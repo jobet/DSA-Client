@@ -1,0 +1,1685 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+.log_h1 {
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  font-size:2rem;
+}
+
+.hidden_email{
+  display: none;
+}
+
+.login_form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  background:transparent;
+  width: 30%;
+  margin-left: 75vh;
+  margin-bottom: 30px;
+}
+.navavatar{
+  width: 20px;
+  vertical-align: middle;
+}
+.box1 input{
+  width: 60%;
+  height: 30px;
+  margin-left: 0%;
+  border-radius: 5px;
+  margin-top: 20px;
+  border: 2px solid turquoise;
+  background-color: white;
+  padding: 20px;
+  color: black;
+  font-weight:normal;
+  font-family: "Montserrat", sans-serif;
+  font-size: large;
+}
+.reply_shown{
+  display: block;
+  margin-top: -20px;
+  background-color:unset;
+  font-family: "Montserrat", sans-serif;
+  font-size: large;
+}
+.replyuser {
+  font-weight: bolder;
+  display: inline-block;
+  padding-left: 7px;
+}
+.reply_shown input{
+  width: 100%;
+  height: 30px;
+  margin-left: 0%;
+  border-radius: 5px;
+  margin-top: 20px;
+  padding: 20px;
+  border-color: unset;
+  color: black;
+  background-color: white;
+  font-family: "Montserrat", sans-serif;
+  font-size: large;
+}
+
+
+
+.reply_hidden{
+  visibility: hidden;
+  margin-top: -80px;
+  margin-bottom: 0px;
+  background-color: unset;
+  
+}
+
+/* .login_form button {
+  width: 120px;
+  margin-left: 30px;
+  font-family: monospace;
+  background:linear-gradient(90deg, rgb(10, 129, 197) 0%,rgb(9, 131, 168) 35%, rgba(0,212,255,1) 100%);
+  border:hidden;
+  border-radius:100px;
+  
+} */
+
+.buttonRegLog{
+  margin-left: 30px;
+  font-weight:normal;
+  font-family: "Montserrat", sans-serif;
+  background: none;
+  border:hidden;
+  color:rgb(0, 0, 0);
+}
+
+
+
+.login_form input {
+  margin: 5px;
+  border:turquoise solid 1px;
+  width: 90%;
+  height: 3rem;
+  border-radius: 100px;
+  padding:5px;
+  text-align: center;
+  font-size: large;
+  font-weight: lighter;
+  font-family: "Montserrat", sans-serif;
+}
+.login_form select {
+  margin: 5px;
+  border:turquoise solid 1px;
+  width: 90%;
+  height: 3rem;
+  border-radius: 100px;
+  padding:5px;
+  text-align: center;
+  font-size: large;
+  font-weight: lighter;
+  font-family: "Montserrat", sans-serif;
+}
+.login_form label {
+  color:black;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.LinkedList,
+.Queue,
+.Tree {
+  display: flex;
+  height: 90vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+}
+.Information {
+  background: transparent;
+  scroll-behavior: smooth;
+}
+.InformationBox1 {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: table;
+  background-attachment: fixed;
+  background-image: url("../src/components/images/newwallpaper2.png");
+  align-items: center;
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  color:rgb(73,72,201);
+}
+.InformationBox1 h1{
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  color:black;
+}
+
+.InformationBox2 {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: table;
+  background-attachment: fixed;
+  background-image: url("../src/components/images/wave2.svg");
+
+}
+.disc-button{
+  width: auto;
+  height: auto;
+  background: #faf9f9;
+  position: relative;
+  margin-bottom: 25px;
+  border-radius: 20px;
+  text-align: center;
+  color:rgb(81,147,244);
+  font-size: large;
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  padding:1%;
+  margin-left:22%;
+  transition: all 0.1s ease-in-out;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+   
+  
+}
+.Infotxtbox {
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 2rem;
+  color: white;
+}
+.left-panel .collapsible{
+  text-align: left;
+}
+
+h1 {
+  color:rgb(27,20,100);
+  font-family: "Montserrat", sans-serif;
+  font-weight:bolder;
+  text-align: center;
+}
+h2 {
+  color:  #208ceb;
+  font-family: "Montserrat", sans-serif;
+  font-weight: bold;
+}
+
+
+
+.Sorting {
+  width: 100%;
+  overflow: hidden;
+  background-image: url("../src/components/images/newwallpaper2.png");
+  background-position: center;
+  background-size: cover;
+  height: 130vh;
+  background-attachment: fixed;
+}
+
+.ShortestPath {
+  width: 100%;
+  overflow: hidden;
+  background-image: url("../src/components/images/newwallpaper2.png");
+  background-position: center;
+  background-size: cover;
+  height: 115vh;
+  background-attachment: fixed;
+}
+
+.DataStructures {
+  width: 100%;
+  overflow: hidden;
+  background-image: url("../src/components/images/newwallpaper2.png");
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  display: table;
+  background-attachment: fixed;
+  
+}
+.DSleft {
+  width: 65%;
+  float: left;
+  margin-left: 0%;
+  margin-right: unset;
+  
+}
+.DSright {
+  color: white;
+  width: 20%;
+  float: right;
+  border-color:#8bcff9;
+  border-width: thin;
+  border-style: solid;
+  margin-right:30px;
+  margin-left:-50%;
+}
+.left-side {
+  width: 55%;
+  float: left;
+}
+
+.right-side {
+  color: white;
+  width: 23%;
+  float: right;
+  padding:unset;
+  border-color:  #8bcff9;
+  border-style: solid;
+  border-width: thin;
+  margin-right:10px;
+}
+.leftInfo {
+  width: 70%;
+  float: left;
+  color:rgb(73,72,201);
+  padding: 2rem;
+  font-size: 1.15rem;
+  /* background-image: url("../src/components/images/bluebox.png"); */
+  text-align: justify;
+
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  line-height: 30px;
+}
+.rounded-container{
+  background:white;
+  border-radius: 100px;
+  border:hidden;
+  padding:7%;
+}
+.boximg {
+  position: absolute;
+  right: 1%;
+  top: 180px;
+  width: 37%;
+}
+.boximg2{
+  position: absolute;
+  right: 0%;
+  width: 32%;
+  bottom: -100%;
+
+}
+.speechbubble1 {
+  position: relative;
+  float: left;
+  left: 10vw;
+  bottom: -21vh;
+  width: 50%;
+}
+.speechbubble2 {
+  position: relative;
+  left: 0px;
+  top: 190px;
+  width: 50%;
+}
+.htext {
+  font-weight: bold;
+  font-size: x-large;
+  color: rgb(38, 11, 87);
+  font-size: x-large;
+}
+.girl1 {
+  position: relative;
+  right: 20vw;
+  top: 25vh;
+  width: 40%;
+  transform: scaleX(-1);
+}
+.girl2 {
+  position: relative;
+  right: 175px;
+  top: 100px;
+  width: 60%;
+  transform: scaleX(-1);
+}
+.rightInfo {
+  width: 30%;
+  float: right;
+  color:rgb(73,72,201);
+  font-size: 1.1rem;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+.left-panel {
+  width: 20%;
+  float: left;
+}
+.left-panel .side-content{
+  width:100%;
+  margin:0%;
+}
+.ShortestPath .left-panel {
+  width: 20%;
+  float: left;
+}
+
+.ShortestPath .left {
+  width: 55%;
+}
+.ShortestPath .right {
+  width: 25%;
+}
+.ShortestPath .left button {
+  font-size: 18px;
+  align-content: center;
+}
+.DataStructures .left-panel {
+  width: 17%;
+}
+
+.box1 {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: table;
+  background-attachment: fixed;
+  background-image: url("../src/components/images/newwallpaper.png");
+  align-items: center;
+  font-family: monospace;
+}
+.box2 {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display: table;
+  background-attachment: fixed;
+  background: white;
+  background-size: cover;
+  padding:unset;
+}
+
+
+.box1-login {
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display:table;
+  background-attachment: fixed;
+  background-image: url("../src/components/images/l2.png");
+  align-items: center;
+  font-family: monospace;
+}
+
+.Home {
+  scroll-behavior: smooth;
+  background-color: black;
+}
+
+
+.quiz{
+  background-image: url('../src/components/images/newwallpaper2.png');
+  height: 100vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  display:table;
+  background-attachment: fixed;
+}
+#typer1 {
+  color: rgb(73,72,201);
+  text-align: center;
+  font-size: 8vh;
+  font-weight: 700;
+  font-family:Courier;
+  padding:3%;
+  width:60%;
+  padding-right: 5%;
+  padding-left: 3%;
+  margin-top:5%;
+  height: 17%;
+}
+
+#typer2 {
+  color: rgb(73,72,201);
+  font-size: 8vh;
+  font-weight: 700;
+  font-family:Courier;
+  text-align: center;
+  margin-top: 5%;
+  padding-right: 5%;
+  float:right; 
+
+}
+.newlogin{
+  width: auto;
+  height: auto;
+  background: #faf9f9;
+  position: relative;
+  margin-bottom: 25px;
+  border-radius: 20px;
+  text-align: center;
+  color:rgb(81,147,244);
+  font-size: large;
+  font-weight: semibold;
+  line-height: 40px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  padding:1%;
+  margin-left:22%;
+  transition: all 0.1s ease-in-out;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+   
+
+  
+}  
+.loginPageButton {
+  width: 20%;
+  height: auto;
+  background: rgb(93,203,231);
+  border-color:rgb(93,203,231);
+  position: relative;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  text-align: center;
+  color:white;
+  font-size: large;
+  font-weight: normal;
+  line-height: 35px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  padding:1%;
+  transition: all 0.1s ease-in-out;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+   
+}
+
+.registerPageButton{
+  width: 30%;
+  height: auto;
+  background: rgb(18, 92, 110);
+  border-color:rgb(93,203,231);
+  position: relative;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  text-align: center;
+  color:white;
+  font-size: large;
+  font-weight: normal;
+  line-height: 35px;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  padding:1%;
+  transition: all 0.1s ease-in-out;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+.newlogin:hover {
+  opacity: 0.7;
+  box-shadow: -6px -6px 10px rgba(193, 243, 239, 0.959),
+    6px 6px 10px rgba(0, 0, 0, 0.2);
+  color:darkturquoise;
+}
+.newlogin:active {
+  opacity: 1;
+  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
+    inset 8px 8px 16px rgba(0, 0, 0, 0.1);
+  color: #79e3b6;
+}
+
+ 
+.message2{
+  color:black;
+  font-weight:lighter;
+  font-size:x-large;
+  margin-top:7%;
+  margin-left:6.5%;
+  text-align: center;
+  width:60%;
+  font-family: "Montserrat", sans-serif;
+}
+.members-image{
+  margin-left:5%;
+  width:34.75rem;
+  height:25.5rem;
+  float:left;
+  margin-top:15%;
+
+}
+#typer0 {
+  font-family: monospace;
+}
+.box2 p {
+  align-content: center;
+  color:rgb(73,72,201);
+  font-family: Courier;
+  font-weight: 700;
+  text-align: center;
+  margin-right:4%;
+  margin-left:7%;
+  margin-top:10%;
+  padding:5vh;
+  padding-left: 40%;
+  font-size: 3vh;
+  width: 90%;
+}
+
+.TabBox {
+  font-size: calc(0.5vh + 0.5vw);
+  height: 80vh;
+  width: 100%;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #36c4c9;
+  border-radius: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(79, 151, 192);
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.ExecutionTime {
+  color:black;
+  font-family: monospace;
+  text-align: center;
+}
+.commentform {
+  align-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.commentform input {
+  width: 60%;
+  height: 50px;
+  margin-left: 20%;
+  margin-right: 20%;
+  border-radius: 5px;
+  border: 2px solid turquoise;
+  background-color: white;
+  padding: 15px;
+  color: black;
+  font-weight:normal;
+  font-family: "Montserrat", sans-serif;
+  font-size: large;
+}
+.commentform label {
+  color: aliceblue;
+  text-align: center;
+  font-size: large;
+}
+.commentform button {
+  width: 10%;
+  text-align: center;
+  margin-left:45%;
+  margin-right:45%;
+}
+.cardholder {
+  margin-left: 5%;
+  margin-right: 5%;
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.replyholder{
+  margin-top: 15px;
+  padding: 10px;
+  padding-bottom: 0px;
+  padding-left: 30px;
+  border-radius: 19px ;
+}
+.replyholder2{
+  margin-top: 15px;
+  padding: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  border-radius: 19px ;
+  background-color: white;
+}
+
+
+.card {
+  width: 97%;
+  height: auto;
+  padding: 20px;
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  border-color: none;
+  margin: 10px;
+  color: black;
+  text-align: justify;
+  font-size: large;
+  border-radius: 19px;
+  background: #cfedfd;
+  margin-bottom: 10px;
+}
+
+.cardholderScore {
+  padding-right:0%;
+  display: flex;
+  flex-direction: column-reverse;
+  
+}
+.score-card{
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  padding:1%;
+  margin:10%;
+  margin-top:2%;
+  background-color: white;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0),
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+  align-self: center;
+  text-align: center;
+  width: 100%;
+  height: auto;
+  padding: 20px;
+  
+  color: black;
+  text-align: justify;
+  font-size: large;
+ 
+  margin-bottom: 10px;
+ 
+}
+
+.scoreLeft{
+  margin-top:18%;
+  margin-left: 9%;
+  float:left;
+  width:90%;
+  height:60vh;
+  overflow-y: auto;
+  
+}
+.scoreLeft::-webkit-scrollbar-track{
+  background-color: gainsboro;
+
+}
+.scoreLeft::-webkit-scrollbar-thumb{
+  background-color: rgb(226, 226, 236);
+}
+.scoreTable::-webkit-scrollbar-track{
+  background-color: gainsboro;
+
+}
+.scoreTable::-webkit-scrollbar-thumb{
+  background-color: rgb(226, 226, 236);
+}
+.man{
+ width:45%;
+ left:11.3%;
+ top:6% ;
+ position: absolute;
+ padding-left:25%;
+
+}
+.checklist{
+  position: absolute;
+  left:3.5%;
+  top:24%;
+  width:5%;
+}
+.outerleft{
+  width:60%;
+  float:left;
+
+}
+.scoreRight{
+  float:right;
+  text-align: center;
+  width:40%;
+  font-weight:lighter;
+  color:darkblue;
+}
+.scoreTable{
+  height:65vh;
+  overflow-y: auto;
+  border-color:unset;
+  border-width: thin;
+  border-radius:10px;
+  background-color:white;
+  padding-left:10%;
+  padding-top:5%;
+  
+  
+}
+.scoreRow{
+  padding-top:2%;
+  padding-right: 5%;
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+  background: rgb(209,239,253);
+  text-align: justify;
+  padding-left: 10%;
+  margin-top: 3%;
+}
+.scoreRow h1{
+  text-align: right;
+  color:forestgreen;
+}
+.scorePic{
+  background-color: white;
+  margin-left:-9%;
+  float:left;
+  color:white;
+  width:auto;
+  padding:1.15%;
+  border-radius: 100px;
+}
+.labelScore{
+  top:27%;
+  position: absolute;
+  left:8%;
+  text-align: left;
+  font-weight:400;
+}
+.crown{
+  margin-bottom: -1%;
+  margin-top:-1%;
+  margin-left:48%;
+  width: 8vw;
+  height:10vh;
+}
+.scoreRight h1{
+  font-weight: bolder;
+}
+.commentmsg{
+  padding-left: 50px;
+}
+.replymsg{
+  padding-left: 28px;
+}
+.datemsg{
+  padding-left: 88%;
+}
+.user {
+  display: inline-block;
+  padding-left: 7px;
+}
+
+.commentbtn {
+  border: none;
+  background: none;
+  font-size: large;
+  color:#2659a6;
+  font-family: monospace;
+}
+.replybtn {
+  border: none;
+  background: none;
+  font-size: large;
+  color:#2659a6;
+  font-family: monospace;
+}
+
+.updateinput {
+  background:white;
+  border-style: hidden;
+  color:black;
+  font-weight:lighter;
+  font-family: "Montserrat", sans-serif;
+  width: 100%;
+  height:30px;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding:10px;
+  font-size: larger;
+}
+
+.ideatext{
+   color:violet;
+   font-weight: bold;
+}
+/* Backend */
+.BackendPage {
+  min-height: 100vh;
+  background: rgb(216,243,255);
+}
+.backend_title{
+  padding-top: 20px;
+  color: black;
+  font-size: 48px;
+  text-align: center;
+  font-weight: bold;
+}
+.userinfo{
+  color: black;
+}
+
+.indentButton{
+  padding-left: 5%;
+  margin-right: -5%;
+}
+.backendtabs {
+  background-color: rgb(216,243,255);
+  -webkit-tap-highlight-color: black;
+}
+
+.backendtablist {
+  line-height: 75px;
+  background: rgb(170, 230, 255);
+  margin: 0 0 10px;
+  height: 100px;
+  padding-left: 5%;
+}
+.graphtablist {
+  margin: 0 0 10px;
+}
+.backendtab {
+  background: rgba(255, 255, 255, 0);
+  display: inline-block;
+  position: relative;
+  list-style: none;
+  height: 100px;
+  margin-right: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+}
+.graphtabs {
+  background-color: rgb(255, 255, 255);
+  -webkit-tap-highlight-color: black;
+}
+.graphtab {
+  background: rgb(197, 197, 197);
+  display: inline-block;
+  position: relative;
+  border: 8px solid transparent;
+  border-radius: 8px 8px 8px 8px;
+  list-style: none;
+  padding: 2px 12px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.backendtab--selected {
+  background: rgb(216,243,255);
+  color: black;
+}
+.graphtab--selected {
+  background: rgb(49, 190, 255);
+  color: black;
+}
+
+.backendtab--disabled {
+  color: GrayText;
+  cursor: default;
+}
+
+.backendtab:focus {
+  outline: none;
+}
+
+.backendtab:focus:after {
+  content: "";
+  position: absolute;
+  height: 5px;
+  left: -4px;
+  right: -4px;
+  bottom: -5px;
+}
+.piegraph{
+  height: 200px
+}
+#listtable {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 19px;
+  background-color: white;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: large;
+  padding-bottom: 0px;
+}
+#listtable  tr th,
+#listtable  tr td {
+  padding: 5px;
+  padding-left: 15px;
+}
+#listtable  tr th {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background: rgba(0, 174, 255, 0.808);
+  text-align: left;
+}
+#listtable tr:nth-child(even){background-color: #f5f5f5;}
+/* top-left border-radius */
+#listtable  tr:first-child th:first-child {
+  border-top-left-radius: 19px;
+}
+/* top-right border-radius */
+#listtable  tr:first-child th:last-child {
+  border-top-right-radius: 19px;
+}
+/* bottom-left border-radius */
+#listtable  tr:last-child td:first-child {
+  border-bottom-left-radius: 19px;
+}
+/* bottom-right border-radius */
+#listtable  tr:last-child td:last-child {
+  border-bottom-right-radius: 19px;
+}
+.deletebtn{
+  height: 50px;
+  font-size: 15px;
+  background-color: rgba(177, 36, 36, 0.808);
+  border-radius: 8px;
+  border:rgb(0, 0, 0);
+  color: black;
+  font-family: "Montserrat", sans-serif;
+}
+.deletebtn:hover{
+  background-color: rgba(199, 73, 73, 0.808);
+}
+.pagination{
+  display: inline-block;
+  text-align: center;
+  margin-left: calc(50% - 350px);
+
+}
+.pagination input, .pagination select{
+  height: 30px;
+}
+.pagination button, .backendbtn{
+  height: 50px;
+  background-color: rgba(0, 174, 255, 0.808);
+  font-size: 15px;
+  border-radius: 8px;
+  border:rgb(0, 0, 0);
+  color: black;
+  font-family: "Montserrat", sans-serif;
+}
+.pagination button:hover, .backendbtn:hover{
+  background-color: rgba(83, 201, 255, 0.808);
+  border-radius: 8px;
+  border:rgb(0, 0, 0);
+  color: black;
+}
+.backendchkbox{
+  width: 20px;
+  height: 20px;
+}
+.backendcard {
+  width: 97%;
+  height: auto;
+  padding: 20px;
+  padding-bottom: 0px;
+  border-color: solid, 5px;
+  margin: 10px;
+  color: black;
+  text-align: left;
+  font-size: large;
+  border-radius: 19px;
+  background: rgba(255, 255, 255);
+}
+.comment{
+  text-align: justify;
+  padding-bottom: 0px;
+}
+.comment td:first-child {
+  width: 1%;
+  white-space: nowrap;
+}
+.dashboardtitle{
+  font-size: 32px;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+}
+.dashboardicon {
+  font-size: 64px;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+  text-align: right;
+}
+.dashboardstats {
+  font-size: 24px;
+  font-weight: bolder;
+  color: #208ceb;
+  text-align: left;
+}
+.dashboardtable{
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  padding-bottom: 10px;
+}
+.seperation{
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  vertical-align: middle;
+  padding-bottom: 10px;
+}
+.seperationusers{
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-right: 15px;
+  vertical-align: middle;
+  padding-bottom: 10px;
+}
+.seperationusers td:first-child {
+  width: 1%;
+  white-space: nowrap;
+}
+.dashboardtable td{
+  width: 25%;
+  vertical-align: top;
+}
+.dashboardcard {
+  padding: 30px;
+  border-color: solid, 5px;
+  margin: 10px;
+  color: black;
+  text-align: left;
+  font-size: large;
+  border-radius: 19px;
+  background: rgba(255, 255, 255);
+}
+.backenduser {
+  font-size: 24px;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  padding-left: 7px;
+}
+.backendreplyuser {
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+  display: inline-block;
+  padding-left: 7px;
+}
+.backendinput {
+  background:rgba(233, 233, 233);
+  height: 30px;
+  border-style: hidden;
+  color:black;
+  width: 100%;
+  border-color: rgba(233, 233, 233);
+  border-style: solid;
+  border-radius: 5px;
+}
+.AdminPage {
+  background-color: rgb(216,243,255);
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  margin: auto;
+}
+.backendform {
+  position: absolute;
+  top: 25%;
+  left: 37.5%;
+  height: auto;
+  text-align: center;
+  background-color: rgba(255, 255, 255);
+  width: 25%;
+  padding: 20px;
+  border-color: solid, 5px;
+  border-radius: 19px;
+}
+.passwordfield{
+  font-size: 15px;
+  color: black;
+  background-color: #00000000;
+  border:none;
+}
+.backendinput{
+  width: 160px;
+  height: 40px;
+  padding: 12px 20px;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+*,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.popup{
+    background-color: #c7f1ea;
+    width: 450px;
+    padding: 30px 40px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+    
+    border-radius: 8px;
+    font-family: "Poppins",sans-serif;
+    text-align: center;
+}
+.popup button{
+    display: block;
+    margin:  0 0 20px auto;
+    background-color: transparent;
+    font-size: 30px;
+    color: #c5c5c5;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.popup p{
+    font-size: 14px;
+    text-align: justify;
+    margin: 20px 0;
+    line-height: 25px;
+}
+
+.user-quiz{
+  background-image: url("../src/components/images/newwallpaper2.png");
+  background-position: center;
+  background-size: cover;
+  height: 115vh;
+  overflow:hidden;
+  background-attachment: fixed;
+  
+}
+#fillDiv{
+  margin-top:20px;
+  margin-bottom: 20px;
+  font-weight: semibold;
+  font-size: 1.2rem;
+}
+.quizInnerDiv{
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  padding:1%;
+  margin:10%;
+  margin-top:2%;
+  background-color: white;
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0),
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#quizSign{
+  font-weight:bold;
+  font-family: "Montserrat";
+  color:#2b388a;
+}
+
+.quiz_demo{
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  padding:1%;
+  margin:auto;
+  margin-top:1%;
+  background-color: rgb(254, 254, 254);
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0),
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  overflow-y:scroll;
+  height: 40rem;
+  width: 60rem;
+  margin-bottom: 20%;
+  border: rgb(93, 213, 243) solid 3px;
+}
+
+#quiz_demo_note{
+  margin-top: 2rem;
+  text-align: center;
+}
+#quiz_demo_note>h2{
+  color: black;
+  font-size: 32px;
+}
+
+.quiz_user_page_front{
+  height: auto;
+}
+
+.quiz_instruction{
+  font-weight: semibold;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  padding:1%;
+  margin-top:10%;
+  margin-left:10%;
+  margin-right:10%;
+  margin-bottom:3%;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top:2%;
+  background-color: rgb(255, 255, 255);
+    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0),
+      6px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+#quiz_instruction_note{
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  padding:1%;
+  margin:10% 10% 5% 10%;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top:2%;
+}
+
+.choices_admin_quiz>label{
+  margin: 2%;
+  font-weight: bolder;
+}
+.choices_admin_quiz{
+  padding-top: 20px;
+}
+
+.buttons-positioned{
+  display: flex;
+  justify-content: space-between;
+  margin-top:20px;
+  margin-bottom:10px;
+}
+
+.button-next{
+  margin:0%;
+  padding:0%;
+  margin-left: 87%;
+  
+
+}
+#buttonQuizz{
+  margin:0%;
+  border-color: teal;
+  border-style: solid;
+  border-width: medium;
+  font-weight:bolder;
+  font-family: "Montserrat", sans-serif;
+  color:#2b388a;
+  font-size: 1.05rem;
+  background-color: white;
+}
+#buttonQuizz:hover{
+  background-color:teal;
+  color:white;
+
+}
+.user-quiz > h1{
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-weight: bold;
+  font-size: 52px;
+  text-align: center;
+  color: #000000;
+  margin-bottom: 2rem;
+}
+
+.quiz-maker-add_button{
+  height: 50px;
+  font-size: 20px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 8px;
+  border:rgb(0, 0, 0) solid 3px;
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  width: 25%;
+}
+
+.quiz_deleteButton{
+  /* background-color: rgba(255, 93, 93, 0.777); */
+  height: 50px;
+  font-size: 15px;
+  background-color: rgba(177, 36, 36, 0.808);
+  border-radius: 8px;
+  border:rgb(0, 0, 0);
+  color: black;
+  font-family: "Montserrat", sans-serif;
+  width: 33%;
+  border:rgb(0, 0, 0) solid 3px;
+}
+
+.quiz_deleteButton:hover, .quiz_editButton:hover, .quiz-maker-add_button:hover{
+  background-color: rgb(255, 255, 255);
+  border: 3px solid black;
+  box-shadow: #36c4c9 5px 10px;
+}
+
+.quiz_editButton{
+  /* background-color: rgba(194, 255, 101, 0.777); */
+  height: 50px;
+  font-size: 15px;
+  background-color:  rgb(124, 195, 66);
+  border-radius: 8px;
+  border:rgb(0, 0, 0);
+  color: black;
+  width: 33%;
+  border:rgb(0, 0, 0) solid 3px;
+  font-family: "Montserrat", sans-serif;
+}
+
+
+.quiz-maker-container{
+  text-align: center;
+  font-size: 24px;
+  background-color: rgb(255, 255, 255);
+  padding-bottom: 3%;
+  width: 60%;
+  margin: auto;
+}
+
+#quiz-maker-edit{
+  text-align: center;
+  font-size: 24px;
+  width: 50%;
+  margin: auto;
+}
+
+.quiz-maker-container > h1{
+  font-size: 64px;
+  color: #292828;
+  margin: auto;
+  padding:3px;
+  background-color: rgb(216, 243, 255);
+  box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
+}
+
+.quiz-maker-choices-input{
+  font-family:inherit;
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px 30px;
+  border:2px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius:10px;
+  
+}
+
+.quiz-maker-choices-edit-input{
+  font-family:inherit;
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px 0px;
+  border:2px;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
+  border-radius:10px;
+  
+}
+
+.quiz_admin_container{
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fill, auto);
+  grid-row-gap: .5em;
+  grid-column-gap: .5em;
+  text-align: center;
+  padding:15px 5px 0px 5px;
+}
+
+.quiz-maker-radio-choices{
+   /* prevent taking any space */
+  /* cross-browser hidingg */
+  opacity: 0;
+  width:0; 
+  height:0;
+}
+
+.question-admin-choices-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.question-admin-choices-container>label{
+  padding-top: 15px;
+  font-weight: bolder;
+}
+
+
+.quiz-maker-select{
+  padding:10px;
+  border-radius:10px;
+  box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
+  font-weight: bolder;
+  font-size: 14px;
+  margin: 10px 0px;
+}
+
+.quiz-maker-label{
+  font-weight: bolder;
+  font-size: 32px;
+}
+
+.quiz_admin_container .questions{
+  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(216, 243, 255); */
+  min-height: 50vh;
+  max-height: 77vh;
+  padding-bottom: 30px;
+  border-radius: 5px;
+  box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
+  /* border-radius: 6px;
+  border: black solid 2px; */
+  overflow-y: auto;
+}
+
+#admin-quiz-content>h1{
+  background-color: none;
+  font-weight:bold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+  text-align: left;
+  font-size: 52px;
+  text-align: center;
+  background-color: rgb(216, 243, 255);
+  color: rgb(3, 0, 30);
+}
+
+#admin_questions{
+  margin-top: 3%;
+  text-align:center;
+}
+
+.grid-questions{
+  
+  text-align: left;
+}
+
+#selected_button{
+  width:95%;
+  background-color:#6b74ad;
+  color:white;
+  border-color: rgba(117, 126, 126, 0.418);
+  border-style: solid;
+  border-width: medium;
+  font-weight:bold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.7rem;
+  text-align: left;
+  border-radius: unset;
+}
+
+#selected_button_tf{
+  opacity: 0.7;
+  font-weight:semibold;
+  font-family: "Montserrat", sans-serif;
+  color:white;
+  background-color:#2b388a;
+  width: 90%;
+}
+
+#true_button{
+  color:  #787878;; 
+  background-color: white;
+  width: 90%;
+  font-weight:semibold;
+  font-family: "Montserrat", sans-serif;
+  border-width:thin;
+}
+
+#false_button{
+  color: #787878;; 
+  background-color:white;
+  width: 90%;
+  font-weight:semibold;
+  font-family: "Montserrat", sans-serif;
+  border-width:thin;
+}
+
+#true_button:hover{
+  background-color: #cfedfd;
+}
+
+#false_button:hover{
+  background-color: #cfedfd;
+}
+
+#quiz-content1{
+  background-color: rgb(216, 243, 255);
+  width: 30%;
+  margin: auto;
+}
+
+#quiz-content0{
+  background-color: none;
+  font-weight:bold;
+  font-family: "Montserrat", sans-serif;
+  font-size: 2rem;
+}
+
+#quiz-content4{
+  font-weight:bolder;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  color:tomato;
+}
+
+#quiz-contentx{
+  width:95%;
+  background-color: white;
+  color:#787878;
+  border-color: rgba(117, 126, 126, 0.418);;
+  border-style: solid;
+  border-width: thin;
+  font-weight:lighter;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.7rem;
+  text-align: left;
+  border-radius: unset;
+}
+#fillInput{
+  border-color: rgba(117, 126, 126, 0.418);;
+  border-style: solid;
+  border-width: thin;
+  width:90%;
+  height:auto;
+  font-size: 1.1rem;
+  font-weight:lighter;
+  font-family: "Montserrat", sans-serif;
+  padding:10px;
+}
+#quiz-contentx:hover{
+  background-color: #c9e8f8;
+}
+
+.AVLdiv{
+  width: 100%;
+  overflow: hidden;
+  background-image: url("../src/components/images/newwallpaper2.png");
+  background-position: center;
+  background-size: cover;
+  height: 140vh;
+  background-attachment: fixed;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#quiz-content2{
+  font-weight: semibold;
+  font-family: "Montserrat", sans-serif;
+  font-size: x-large;
+  margin-bottom: 10px;
+  margin-top:10px;
+}
+
+#quiz-content3{
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+  align-content: center;
+  margin-top:10px;
+  margin-bottom: 10px;
+}
+
+.progress-circle-container{
+  background-color: white;
+  padding: 10px;
+  margin-right: 3%;
+  border-radius: 100%;
+  float: right;
+  width: 25%;
+  height: 25%;
+}
+
+.score-information-holder{
+  background-color: white;
+  padding: 10px;
+  margin-left: 3%;
+  border-radius: 15px;
+  float: left;
+  color: rgb(22, 86, 126);
+  width:50%;
+  height:200%;
+}
+
+.AVl-redirect-button{
+  position: absolute;
+  margin-top: -64.2%;
+  left: 55%;
+  width: auto;
+  height: auto;
+  text-align: left;
+  border: none;
+  color: steelblue;
+  background-color: transparent;
+  font-size: 1.1rem;
+  font-family: "Montserrat", sans-serif;
+  cursor: pointer;
+  padding: 13px;
+}
+
+.left-avl-panel{
+  width: 20%;
+  position:absolute;
+}
