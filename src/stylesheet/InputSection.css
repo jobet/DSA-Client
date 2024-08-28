@@ -21,7 +21,7 @@ div.text-input1 {
   position: relative;
   text-align: middle;
   color:aliceblue;
-  font-family: "Montserrat", sans-serif;
+  
 }
 .precaution {
   width: 22px;
@@ -72,7 +72,7 @@ div.text-input1 {
   border-color: black;
   border-width: 2px;
   border-style: double;
-  font-family: "Montserrat", sans-serif;
+  
   color:white;
 }
 
@@ -88,7 +88,7 @@ div.text-input1 {
   color:rgb(26, 150, 26);
   font-size: 1.1rem;
   cursor: pointer;
-  font-family: "Montserrat", sans-serif;
+  
 }
 
 .input-button-close {
@@ -101,7 +101,7 @@ div.text-input1 {
   font-size: 17px;
   cursor: pointer;
   padding: 7px;
-  font-family: "Montserrat", sans-serif;
+  
 }
 
 p.linestyle {
@@ -115,7 +115,7 @@ div.text-input2 {
   font-weight: bold;
   text-align: middle;
   color: rgb(6, 40, 70);
-  font-family: "Montserrat", sans-serif;
+  
   font-weight: lighter;
   font-size: larger;
   border-radius: 15px;

@@ -20,7 +20,6 @@
   transition: all 0.4s ease-in;
   border-radius: 3px;
   font-weight: bold;
-  font-family: 'Courier New', Courier, monospace;
   ;
 }
 .cell.done {
@@ -48,7 +47,7 @@ button {
   border-style: hidden;
   font-weight: bold;
   cursor: pointer;
-  font-family: monospace;
+
   border-radius: 7px;
   border: 3px solid rgb(38,89,166);
 }
@@ -83,7 +82,7 @@ button:hover {background-color:rgb(113, 220, 228)}
   min-height: 60px;
   align-content: center;
   text-align: center;
-  font-family: monospace;
+
   font-weight: bolder;
   padding:20px;
   padding-left:17vh;
@@ -175,7 +174,6 @@ button:hover {background-color:rgb(113, 220, 228)}
   font-size: 48px;
   border: 0px;
   outline: 0px;
-  font-family: "Montserrat",sans-serif;
   font-weight: bold;
   text-align: center;
 }
@@ -183,7 +181,6 @@ button:hover {background-color:rgb(113, 220, 228)}
   background-color: rgb(0,0,34);
   color: white;
   font-size: 36px;
-  font-family: "Montserrat",sans-serif;
   border: 0px;
   outline: 0px;
 }
@@ -192,7 +189,7 @@ button:hover {background-color:rgb(113, 220, 228)}
   color: rgb(38,89,166);
   font-size: 18px;
   text-align: center;
-  font-family: monospace;
+
   width: 70px;
   height: 40px;
   text-overflow: ellipsis;
@@ -203,7 +200,7 @@ button:hover {background-color:rgb(113, 220, 228)}
   background-color: rgb(38,89,166);
   color: white;
   font-size: 18px;
-  font-family: monospace;
+
   width: 30px;
   height: 60px;
   text-overflow: ellipsis;

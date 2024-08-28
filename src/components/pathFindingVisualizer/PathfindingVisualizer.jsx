@@ -347,8 +347,8 @@ export default class PathfindingVisualizer extends Component {
       }
     }
     visiNode="Number of Visited Nodes: "+(visited_nodes-1).toString()+" cells";
-    document.getElementById('textDistance').style.cssText = "color: white;font-weight:800;font-size: larger;font-family: 'Courier New', Courier, monospace;";
-    document.getElementById('textDistance1').style.cssText = "color: white;font-weight:800;font-size: larger;font-family: 'Courier New', Courier, monospace;";
+    document.getElementById('textDistance').style.cssText = "color: white;font-weight:800;font-size: larger;";
+    document.getElementById('textDistance1').style.cssText = "color: white;font-weight:800;font-size: larger;";
   }
 
   animate(visitedNodesInOrder, nodesInShortestPathOrder) {

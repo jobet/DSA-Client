@@ -2,7 +2,7 @@
 
 .AVLdiv {
 	margin: 0;
-	font-family: "Montserrat", sans-serif;
+	
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
   }
@@ -18,7 +18,7 @@
 	margin-left:20%;
 	margin-right:20%;
 	padding-top:50px;
-	font-family: "Montserrat", sans-serif;
+	
   }
   
   #treeAVL {
@@ -37,7 +37,7 @@
 	scroll-behavior: smooth;
 	overflow-y: auto;
 	overflow-x: auto;
-	font-family: "Montserrat", sans-serif;
+	
   }
 .treeAVL ::-webkit-scrollbar {
 	width: 10px;
@@ -68,11 +68,11 @@
 	height:30px;
 	border-radius: 10px;
 	text-align: center;
-	font-family: "Montserrat", sans-serif;
+	
 	
   }
   .txt{
-	font-family: "Montserrat", sans-serif;
+	
 	font-weight: unset;
 	margin-left:15%;
 	margin-right:15%;
@@ -210,7 +210,7 @@
 	  text-decoration: none;
 	  background-color: #ccc;
 	  color: rgb(0, 0, 0);
-	  font-family: "Montserrat", sans-serif;
+	  
 	  font-size: 20px;
 	  font-weight: semibold;
 	  display: inline-block;
@@ -230,7 +230,7 @@
 	height: 2rem;
 	border-radius: 100px;
 	padding:5px;
-	font-family: "Montserrat", sans-serif;
+	
 }
 
 .AVLButton{
@@ -244,7 +244,7 @@
 	border: 3px solid rgb(27,20,100);
 	border-radius: 20px;
 	font-size: 1.1rem;
-	font-family: "Montserrat", sans-serif;
+	
 	cursor: pointer;
 	padding: 10px;
 }
@@ -260,7 +260,7 @@
 	border: 3px solid rgb(27,20,100);
 	border-radius: 20px;
 	font-size: 1.1rem;
-	font-family: "Montserrat", sans-serif;
+	
 	cursor: pointer;
 	padding: 10px;
 }

@@ -1,16 +1,14 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Montserrat", sans-serif;
 }
 
 .log_h1 {
   margin-top: 10px;
   text-align: center;
-  font-weight: bold;
-  font-family: "Montserrat", sans-serif;
   font-size:2rem;
 }
 
@@ -42,14 +40,14 @@
   padding: 20px;
   color: black;
   font-weight:normal;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: large;
 }
 .reply_shown{
   display: block;
   margin-top: -20px;
   background-color:unset;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: large;
 }
 .replyuser {
@@ -67,7 +65,7 @@
   border-color: unset;
   color: black;
   background-color: white;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: large;
 }
 
@@ -81,25 +79,14 @@
   
 }
 
-/* .login_form button {
-  width: 120px;
-  margin-left: 30px;
-  font-family: monospace;
-  background:linear-gradient(90deg, rgb(10, 129, 197) 0%,rgb(9, 131, 168) 35%, rgba(0,212,255,1) 100%);
-  border:hidden;
-  border-radius:100px;
-  
-} */
-
 .buttonRegLog{
   margin-left: 30px;
   font-weight:normal;
-  font-family: "Montserrat", sans-serif;
+  
   background: none;
   border:hidden;
   color:rgb(0, 0, 0);
 }
-
 
 
 .login_form input {
@@ -112,7 +99,7 @@
   text-align: center;
   font-size: large;
   font-weight: lighter;
-  font-family: "Montserrat", sans-serif;
+  
 }
 .login_form select {
   margin: 5px;
@@ -124,7 +111,7 @@
   text-align: center;
   font-size: large;
   font-weight: lighter;
-  font-family: "Montserrat", sans-serif;
+  
 }
 .login_form label {
   color:black;
@@ -153,15 +140,14 @@
   background-position: center;
   display: table;
   background-attachment: fixed;
-  background-image: url("../src/components/images/newwallpaper2.png");
   align-items: center;
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
-  color:rgb(73,72,201);
+  
+  color:#B8336A;
 }
 .InformationBox1 h1{
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   color:black;
 }
 
@@ -183,10 +169,10 @@
   margin-bottom: 25px;
   border-radius: 20px;
   text-align: center;
-  color:rgb(81,147,244);
+  color:#B8336A;
   font-size: large;
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   cursor: pointer;
   text-decoration: none;
   padding:1%;
@@ -209,14 +195,18 @@
 }
 
 h1 {
-  color:rgb(27,20,100);
-  font-family: "Montserrat", sans-serif;
-  font-weight:bolder;
-  text-align: center;
+  color:#1b1464;
+  font-family: "Archivo", sans-serif;
+  font-weight: 800;
 }
+
+h2, h3, p, a{
+  font-family: "Archivo", monospace;
+  font-weight: 600;
+}
+
 h2 {
-  color:  #208ceb;
-  font-family: "Montserrat", sans-serif;
+  color:  #208ceb; 
   font-weight: bold;
 }
 
@@ -225,7 +215,7 @@ h2 {
 .Sorting {
   width: 100%;
   overflow: hidden;
-  background-image: url("../src/components/images/newwallpaper2.png");
+  
   background-position: center;
   background-size: cover;
   height: 130vh;
@@ -235,7 +225,7 @@ h2 {
 .ShortestPath {
   width: 100%;
   overflow: hidden;
-  background-image: url("../src/components/images/newwallpaper2.png");
+  
   background-position: center;
   background-size: cover;
   height: 115vh;
@@ -245,7 +235,7 @@ h2 {
 .DataStructures {
   width: 100%;
   overflow: hidden;
-  background-image: url("../src/components/images/newwallpaper2.png");
+  
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -288,14 +278,14 @@ h2 {
 .leftInfo {
   width: 70%;
   float: left;
-  color:rgb(73,72,201);
+  color:#B8336A;
   padding: 2rem;
   font-size: 1.15rem;
   /* background-image: url("../src/components/images/bluebox.png"); */
   text-align: justify;
 
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   line-height: 30px;
 }
 .rounded-container{
@@ -353,11 +343,10 @@ h2 {
 .rightInfo {
   width: 30%;
   float: right;
-  color:rgb(73,72,201);
+  color:#B8336A;
   font-size: 1.1rem;
   text-align: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
 }
 .left-panel {
   width: 20%;
@@ -387,28 +376,75 @@ h2 {
 }
 
 .box1 {
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  display: table;
-  background-attachment: fixed;
-  background-image: url("../src/components/images/newwallpaper.png");
+  height: 75svh;
+  width:100%;
+  margin-left: auto;
+  margin-right: auto;
   align-items: center;
-  font-family: monospace;
-}
-.box2 {
-  height: 100vh;
-  width: 100%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-image: url(../src/components/images/newwallpaper.png);
+  background-position: 0px -100px;
   background-size: cover;
-  background-position: center;
-  display: table;
-  background-attachment: fixed;
-  background: white;
-  background-size: cover;
-  padding:unset;
 }
 
+#typer1 {
+  text-align: center;
+  margin-bottom: 12px;
+  font-size: 48px;
+}
+
+.message2{
+  color:black;
+  font-size: x-large;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.newlogin{
+  background: #B8336A;
+  margin-bottom: 25px;
+  border-radius: 12px;
+  text-align: center;
+  color:white;
+  font-size: large;
+  line-height: 40px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 12px 24px;
+  transition: all 0.1s ease-in-out;
+}  
+
+.box2 {
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
+  height: 50svh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  background: white;
+}
+
+.box2 img{
+  padding-right: 20px;
+}
+
+.descSection{
+  padding-right: 20%;
+}
+
+.imgSection{
+  padding-left: 20%;
+}
+
+.box2 p {
+  font-weight: 700;
+  text-align: justify;
+  font-size: 24px;
+}
 
 .box1-login {
   height: 100vh;
@@ -419,17 +455,15 @@ h2 {
   background-attachment: fixed;
   background-image: url("../src/components/images/l2.png");
   align-items: center;
-  font-family: monospace;
+
 }
 
 .Home {
   scroll-behavior: smooth;
-  background-color: black;
 }
 
 
 .quiz{
-  background-image: url('../src/components/images/newwallpaper2.png');
   height: 100vh;
   width: 100%;
   background-size: cover;
@@ -437,55 +471,25 @@ h2 {
   display:table;
   background-attachment: fixed;
 }
-#typer1 {
-  color: rgb(73,72,201);
-  text-align: center;
-  font-size: 8vh;
-  font-weight: 700;
-  font-family:Courier;
-  padding:3%;
-  width:60%;
-  padding-right: 5%;
-  padding-left: 3%;
-  margin-top:5%;
-  height: 17%;
-}
+
 
 #typer2 {
-  color: rgb(73,72,201);
+  
   font-size: 8vh;
-  font-weight: 700;
-  font-family:Courier;
   text-align: center;
   margin-top: 5%;
   padding-right: 5%;
   float:right; 
 
 }
-.newlogin{
-  width: auto;
-  height: auto;
-  background: #faf9f9;
-  position: relative;
-  margin-bottom: 25px;
-  border-radius: 20px;
-  text-align: center;
-  color:rgb(81,147,244);
-  font-size: large;
-  font-weight: semibold;
-  line-height: 40px;
-  font-family: "Montserrat", sans-serif;
-  cursor: pointer;
-  text-decoration: none;
-  padding:1%;
-  margin-left:22%;
-  transition: all 0.1s ease-in-out;
-    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
-      6px 6px 10px rgba(0, 0, 0, 0.2);
-   
 
-  
-}  
+.newlogin:hover {
+  opacity: 0.7;
+}
+.newlogin:active {
+  opacity: 1;
+}
+
 .loginPageButton {
   width: 20%;
   height: auto;
@@ -499,7 +503,7 @@ h2 {
   font-size: large;
   font-weight: normal;
   line-height: 35px;
-  font-family: "Montserrat", sans-serif;
+  
   cursor: pointer;
   text-decoration: none;
   padding:1%;
@@ -522,62 +526,13 @@ h2 {
   font-size: large;
   font-weight: normal;
   line-height: 35px;
-  font-family: "Montserrat", sans-serif;
+  
   cursor: pointer;
   text-decoration: none;
   padding:1%;
   transition: all 0.1s ease-in-out;
     box-shadow: -6px -6px 10px rgba(255, 255, 255, 0.8),
       6px 6px 10px rgba(0, 0, 0, 0.2);
-}
-.newlogin:hover {
-  opacity: 0.7;
-  box-shadow: -6px -6px 10px rgba(193, 243, 239, 0.959),
-    6px 6px 10px rgba(0, 0, 0, 0.2);
-  color:darkturquoise;
-}
-.newlogin:active {
-  opacity: 1;
-  box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
-    inset 8px 8px 16px rgba(0, 0, 0, 0.1);
-  color: #79e3b6;
-}
-
- 
-.message2{
-  color:black;
-  font-weight:lighter;
-  font-size:x-large;
-  margin-top:7%;
-  margin-left:6.5%;
-  text-align: center;
-  width:60%;
-  font-family: "Montserrat", sans-serif;
-}
-.members-image{
-  margin-left:5%;
-  width:34.75rem;
-  height:25.5rem;
-  float:left;
-  margin-top:15%;
-
-}
-#typer0 {
-  font-family: monospace;
-}
-.box2 p {
-  align-content: center;
-  color:rgb(73,72,201);
-  font-family: Courier;
-  font-weight: 700;
-  text-align: center;
-  margin-right:4%;
-  margin-left:7%;
-  margin-top:10%;
-  padding:5vh;
-  padding-left: 40%;
-  font-size: 3vh;
-  width: 90%;
 }
 
 .TabBox {
@@ -609,7 +564,7 @@ h2 {
 
 .ExecutionTime {
   color:black;
-  font-family: monospace;
+
   text-align: center;
 }
 .commentform {
@@ -629,7 +584,7 @@ h2 {
   padding: 15px;
   color: black;
   font-weight:normal;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: large;
 }
 .commentform label {
@@ -672,7 +627,7 @@ h2 {
   height: auto;
   padding: 20px;
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   border-color: none;
   margin: 10px;
   color: black;
@@ -691,7 +646,7 @@ h2 {
 }
 .score-card{
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   padding:1%;
   margin:10%;
   margin-top:2%;
@@ -777,7 +732,7 @@ h2 {
   padding-top:2%;
   padding-right: 5%;
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: 1.1rem;
   background: rgb(209,239,253);
   text-align: justify;
@@ -833,14 +788,14 @@ h2 {
   background: none;
   font-size: large;
   color:#2659a6;
-  font-family: monospace;
+
 }
 .replybtn {
   border: none;
   background: none;
   font-size: large;
   color:#2659a6;
-  font-family: monospace;
+
 }
 
 .updateinput {
@@ -848,7 +803,7 @@ h2 {
   border-style: hidden;
   color:black;
   font-weight:lighter;
-  font-family: "Montserrat", sans-serif;
+  
   width: 100%;
   height:30px;
   margin-top: 10px;
@@ -997,7 +952,7 @@ h2 {
   border-radius: 8px;
   border:rgb(0, 0, 0);
   color: black;
-  font-family: "Montserrat", sans-serif;
+  
 }
 .deletebtn:hover{
   background-color: rgba(199, 73, 73, 0.808);
@@ -1018,7 +973,7 @@ h2 {
   border-radius: 8px;
   border:rgb(0, 0, 0);
   color: black;
-  font-family: "Montserrat", sans-serif;
+  
 }
 .pagination button:hover, .backendbtn:hover{
   background-color: rgba(83, 201, 255, 0.808);
@@ -1189,7 +1144,6 @@ h2 {
     top: 50%;
     
     border-radius: 8px;
-    font-family: "Poppins",sans-serif;
     text-align: center;
 }
 .popup button{
@@ -1210,7 +1164,6 @@ h2 {
 }
 
 .user-quiz{
-  background-image: url("../src/components/images/newwallpaper2.png");
   background-position: center;
   background-size: cover;
   height: 115vh;
@@ -1226,7 +1179,7 @@ h2 {
 }
 .quizInnerDiv{
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   padding:1%;
   margin:10%;
   margin-top:2%;
@@ -1237,13 +1190,12 @@ h2 {
 
 #quizSign{
   font-weight:bold;
-  font-family: "Montserrat";
   color:#2b388a;
 }
 
 .quiz_demo{
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   padding:1%;
   margin:auto;
   margin-top:1%;
@@ -1274,7 +1226,7 @@ h2 {
 .quiz_instruction{
   font-weight: semibold;
   text-align: center;
-  font-family: "Montserrat", sans-serif;
+  
   padding:1%;
   margin-top:10%;
   margin-left:10%;
@@ -1290,7 +1242,7 @@ h2 {
 
 #quiz_instruction_note{
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   padding:1%;
   margin:10% 10% 5% 10%;
   font-size: 16px;
@@ -1326,7 +1278,7 @@ h2 {
   border-style: solid;
   border-width: medium;
   font-weight:bolder;
-  font-family: "Montserrat", sans-serif;
+  
   color:#2b388a;
   font-size: 1.05rem;
   background-color: white;
@@ -1337,7 +1289,6 @@ h2 {
 
 }
 .user-quiz > h1{
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-weight: bold;
   font-size: 52px;
   text-align: center;
@@ -1352,7 +1303,7 @@ h2 {
   border-radius: 8px;
   border:rgb(0, 0, 0) solid 3px;
   color: black;
-  font-family: "Montserrat", sans-serif;
+  
   width: 25%;
 }
 
@@ -1364,7 +1315,7 @@ h2 {
   border-radius: 8px;
   border:rgb(0, 0, 0);
   color: black;
-  font-family: "Montserrat", sans-serif;
+  
   width: 33%;
   border:rgb(0, 0, 0) solid 3px;
 }
@@ -1385,7 +1336,7 @@ h2 {
   color: black;
   width: 33%;
   border:rgb(0, 0, 0) solid 3px;
-  font-family: "Montserrat", sans-serif;
+  
 }
 
 
@@ -1415,7 +1366,6 @@ h2 {
 }
 
 .quiz-maker-choices-input{
-  font-family:inherit;
   font-size: 16px;
   padding: 10px;
   margin: 10px 30px;
@@ -1426,7 +1376,6 @@ h2 {
 }
 
 .quiz-maker-choices-edit-input{
-  font-family:inherit;
   font-size: 16px;
   padding: 10px;
   margin: 10px 0px;
@@ -1497,7 +1446,7 @@ h2 {
 #admin-quiz-content>h1{
   background-color: none;
   font-weight:bold;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: 2rem;
   text-align: left;
   font-size: 52px;
@@ -1524,7 +1473,7 @@ h2 {
   border-style: solid;
   border-width: medium;
   font-weight:bold;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: 1.7rem;
   text-align: left;
   border-radius: unset;
@@ -1533,7 +1482,7 @@ h2 {
 #selected_button_tf{
   opacity: 0.7;
   font-weight:semibold;
-  font-family: "Montserrat", sans-serif;
+  
   color:white;
   background-color:#2b388a;
   width: 90%;
@@ -1544,7 +1493,7 @@ h2 {
   background-color: white;
   width: 90%;
   font-weight:semibold;
-  font-family: "Montserrat", sans-serif;
+  
   border-width:thin;
 }
 
@@ -1553,7 +1502,7 @@ h2 {
   background-color:white;
   width: 90%;
   font-weight:semibold;
-  font-family: "Montserrat", sans-serif;
+  
   border-width:thin;
 }
 
@@ -1574,13 +1523,13 @@ h2 {
 #quiz-content0{
   background-color: none;
   font-weight:bold;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: 2rem;
 }
 
 #quiz-content4{
   font-weight:bolder;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: 1rem;
   color:tomato;
 }
@@ -1593,7 +1542,7 @@ h2 {
   border-style: solid;
   border-width: thin;
   font-weight:lighter;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: 1.7rem;
   text-align: left;
   border-radius: unset;
@@ -1606,7 +1555,7 @@ h2 {
   height:auto;
   font-size: 1.1rem;
   font-weight:lighter;
-  font-family: "Montserrat", sans-serif;
+  
   padding:10px;
 }
 #quiz-contentx:hover{
@@ -1616,7 +1565,6 @@ h2 {
 .AVLdiv{
   width: 100%;
   overflow: hidden;
-  background-image: url("../src/components/images/newwallpaper2.png");
   background-position: center;
   background-size: cover;
   height: 140vh;
@@ -1627,7 +1575,7 @@ h2 {
 
 #quiz-content2{
   font-weight: semibold;
-  font-family: "Montserrat", sans-serif;
+  
   font-size: x-large;
   margin-bottom: 10px;
   margin-top:10px;
@@ -1674,7 +1622,7 @@ h2 {
   color: steelblue;
   background-color: transparent;
   font-size: 1.1rem;
-  font-family: "Montserrat", sans-serif;
+  
   cursor: pointer;
   padding: 13px;
 }

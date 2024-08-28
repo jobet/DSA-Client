@@ -11,7 +11,7 @@ div.code-write {
   border-style: solid;
   border-radius: 15px;
   color:transparent;
-  font-family: "Montserrat", sans-serif;
+  
 }
 
 div.fixedCode {
@@ -19,7 +19,7 @@ div.fixedCode {
   height: 3%;
   margin: 5px;
   font-size: 13px;
-  font-family: "Montserrat", sans-serif;
+  
 }
 
 textarea.code-write {
@@ -32,7 +32,6 @@ textarea.code-write {
   background-color:transparent;
   border-color:transparent;
   font-size: 12px;
-  font-family: initial;
   outline:0px !important;
-  font-family: "Montserrat", sans-serif;
+  
 }

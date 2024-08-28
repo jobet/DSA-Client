@@ -74,10 +74,10 @@ function LoginDropdown(data){
     }
     if(data.avatar == undefined){
         return(
-            <li className="nav-item">
+            <li className="nav-item-user">
             <div className="container" ref={container}>
             <Link className="nav-links" onClick={handleButtonClick}>
-            <span className="navbicon"><BiUser/> </span>Login
+            <span className="navbicon"><BiUser/></span>Login
             </Link>
             {state ?
             <div class="dropdown">
