@@ -3,7 +3,7 @@ import React,{ useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './Navbar.css';
 import logoImage from './images/logo.svg';
-import logoImageb from './images/backendlogo.png';
+import logoImageb from './images/logo.svg';
 import { UserContext } from './UserContext';
 import { BiUser, BiCommentDetail, BiEdit, BiLogOut, BiLineChart} from "react-icons/bi";
 

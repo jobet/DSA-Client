@@ -8,7 +8,6 @@ import ShortestPath from './components/pages/ShortestPath';
 import Sorting from './components/pages/Sorting';
 import Dsa from './components/pages/Dsa';
 import DataStructures from './components/pages/DataStructures';
-import Information from './components/pages/Information';
 import LoginForm from './components/pages/LoginForm';
 import { UserContext } from './components/UserContext';
 import Comment from './components/pages/comment';
@@ -64,7 +63,6 @@ function App() {
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/home" exact component={Home} />
-        <Route path="/information" exact component={Information}/>
         <Route path="/sorting-algorithms" exact component={Sorting} />
         <Route path="/shortest-path-algorithms" exact component={ShortestPath} />
         <Route path="/data-structures" exact component={DataStructures} />

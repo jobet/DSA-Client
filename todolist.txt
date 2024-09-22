@@ -1,0 +1,34 @@
+Home
+-Mix with introduction
+-responsive design
+
+Introduction
+-Mix with Home
+-responsive design
+
+Sorting
+-Change to "Sort"
+-Add Discussion Board below
+-responsive design
+
+Path Finding
+-Add Discussion Board below
+-responsive design
+
+Data Structures
+-Add Discussion Board below
+-responsive design
+
+Quiz
+-remove demonstration
+-add leaderboards
+-responsive design
+
+Discussion Board
+-Remove altogether, move to each algo
+
+Login
+-responsive design
+
+User Panel
+-responsive design

@@ -4,7 +4,6 @@ import Collapsible from '../functions/Collapsible.js';
 import SideCollapsible from '../functions/SideCollapsible';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import arrow from '../images/arrow.png';
 import "../functions/modal.css";
 import shortPath from '../images/shortPath.PNG';
 import clearWall from '../images/clearWall.PNG';

@@ -5,7 +5,6 @@ import Reg_username from './LoginForm';
 import ReactSession from 'react-client-session/dist/ReactSession';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import usericon from '../images/usericon.png';
 import { AvatarGenerator } from './generator_avatar.ts';
 import { render } from '@testing-library/react';
 
