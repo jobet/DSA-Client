@@ -82,7 +82,7 @@ function LoginDropdown(data){
             {state ?
             <div class="dropdown">
                 <ul>
-                <h3>Log in or Register to join our discussion board and to take the daily quiz!</h3>
+                <h3>Log in or Register to comment and to take the daily quiz!</h3>
                 <Link to='/login-form' onClick={handleButtonClick} className="dropdownlinks"><li>Login</li></Link>
                 <Link to='/register-form' onClick={handleButtonClick} className="dropdownlinks"><li>Register</li></Link>
                 </ul>

@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
 * {
+  font-family: "Archivo", sans-serif;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -195,17 +196,21 @@
 
 h1 {
   color:#1b1464;
-  font-family: "Archivo", sans-serif;
   font-weight: 800;
 }
 
 h2, h3, p, a{
-  font-family: "Archivo", monospace;
   font-weight: 600;
 }
 
+p{
+  font-weight: 400;
+  text-align: justify;
+}
+
+
 h2 {
-  color:  #208ceb; 
+  color:  #B8336A; 
   font-weight: bold;
 }
 
@@ -375,7 +380,7 @@ h2 {
 }
 
 .box1 {
-  height: 75svh;
+  height: 100svh;
   width:100%;
   margin-left: auto;
   margin-right: auto;
@@ -389,6 +394,7 @@ h2 {
   text-align: center;
   margin-bottom: 12px;
   font-size: 48px;
+  text-shadow: 0px 1px #ffffff;
 }
 
 .message2{
@@ -396,6 +402,7 @@ h2 {
   font-size: x-large;
   margin-bottom: 12px;
   text-align: center;
+  text-shadow: 0px 1px #ffffff;
 }
 
 .newlogin{
@@ -413,11 +420,9 @@ h2 {
 }  
 
 .box2 {
-  margin-left: auto;
-  margin-right: auto;
+  padding: 0px 0px 40px 0px;
   align-items: center;
   justify-content: center;
-  height: 50svh;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -431,13 +436,51 @@ h2 {
   padding-right: 20%;
 }
 
+.oneSection{
+  padding: 0 20%;
+}
+
+.oneSection p, .oneSection li{
+  font-size: 20px;
+}
+
+.oneSection h1, .oneSection h2{
+  font-size: 32px;
+}
+
+.typeSection{
+  display: flex;
+  flex-direction: column;
+}
+
+.type{
+  padding: 10px 50px;
+  display: grid;
+  grid-template-columns: 15% auto;
+  justify-content: center;
+  align-items: start;
+}
+.type div{
+  padding-left: 10px;
+}
+
+.oneSection ul {
+	position: relative;
+	list-style: none;
+	margin-left: 0;
+	padding-left: 1.2em;
+}
+.oneSection ul li:before {
+	content: "✔";
+	position: absolute;
+	left: 0;
+}
+
 .imgSection{
   padding-left: 20%;
 }
 
-.box2 p {
-  font-weight: 700;
-  text-align: justify;
+.box2 .descSection{
   font-size: 24px;
 }
 
@@ -455,7 +498,7 @@ h2 {
   scroll-behavior: smooth;
   background-image: url(../src/components/images/wallpaper.png);
   background-repeat: no-repeat;
-  background-position: 0px -150px;
+  background-position: 0px -200px;
 }
 
 

@@ -11,7 +11,7 @@
   outline: solid 1px #1b1464;
 }
 .footer {
-  background:rgb(0, 0, 0);
+  background: #1b1464;
   height: 100px;
   display: flex;
   justify-content: center;
