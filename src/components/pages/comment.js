@@ -48,11 +48,11 @@ export default function Comment(){
     
     //get comment and replies
     useEffect(() => {
-      Axios.post('http://localhost:3001/api/reply_get').then((response)=>{
+      Axios.post(`${process.env.REACT_APP_API_URL}/api/reply_get`).then((response)=>{
         setReplyList(response.data);
 
     });
-        Axios.get('http://localhost:3001/api/comment/get').then((response)=>{
+        Axios.get(`${process.env.REACT_APP_API_URL}/api/comment/get`).then((response)=>{
         setcommentList(response.data);
     });
     } , [])
@@ -78,7 +78,7 @@ export default function Comment(){
       var timeSQL = (today.getHours()-8) + ":" + today.getMinutes() + ":" + today.getSeconds();
       var dateTime = date+' '+time;
       var dateTimeSQL = date+' '+timeSQL;
-        Axios.post("http://localhost:3001/api/reply_insert", {
+        Axios.post(`${process.env.REACT_APP_API_URL}/api/reply_insert`, {
             Reg_email:ReactSession.get("email"),
             Reply_content:replyMessage,
             Reply_written: dateTimeSQL,
@@ -122,13 +122,13 @@ const forceUpdate = useForceUpdate();
       var dateTime = date+' '+time;
       var dateTimeSQL = date+' '+timeSQL;
       var dateTime = date+' '+time;
-        Axios.post("http://localhost:3001/api/comment/insert", {
+        Axios.post(`${process.env.REACT_APP_API_URL}/api/comment/insert`, {
             useremail_reg:username,
             comment_text:comment,
             date_written: dateTimeSQL,
         })
         
-        Axios.get('http://localhost:3001/api/comment/comment_id/get').then((response)=>{
+        Axios.get(`${process.env.REACT_APP_API_URL}/api/comment/comment_id/get`).then((response)=>{
         // console.log(response.data[0].comment_id)
 
         if(commentID == null){// setting it to 0 will cause bug for shifting replies to new comment
@@ -220,7 +220,7 @@ const forceUpdate = useForceUpdate();
             const updatedReplies = replies.filter(val => val.reply_id != id);
             //setDeleteCount(deleteCount + 1);
             setReplyList([...updatedReplies]);
-         Axios.delete(`http://localhost:3001/api/user_reply/delete/${id}`)
+         Axios.delete(`${process.env.REACT_APP_API_URL}/api/user_reply/delete/${id}`)
 
         }
 
@@ -242,11 +242,11 @@ const forceUpdate = useForceUpdate();
         cancelButtonText:'Yes'
       }).then((result) => {
         if (!result.isConfirmed) {
-          Axios.delete(`http://localhost:3001/api/comment/delete/${id}`)
+          Axios.delete(`${process.env.REACT_APP_API_URL}/api/comment/delete/${id}`)
             const updatedBackendComments = commentList.filter(val => val.comment_id != id);
             //setDeleteCount(deleteCount + 1);
             setcommentList([...updatedBackendComments]);
-         Axios.delete(`http://localhost:3001/api/reply/delete/${id}`)
+         Axios.delete(`${process.env.REACT_APP_API_URL}/api/reply/delete/${id}`)
 
         }
 
@@ -268,7 +268,7 @@ const forceUpdate = useForceUpdate();
         cancelButtonText:'Yes'
       }).then((result) => {
         if (!result.isConfirmed) {
-          Axios.put('http://localhost:3001/api/comment/update',{
+          Axios.put(`${process.env.REACT_APP_API_URL}/api/comment/update`,{
             comment_text: newComment,
             comment_id: comment_id,
 
@@ -333,7 +333,7 @@ const forceUpdate = useForceUpdate();
           cancelButtonText:'Yes'
         }).then((result) => {
           if (!result.isConfirmed) {
-            Axios.put('http://localhost:3001/api/reply/update',{
+            Axios.put(`${process.env.REACT_APP_API_URL}/api/reply/update`,{
               Reply_value: editReplyValue,
               Reply_id: replyID,
   

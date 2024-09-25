@@ -20,6 +20,94 @@ function RegisterForm() {
       return false; 
     }
   }
+  async function handleRegistration() {
+    // Generate random avatar and confirmation code
+    let new_avatar = generator.generateRandomAvatar();
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var timeSQL = (today.getHours()-8) + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTimeSQL = date+' '+timeSQL;
+    
+    ReactSession.set("avatar_url", new_avatar);
+    const min = 100000;
+    const max = 1000000;
+    const rand = String(Math.round(min + Math.random() * (max - min)));
+
+    try {
+        // Insert user into database
+        await Axios.post(`${process.env.REACT_APP_API_URL}/api/insert`, {
+            Reg_username: Reg_username,
+            Reg_email: Reg_email,
+            Reg_password: Reg_password,
+            Reg_avatar_url: new_avatar,
+            confirmed: confirmed,
+            code: rand,
+            user_created: dateTimeSQL,
+            usergender_reg: Reg_gender,
+            userprogram_reg: Reg_program,
+            useryear_reg: Reg_yearlevel
+        });
+        
+        // Update the local state after insertion
+        setuserNameList([
+            ...usernameList,
+            {
+                useremail_reg: Reg_email,
+                username_reg: Reg_username,
+                userpassword_reg: Reg_password,
+                confirmed: confirmed,
+                code: rand,
+            },
+        ]);
+
+        // Fetch the user info after inserting
+        const response = await Axios.post(`${process.env.REACT_APP_API_URL}/api/fetch_user_infos`, {
+            Reg_email: Reg_email
+        });
+        setUserInfo(response.data);
+
+        // Send confirmation email
+        try {
+            await Axios.post(`${process.env.REACT_APP_API_URL}/api/sendemail`, {
+                code: rand,
+                email: Reg_email,
+            });
+        } catch (err) {
+            console.error('Error sending confirmation email:', err);
+        }
+
+    } catch (err) {
+        console.error('Error inserting user:', err);
+    }
+    
+        // Show success toast
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer);
+              toast.addEventListener('mouseleave', Swal.resumeTimer);
+          }
+      });
+
+      Toast.fire({
+          icon: 'success',
+          title: 'Registration Successful! \n\nPlease confirm \nyour E-mail and \nenter your \nconfirmation code'
+      });
+
+      // Clear form fields
+      document.getElementById('reg_user_input').value = '';
+      document.getElementById('reg_user_pass').value = '';
+      document.getElementById('reg_email').value = '';
+      document.getElementById('confirm_user_pass').value = '';
+
+      // Redirect after the database and toast are handled
+      window.location.href = "/login-form?confirm=" + Reg_email;
+    dis(true);
+}
 
   //Registration
   const [Reg_username, setReg_username] = useState('')
@@ -33,7 +121,7 @@ function RegisterForm() {
   const [confirmed, setConfirmed] = useState("false");
   const [enableSubmitCode, setEnableSubmitCode] = useState(false);
   useEffect(() =>{
-    Axios.get('http://localhost:3001/api/get').then((response)=>{
+    Axios.get(`${process.env.REACT_APP_API_URL}/api/get`).then((response)=>{
       setuserNameList(response.data)
     })
   },[])
@@ -118,80 +206,9 @@ function RegisterForm() {
       })
     }
     else{
-    //Call the api using Axios
-    //Generate Random Code for E-Mail Confirmation
-    let new_avatar = generator.generateRandomAvatar()
-    // set_avatar(new_avatar)
-
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var timeSQL = (today.getHours()-8) + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTimeSQL = date+' '+timeSQL;
-
-    ReactSession.set("avatar_url", new_avatar)
-    const min = 100000;
-    const max = 1000000;
-    const rand = String(Math.round(min + Math.random() * (max - min)));
-    Axios.post('http://localhost:3001/api/insert', {
-      Reg_username: Reg_username,
-      Reg_email: Reg_email, 
-      Reg_password: Reg_password,
-      Reg_avatar_url: new_avatar,
-      confirmed: confirmed,
-      code: rand,
-      user_created: dateTimeSQL,
-      usergender_reg: Reg_gender,
-      userprogram_reg: Reg_program,
-      useryear_reg: Reg_yearlevel
-  });
-  setuserNameList([
-    ...usernameList,
-    { useremail_reg: Reg_email,
-      username_reg: Reg_username, 
-      userpassword_reg: Reg_password,
-      confirmed: confirmed,
-      code: rand,
-      },
-  ])
-
-  Axios.post('http://localhost:3001/api/fetch_user_infos',{
-    Reg_email:Reg_email}).then((response)=>{setUserInfo(response.data)})
-
-  const Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000,
-    timerProgressBar: true,
-    didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer)
-      toast.addEventListener('mouseleave', Swal.resumeTimer)
+      handleRegistration();
     }
-  })
-  
-  Toast.fire({
-    icon: 'success',
-    title: 'Registration Successful! \n\nPlease confirm \nyour E-mail and \nenter your \nconfirmation code'
-  })
-  document.getElementById('reg_user_input').value = ''
-  document.getElementById('reg_user_pass').value = ''
-  document.getElementById('reg_email').value = ''
-  document.getElementById('confirm_user_pass').value =''
-  window.location.href = "/login-form?confirm="+Reg_email;
-  //Sending Confirmation E-mail
-  try{
-    Axios.post('http://localhost:3001/api/sendemail', {
-        code: rand,
-        email: Reg_email,
-    });
   }
-  catch{
-    console.log('Invalid E-mail')
-  }
-  dis(true);
-  
-}
-    }
   };
 
 }

@@ -10,11 +10,11 @@ export default function ManageDiscussion(){
     
     //get comment and replies
     useEffect(() => {
-      Axios.post('http://localhost:3001/api/reply_get').then((response)=>{
+      Axios.post(`${process.env.REACT_APP_API_URL}/api/reply_get`).then((response)=>{
         setReplyList(response.data);
 
     });
-        Axios.get('http://localhost:3001/api/comment/get').then((response)=>{
+        Axios.get(`${process.env.REACT_APP_API_URL}/api/comment/get`).then((response)=>{
         setcommentList(response.data);
     });
     } , [])
@@ -65,11 +65,11 @@ export default function ManageDiscussion(){
         cancelButtonText:'Yes'
       }).then((result) => {
         if (!result.isConfirmed) {
-          Axios.delete(`http://localhost:3001/api/comment/delete/${id}`)
+          Axios.delete(`${process.env.REACT_APP_API_URL}/api/comment/delete/${id}`)
             const updatedBackendComments = commentList.filter(val => val.comment_id != id);
             //setDeleteCount(deleteCount + 1);
             setcommentList([...updatedBackendComments]);
-         Axios.delete(`http://localhost:3001/api/reply/delete/${id}`)
+         Axios.delete(`${process.env.REACT_APP_API_URL}/api/reply/delete/${id}`)
 
         }
 
@@ -92,7 +92,7 @@ export default function ManageDiscussion(){
             const updatedReplies = replies.filter(val => val.reply_id != id);
             //setDeleteCount(deleteCount + 1);
             setReplyList([...updatedReplies]);
-         Axios.delete(`http://localhost:3001/api/user_reply/delete/${id}`)
+         Axios.delete(`${process.env.REACT_APP_API_URL}/api/user_reply/delete/${id}`)
 
         }
 

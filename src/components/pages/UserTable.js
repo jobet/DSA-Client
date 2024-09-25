@@ -40,7 +40,7 @@ export default function UserTable({ columns, data }) {
       cancelButtonText:'Yes'
     }).then((result) => {
       if (!result.isConfirmed) {
-        Axios.delete(`http://localhost:3001/api/username/delete/${selecteduser}`);
+        Axios.delete(`${process.env.REACT_APP_API_URL}/api/username/delete/${selecteduser}`);
       }
     }
   )
@@ -64,7 +64,7 @@ export default function UserTable({ columns, data }) {
         for (var key in arr) {
         const userinfo = arr[key];
         console.log(userinfo.useremail_reg);
-        Axios.delete(`http://localhost:3001/api/username/delete/${userinfo.useremail_reg}`);
+        Axios.delete(`${process.env.REACT_APP_API_URL}/api/username/delete/${userinfo.useremail_reg}`);
         }
       }
     }

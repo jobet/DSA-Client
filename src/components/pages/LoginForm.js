@@ -27,7 +27,7 @@ function LoginForm() {
   const {value,setValue} = useContext(UserContext);
   //Getting the user infos from the DB
   useEffect(() =>{
-    Axios.get('http://localhost:3001/api/get').then((response)=>{
+    Axios.get(`${process.env.REACT_APP_API_URL}/api/get`).then((response)=>{
       setuserNameList(response.data)
       if(query.get("code") && query.get("email")){
         confirmUserParams(response.data, query.get("code"), query.get("email"))
@@ -76,7 +76,7 @@ function LoginForm() {
     forceUpdate();
     setLog_Password("")
     setLog_Email("")
-    Axios.post('http://localhost:3001/api/avatar_get',{
+    Axios.post(`${process.env.REACT_APP_API_URL}/api/avatar_get`,{
       Reg_email:email}).then((response)=>{
         getUserAvatar(response.data[0]["useravatar_url"], username);
       }) 
@@ -90,7 +90,7 @@ function LoginForm() {
   const login_User = ()=>{
     let isConfirmed = false;
     let success = false;
-    Axios.post('http://localhost:3001/api/userpass/check', {
+    Axios.post(`${process.env.REACT_APP_API_URL}/api/userpass/check`, {
       Reg_email: log_Email, 
       Reg_password: log_Password
   }).then((response) => {
@@ -109,7 +109,7 @@ function LoginForm() {
             title: 'Email has not been confirmed'
           })
           document.getElementById('log_password').value = ''
-          Axios.post('http://localhost:3001/api/fetch_user_infos',{
+          Axios.post(`${process.env.REACT_APP_API_URL}/api/fetch_user_infos`,{
             Reg_email:log_Email}).then((response)=>{setUserInfo(response.data)})
           dis(true)
       }
@@ -143,7 +143,7 @@ function LoginForm() {
           break;
       }
       else if(email == userNamesConfirmCode[i][0] && confirmcode == userNamesConfirmCode[i][1] && userNamesConfirmCode[i][2] == 'false'){
-        Axios.put('http://localhost:3001/api/confirm/update',{
+        Axios.put(`${process.env.REACT_APP_API_URL}/api/confirm/update`,{
           log_Email: email,
           confirm:'true',
         }).then(()=>{
@@ -176,7 +176,7 @@ function LoginForm() {
         dis(false)
       }
       else if((log_Email.trim()) == userNamesConfirmCode[i][0] && (code.trim()) == userNamesConfirmCode[i][1] && userNamesConfirmCode[i][2] == 'false'){
-        Axios.put('http://localhost:3001/api/confirm/update',{
+        Axios.put(`${process.env.REACT_APP_API_URL}/api/confirm/update`,{
           log_Email: log_Email,
           confirm:'true',
         }).then(()=>{

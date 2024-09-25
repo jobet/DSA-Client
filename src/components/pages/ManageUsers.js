@@ -51,7 +51,7 @@ export default function ManageUsers(){
   //Gather UserData
   useEffect(() => {
     (async () => {
-      const result = await axios("http://localhost:3001/api/get");
+      const result = await axios(`${process.env.REACT_APP_API_URL}/api/get`);
       setData(result.data);
     })();
   }, []);

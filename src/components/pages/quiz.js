@@ -96,7 +96,7 @@ export default function Quiz(){
                 var dateTimeSQL = date+' '+timeSQL;
 
                 if(!hasTakenQuizToday){
-                    Axios.post('http://localhost:3001/api/quiz_finish', {
+                    Axios.post(`${process.env.REACT_APP_API_URL}/api/quiz_finish`, {
                         Reg_email: ReactSession.get('email'),
                         User_score: score, 
                         Q_total: questionSets.length,
@@ -161,7 +161,7 @@ export default function Quiz(){
 
     //Gather quiz questions
     useEffect(() =>{
-        Axios.get('http://localhost:3001/api/user/get_questions').then((response)=>{
+        Axios.get(`${process.env.REACT_APP_API_URL}/api/user/get_questions`).then((response)=>{
           setQuestionSets(response.data);
         //   console.log(questionSets[0].question_choices)
         //   console.log(response.data)
@@ -178,7 +178,7 @@ export default function Quiz(){
 
     //Check if user has taken a quiz already today
     useEffect(()=>{
-        Axios.post('http://localhost:3001/api/user/get_user_quiz_taken', {
+        Axios.post(`${process.env.REACT_APP_API_URL}/api/user/get_user_quiz_taken`, {
             Reg_email: ReactSession.get("email"),
         }).then((response)=>{
             if(response.data[0] != undefined)

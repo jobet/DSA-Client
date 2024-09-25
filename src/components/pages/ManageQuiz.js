@@ -17,14 +17,14 @@ export default function ManageQuiz(){
 
 
     useEffect(() =>{
-        Axios.get('http://localhost:3001/api/admin/get_questions').then((response)=>{
+        Axios.get(`${process.env.REACT_APP_API_URL}/api/admin/get_questions`).then((response)=>{
           setQuestionSets(response.data);
         //   console.log(response.data)
         })
       },[questionSets])
     
     useEffect(()=>{
-        Axios.get('http://localhost:3001/api/admin/quiz_id/get').then((response)=>{
+        Axios.get(`${process.env.REACT_APP_API_URL}/api/admin/quiz_id/get`).then((response)=>{
             setHighestID(response.data[0].question_id);
         })
 
@@ -35,7 +35,7 @@ export default function ManageQuiz(){
 
         switch(q_type){
             case "Multiple Choice":
-                Axios.post('http://localhost:3001/api/admin/insert_questions', {
+                Axios.post(`${process.env.REACT_APP_API_URL}/api/admin/insert_questions`, {
                 question_type: questionType,
                 question_content: questionContent, 
                 question_choices: separator+choiceA+separator+choiceB+separator+choiceC+separator+choiceD,
@@ -53,7 +53,7 @@ export default function ManageQuiz(){
                                 setCorrectAnswer("")
                 break;
             case "Fill in the Blank":
-                Axios.post('http://localhost:3001/api/admin/insert_questions', {
+                Axios.post(`${process.env.REACT_APP_API_URL}/api/admin/insert_questions`, {
                 question_type: questionType,
                 question_content: questionContent, 
                 question_choices: "none",
@@ -71,7 +71,7 @@ export default function ManageQuiz(){
                 setCorrectAnswer("")
                 break;
             case "True or False":
-                Axios.post('http://localhost:3001/api/admin/insert_questions', {
+                Axios.post(`${process.env.REACT_APP_API_URL}/api/admin/insert_questions`, {
                 question_type: questionType,
                 question_content: questionContent, 
                 question_choices: "none",
@@ -155,7 +155,7 @@ export default function ManageQuiz(){
                     separator+tempChoiceD+separator,correct_answer:tempCorrectAnswer}:val
               }))
 
-              Axios.put('http://localhost:3001/api/quiz_admin/update',{
+              Axios.put(`${process.env.REACT_APP_API_URL}/api/quiz_admin/update`,{
                 question_id: q_id,
                 question_type: tempQuestionType,
                 question_content: tempQuestionContent,
@@ -172,7 +172,7 @@ export default function ManageQuiz(){
                 return val.question_id == q_id?{question_id:q_id,question_type:tempQuestionType,question_content:tempQuestionContent,question_choices:"none",correct_answer:tempCorrectAnswer}:val
               }))
 
-              Axios.put('http://localhost:3001/api/quiz_admin/update',{
+              Axios.put(`${process.env.REACT_APP_API_URL}/api/quiz_admin/update`,{
                 question_id: q_id,
                 question_type: tempQuestionType,
                 question_content: tempQuestionContent,
@@ -185,13 +185,13 @@ export default function ManageQuiz(){
 
     function DeleteQuestion(q_id){
         console.log(questionSets)
-        Axios.delete(`http://localhost:3001/api/admin/delete_question/${q_id}`);
+        Axios.delete(`${process.env.REACT_APP_API_URL}/api/admin/delete_question/${q_id}`);
           const updatedQuestions = questionSets.filter(val => val.question_id != q_id);
           setQuestionSets([...updatedQuestions]);
         console.log(questionSets)
 
         if(questionSets.length == 1)
-            Axios.delete(`http://localhost:3001/api/admin/truncate_question`);
+            Axios.delete(`${process.env.REACT_APP_API_URL}/api/admin/truncate_question`);
     }
 
     function ChangeQuestionType(event){

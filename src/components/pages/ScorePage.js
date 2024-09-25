@@ -18,12 +18,12 @@ export default function ScorePage(){
 
      //get scorelist
      useEffect(() => {
-        Axios.post('http://localhost:3001/api/scoreList/post',{useremail_reg:ReactSession.get('email')}).then((response)=>{
+        Axios.post(`${process.env.REACT_APP_API_URL}/api/scoreList/post`,{useremail_reg:ReactSession.get('email')}).then((response)=>{
           setScoreList(response.data);
 
   
       });
-        Axios.get('http://localhost:3001/api/profileScore/get').then((response)=>{
+        Axios.get(`${process.env.REACT_APP_API_URL}/api/profileScore/get`).then((response)=>{
             setTopScore(response.data);
       });
     } , []) 

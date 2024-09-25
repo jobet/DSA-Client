@@ -69,7 +69,7 @@ function Profile() {
     let new_avatar = generator.generateRandomAvatar()
     set_avatar(new_avatar)
     ReactSession.set("avatar_display",new_avatar)
-    Axios.put('http://localhost:3001/api/avatar/update',{
+    Axios.put(`${process.env.REACT_APP_API_URL}/api/avatar/update`,{
             Reg_email: ReactSession.get('email'),
           Reg_avatar_url: new_avatar} )
   }
@@ -101,7 +101,7 @@ function Profile() {
                 Swal.fire("Password's length must be at least be 5")
             else{
               ReactSession.set("password", newPass)
-              Axios.put('http://localhost:3001/api/userpass/update',{
+              Axios.put(`${process.env.REACT_APP_API_URL}/api/userpass/update`,{
               Reg_email: ReactSession.get("email"),
               Reg_password: re_EnterPass
              } )
@@ -132,7 +132,7 @@ function Profile() {
       })
       
       if (userName) {
-        Axios.put('http://localhost:3001/api/username/update',{
+        Axios.put(`${process.env.REACT_APP_API_URL}/api/username/update`,{
               Reg_username: userName,
               Reg_email: ReactSession.get("email")
              } )
@@ -173,12 +173,12 @@ function Profile() {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.delete(`http://localhost:3001/api/username/delete/${ReactSession.get("email")}`);
+        Axios.delete(`${process.env.REACT_APP_API_URL}/api/username/delete/${ReactSession.get("email")}`);
           setBackupUserList(usernameList.filter(val => val.useremail_reg != ReactSession.get("email")));
           setuserNameList([...backUpUserList]);
 
-       Axios.delete(`http://localhost:3001/api/user_comment/delete/${ReactSession.get("email")}`);
-       Axios.delete(`http://localhost:3001/api/user_reply/delete/:${ReactSession.get("email")}`);
+       Axios.delete(`${process.env.REACT_APP_API_URL}/api/user_comment/delete/${ReactSession.get("email")}`);
+       Axios.delete(`${process.env.REACT_APP_API_URL}/api/user_reply/delete/:${ReactSession.get("email")}`);
        ReactSession.remove("username");
        ReactSession.remove("email");
        ReactSession.remove("password");
