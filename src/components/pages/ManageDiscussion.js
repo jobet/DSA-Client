@@ -123,10 +123,10 @@ export default function ManageDiscussion(){
             <table className="comment">
               <tr>
                 <td>
-                <img className='usericon' width={'45px'} height={'50px'}src={val.useravatar_url}></img>
+                <img className='usericon' width={'45px'} height={'50px'}src={val.user_infos.useravatar_url}></img>
                 </td>
               <td>
-              <span className='backenduser'>  {val.username_reg}</span> • {convertDate(new Date(val.date_written))}
+              <span className='backenduser'>  {val.user_infos.username_reg}</span> • {convertDate(new Date(val.date_written))}
               </td>
               </tr>
             </table>
@@ -145,10 +145,10 @@ export default function ManageDiscussion(){
               <table className="comment">
                 <tr>
                   <td>
-                  <img src={item.useravatar_url} width="20px" height="20px"></img>
+                  <img src={item.user_infos.useravatar_url} width="20px" height="20px"></img>
                   </td>
                   <td>
-                  <label className="backendreplyuser">{item.username_reg}</label><span> • {convertDate(new Date(item.reply_written))}</span>
+                  <label className="backendreplyuser">{item.user_infos.username_reg}</label><span> • {convertDate(new Date(item.reply_written))}</span>
                   </td>
                 </tr>
               </table>

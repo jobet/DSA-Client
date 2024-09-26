@@ -26,7 +26,7 @@ import {LoginDropdown} from './components/UserDropDown';
 
 function App() {
   //Login/Register with Dropdown
-  const [value, setValue] = useState(<LoginDropdown/>)
+  const [value, setValue] = useState(<LoginDropdown avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)
   
   if(window.location.pathname=="/admin"){
     return (

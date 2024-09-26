@@ -44,6 +44,11 @@ function Navbar() {
             Quiz
             </Link>
           </li>
+          <li className='nav-item'>
+            <Link to='/comments' className='nav-links' onClick={closeMobileMenu}>
+            Discussion
+            </Link>
+          </li>
         </ul>
         <ul className='nav-menu-user'>
           {value}

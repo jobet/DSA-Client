@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
-import ReactSession from 'react-client-session/dist/ReactSession';
 import Swal from 'sweetalert2';
 import {UserContext} from '../UserContext';
 import { useLocation, useParams, searchParams } from "react-router-dom";
@@ -39,8 +38,6 @@ function LoginForm() {
       }
     })
   },[]) //Calling it once
-  const [Reg_username, setReg_username] = useState('')
-  const [Reg_password, setReg_password] = useState('')
   const [usernameList, setuserNameList] = useState([])
   const [code, setCode] = useState("")
   const [enableSubmitCode, setEnableSubmitCode] = useState(false);
@@ -48,7 +45,7 @@ function LoginForm() {
   const dis = (param) => {
     setEnableSubmitCode(param);
   }
-    //Login
+  //Login
   const [log_Email, setLog_Email] = useState('')
   const [log_Password, setLog_Password] = useState('')
 
@@ -68,67 +65,69 @@ function LoginForm() {
       icon: 'success',
       title: 'Signed in successfully'
     })
-    ReactSession.set("email", email);
-    ReactSession.set("password", password);
+    localStorage.setItem('avatar_display', avatar);
+    localStorage.setItem('username', username);
+    localStorage.setItem('email', email);
+    localStorage.setItem('password', password);
     document.getElementById('log_email').value = ''
     document.getElementById('log_password').value = ''
-    setValue(<LoginDropdown avatar={avatar} username={username}/>)
+    setValue(<LoginDropdown avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)
     forceUpdate();
     setLog_Password("")
     setLog_Email("")
-    Axios.post(`${process.env.REACT_APP_API_URL}/api/avatar_get`,{
-      Reg_email:email}).then((response)=>{
-        getUserAvatar(response.data[0]["useravatar_url"], username);
-      }) 
-  }
-  function getUserAvatar(useravatar, uname){
-    ReactSession.set('avatar_display', useravatar);
-    ReactSession.set("username", uname);
-    forceUpdate();
   }
 
-  const login_User = ()=>{
-    let isConfirmed = false;
-    let success = false;
+  const login_User = () => {
     Axios.post(`${process.env.REACT_APP_API_URL}/api/userpass/check`, {
       Reg_email: log_Email, 
       Reg_password: log_Password
-  }).then((response) => {
-    console.log(response.data);
-    if(response.data){
-      if(response.data["correct_pass"] && response.data["confirmed"] == 'true'){
-           correctPass_Confirmed(response.data["useravatar_url"], response.data["username_reg"], log_Email, log_Password)
-           isConfirmed = true;
-           success = true;
-           console.log(response.data["correct_pass"])
-           console.log(response.data["confirmed"])
-         }
-      else if(response.data["correct_pass"] && response.data["confirmed"] == 'false'){
-          Swal.fire({
-            icon: 'error',
-            title: 'Email has not been confirmed'
-          })
-          document.getElementById('log_password').value = ''
-          Axios.post(`${process.env.REACT_APP_API_URL}/api/fetch_user_infos`,{
-            Reg_email:log_Email}).then((response)=>{setUserInfo(response.data)})
-          dis(true)
-      }
-      else{
+    }).then((response) => {
+      console.log("Full server response:", JSON.stringify(response.data, null, 2));
+  
+      if (response.data && response.data.exists) {
+        // Log individual fields for debugging
+        console.log("correct_pass:", response.data.correct_pass);
+        console.log("confirmed:", response.data.confirmed);
+  
+        if (response.data.correct_pass == true) {  // Using loose equality
+          if (response.data.confirmed == "true") {  // Using loose equality
+            console.log("Login successful");
+            correctPass_Confirmed(response.data.useravatar_url, response.data.username_reg, log_Email, log_Password);
+          } else {
+            console.log("Email not confirmed");
+            Swal.fire({
+              icon: 'error',
+              title: 'Email has not been confirmed'
+            });
+            document.getElementById('log_password').value = '';
+            dis(true);
+          }
+        } else {
+          console.log("Incorrect password");
           Swal.fire({
             icon: 'info',
-            title: 'Invalid Email or Password',
-            text: 'Please input a valid email or password',
-          })
-          document.getElementById('log_password').value = ''
+            title: 'Invalid Password',
+            text: 'Please input the correct password',
+          });
+          document.getElementById('log_password').value = '';
+        }
+      } else {
+        console.log("Email does not exist");
+        Swal.fire({
+          icon: 'error',
+          title: 'User not found',
+          text: 'The email you entered does not exist in our records.',
+        });
       }
-    }
-    else{
-      alert("Email does not exist")
-    }
-  });
-  }
-
-  const [userInfo, setUserInfo] = useState([]);
+    }).catch(error => {
+      console.error("Login error:", error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Error',
+        text: 'An error occurred during login. Please try again later.',
+      });
+    });
+  };
   //Confirm User From Link
   function confirmUserParams(userlist, confirmcode, email){
     Swal.fire('Confirming E-mail Address...')
@@ -164,7 +163,6 @@ function LoginForm() {
 }
   //Confirm User
   const confirm_User = () => {
-
     let i;
     let userNamesConfirmCode = usernameList.map((val) => [val.useremail_reg, val.code, val.confirmed]);
     for (i=0;i<userNamesConfirmCode.length;i++){
@@ -186,11 +184,6 @@ function LoginForm() {
           })
           document.getElementById('log_confirm_code').value = ''
           dis(false);
-          //setuserNameList(usernameList.map((val) => { 
-          //  return  val.useremail_reg == log_Email?{useremail_reg:val.useremail_reg, username_reg:val.username_reg, userpassword_reg:val.userpassword_reg, useravatar_url:val.useravatar_url, confirmed:'true', code:val.code}:val
-          //}))
-
-          //correctPass_Confirmed('NaN', Reg_username, log_Email, Reg_password)
         })
       }
       else if ((log_Email.trim()) == userNamesConfirmCode[i][0] && (code.trim()) != userNamesConfirmCode[i][1] && userNamesConfirmCode[i][2] == 'false'){
@@ -200,7 +193,6 @@ function LoginForm() {
           title: 'Incorrect Code'
         })
         dis(true);
-        // console.log('Confirm Code documentID: ',(document.getElementById('log_confirm_code').value),'Confirm Code state: ',code,'Log Email: ',log_Email)
       }
       else if (((log_Email.trim()) != userNamesConfirmCode[i][0] && (code.trim()) == userNamesConfirmCode[i][1] && userNamesConfirmCode[i][2] == 'false')){
         document.getElementById('log_confirm_code').value = ''
@@ -209,7 +201,6 @@ function LoginForm() {
           title: 'Incorrect Email'
         })
         dis(true);
-        // console.log('Confirm Code documentID: ',(document.getElementById('log_confirm_code').value),'Confirm Code state: ',code,'Log Email: ',log_Email)
       }
     }
   }
@@ -217,7 +208,7 @@ function LoginForm() {
 return (
 <div className='Home'>
          {(() => {
-        if (ReactSession.get('username')){
+        if (localStorage.getItem('username')){
           history.push("/profile");
         }
         else if (enableSubmitCode == true) {

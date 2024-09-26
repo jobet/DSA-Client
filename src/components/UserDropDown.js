@@ -4,7 +4,6 @@ import './Navbar.css';
 import { BiUser } from "react-icons/bi";
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import ReactSession from 'react-client-session/dist/ReactSession';
 import { useHistory } from 'react-router-dom';
 
 function LoginDropdown(data){
@@ -35,11 +34,11 @@ function LoginDropdown(data){
           cancelButtonText:'No'
         }).then((result) => {
           if (result.isConfirmed) {
-            ReactSession.remove("username");
-            ReactSession.remove("email");
-            ReactSession.remove("password");
-            ReactSession.remove("avatar_url");
-            ReactSession.remove("avatar_display");
+            localStorage.removeItem("username");
+            localStorage.removeItem("email");
+            localStorage.removeItem("password");
+            localStorage.removeItem("avatar_url");
+            localStorage.removeItem("avatar_display");
             {setValue(<LoginDropdown/>)}
             dis(false);
             forceUpdate();

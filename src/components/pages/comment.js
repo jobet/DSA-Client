@@ -1,26 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {UserContext} from '../UserContext';
 import Axios from 'axios';
-import Reg_username from './LoginForm';
-import ReactSession from 'react-client-session/dist/ReactSession';
 import { useHistory } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { AvatarGenerator } from './generator_avatar.ts';
-import { render } from '@testing-library/react';
 
-const generator = new AvatarGenerator();
-
-function useForceUpdate(){
-  const [value, setValue] = useState(0); // integer state
-  return () => setValue(value => value + 1); // update the state to force render
-}
 
 export default function Comment(){
-
   let history = useHistory();
   const {value,setValue} = useContext(UserContext);
     const [comment,setcomment]=useState("");
-    const [username,setusername]=useState(ReactSession.get('email'));
+    const [username,setusername]=useState(localStorage.getItem('email'));
     const [commentID,setcommentID]=useState(0);
     const [userid,setuserid]=useState("");
     const [newComment,setnewComment]=useState("");
@@ -41,11 +30,7 @@ export default function Comment(){
     const [replyCardIndex, setReplyCardIndex] = useState(null);
     const [commentReplyIndex, setCommentReplyIndex] = useState(null)
     const [editReplyValue, setEditReplyValue] = useState("")
-    // const [backupReplyList, setBackUpReplyList] = useState([])
 
-
-
-    
     //get comment and replies
     useEffect(() => {
       Axios.post(`${process.env.REACT_APP_API_URL}/api/reply_get`).then((response)=>{
@@ -71,7 +56,6 @@ export default function Comment(){
 
   function submitReply(replyMessage, comm_ID){
     {
-      let new_reply = [];
       var today = new Date();
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       var time = (today.getHours()) + ":" + today.getMinutes() + ":" + today.getSeconds();
@@ -79,26 +63,21 @@ export default function Comment(){
       var dateTime = date+' '+time;
       var dateTimeSQL = date+' '+timeSQL;
         Axios.post(`${process.env.REACT_APP_API_URL}/api/reply_insert`, {
-            Reg_email:ReactSession.get("email"),
+            Reg_email:localStorage.getItem("email"),
             Reply_content:replyMessage,
             Reply_written: dateTimeSQL,
             Comment_ID:comm_ID
         })
-
-
-
       setReplyList([...replies,{"reply_id":highestReplyID,"reply_written":dateTime,"comment_id":comm_ID,
-      "useravatar_url":ReactSession.get("avatar_display"),"useremail_reg":ReactSession.get("email"),
-    "reply_content":replyMessage,"username_reg":ReactSession.get("username")}])
+      "useravatar_url":localStorage.getItem("avatar_display"),"useremail_reg":localStorage.getItem("email"),
+    "reply_content":replyMessage,"username_reg":localStorage.getItem("username")}])
       setHighestReplyID(highestReplyID+1)
       };
       setShow(false)
       setReplyValue("")
 
   }
-    
-    
-    
+
 const Toast = Swal.mixin({
   toast: true,
   position: 'top-end',
@@ -110,39 +89,54 @@ const Toast = Swal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer)
   }
 })
-const forceUpdate = useForceUpdate();
 
 //submit comment
-    const submitComment = () => {
+    async function submitComment () {
       console.log(commentID)
       var today = new Date();
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
       var time = (today.getHours()) + ":" + today.getMinutes() + ":" + today.getSeconds();
       var timeSQL = (today.getHours()) + ":" + today.getMinutes() + ":" + today.getSeconds();
-      var dateTime = date+' '+time;
       var dateTimeSQL = date+' '+timeSQL;
       var dateTime = date+' '+time;
-        Axios.post(`${process.env.REACT_APP_API_URL}/api/comment/insert`, {
+        await Axios.post(`${process.env.REACT_APP_API_URL}/api/comment/insert`, {
             useremail_reg:username,
             comment_text:comment,
             date_written: dateTimeSQL,
         })
-        
-        Axios.get(`${process.env.REACT_APP_API_URL}/api/comment/comment_id/get`).then((response)=>{
-        // console.log(response.data[0].comment_id)
-
-        if(commentID == null){// setting it to 0 will cause bug for shifting replies to new comment
-        setcommentList([...commentList,
-          {comment_id:highestCommentID,"useremail_reg":ReactSession.get("email"), "comment_text":comment, "date_written":dateTime, "useravatar_url":ReactSession.get('avatar_display')}])
-        setHighestCommentID(highestCommentID+1)
-        }
-        else
-        setcommentList([
-          ...commentList,
-          {comment_id:((response.data)[0].comment_id+1),useremail_reg:username, comment_text:comment, date_written:dateTime, useravatar_url:ReactSession.get('avatar_display')},
-        ]);
-
-      }) 
+        await Axios.get(`${process.env.REACT_APP_API_URL}/api/comment/comment_id/get`).then((response)=>{
+          if(commentID == null){
+            setcommentList([...commentList,
+              {
+                comment_id: highestCommentID,
+                useremail_reg: localStorage.getItem("email"),
+                comment_text: comment,
+                date_written: dateTime,
+                user_infos: {
+                  useravatar_url: localStorage.getItem('avatar_display'),
+                  username_reg: localStorage.getItem("username"),
+                  useremail_reg: localStorage.getItem("email")
+                }
+              }])
+            setHighestCommentID(highestCommentID+1)
+          }
+          else {
+            setcommentList([
+              ...commentList,
+              {
+                comment_id: ((response.data)[0].comment_id+1),
+                useremail_reg: username,
+                comment_text: comment,
+                date_written: dateTime,
+                user_infos: {
+                  useravatar_url: localStorage.getItem('avatar_display'),
+                  username_reg: localStorage.getItem("username"),
+                  useremail_reg: username
+                }
+              },
+            ]);
+          }
+        }) 
       setCommentCount(commentCount + 1)
       setShow(false)
       setReplyValue(" ")
@@ -152,22 +146,8 @@ const forceUpdate = useForceUpdate();
     
 
     function submit(){
-      Swal.fire({
-        title: 'Are you sure you?',
-        text: "Submit?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'No',
-        cancelButtonText:'Yes'
-      }).then((result) => {
-        if (!result.isConfirmed) {
-          submitComment();
-          setcomment("");
-        
-        }
-      })
+      submitComment();
+      setcomment("");
     }
 
     function Login(){
@@ -177,30 +157,33 @@ const forceUpdate = useForceUpdate();
 
 
     function convertDate(date){
+      let finalDate = "";
       var seconds = Math.floor((new Date() - date) / 1000);
-
-      var interval = seconds / 31536000;
-    
-      if (interval > 1) {
-        return Math.floor(interval) + " years ago";
+      if ((seconds / 31536000) > 1) {
+          finalDate = Math.floor(seconds / 31536000) + " year";
+          if (Math.floor(seconds / 31536000) != 1) finalDate += "s";
       }
-      interval = seconds / 2592000;
-      if (interval > 1) {
-        return Math.floor(interval) + " months ago";
+      else if ((seconds / 2592000) > 1) {
+          finalDate = Math.floor(seconds / 2592000) + " month";
+          if (Math.floor(seconds / 2592000) != 1) finalDate += "s";
       }
-      interval = seconds / 86400;
-      if (interval > 1) {
-        return Math.floor(interval) + " days ago";
+      else if ((seconds / 86400) > 1) {
+          finalDate = Math.floor(seconds / 86400) + " day";
+          if (Math.floor(seconds / 86400) != 1) finalDate += "s";
       }
-      interval = seconds / 3600;
-      if (interval > 1) {
-        return Math.floor(interval) + " hours ago";
+      else if ((seconds / 3600) > 1) {
+          finalDate = Math.floor(seconds / 3600) + " hour";
+          if (Math.floor(seconds / 3600) != 1) finalDate += "s";
       }
-      interval = seconds / 60;
-      if (interval > 1) {
-        return Math.floor(interval) + " minutes ago";
+      else if ((seconds / 60) > 1) {
+          finalDate = Math.floor(seconds / 60) + " minute";
+          if (Math.floor(seconds / 60) != 1) finalDate += "s";
       }
-      return Math.floor(seconds) + " seconds ago";
+      else{
+          finalDate = Math.floor(seconds) + " second";
+          if (Math.floor(seconds) != 1) finalDate += "s";
+      }
+      return finalDate+" ago";
     }
 
 
@@ -229,27 +212,23 @@ const forceUpdate = useForceUpdate();
 
 
     const deleteComment=(id)=>{
-
-     
       Swal.fire({
-        title: 'Are you sure you?',
-        text: "Submit?",
+        title: 'Are you sure you want to delete this comment?',
+        text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: 'No',
-        cancelButtonText:'Yes'
+        confirmButtonText: 'Yes',
+        cancelButtonText:'No'
       }).then((result) => {
-        if (!result.isConfirmed) {
+        if (result.isConfirmed) {
           Axios.delete(`${process.env.REACT_APP_API_URL}/api/comment/delete/${id}`)
             const updatedBackendComments = commentList.filter(val => val.comment_id != id);
             //setDeleteCount(deleteCount + 1);
             setcommentList([...updatedBackendComments]);
          Axios.delete(`${process.env.REACT_APP_API_URL}/api/reply/delete/${id}`)
-
         }
-
       })
       
       
@@ -258,44 +237,32 @@ const forceUpdate = useForceUpdate();
 
     const updateComment=(comment_id)=>{
       Swal.fire({
-        title: 'Are you sure you?',
-        text: "Submit?",
+        title: 'Are you sure you want to update this comment?',
+        text: "",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
-        confirmButtonText: 'No',
-        cancelButtonText:'Yes'
+        confirmButtonText: 'Yes',
+        cancelButtonText:'No'
       }).then((result) => {
-        if (!result.isConfirmed) {
+        if (result.isConfirmed) {
           Axios.put(`${process.env.REACT_APP_API_URL}/api/comment/update`,{
             comment_text: newComment,
             comment_id: comment_id,
-
           } )
           //setEditCount(editCount + 1);
           const updatedcomm=setcommentList(commentList.map((val) => {   //maps comment for updating
             return val.comment_id == comment_id?{comment_id:val.comment_id,useravatar_url:val.useravatar_url,useremail_reg:val.useremail_reg,comment_text:newComment,date_written:val.date_written}:val
-          }))
-       
-            
+          }))           
         setDis(!dis);
-        
-        
-       
-          
-
         }
       })
      
     }
 
     const [show, setShow] = useState(false);
-    const [editReplyShow, setEditReplyShow] = useState(false);
-
-
-      
-    
+    const [editReplyShow, setEditReplyShow] = useState(false);   
     const editing=(val)=>{
       setTempCommentID(val.comment_id)
       setDis(!dis);
@@ -358,28 +325,25 @@ const forceUpdate = useForceUpdate();
      return(
         
         <div className="InformationBox1">
-            <h1 style={{textAlign:"center"}}>DISCUSSION BOARD</h1>
+            <h1 style={{textAlign:"center"}}>Discussion Board</h1>
             <br></br>
             <div className="commentform">
 
       {(() => {
-        if (ReactSession.get("username") && commentCount == 2){
+        if (localStorage.getItem("username") && commentCount == 2){
           return (
             <div className="commentform">
-                <h2>{ReactSession.get("username")}</h2>
+                <h2>{localStorage.getItem("username")}</h2>
                 <h2>Adding comments is restricted to 2 at a time</h2>
             </div>
           )
         }
-        else if (ReactSession.get("username")) {
+        else if (localStorage.getItem("username")) {
           return (
             <div className="commentform">
-              <center><h2>{ReactSession.get("username")}</h2>
-              <img className='usericon' width={'70px'} height={'90px'}src={ReactSession.get("avatar_display")}></img>
+              <center><h2>{localStorage.getItem("username")}</h2>
+              <img className='usericon' width={'70px'} height={'90px'}src={localStorage.getItem("avatar_display")}></img>
               </center>
-                
-                
-            {/* <label>COMMENT: </label> */}
             <input type="text" name="comment" value={comment} placeholder="Type a response" onChange={(e)=>{setcomment(e.target.value)}}/>
            <button onClick={submit}  >Submit</button>
             </div>
@@ -409,31 +373,17 @@ const forceUpdate = useForceUpdate();
                return (
                 <div className="card">
                   {(() => {
-        if (String(val.username_reg)=="undefined") {
+          console.log(val);
           return (
             <>
             <table className="comment">
               <tr>
-                <td><img className='usericon' width={'45px'} height={'50px'}src={val.useravatar_url}></img></td>
-                <td><h2 className='user' value={userid}>{ReactSession.get('username')}</h2><span> • {convertDate(new Date(val.date_written))}</span></td>
-              </tr>
-            </table>  
-              </>
-          )
-        } 
-        
-        else {
-          return (
-            <>
-            <table className="comment">
-              <tr>
-                <td><img className='usericon' width={'45px'} height={'50px'}src={val.useravatar_url}></img></td>
-                <td><h2 className='user' value={userid}>{val.username_reg}</h2><span> • {convertDate(new Date(val.date_written))}</span></td>
+                <td><img className='usericon' width={'45px'} height={'50px'}src={val.user_infos.useravatar_url}></img></td>
+                <td><h2 className='user' value={userid}>{val.user_infos.username_reg}</h2><span> • {convertDate(new Date(val.date_written))}</span></td>
               </tr>
             </table>  
             </>
           )
-        }
       })()}
             <p className="commentmsg">{val.comment_text} </p> 
 
@@ -447,43 +397,29 @@ const forceUpdate = useForceUpdate();
     )
   }
 })}
-
-            {/* {ReactSession.get("email") ? <div><button className='replybtn' onClick={() => handleCardIndex(val.comment_id)}>Reply</button>
-              <div className={val.comment_id == cardIndex && show ? 'reply_shown' : 'reply_hidden'}>
-  <input value={replyValue} placeholder="Input Reply" onChange={(e) => {setReplyValue(e.target.value)}} type="text"></input> <button onClick={() => submitReply(replyValue, val.comment_id)} className='replybtn'>Confirm</button>
-</div></div> : ""} */}
-
-                    
-
-
-
             {(() => {
-        if (val.useremail_reg == ReactSession.get("email") && deleteCount==2 && editCount==2){
+        if (val.user_infos.useremail_reg == localStorage.getItem("email") && deleteCount==2 && editCount==2){
           return (
             <div>
-            
             <button id='editBtn' className='commentbtn' onClick={()=>{editing(val)}}>Edit</button>
             <button id='deleteBtn' className='commentbtn' onClick={()=>{deleteComment(val.comment_id)}}>Delete</button>
-            
-              </div>
+            </div>
           )
         }
         
-        else if (val.useremail_reg == ReactSession.get("email")) {
+        else if (val.user_infos.useremail_reg == localStorage.getItem("email")) {
           return (
             <div>    
-           
             <button id='editBtn' className='commentbtn' onClick={()=>{editing(val)}}>Edit</button>
             <button id='deleteBtn' className='commentbtn' onClick={()=>{deleteComment(val.comment_id)}}>Delete</button>
             <button className='replybtn' onClick={() => handleCardIndex(val.comment_id)}>Reply</button>
             <div className={val.comment_id == cardIndex && show ? 'reply_shown' : 'reply_hidden'}>
             <input value={replyValue} placeholder="Input Reply" onChange={(e) => {setReplyValue(e.target.value)}} type="text"></input> <button onClick={() => submitReply(replyValue, val.comment_id)} className='replybtn'>Confirm</button>
             </div>
-            
-              </div>
+            </div>
           )
         } 
-        else if (ReactSession.get("username")){
+        else if (localStorage.getItem("username")){
           return(
             <div>
                <button className='replybtn' onClick={() => handleCardIndex(val.comment_id)}>Reply</button>
@@ -497,7 +433,7 @@ const forceUpdate = useForceUpdate();
       })()}
       
       {(() => {
-              if (tempCommentID == val.comment_id && dis==false && val.useremail_reg == ReactSession.get("email") ){
+              if (tempCommentID == val.comment_id && dis==false && val.useremail_reg == localStorage.getItem("email") ){
                 return(
                   <div>
                     <input type='text' id='editText'  className='updateinput' onChange={(e)=>{setnewComment(e.target.value)}}/>
@@ -519,14 +455,14 @@ const forceUpdate = useForceUpdate();
             <>
             <table className="comment">
               <tr>
-            <td><img src={item.useravatar_url} width="20px" height="20px"></img></td>
-            <td><label className="replyuser">{item.username_reg}</label><span> • {convertDate(new Date(item.reply_written))}</span></td>
+            <td><img src={item.user_infos.useravatar_url} width="20px" height="20px"></img></td>
+            <td><label className="replyuser">{item.user_infos.username_reg}</label><span> • {convertDate(new Date(item.reply_written))}</span></td>
             </tr>
             </table>
             <span className="replymsg">{item.reply_content}</span>
             </>}
 
-            {item.useremail_reg == ReactSession.get("email") ?
+            {item.useremail_reg == localStorage.getItem("email") ?
              <div>
             <button className='replybtn' onClick={() => handleReplyCardIndex(item.reply_id)}>Edit</button>
              <button className='replybtn' onClick={()=>{deleteReply(item.reply_id)}}>Delete</button>

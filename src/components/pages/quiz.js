@@ -1,9 +1,7 @@
 import React, {useEffect, useState, useRef, useReducer} from 'react';
-import { elements, choices, answers_sets } from './QuizData';
 import Swal from 'sweetalert2';
 import Axios from 'axios';
 import { useHistory } from 'react-router-dom';
-import ReactSession from 'react-client-session/dist/ReactSession';
 import fill_blank from '../images/fill_in_the_blank.jpg'
 import fil_blank2 from '../images/fill_blank.jpg'
 import t_or_f from '../images/t_or_f.jpg'
@@ -97,7 +95,7 @@ export default function Quiz(){
 
                 if(!hasTakenQuizToday){
                     Axios.post(`${process.env.REACT_APP_API_URL}/api/quiz_finish`, {
-                        Reg_email: ReactSession.get('email'),
+                        Reg_email: localStorage.getItem('email'),
                         User_score: score, 
                         Q_total: questionSets.length,
                         Q_taken: dateTimeSQL
@@ -179,7 +177,7 @@ export default function Quiz(){
     //Check if user has taken a quiz already today
     useEffect(()=>{
         Axios.post(`${process.env.REACT_APP_API_URL}/api/user/get_user_quiz_taken`, {
-            Reg_email: ReactSession.get("email"),
+            Reg_email: localStorage.getItem("email"),
         }).then((response)=>{
             if(response.data[0] != undefined)
                 setHasTakenQuizToday(true)
@@ -255,15 +253,38 @@ export default function Quiz(){
                 {started ? <div className="quizInnerDiv">            
                 <QuizQuestion/>
                 
-                {questionNo+1 == 1 && questionNo+1 == questionSets.length ? <div class="button-next">
-                    <button id="buttonQuizz" onClick={NextQuestion}>Finish</button></div>:questionNo >0 && questionNo+1!=questionSets.length?<div class="buttons-positioned">
-                    <button id="buttonQuizz" onClick={PrevQuestion}>Previous Question</button>
-                    <button id="buttonQuizz" onClick={NextQuestion}>Next Question</button>
-                </div>: questionNo+1 == questionSets.length ?<div class="buttons-positioned">
-                    <button id="buttonQuizz" onClick={PrevQuestion}>Previous Question</button>
+                {
+                questionSets.length === 1 ? (
+                    // Case when there's only one question
+                    <div class="button-next">
                     <button id="buttonQuizz" onClick={FinishQuiz}>Finish</button>
-                </div>:<div class="button-next">
-                    <button id="buttonQuizz" onClick={NextQuestion}>Next Question</button></div>}
+                    </div>
+                ) : (
+                    // Other cases
+                    questionNo+1 === 1 && questionNo+1 !== questionSets.length ? (
+                    // First question but not the only one
+                    <div class="button-next">
+                        <button id="buttonQuizz" onClick={NextQuestion}>Next Question</button>
+                    </div>
+                    ) : questionNo > 0 && questionNo+1 !== questionSets.length ? (
+                    // Any middle question
+                    <div class="buttons-positioned">
+                        <button id="buttonQuizz" onClick={PrevQuestion}>Previous Question</button>
+                        <button id="buttonQuizz" onClick={NextQuestion}>Next Question</button>
+                    </div>
+                    ) : questionNo+1 === questionSets.length ? (
+                    // Last question
+                    <div class="buttons-positioned">
+                        <button id="buttonQuizz" onClick={PrevQuestion}>Previous Question</button>
+                        <button id="buttonQuizz" onClick={FinishQuiz}>Finish</button>
+                    </div>
+                    ) : (
+                    <div class="button-next">
+                        <button id="buttonQuizz" onClick={NextQuestion}>Next Question</button>
+                    </div>
+                    )
+                )
+                }
                 {questionNo+1 + " of " + questionSets.length}
                 </div>
                 
@@ -279,7 +300,7 @@ export default function Quiz(){
                     </div>
                     
 
-                    {ReactSession.get("email") != undefined ?
+                    {localStorage.getItem("email") != undefined ?
                     <div>
                         <div className="commentform">
                             <button className="disc-button" onClick={()=>{BeginQuiz()}}>BEGIN QUIZ</button>

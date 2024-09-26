@@ -301,7 +301,7 @@ export default function Dashboard(){
                   <Tab className="graphtab"><strong>Quiz Statistics</strong></Tab>
               </TabList>
               <TabPanel>
-              <LineGraph labels={quizLineStats.map(val => val.datemade)} data1={quizLineStats.map(val => val.quiztakers)} label1={'Quizzes Taken'}
+              <LineGraph labels={quizLineStats.map(val => val.DateMade)} data1={quizLineStats.map(val => val.QuizTakers)} label1={'Quizzes Taken'}
                 label2={''} color1={'rgb(38, 230, 0, 0.6)'} color2={'rgb(0,0,0,0)'}/>
               </TabPanel>
               <TabPanel>

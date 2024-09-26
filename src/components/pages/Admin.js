@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
-import ReactSession from 'react-client-session/dist/ReactSession';
 import Swal from 'sweetalert2';
 import {UserContext} from '../UserContext';
 import logoImage from './panellogo.png';

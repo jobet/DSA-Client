@@ -8,7 +8,7 @@
   z-index: 5;
   top: 0;
   background-color: rgb(255, 255, 255);
-  outline: solid 1px #1b1464;
+  outline: solid 1px #B8336A60;
 }
 .footer {
   background: #1b1464;
@@ -91,7 +91,7 @@ a{
   margin-left: 5%;
   color: #1b1464;
   transition: all 0.1s ease-in-out;
-  margin-right: 20px;
+  margin-right: 30px;
 }
 
 .navbar-logo img{
@@ -110,8 +110,8 @@ a{
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(4, max-content);
-  grid-gap: 20px;
+  grid-template-columns: repeat(5, max-content);
+  grid-gap: 30px;
   list-style: none;
   text-align: center;
   justify-content: start;

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
-import ReactSession from 'react-client-session/dist/ReactSession';
 import Swal from 'sweetalert2';
 import {AvatarGenerator} from './generator_avatar.ts';
 import { useHistory } from 'react-router-dom';
@@ -27,8 +26,6 @@ function RegisterForm() {
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     var timeSQL = (today.getHours()-8) + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTimeSQL = date+' '+timeSQL;
-    
-    ReactSession.set("avatar_url", new_avatar);
     const min = 100000;
     const max = 1000000;
     const rand = String(Math.round(min + Math.random() * (max - min)));
@@ -217,7 +214,7 @@ function RegisterForm() {
 
         <div className='Home'>
          {(() => {
-        if (ReactSession.get('username')){
+        if (localStorage.getItem('username')){
             history.push("/profile");
         }
         else{

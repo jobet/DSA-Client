@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
@@ -6,7 +6,6 @@ import FormatMonth from '../functions/formatMonth';
 import FormatTime from '../functions/formatTime';
 import {AvatarGenerator} from './generator_avatar.ts';
 import crown from '../images/crown.png';
-import ReactSession from 'react-client-session/dist/ReactSession';
 import man from '../images/sit.png';
 import checklist from '../images/pencil.png';
 
@@ -18,7 +17,7 @@ export default function ScorePage(){
 
      //get scorelist
      useEffect(() => {
-        Axios.post(`${process.env.REACT_APP_API_URL}/api/scoreList/post`,{useremail_reg:ReactSession.get('email')}).then((response)=>{
+        Axios.post(`${process.env.REACT_APP_API_URL}/api/scoreList/post`,{useremail_reg:localStorage.getItem('email')}).then((response)=>{
           setScoreList(response.data);
 
   
@@ -48,16 +47,33 @@ export default function ScorePage(){
 
     //function for formating datetime string
     function formatDateTime(dateTimeString){
-        let year = dateTimeString.slice(0,4);
-        let month = dateTimeString.slice(5,7)
-        let day = dateTimeString.slice(8,10)
-        let hour = (parseInt(dateTimeString.slice(11,13)) - 8)
-        let minute = dateTimeString.slice(14,16)
-
-        let formatedMonth = FormatMonth(month)
-        let formatedTime = FormatTime(hour,minute)
-        
-        return formatedMonth + " " + (parseInt(day)+1) + ", " + year + " - " + formatedTime
+        let finalDate = "";
+        var seconds = Math.floor((new Date() - dateTimeString) / 1000);
+        if ((seconds / 31536000) > 1) {
+            finalDate = Math.floor(seconds / 31536000) + " year";
+            if (Math.floor(seconds / 31536000) != 1) finalDate += "s";
+        }
+        else if ((seconds / 2592000) > 1) {
+            finalDate = Math.floor(seconds / 2592000) + " month";
+            if (Math.floor(seconds / 2592000) != 1) finalDate += "s";
+        }
+        else if ((seconds / 86400) > 1) {
+            finalDate = Math.floor(seconds / 86400) + " day";
+            if (Math.floor(seconds / 86400) != 1) finalDate += "s";
+        }
+        else if ((seconds / 3600) > 1) {
+            finalDate = Math.floor(seconds / 3600) + " hour";
+            if (Math.floor(seconds / 3600) != 1) finalDate += "s";
+        }
+        else if ((seconds / 60) > 1) {
+            finalDate = Math.floor(seconds / 60) + " minute";
+            if (Math.floor(seconds / 60) != 1) finalDate += "s";
+        }
+        else{
+            finalDate = Math.floor(seconds) + " second";
+            if (Math.floor(seconds) != 1) finalDate += "s";
+        }
+        return finalDate+" ago";
     }
     
     return(
@@ -75,7 +91,7 @@ export default function ScorePage(){
                     return (
                      <div className="score-card">
                         <div className = "score-information-holder">
-                            <h1 >{item.username_reg}</h1>
+                            <h1 >{item.user_infos.username_reg}</h1>
                             Score for daily quiz:
                             <br/>
                             {item.user_score} / {item.questions_total}
@@ -83,7 +99,7 @@ export default function ScorePage(){
                             <br/>
                             Taken on:
                             <br/>
-                            {formatDateTime(item.quiz_taken)}
+                            {formatDateTime(new Date(item.quiz_taken))}
                         </div>
                         <div className="progress-circle-container">
                             <CircularProgressbar
@@ -128,11 +144,11 @@ export default function ScorePage(){
                     return(
                         <div>
                             <div className="scorePic">
-                            <img width={'90px'} height={'90px'} src={item.useravatar_url}></img>
+                            <img width={'90px'} height={'90px'} src={item.user_infos.useravatar_url}></img>
                             </div>
                             <div className="scoreRow">
 
-                                <h3>{item.username_reg}</h3>{formatDateTime(item.quiz_taken)} <h1>{item.user_score} / {item.questions_total}</h1>
+                                <h3>{item.user_infos.username_reg}</h3>{formatDateTime(new Date(item.quiz_taken))} <h1>{item.user_score} / {item.questions_total}</h1>
                             </div>
                         </div>
                     )

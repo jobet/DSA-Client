@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import Axios from 'axios';
-import ReactSession from 'react-client-session/dist/ReactSession';
 import Swal from 'sweetalert2';
 import {UserContext} from '../UserContext';
 import {AvatarGenerator} from './generator_avatar.ts';
@@ -51,11 +50,11 @@ function Profile() {
       cancelButtonText:'No'
     }).then((result) => {
       if (result.isConfirmed) {
-        ReactSession.remove("username");
-        ReactSession.remove("email");
-        ReactSession.remove("password");
-        ReactSession.remove("avatar_url");
-        ReactSession.remove("avatar_display");
+        localStorage.removeItem("username");
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+        localStorage.removeItem("avatar_url");
+        localStorage.removeItem("avatar_display");
         {setValue(<LoginDropdown/>)}
         dis(false);
         forceUpdate();
@@ -68,9 +67,9 @@ function Profile() {
   function changeAvatar(){
     let new_avatar = generator.generateRandomAvatar()
     set_avatar(new_avatar)
-    ReactSession.set("avatar_display",new_avatar)
+    localStorage.setItem("avatar_display",new_avatar)
     Axios.put(`${process.env.REACT_APP_API_URL}/api/avatar/update`,{
-            Reg_email: ReactSession.get('email'),
+            Reg_email: localStorage.getItem('email'),
           Reg_avatar_url: new_avatar} )
   }
 
@@ -100,9 +99,9 @@ function Profile() {
              if(newPass.length < 5 || re_EnterPass.length < 5)
                 Swal.fire("Password's length must be at least be 5")
             else{
-              ReactSession.set("password", newPass)
+              localStorage.setItem("password", newPass)
               Axios.put(`${process.env.REACT_APP_API_URL}/api/userpass/update`,{
-              Reg_email: ReactSession.get("email"),
+              Reg_email: localStorage.getItem("email"),
               Reg_password: re_EnterPass
              } )
              forceUpdate();
@@ -134,10 +133,10 @@ function Profile() {
       if (userName) {
         Axios.put(`${process.env.REACT_APP_API_URL}/api/username/update`,{
               Reg_username: userName,
-              Reg_email: ReactSession.get("email")
+              Reg_email: localStorage.getItem("email")
              } )
-             {setValue(<LoginDropdown avatar={ReactSession.get('avatar_display')} username={userName}/>)}
-             ReactSession.set("username", userName)
+             localStorage.setItem("username", userName)
+             {setValue(<LoginDropdown avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)}
         forceUpdate();
       }
       else
@@ -173,17 +172,17 @@ function Profile() {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        Axios.delete(`${process.env.REACT_APP_API_URL}/api/username/delete/${ReactSession.get("email")}`);
-          setBackupUserList(usernameList.filter(val => val.useremail_reg != ReactSession.get("email")));
+        Axios.delete(`${process.env.REACT_APP_API_URL}/api/username/delete/${localStorage.getItem("email")}`);
+          setBackupUserList(usernameList.filter(val => val.useremail_reg != localStorage.getItem("email")));
           setuserNameList([...backUpUserList]);
 
-       Axios.delete(`${process.env.REACT_APP_API_URL}/api/user_comment/delete/${ReactSession.get("email")}`);
-       Axios.delete(`${process.env.REACT_APP_API_URL}/api/user_reply/delete/:${ReactSession.get("email")}`);
-       ReactSession.remove("username");
-       ReactSession.remove("email");
-       ReactSession.remove("password");
-       ReactSession.remove("avatar_url");
-       ReactSession.remove("avatar_display");
+       Axios.delete(`${process.env.REACT_APP_API_URL}/api/user_comment/delete/${localStorage.getItem("email")}`);
+       Axios.delete(`${process.env.REACT_APP_API_URL}/api/user_reply/delete/:${localStorage.getItem("email")}`);
+       localStorage.removeItem("username");
+       localStorage.removeItem("email");
+       localStorage.removeItem("password");
+       localStorage.removeItem("avatar_url");
+       localStorage.removeItem("avatar_display");
        {setValue(<LoginDropdown/>)}
        dis(false);
        forceUpdate();
@@ -202,16 +201,14 @@ function Profile() {
   return (
 <div className='Home'>
          {(() => {
-        if (ReactSession.get('username')){
+        if (localStorage.getItem('username')){
           return (
             <div className='box1-login'>
               <div className='login_form'>
                 <center>
-                <img className='usericon' width={'120px'} height={'120px'} src={ReactSession.get('avatar_display')}></img>
-                  <h1>Username: {ReactSession.get('username')}</h1>
-                     <h1>Email: {ReactSession.get('email')}</h1>
-                     {/* <h1>Password: {ReactSession.get('password')}</h1> */}
-
+                <img className='usericon' width={'120px'} height={'120px'} src={localStorage.getItem('avatar_display')}></img>
+                  <h1>Username: {localStorage.getItem('username')}</h1>
+                     <h1>Email: {localStorage.getItem('email')}</h1>
                      <button onClick={changeName}>Change Username</button>
                      <button onClick={changePassword}>Change Password</button>
                      <button onClick={changeAvatar}>Change Avatar</button>
