@@ -22,11 +22,9 @@ import ScorePage from './components/pages/ScorePage';
 import Profile from './components/pages/Profile';
 import RegisterForm from './components/pages/RegisterForm';
 
-import {LoginDropdown} from './components/UserDropDown';
-
 function App() {
   //Login/Register with Dropdown
-  const [value, setValue] = useState(<LoginDropdown avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)
+  const [value, setValue] = useState(<Navbar avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)
   
   if(window.location.pathname=="/admin"){
     return (
@@ -59,7 +57,7 @@ function App() {
   return (
     <Router>
       <UserContext.Provider value={{value,setValue}}>
-      <Navbar />
+      <Navbar avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/home" exact component={Home} />

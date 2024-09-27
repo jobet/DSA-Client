@@ -73,11 +73,12 @@ function LoginDropdown(data){
     }
     if(data.avatar == undefined){
         return(
-            <li className="nav-item-user">
-            <div className="container" ref={container}>
-            <Link className="nav-links" onClick={handleButtonClick}>
-            <span className="navbicon"><BiUser/></span>Login
-            </Link>
+            <>
+            <li className='nav-item'>
+              <Link className="nav-links-button" onClick={handleButtonClick}>
+                <span className="navbicon"><BiUser/></span>
+                <span>Login</span>
+              </Link>
             {state ?
             <div class="dropdown">
                 <ul>
@@ -87,29 +88,31 @@ function LoginDropdown(data){
                 </ul>
             </div>
              : null}
-            </div>
-            </li>
+             </li>
+            </>
         )
     }
     else{
         return(
+            <>
             <li className='nav-item'>
-            <div className="container" ref={container}>
-            <Link className="nav-links" onClick={handleButtonClick}><span>
-            <img src={data.avatar} className="navavatar"/> {data.username}</span></Link>
+              <Link className="nav-links-button" onClick={handleButtonClick}>
+                <img src={data.avatar} className="navavatar"/>
+                <span>{data.username}</span>
+              </Link>
             {state ?
             <div class="dropdown">
             <ul>
                 <Link to='/profile' className="dropdownlinks"><li><img src={data.avatar} width={80}/>
                 <h2>{data.username}</h2></li></Link>
-                <Link to='/profile' className="dropdownlinks"><li>Profile</li></Link>
-                <Link to='/score-page' className="dropdownlinks"><li>Scores</li></Link>
+                <Link to='/profile' className="dropdownlinks" onClick={handleButtonClick}><li>Profile</li></Link>
+                <Link to='/score-page' className="dropdownlinks" onClick={handleButtonClick}><li>Scores</li></Link>
                 <Link onClick={logOut} className="dropdownlogout"><li>Logout</li></Link>
             </ul>
             </div>
             : null}
-            </div>
             </li>
+            </>
         )
     }
 }

@@ -5,7 +5,7 @@ import {UserContext} from '../UserContext';
 import { useLocation, useParams, searchParams } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { LoginDropdown } from '../UserDropDown';
+import { Navbar } from '../Navbar';
 
 
 //create your forceUpdate hook
@@ -71,7 +71,7 @@ function LoginForm() {
     localStorage.setItem('password', password);
     document.getElementById('log_email').value = ''
     document.getElementById('log_password').value = ''
-    setValue(<LoginDropdown avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)
+    setValue(<Navbar avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)
     forceUpdate();
     setLog_Password("")
     setLog_Email("")

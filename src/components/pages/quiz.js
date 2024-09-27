@@ -161,16 +161,10 @@ export default function Quiz(){
     useEffect(() =>{
         Axios.get(`${process.env.REACT_APP_API_URL}/api/user/get_questions`).then((response)=>{
           setQuestionSets(response.data);
-        //   console.log(questionSets[0].question_choices)
-        //   console.log(response.data)
         console.log(response.data)
-
         for (let i=0;i<response.data.length;i++){//Creation of answer holder
             answers.current[i] = null
         }
-
-        // alert(response.data.length)
-        // console.log(answers.current)
         })
       },[])
 

@@ -43,15 +43,14 @@
 .dropdown {
   text-align: center;
   background: #fff;
-  width: 15vw;
+  width: 280px;
   position: absolute;
-  top: 10vh;
-  right: 0vw;
+  top: 61px;
   z-index: 2;
   border: 0px solid;
   border-radius: 12px;
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14);
-  padding: 10px;
+  padding: 30px 10px;
 }
 .dropdown ul {
   list-style: none;
@@ -59,7 +58,7 @@
   margin-top: 0;
 }
 .dropdown li {
-  padding: 8px 12px;
+  padding: 18px 12px;
 }
 .dropdown li:hover {
   background-color: rgba(0, 0, 0, 0.14);
@@ -76,18 +75,12 @@
   text-decoration: none;
   font-weight: bold;
 }
-a{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .navbar-logo {
-  image-rendering: -webkit-optimize-contrast;
+  display: flex;
+  align-items: center;
   justify-content: center;
   cursor: pointer;
   text-decoration: none;
-  align-items: center;
   margin-left: 5%;
   color: #1b1464;
   transition: all 0.1s ease-in-out;
@@ -109,12 +102,13 @@ a{
 }
 
 .nav-menu {
+  margin-right: 5%;
   display: grid;
-  grid-template-columns: repeat(5, max-content);
+  grid-template-columns: repeat(6, max-content);
   grid-gap: 30px;
   list-style: none;
   text-align: center;
-  justify-content: start;
+  justify-content: end;
   width: 100%;
 }
 .nav-menu-user {
@@ -130,7 +124,7 @@ a{
 .nav-item {
   display: flex;
   align-items: center;
-  height: 80px;
+  justify-content: center;
 }
 
 .nav-item-user {
@@ -148,17 +142,42 @@ a{
   margin-top: 22px;
 }
 .nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color:#1b1464;
   text-decoration: none;
   font-weight: bold;
   transition: all 0.1s ease-in-out;
 }
+.nav-links-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  padding: 4px 12px;
+  height: 36px;
+  border: 1px solid #B8336A;
+  border-radius: 6px;
+  background-color: #B8336A;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.1s ease-out;
+}
 
 .nav-links:hover {
   color:#B8336A;
-  border-radius: 4px;
   transition: all 0.1s ease-in-out;
 }
+
+.nav-links-button:hover {
+  color:#B8336A;
+  border: 1px solid #B8336A;
+  background-color:#ffffff;
+  transition: all 0.1s ease-in;
+}
+
 
 .fa-bars {
   color: rgb(73,72,201);
@@ -176,32 +195,57 @@ a{
   .NavbarItems {
     position: relative;
   }
+  .dropdown{
+    height: calc((100svh - 61px) - ((100svh - 61px)/6));
+    width: 100%;
+    bottom: 61px;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+
+  .dropdown li{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: calc(((100svh - 61px) - ((100svh - 61px)/6))/4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   .nav-menu {
+    grid-gap: 0;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 90vh;
-    position: absolute;
-    top: 80px;
     left: -100%;
-    opacity: 1;
-    transition: all 0.5s ease;
+    height: calc(100svh - 61px);
+    position: absolute;
+    top: 61px;
+    opacity: 0;
+    transition: all 0.2s ease;
   }
 
   .nav-menu.active {
-    background: #242222;
+    background: #ffffff;
     left: 0;
     opacity: 1;
-    transition: all 0.5s ease;
+    transition: all 0.2s ease;
     z-index: 1;
   }
 
-  .nav-links {
+  .nav-links, .nav-links-button {
     text-align: center;
-    padding: 2rem;
+    height: calc((100svh - 61px)/6);
     width: 100%;
-    display: table;
+    display: flex;
+    border-radius: 0px;
   }
 
   .nav-links:hover {
@@ -215,7 +259,7 @@ a{
     position: absolute;
     top: 0;
     right: 0;
-    transform: translate(-100%, 60%);
+    transform: translate(-100%, 50%);
     font-size: 1.8rem;
     cursor: pointer;
   }
@@ -229,25 +273,6 @@ a{
     color: black;
     font-size: 2rem;
   }
-  .nav-links-mobile {
-    display: block;
-    text-align: center;
-    padding: 1.5rem;
-    margin: 2rem auto;
-    border-radius: 4px;
-    width: 80%;
-    background: red;
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.5rem;
-  }
-
-  .nav-links-mobile:hover {
-    background: #fff;
-    color: red;
-    transition: 250ms;
-  }
-
   button {
     display: none;
   }
@@ -275,8 +300,13 @@ a{
   font-size: 1.6rem;
 }
 .navbicon{
+  display: flex;
   font-size: 20px;
-  vertical-align: middle;
+}
+.navavatar{
+  display: flex;
+  width: 24px;
+  padding: 0px 4px 4px 0px;
 }
 .navb-menu {
   display: grid;

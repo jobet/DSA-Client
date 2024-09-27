@@ -6,7 +6,7 @@ import {AvatarGenerator} from './generator_avatar.ts';
 import { useHistory } from 'react-router-dom';
 import { BiUser } from "react-icons/bi";
 import { Link } from 'react-router-dom';
-import { LoginDropdown } from '../UserDropDown';
+import { Navbar } from '../Navbar';
 
 const generator = new AvatarGenerator();
 
@@ -55,7 +55,7 @@ function Profile() {
         localStorage.removeItem("password");
         localStorage.removeItem("avatar_url");
         localStorage.removeItem("avatar_display");
-        {setValue(<LoginDropdown/>)}
+        {setValue(<Navbar/>)}
         dis(false);
         forceUpdate();
         history.push("/login-form");
@@ -136,7 +136,7 @@ function Profile() {
               Reg_email: localStorage.getItem("email")
              } )
              localStorage.setItem("username", userName)
-             {setValue(<LoginDropdown avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)}
+             {setValue(<Navbar avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)}
         forceUpdate();
       }
       else
@@ -183,7 +183,7 @@ function Profile() {
        localStorage.removeItem("password");
        localStorage.removeItem("avatar_url");
        localStorage.removeItem("avatar_display");
-       {setValue(<LoginDropdown/>)}
+       {setValue(<Navbar/>)}
        dis(false);
        forceUpdate();
             Swal.fire(
