@@ -238,7 +238,7 @@ export default function Quiz(){
     }
 
     return(
-        <div className="user-quiz" style={ started ? {} : {height:"165vh"} }>
+        <div className="QuizPage" style={ started ? {} : {height:"165vh"} }>
             <h1 id="quizSign">{prnDt}</h1>
 
         <div>

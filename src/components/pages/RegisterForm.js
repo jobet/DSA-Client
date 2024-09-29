@@ -211,27 +211,24 @@ function RegisterForm() {
 }
   const [userInfo, setUserInfo] = useState([]);
     return (
-
-        <div className='Home'>
+        <div className='LoginForm'>
          {(() => {
         if (localStorage.getItem('username')){
             history.push("/profile");
         }
         else{
           return (
-            <div className='box1-login'>
-            <div className='login_form'>
+            <div className='loginBox'>
             <h1 className='log_h1'>Create an Account</h1>
-                <br/>
-                <center>
+                <h3>Username</h3>
                   <input type="text" name="Reg_username" placeholder="Enter Username" id="reg_user_input" onChange={(e) => {
                      setReg_username(e.target.value)
                   }} ></input>
-                <br/>    
+                <h3>E-Mail</h3>
                   <input type="email" name="Reg_email" placeholder="Enter Email" id="reg_email" onChange={(e) => {
                      setReg_email(e.target.value)
                   }} ></input>
-                <br/>
+                <h3>Gender</h3>
                 <select id="reg_gender" name="Reg_gender" onChange={(e) => {
                      setReg_gender(e.target.value)
                   }} >
@@ -239,7 +236,7 @@ function RegisterForm() {
                 <option value="Male">Male</option>
                 <option value="Female">Female</option>
                 <option value="Others">Others</option></select>
-                <br/>
+                <h3>CCIS Program</h3>
                 <select id="reg_program" name="Reg_program" onChange={(e) => {
                      setReg_program(e.target.value)
                   }} >
@@ -248,7 +245,7 @@ function RegisterForm() {
                 <option value="BSIS">B.S. Information Systems</option>
                 <option value="BSIT">B.S. Information Technology</option>
                 <option value="Others">I am not a CCIS Student</option></select>
-                <br/>
+                <h3>Year Level</h3>
                 <select id="reg_yearlevel" name="Reg_yearlevel" onChange={(e) => {
                      setReg_yearlevel(e.target.value)
                   }} >
@@ -259,17 +256,16 @@ function RegisterForm() {
                 <option value="4th Year">4th Year</option>
                 <option value="5th Year">5th Year</option>
                 <option value="Others">I am not a student</option></select>
-                <br/>
+                <h3>Password</h3>
                   <input type="password" placeholder="Enter Password" name="Reg_password" id="reg_user_pass" onChange={(e) => {
                      setReg_password(e.target.value)
                   }} ></input>
-                <br/>
+                <h3>Confirm Password</h3>
                   <input placeholder="Confirm Password" type="password" name="Confirm_password" id="confirm_user_pass" onChange={(e) => {
                      setConf_password(e.target.value)
                   }} ></input>
-              <center><button className="registerPageButton" onClick={registerUser}>Register</button></center>
-              <Link to="/login-form"><button className="buttonRegLog">Already have an account?</button></Link></center>
-            </div>
+              <button onClick={registerUser}>Register</button>
+              <Link to="/login-form"><button className="buttonRegLog">Already have an account?</button></Link>
           </div>
           )
         }

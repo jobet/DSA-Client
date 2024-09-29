@@ -206,7 +206,7 @@ function LoginForm() {
   }
   const forceUpdate = useForceUpdate();
 return (
-<div className='Home'>
+<div className='LoginForm'>
          {(() => {
         if (localStorage.getItem('username')){
           history.push("/profile");
@@ -242,35 +242,22 @@ return (
       }
         else{
           return (
-          <div className='box1-login'>
-          <div className='login_form'>
-            <h1 className='log_h1'>Login to Your Account</h1><br/><br/><br/>
-            
-              
-              <div className='logbox'>
-                <center>
-
-                  <input placeholder="Enter Email" type="email" name="email" id="log_email" onChange={(e) => {
-                     setLog_Email(e.target.value)
-                  }} ></input>
-                </center>
-              </div>
-              <div>
-                <center>
-
-                  <input type="password" placeholder="Enter Password" name="password" id="log_password" onChange={(e) => {
-                     setLog_Password(e.target.value)
-                  }} ></input>
-                </center>
-              </div>
-              <center><button className="loginPageButton" onClick={login_User}>Login</button>
-              <br></br>
-              <Link to="/register-form"><button className="buttonRegLog">Don't have an account?</button></Link></center>
+          <div className='loginBox'>
+            <h1 className='log_h1'>Login to DSA</h1>
+              <h3>E-Mail</h3>
+              <input placeholder="Enter Email" type="email" name="email" id="log_email" onChange={(e) => {
+                setLog_Email(e.target.value)
+              }} />
+              <h3>Password</h3>
+              <input type="password" placeholder="Enter Password" name="password" id="log_password" onChange={(e) => {
+                setLog_Password(e.target.value)
+              }} />
+              <button onClick={login_User}>Login</button>
+              <Link to="/register-form"><button className="buttonRegLog">Don't have an account?</button></Link>
             </div>
-          </div>
         )
         }
-        
+
       })()}
           
         </div>

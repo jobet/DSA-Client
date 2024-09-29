@@ -11,7 +11,7 @@ const Speed = (props) => {
                     <option className="config-option"
                         key = {element}
                         value = {element}>
-                        {element}x
+                        {element}
                     </option>
                 ))}
             </select>

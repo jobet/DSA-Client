@@ -7,7 +7,7 @@ function Footer() {
   return (
     <>
       <div className='footer'>
-      <img src={logoImage} alt='' width={30} height={30} />
+      <img src={logoImage} alt='' className="footerlogo"/>
       <p>&nbsp;&nbsp;Copyright © 2024 DSA. Some Rights Reserved.</p>
       </div>
     </>
@@ -17,7 +17,7 @@ function FooterBackend() {
   return (
     <>
       <div className='footerb'>
-      <img src={logoImage} alt='' width={100} height={28} />
+      <img src={logoImage} alt='' className="footerlogo"/>
       <p>&nbsp;&nbsp;Copyright © 2024 DSA. Some Rights Reserved.</p>
       </div>
     </>

@@ -3,9 +3,6 @@ import Typewriter from 'typewriter-effect';
 import members from '../images/members.png';
 import linear from '../images/linear.svg';
 import nonlinear from '../images/nonlinear.svg';
-import {Link} from 'react-router-dom';
-
-
 
 export default function Home(){
     return(
@@ -27,7 +24,7 @@ export default function Home(){
             </div>
             <div className='box2'>
                 <div className="imgSection">
-                    <img src={members} width={500}/>
+                    <img src={members} className="aboutImg"/>
                 </div>
                 <div className="descSection">
                     <h1 id="typer0" >About DSA Visualizer</h1>

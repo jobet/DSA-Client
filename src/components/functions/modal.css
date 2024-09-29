@@ -17,31 +17,93 @@ body.active-modal {
     right: 0;
     bottom: 0;
     position: fixed;
+    z-index: 3;
 }
 
 .overlay {
-    background: rgba(49,49,49,0.8);
+    background: rgba(0, 0, 0, 0.6);
 }
+
 .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: absolute;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    line-height: 1.4;
+    line-height: 1.2;
     background: #f1f1f1;
-    padding: 14px 28px;
+    padding: 24px 16px;
     border-radius: 3px;
-    max-width: 600px;
-    min-width: 300px;
-    align-content: center;
-    text-align: center;
-    font-size:large;
-    
+    font-size: large;
+    z-index: 4;
+}
+
+.modal-content > * {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-content pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 10px;
+    overflow-x: auto;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+    counter-reset: line;
+}
+
+.modal-content code {
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+}
+
+.modal-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.modal-content p {
+    text-align: justify;
 }
 
 .close-modal {
     position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     top: 10px;
     right: 10px;
-    padding: 5px 7px;
+    height: 50px;
+    width: 50px;
+    padding: 0;
+    margin: 0;
+}
+
+@media screen and (max-width: 960px) {
+    .modal-content {
+        box-sizing: border-box;
+        min-width: 100dvw;
+        min-height: 100dvh;
+        top: 0;
+        left: 0;
+        transform: none;
+        border-radius: 0;
+    }
+    .close-modal {
+        font-size: 1.5rem;
+    }
 }

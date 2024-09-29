@@ -4,14 +4,14 @@ import React from 'react';
 class Frame extends React.Component {
     render() { 
         return (
-            <div className="frame"  >
-                <div className="array" style={{height:"59vh"}}>
+            <div className="frame" >
+                <div className="array">
                    
                     {this.props.list.map((element, index) => (
                         <div
                             className = {this.getClass(element.classType)}
                             key = {index}
-                            style = {{height : `${4.5*element.key}px`}}
+                            style = {{height : `${0.4*element.key}svh`}}
                             value = {element.key}>
                             {element.key}
                         </div>

@@ -141,8 +141,6 @@
 	color: #61dafb;
   }
   
-  * {margin: 0; padding: 0;}
-  
   .treeAVL ul {
 	  padding-top: 20px; position: relative;
   

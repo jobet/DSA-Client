@@ -18,9 +18,7 @@ import pause from '../helper/pause';
 import generator from '../helper/generator';
 import {ALGORITHM, SPEED, SIZE, SWAP, CURRENT, NORMAL, DONE} from '../helper/constants';
 import { getKeysCopy } from '../helper/keys.js';
-import { isVisible } from '@testing-library/user-event/dist/utils';
 
-let executionTime = " ";
 class Visualizer extends React.Component {
    //all the elements present in the list have a key and class type
    //key (value of comment in integer)
@@ -31,6 +29,7 @@ class Visualizer extends React.Component {
         speed: 1,
         algorithm: 1,
         running: false,
+        executionTime: "0.00s",
     };
 
     // creating the list
@@ -47,27 +46,25 @@ class Visualizer extends React.Component {
     render() { 
         return (
             <React.Fragment>
-                <SortType
-                    start = {this.start}
-                    response = {this.response}
-                    newList = {this.generateList}
-                    onChange = {this.onChange}
-                    
-                />
                 <Frame 
-                    list = {this.state.list}
+                    list={this.state.list}
                 />
                 <div className='ExecutionTime'>
-                    <h1>{executionTime}</h1>
+                    <h1>{this.state.executionTime}</h1>
                 </div>
-                <Navbar
-                    start = {this.start}
-                    response = {this.response}
-                    newList = {this.generateList}
-                    onChange = {this.onChange}
+                <SortType
+                    start={this.start}
+                    response={this.response}
+                    newList={this.generateList}
+                    onChange={this.onChange}
+                    algorithm={this.state.algorithm}
                 />
-                
-        
+                <Navbar
+                    start={this.start}
+                    response={this.response}
+                    newList={this.generateList}
+                    onChange={this.onChange}
+                />
             </React.Fragment>
         );
     }
@@ -98,12 +95,30 @@ class Visualizer extends React.Component {
     // chooses and runs the chosen sorting algorithms
     start = async() => {
         let startTime = performance.now();
+
         this.lock(true);
+        
+        // Set up a timer to periodically update the execution time
+        const intervalId = setInterval(() => {
+            const currentTime = performance.now();
+            const elapsedTime = currentTime - startTime;
+            this.setState({
+                executionTime: `${(elapsedTime / 1000).toFixed(2)}s`
+            });
+        }, 1); // Update every 1 ms (you can adjust this)
+
         let moves = await this.getMoves(this.state.algorithm);
         await this.visualizeMoves(moves);
         await this.done();
+
         let endTime = performance.now();
-        executionTime = (`Execution Time: ${Math.round((endTime + Number.EPSILON) - (startTime + Number.EPSILON))/1000} seconds`);
+        clearInterval(intervalId); // Clear the interval when done
+
+        // Final update of the execution time
+        this.setState({
+            executionTime: `${((endTime - startTime) / 1000).toFixed(2)}s`
+        });
+
         this.lock(false);
     };
 
