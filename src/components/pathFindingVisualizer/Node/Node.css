@@ -1,7 +1,7 @@
 .node {
   box-sizing: border-box;
-  width: calc(100svw / 75);
-  height: calc(100svw / 75);
+  height: 25px;
+  width: 25px;
   box-shadow:0px 0px 0px 1px black inset;
   display: inline-block;
   margin: 0;

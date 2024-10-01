@@ -147,10 +147,10 @@
     width: 100%;
   }
   button {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   button svg{
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .ExecutionTime {
     font-size: 0.8rem;

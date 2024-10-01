@@ -10,7 +10,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  overflow-x: auto;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
   margin-bottom: 4px;
 }
@@ -18,7 +18,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 50%;
+  width: 25%;
 }
 .grid {
   outline: 1px solid #1b1464;

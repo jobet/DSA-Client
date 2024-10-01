@@ -3,7 +3,7 @@ import Node from './Node/Node';
 import {dijkstra} from '../pathFindingAlgorithms/dijkstra';
 import {dfs} from '../pathFindingAlgorithms/dfs';
 import {bfs} from '../pathFindingAlgorithms/bfs';
-import { BiInfoCircle, BiHelpCircle, BiX } from "react-icons/bi";
+import { BiInfoCircle, BiHelpCircle, BiX, BiTrash, BiPlayCircle } from "react-icons/bi";
 import './PathfindingVisualizer.css';
 import shortPath from '../images/shortPath.PNG';
 import clearWall from '../images/clearWall.PNG';
@@ -20,19 +20,38 @@ export default class PathfindingVisualizer extends Component {
     e.preventDefault();
     this.props.response();
   }
-  handleTouchStart = (row, col) => {
+  handleTouchStart(row, col) {
     if (!this.state.isRunning) {
-      const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
-      this.setState({
-        grid: newGrid,
-        isDrawing: true,
-        mouseIsPressed: true,
-        lastTouchedNode: `${row}-${col}`,
-      });
+      const node = this.state.grid[row][col];
+      if (node.isStart) {
+        this.setState({
+          isStartNode: true,
+          mouseIsPressed: true,
+          currRow: row,
+          currCol: col,
+        });
+      } else if (node.isFinish) {
+        this.setState({
+          isFinishNode: true,
+          mouseIsPressed: true,
+          currRow: row,
+          currCol: col,
+        });
+      } else {
+        const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
+        this.setState({
+          grid: newGrid,
+          isWallNode: true,
+          mouseIsPressed: true,
+          currRow: row,
+          currCol: col,
+        });
+      }
     }
-  };
-  handleTouchMove = (e) => {
-    if (this.state.isDrawing) {
+  }
+
+  handleTouchMove(e) {
+    if (this.state.mouseIsPressed) {
       e.preventDefault();
       const touch = e.touches[0];
       const element = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -40,23 +59,17 @@ export default class PathfindingVisualizer extends Component {
         const [, row, col] = element.id.split('-');
         const nodeKey = `${row}-${col}`;
         if (nodeKey !== this.state.lastTouchedNode) {
-          const newGrid = getNewGridWithWallToggled(this.state.grid, parseInt(row), parseInt(col));
+          this.handleMouseEnter(parseInt(row), parseInt(col));
           this.setState({
-            grid: newGrid,
             lastTouchedNode: nodeKey,
           });
         }
       }
     }
-  };
-  handleTouchEnd = () => {
-    this.setState({
-      isDrawing: false,
-      mouseIsPressed: false,
-      lastTouchedNode: null,
-    });
-  };
-  
+  }
+  handleTouchEnd() {
+    this.setState({mouseIsPressed: false, isStartNode: false, isFinishNode: false, isWallNode: false, lastTouchedNode: null});
+  }
   renderSortInfo() {
     const selectedAlgorithm = this.state.selectedAlgorithm;
     const sortInfo = {
@@ -215,11 +228,11 @@ DFS(node) {
     this.state = {
       grid: [],
       START_NODE_ROW: 2,
-      FINISH_NODE_ROW: (this.calculateColumnCount() - 3),
+      FINISH_NODE_ROW: (this.calculateColumnCount() - 8),
       START_NODE_COL: 2,
       FINISH_NODE_COL: (this.calculateColumnCount() - 3),
       mouseIsPressed: false,
-      ROW_COUNT: this.calculateColumnCount(),
+      ROW_COUNT: (this.calculateColumnCount() - (this.calculateColumnCount() / 5)),
       COLUMN_COUNT: this.calculateColumnCount(),
       isRunning: false,
       isStartNode: false,
@@ -233,10 +246,12 @@ DFS(node) {
       isDrawing: false,
       lastTouchedNode: null,
     };
-
     this.handleMouseDown = this.handleMouseDown.bind(this);
-    this.handleMouseLeave = this.handleMouseLeave.bind(this);
-    this.toggleIsRunning = this.toggleIsRunning.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseUp = this.handleMouseUp.bind(this);
+    this.handleTouchStart = this.handleTouchStart.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.handleTouchEnd = this.handleTouchEnd.bind(this);
   }
 
   // creates the grid
@@ -257,11 +272,11 @@ DFS(node) {
         const newGrid = this.getInitialGrid();
         this.setState({ grid: newGrid });
       });
-      this.setState({ ROW_COUNT: newColumnCount }, () => {
+      this.setState({ ROW_COUNT: newColumnCount - (newColumnCount / 5) }, () => {
         const newGrid = this.getInitialGrid();
         this.setState({ grid: newGrid });
       });
-      this.setState({ FINISH_NODE_ROW: (newColumnCount - 3) }, () => {
+      this.setState({ FINISH_NODE_ROW: (newColumnCount - 8) }, () => {
         const newGrid = this.getInitialGrid();
         this.setState({ grid: newGrid });
       });
@@ -324,20 +339,15 @@ DFS(node) {
   handleMouseDown(row, col) {
     if (!this.state.isRunning) {
       if (this.isGridClear()) {
-        if (
-          document.getElementById(`node-${row}-${col}`).className ===
-          'node node-start'
-        ) {
+        const node = this.state.grid[row][col];
+        if (node.isStart) {
           this.setState({
             mouseIsPressed: true,
             isStartNode: true,
             currRow: row,
             currCol: col,
           });
-        } else if (
-          document.getElementById(`node-${row}-${col}`).className ===
-          'node node-finish'
-        ) {
+        } else if (node.isFinish) {
           this.setState({
             mouseIsPressed: true,
             isFinishNode: true,
@@ -382,42 +392,29 @@ DFS(node) {
   handleMouseEnter(row, col) {
     if (!this.state.isRunning) {
       if (this.state.mouseIsPressed) {
-        const nodeClassName = document.getElementById(`node-${row}-${col}`)
-          .className;
+        const node = this.state.grid[row][col];
         if (this.state.isStartNode) {
-          if (nodeClassName !== 'node node-wall') {
-            const prevStartNode = this.state.grid[this.state.currRow][
-              this.state.currCol
-            ];
-            prevStartNode.isStart = false;
-            document.getElementById(
-              `node-${this.state.currRow}-${this.state.currCol}`,
-            ).className = 'node';
-
-            this.setState({currRow: row, currCol: col});
-            const currStartNode = this.state.grid[row][col];
-            currStartNode.isStart = true;
-            document.getElementById(`node-${row}-${col}`).className =
-              'node node-start';
+          if (!node.isWall && !node.isFinish) {
+            const newGrid = getNewGridWithMovedStart(this.state.grid, row, col, this.state.currRow, this.state.currCol);
+            this.setState({
+              grid: newGrid,
+              currRow: row,
+              currCol: col,
+              START_NODE_ROW: row,
+              START_NODE_COL: col,
+            });
           }
-          this.setState({START_NODE_ROW: row, START_NODE_COL: col});
         } else if (this.state.isFinishNode) {
-          if (nodeClassName !== 'node node-wall') {
-            const prevFinishNode = this.state.grid[this.state.currRow][
-              this.state.currCol
-            ];
-            prevFinishNode.isFinish = false;
-            document.getElementById(
-              `node-${this.state.currRow}-${this.state.currCol}`,
-            ).className = 'node';
-
-            this.setState({currRow: row, currCol: col});
-            const currFinishNode = this.state.grid[row][col];
-            currFinishNode.isFinish = true;
-            document.getElementById(`node-${row}-${col}`).className =
-              'node node-finish';
+          if (!node.isWall && !node.isStart) {
+            const newGrid = getNewGridWithMovedFinish(this.state.grid, row, col, this.state.currRow, this.state.currCol);
+            this.setState({
+              grid: newGrid,
+              currRow: row,
+              currCol: col,
+              FINISH_NODE_ROW: row,
+              FINISH_NODE_COL: col,
+            });
           }
-          this.setState({FINISH_NODE_ROW: row, FINISH_NODE_COL: col});
         } else if (this.state.isWallNode) {
           const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
           this.setState({grid: newGrid});
@@ -442,22 +439,8 @@ DFS(node) {
     }
 
   // when mouse action is released
-  handleMouseUp(row, col) {
-    if (!this.state.isRunning) {
-      this.setState({mouseIsPressed: false});
-      if (this.state.isStartNode) {
-        const isStartNode = !this.state.isStartNode;
-        this.setState({isStartNode, START_NODE_ROW: row, START_NODE_COL: col});
-      } else if (this.state.isFinishNode) {
-        const isFinishNode = !this.state.isFinishNode;
-        this.setState({
-          isFinishNode,
-          FINISH_NODE_ROW: row,
-          FINISH_NODE_COL: col,
-        });
-      }
-      this.getInitialGrid();
-    }
+  handleMouseUp() {
+    this.setState({mouseIsPressed: false, isStartNode: false, isFinishNode: false, isWallNode: false});
   }
 
 
@@ -625,8 +608,7 @@ DFS(node) {
           onTouchMove={this.handleTouchMove}
           onTouchEnd={this.handleTouchEnd}
         >
-          <table
-            onMouseLeave={() => this.handleMouseLeave()}>
+          <table>
             <tbody className="grid">
               {grid.map((row, rowIdx) => {
                 return (
@@ -647,15 +629,12 @@ DFS(node) {
                           onMouseEnter={(row, col) =>
                             this.handleMouseEnter(row, col)
                           }
-                          onMouseUp={() => this.handleMouseUp(row, col)}
-                          onTouchStart={(row, col) => 
-                            this.handleTouchStart(row, col)
-                          }
+                          onMouseUp={() => this.handleMouseUp()}
+                          onTouchStart={() => this.handleTouchStart(row, col)}
                           row={row}></Node>
                       );
                     })}
                   </tr>
-                  
                 );
               })}
             </tbody>
@@ -671,12 +650,12 @@ DFS(node) {
             <button
               type="button"
               onClick={() => this.clearGrid()}>
-              Clear Grid
+              <BiTrash /> Clear Grid
             </button>
             <button
               type="button"
               onClick={() => this.clearWalls()}>
-              Clear Walls
+              <BiTrash /> Clear Walls
             </button>
           </div>
           <div className="buttonArea">
@@ -691,7 +670,7 @@ DFS(node) {
                 type="button"
                 className="algorithm-button"
                 onClick={() => this.visualize('Dijkstra')}>
-                Dijkstra's
+                <BiPlayCircle/> Dijkstra's
               </button>
             </div>
             <div className="algorithm-button-group">
@@ -705,7 +684,7 @@ DFS(node) {
                 type="button"
                 className="algorithm-button"
                 onClick={() => this.visualize('BFS')}>
-                Breadth First Search
+                <BiPlayCircle/> Breadth First Search
               </button>
             </div>
             <div className="algorithm-button-group">
@@ -719,7 +698,7 @@ DFS(node) {
                 type="button"
                 className="algorithm-button"
                 onClick={() => this.visualize('DFS')}>
-                Depth First Search
+                <BiPlayCircle/> Depth First Search
               </button>
             </div>
           </div>
@@ -780,13 +759,32 @@ function getNodesInShortestPathOrder(finishNode) {
 const getNewGridWithWallToggled = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
-  if (!node.isStart && !node.isFinish && node.isNode) {
+  if (!node.isStart && !node.isFinish) {
     const newNode = {
       ...node,
-      isWall: true, // Always set to true instead of toggling
+      isWall: !node.isWall,
     };
     newGrid[row][col] = newNode;
   }
   return newGrid;
 };
 
+const getNewGridWithMovedStart = (grid, row, col, prevRow, prevCol) => {
+  const newGrid = grid.slice();
+  const newNode = newGrid[row][col];
+  const prevNode = newGrid[prevRow][prevCol];
+  newNode.isStart = true;
+  newNode.isWall = false;
+  prevNode.isStart = false;
+  return newGrid;
+};
+
+const getNewGridWithMovedFinish = (grid, row, col, prevRow, prevCol) => {
+  const newGrid = grid.slice();
+  const newNode = newGrid[row][col];
+  const prevNode = newGrid[prevRow][prevCol];
+  newNode.isFinish = true;
+  newNode.isWall = false;
+  prevNode.isFinish = false;
+  return newGrid;
+};
