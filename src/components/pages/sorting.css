@@ -18,6 +18,7 @@
   transition: all 0.4s ease-in;
   border-radius: 3px;
   font-weight: bold;
+  font-size: 0.8svw;
   color: #fff;
 }
 .cell.done {
@@ -71,6 +72,10 @@
   justify-content: center;
   padding: 0;
 }
+.complexity-table{
+  width: 100%;
+  text-align: center;
+}
 .settingArea{
   padding: 0 12px;
   width: 100%;
@@ -94,7 +99,7 @@
   width: 100%;
 }
 .buttonArea button{
-  margin: 4px 1px;
+  margin: 0 1px 1px 0;
 }
 .navbar-table {
   width: 40vh;

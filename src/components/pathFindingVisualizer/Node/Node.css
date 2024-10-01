@@ -1,23 +1,39 @@
 .node {
-  width: 25px;
-  height: 25px;
-  outline: 0.5px solid rgb(38,89,166);
-  display:inline-block;
-  background-color:transparent;
-  
+  box-sizing: border-box;
+  width: calc(100svw / 75);
+  height: calc(100svw / 75);
+  box-shadow:0px 0px 0px 1px black inset;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
 }
 
+@media screen and (max-width: 768px) {
+  .node {
+    box-sizing: border-box;
+    width: calc(100svw / 20);
+    height: calc(100svw / 20);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .node {
+    box-sizing: border-box;
+    width: calc(100svw / 15);
+    height: calc(100svw / 15);
+  }
+}
 .node-finish {
-  background-color: rgb(243, 17, 17);
+  background-color: #B8336A;
 }
 
 .node-start {
-  background-color: rgb(32, 32, 255);
+  background-color: #287ade;
 }
 
 .node-visited {
   animation-name: visitedAnimation;
-  animation-duration: 1.5s;
+  animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
@@ -28,33 +44,29 @@
 
 @keyframes visitedAnimation {
   0% {
-    transform: scale(0.3);
-    background-color: rgba(0, 0, 66, 0.75);
+    transform: scale(0.33);
+    background-color: #ffffff;
     border-radius: 100%;
   }
 
   50% {
-    background-color:rgb(224,144,223, 0.75);
-  }
-
-  75% {
     transform: scale(1.2);
-    background-color: rgb(164,76,211, 0.75);
+    background-color:#B8336A;
   }
 
   100% {
     transform: scale(1);
-    background-color: rgb(53,0,117);
+    background-color: #1b1464;
   }
 }
 
 .node-wall {
-  background-color: rgb(139,207,249);
+  background-color: #e6a05f;
 }
 
 .node-shortest-path {
   animation-name: shortestPath;
-  animation-duration: 1.5s;
+  animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-delay: 0;
   animation-direction: alternate;
@@ -66,16 +78,16 @@
 @keyframes shortestPath {
   0% {
     transform: scale(0.6);
-    background-color: rgb(3,89,86);
+    background-color: #5fcae633;
   }
 
   50% {
     transform: scale(1.2);
-    background-color: rgb(0,145,124);
+    background-color: #5fcae667;
   }
 
   100% {
     transform: scale(1);
-    background-color: rgb(18, 187, 187);
+    background-color: #5fcae6;
   }
 }

@@ -3,32 +3,235 @@ import Node from './Node/Node';
 import {dijkstra} from '../pathFindingAlgorithms/dijkstra';
 import {dfs} from '../pathFindingAlgorithms/dfs';
 import {bfs} from '../pathFindingAlgorithms/bfs';
-
+import { BiInfoCircle, BiHelpCircle, BiX } from "react-icons/bi";
 import './PathfindingVisualizer.css';
+import shortPath from '../images/shortPath.PNG';
+import clearWall from '../images/clearWall.PNG';
+import start from '../images/start.PNG';
+import wall from '../images/wall.PNG';
 
-let distancestr='';
+let distancestr='Shortest Distance: 0 cells';
 let visited_nodes =-2;
-let visiNode='';
+let visiNode='Cells Visited: 0 cells';
 
 // main component for the path finding visualizer
 export default class PathfindingVisualizer extends Component {
+  handleClick = (e) => {
+    e.preventDefault();
+    this.props.response();
+  }
+  handleTouchStart = (row, col) => {
+    if (!this.state.isRunning) {
+      const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
+      this.setState({
+        grid: newGrid,
+        isDrawing: true,
+        mouseIsPressed: true,
+        lastTouchedNode: `${row}-${col}`,
+      });
+    }
+  };
+  handleTouchMove = (e) => {
+    if (this.state.isDrawing) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const element = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (element && element.className.includes('node')) {
+        const [, row, col] = element.id.split('-');
+        const nodeKey = `${row}-${col}`;
+        if (nodeKey !== this.state.lastTouchedNode) {
+          const newGrid = getNewGridWithWallToggled(this.state.grid, parseInt(row), parseInt(col));
+          this.setState({
+            grid: newGrid,
+            lastTouchedNode: nodeKey,
+          });
+        }
+      }
+    }
+  };
+  handleTouchEnd = () => {
+    this.setState({
+      isDrawing: false,
+      mouseIsPressed: false,
+      lastTouchedNode: null,
+    });
+  };
+  
+  renderSortInfo() {
+    const selectedAlgorithm = this.state.selectedAlgorithm;
+    const sortInfo = {
+        1: {
+            name: "Dijkstra Algorithm",
+            time: "O((|V| + |E|) log V)",
+            space: "O(|V| + |E|)",
+            description: "Dijkstra's algorithm allows us to find the shortest path between any two vertices of a graph. It differs from the minimum spanning tree because the shortest distance between two vertices might not include all the vertices of the graph.",
+            code: `djikstraAlgorithm(startNode) {
+    let distances = {};
+ 
+    //Stores the reference to previous nodes
+    let prev = {};
+    let pq = new PriorityQueue(this.nodes
+        .length * this.nodes.length);
+ 
+    // Set distances to all nodes to be 
+    // infinite except startNode
+    distances[startNode] = 0;
+    pq.enqueue(startNode, 0);
+    this.nodes.forEach(node => {
+       if (node !== startNode) {
+           distances[node] = Infinity;
+           prev[node] = null;
+        }
+    });
+ 
+    while (!pq.isEmpty()) {
+       let minNode = pq.dequeue();
+       let currNode = minNode.data;
+       let weight = minNode.priority;
+       this.edges[currNode].forEach(neighbor 
+        => {let alt = distances[currNode] 
+          + neighbor.weight;
+        if (alt < distances[neighbor.node]) 
+          {
+             distances[neighbor.node] = alt;
+             prev[neighbor.node] = currNode;
+             pq.enqueue(neighbor.node, 
+                distances[neighbor.node]);
+          }
+       });
+    }
+    return distances;
+ }`},
+ 2: {
+  name: "Breadth First Search",
+  time: "O(V+E)",
+  space: "O(l), l is no. of node in single level",
+  description: "BFS is a traversing algorithm where you should start traversing from a selected node (source or starting node) and traverse the graph layerwise thus exploring the neighbour nodes (nodes which are directly connected to source node). You must then move towards the next-level neighbour nodes. As the name BFS suggests, you are required to traverse the graph breadthwise as follows: 1.First move horizontally and visit all the nodes of the current layer 2.Move to the next layer",
+  code: `BFS(node) {
+// Create a Queue and add 
+// our initial node in it
+let q = new Queue(this.nodes.length);
+let explored = new Set();
+q.enqueue(node);
+
+// Mark the first node as 
+// explored explored.
+add(node);
+
+// We'll continue till our 
+// queue gets empty
+while (!q.isEmpty()) {
+ let t = q.dequeue();
+
+ // Log every element that comes 
+ // out of the Queue
+ console.log(t);
+
+ // 1. In the edges object, we search  
+ // for nodes this node is directly 
+ // connected to.
+ // 2. We filter out the nodes that 
+ // have already been explored.
+ // 3. Then we mark each unexplored 
+ // node as explored and add it to 
+ // the queue.
+ this.edges[t]
+ .filter(n => !explored.has(n))
+ .forEach(n => {
+    explored.add(n);
+    q.enqueue(n);
+ });
+}
+}
+`
+ },
+ 3: {
+  name: "Depth First Search",
+  time: "O(V+E)",
+  space: "O(h), h is max height",
+  description: "The DFS algorithm is a recursive algorithm that uses the idea of backtracking. It involves exhaustive searches of all the nodes by going ahead, if possible, else by backtracking. Here, the word backtrack means that when you are moving forward and there are no more nodes along the current path, you move backwards on the same path to find nodes to traverse. All the nodes will be visited on the current path till all the unvisited nodes have been traversed after which the next path will be selected.",
+  code: `
+DFS(node) {
+    // Create a Stack and add our initial 
+    // node in it
+    let s = new Stack(this.nodes.length);
+    let explored = new Set();
+    s.push(node);
+ 
+    // Mark the first node as explored
+    explored.add(node);
+ 
+    // We'll continue till our Stack
+    // gets empty
+    while (!s.isEmpty()) {
+       let t = s.pop();
+ 
+    // Log every element that comes 
+    // out of the Stack
+       console.log(t);
+ 
+    // 1. In the edges object, we search for
+    // nodes this node is directly 
+    // connected to.
+    // 2. We filter out the nodes that have
+    // already been explored.
+    // 3. Then we mark each unexplored node 
+    // as explored and push it to the Stack.
+    this.edges[t]
+    .filter(n => !explored.has(n))
+    .forEach(n => {
+       explored.add(n);
+       s.push(n);
+       });
+    }
+ }
+`}
+  };
+  const info = sortInfo[selectedAlgorithm];
+  return (
+      <div>
+          <h1>{info.name}</h1>
+          <p>{info.description}</p>
+          <h2>Complexity</h2>
+          <table className='complexity-table'>
+              <tbody>
+                  <tr>
+                      <th>Time</th>
+                      <th>Space</th>
+                  </tr>
+                  <tr>
+                      <td>{info.time}</td>
+                      <td>{info.space}</td>
+                  </tr>
+              </tbody>
+          </table>
+          <h2>Code</h2>
+          <pre><code>{info.code}</code></pre>
+      </div>
+  );
+}
   constructor() {
     super();
     this.state = {
       grid: [],
       START_NODE_ROW: 2,
-      FINISH_NODE_ROW: 24,
+      FINISH_NODE_ROW: (this.calculateColumnCount() - 3),
       START_NODE_COL: 2,
-      FINISH_NODE_COL: 24,
+      FINISH_NODE_COL: (this.calculateColumnCount() - 3),
       mouseIsPressed: false,
-      ROW_COUNT: 25,
-      COLUMN_COUNT: 25,
+      ROW_COUNT: this.calculateColumnCount(),
+      COLUMN_COUNT: this.calculateColumnCount(),
       isRunning: false,
       isStartNode: false,
       isFinishNode: false,
       isWallNode: false, 
       currRow: 0,
       currCol: 0,
+      modal: false,
+      algoInfoModal: false,
+      selectedAlgorithm: 1,
+      isDrawing: false,
+      lastTouchedNode: null,
     };
 
     this.handleMouseDown = this.handleMouseDown.bind(this);
@@ -40,6 +243,40 @@ export default class PathfindingVisualizer extends Component {
   componentDidMount() {
     const grid = this.getInitialGrid();
     this.setState({grid});
+    window.addEventListener('resize', this.handleResize);
+  }  
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize);
+  }
+  
+  handleResize = () => {
+    const newColumnCount = this.calculateColumnCount();
+    if (newColumnCount !== this.state.COLUMN_COUNT) {
+      this.setState({ COLUMN_COUNT: newColumnCount }, () => {
+        const newGrid = this.getInitialGrid();
+        this.setState({ grid: newGrid });
+      });
+      this.setState({ ROW_COUNT: newColumnCount }, () => {
+        const newGrid = this.getInitialGrid();
+        this.setState({ grid: newGrid });
+      });
+      this.setState({ FINISH_NODE_ROW: (newColumnCount - 3) }, () => {
+        const newGrid = this.getInitialGrid();
+        this.setState({ grid: newGrid });
+      });
+      this.setState({ FINISH_NODE_COL: (newColumnCount - 3) }, () => {
+        const newGrid = this.getInitialGrid();
+        this.setState({ grid: newGrid });
+      });
+    }
+  }  
+
+  calculateColumnCount = () => {
+    const width = window.innerWidth;
+    if (width <= 480) return 15;
+    if (width <= 768) return 20;
+    return 25; // default column count
   }
 
   toggleIsRunning() {
@@ -322,7 +559,7 @@ export default class PathfindingVisualizer extends Component {
 
   // draws a path from the start to the end node
   animateShortestPath(nodesInShortestPathOrder) {
-    distancestr="Path Distance: "+(nodesInShortestPathOrder.length-3).toString()+" cells"
+    distancestr="Shortest Distance: "+(nodesInShortestPathOrder.length-3).toString()+" cells"
    
     // visited_nodes="No. of Visited Nodes: "+ visited_nodes.toString() +" Cells";
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
@@ -346,7 +583,7 @@ export default class PathfindingVisualizer extends Component {
         }, i * 40);
       }
     }
-    visiNode="Number of Visited Nodes: "+(visited_nodes-1).toString()+" cells";
+    visiNode="Cells Visited: "+(visited_nodes-1).toString()+" cells";
     document.getElementById('textDistance').style.cssText = "color: white;font-weight:800;font-size: larger;";
     document.getElementById('textDistance1').style.cssText = "color: white;font-weight:800;font-size: larger;";
   }
@@ -378,87 +615,152 @@ export default class PathfindingVisualizer extends Component {
     }
     
   }
-
-
   render() {
     const {grid, mouseIsPressed} = this.state;
     return (
       <div className="pathfindcontent">
-        
+        <h1 style={{textAlign:"center"}}>Shortest Path Algorithms</h1>
+        <div 
+          className="grid-container"
+          onTouchMove={this.handleTouchMove}
+          onTouchEnd={this.handleTouchEnd}
+        >
+          <table
+            onMouseLeave={() => this.handleMouseLeave()}>
+            <tbody className="grid">
+              {grid.map((row, rowIdx) => {
+                return (
+                  <tr key={rowIdx}>
+                    {row.map((node, nodeIdx) => {
+                      const {row, col, isFinish, isStart, isWall} = node;
+                      return (
+                        <Node
+                          key={nodeIdx}
+                          col={col}
+                          isFinish={isFinish}
+                          isStart={isStart}
+                          isWall={isWall}
+                          mouseIsPressed={mouseIsPressed}
+                          onMouseDown={(row, col) =>
+                            this.handleMouseDown(row, col)
+                          }
+                          onMouseEnter={(row, col) =>
+                            this.handleMouseEnter(row, col)
+                          }
+                          onMouseUp={() => this.handleMouseUp(row, col)}
+                          onTouchStart={(row, col) => 
+                            this.handleTouchStart(row, col)
+                          }
+                          row={row}></Node>
+                      );
+                    })}
+                  </tr>
+                  
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+        <div className="dashboardArea">
+          <h3>{distancestr}</h3>
+          <h3>{visiNode}</h3>
+          <div className="buttonArea">
+            <button id="help" onClick={() => this.setState({ modal: true })}>
+              <BiHelpCircle/> Help
+            </button>
+            <button
+              type="button"
+              onClick={() => this.clearGrid()}>
+              Clear Grid
+            </button>
+            <button
+              type="button"
+              onClick={() => this.clearWalls()}>
+              Clear Walls
+            </button>
+          </div>
+          <div className="buttonArea">
+            <div className="algorithm-button-group">
+              <button
+                type="button"
+                className="info-button"
+                onClick={() => this.setState({ algoInfoModal: true, selectedAlgorithm: 1 })}>
+                <BiInfoCircle />
+              </button>
+              <button
+                type="button"
+                className="algorithm-button"
+                onClick={() => this.visualize('Dijkstra')}>
+                Dijkstra's
+              </button>
+            </div>
+            <div className="algorithm-button-group">
+              <button
+                type="button"
+                className="info-button"
+                onClick={() => this.setState({ algoInfoModal: true, selectedAlgorithm: 2 })}>
+                <BiInfoCircle />
+              </button>
+              <button
+                type="button"
+                className="algorithm-button"
+                onClick={() => this.visualize('BFS')}>
+                Breadth First Search
+              </button>
+            </div>
+            <div className="algorithm-button-group">
+              <button
+                type="button"
+                className="info-button"
+                onClick={() => this.setState({ algoInfoModal: true, selectedAlgorithm: 3 })}>
+                <BiInfoCircle />
+              </button>
+              <button
+                type="button"
+                className="algorithm-button"
+                onClick={() => this.visualize('DFS')}>
+                Depth First Search
+              </button>
+            </div>
+          </div>
+        </div>
 
-<button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => this.visualize('Dijkstra')}>
-          Dijkstra's
-        </button>
-       
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => this.visualize('BFS')}>
-          Breadth First Search
-        </button>
-        <button
-          type="button"
-          className="btn btn-primary"
-          onClick={() => this.visualize('DFS')}>
-          Depth First Search
-        </button>
-        <br/>
-        <button
-          type="button"
-          className="btn btn-danger"
-          onClick={() => this.clearGrid()}>
-          Clear Grid
-        </button>
-        <button
-          type="button"
-          className="btn btn-warning"
-          onClick={() => this.clearWalls()}>
-          Clear Walls
-        </button>
-
-        <br></br>
-        <span style={{color:'black'}}>{distancestr}</span>
-        <br></br>
-        <span style={{color:'black'}}>{visiNode}</span>
-        <h3 style={{color:'black',fontFamily:'monospace' }}><em>*Draw walls by clicking empty cells. <br/>To move the start(blue) and end(red) points, click and drag them </em></h3>
-            
-        <table
-          onMouseLeave={() => this.handleMouseLeave()}>
-          <tbody className="grid">
-            {grid.map((row, rowIdx) => {
-              return (
-                <tr key={rowIdx}>
-                  {row.map((node, nodeIdx) => {
-                    const {row, col, isFinish, isStart, isWall} = node;
-                    return (
-                      <Node
-                        key={nodeIdx}
-                        col={col}
-                        isFinish={isFinish}
-                        isStart={isStart}
-                        isWall={isWall}
-                        mouseIsPressed={mouseIsPressed}
-                        onMouseDown={(row, col) =>
-                          this.handleMouseDown(row, col)
-                        }
-                        onMouseEnter={(row, col) =>
-                          this.handleMouseEnter(row, col)
-                        }
-                        onMouseUp={() => this.handleMouseUp(row, col)}
-                        row={row}></Node>
-                    );
-                  })}
-                </tr>
-                
-              );
-            })}
-          </tbody>
-        
-        
-        </table>
+        {this.state.algoInfoModal && (
+                    <div className="modal">
+                        <div onClick={() => this.setState({ algoInfoModal: false })} className="overlay"></div>
+                        <div className="modal-content">
+                            {this.renderSortInfo()}
+                            <button className="close-modal" onClick={() => this.setState({ algoInfoModal: false })}>
+                                <BiX/>
+                            </button>
+                        </div>
+                    </div>
+                )}
+        {this.state.modal && (
+        <div className="modal">
+          <div onClick={() => this.setState({ modal: false })} className="overlay"></div>
+          <div className="modal-content">
+              <h1>Path Finding Instructions</h1>
+              <img src={start} style={{width:150}}></img>
+              <p>Drag the starting point (blue) and the ending point (red) to change their positions.</p>
+              <img src={wall} style={{width:150}}></img>
+              <p>
+                Click an empty cell to create a wall.
+              </p>
+              <img src={clearWall} style={{width:300}}></img>
+              <p>The clear grid button will remove the previous path
+                  Clear wall button will remove walls.
+              </p>
+              <img src={shortPath} style={{width:500}}></img>
+              <p>
+                Choose from the available algorithm to start the path finding process.
+              </p>
+              <button className="close-modal" onClick={() => this.setState({ modal: false })}>
+                <BiX/>
+              </button>
+          </div>
+        </div>
+        )}
       </div>
     );
   }
@@ -476,13 +778,12 @@ function getNodesInShortestPathOrder(finishNode) {
 
 // create walls 
 const getNewGridWithWallToggled = (grid, row, col) => {
-
   const newGrid = grid.slice();
   const node = newGrid[row][col];
   if (!node.isStart && !node.isFinish && node.isNode) {
     const newNode = {
       ...node,
-      isWall: !node.isWall,
+      isWall: true, // Always set to true instead of toggling
     };
     newGrid[row][col] = newNode;
   }

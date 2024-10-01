@@ -13,6 +13,7 @@ export default class Node extends Component {
       onMouseDown,
       onMouseEnter,
       onMouseUp,
+      onTouchStart,
       row,
     } = this.props;
     
@@ -30,7 +31,8 @@ export default class Node extends Component {
         className={`node ${extraClassName}`}
         onMouseDown={() => onMouseDown(row, col)}
         onMouseEnter={() => onMouseEnter(row, col)}
-        onMouseUp={() => onMouseUp()}></td>
+        onMouseUp={() => onMouseUp()}
+        onTouchStart={() => onTouchStart(row, col)}></td>
     );
   }
 }
