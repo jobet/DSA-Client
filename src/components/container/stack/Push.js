@@ -46,7 +46,7 @@ const Push = ({initiate=f=>f, object, params=[], duration = 1, stop = false}) =>
   keyid += 1;
   
   return (
-    <svg style={{width:"100%", height: "100%"}}>
+    <svg>
       {express}
     </svg>
   )

@@ -1,6 +1,8 @@
 import React from 'react';
 import Algorithms from './sorting-navbar/algorithms';
-import { BiInfoCircle, BiX } from "react-icons/bi";
+import { BiInfoCircle, BiX, BiLayer } from "react-icons/bi";
+import Size from './sorting-navbar/size';
+import Speed from './sorting-navbar/speed';
 
 class SortType extends React.Component {
     state = {
@@ -10,7 +12,9 @@ class SortType extends React.Component {
             { value: 3, type: 'Merge Sort' },
             { value: 4, type: 'Quick Sort' },
             { value: 5, type: 'Heap Sort' },
-        ]
+        ],
+        lengths: [10, 20, 30],
+        speeds: [0.50, 0.75, 1.00, 2.00, 4.00, 8.00, 16.00, 32.00, 64.00, 128.00],
     };
 
     handleClick = (e) => {
@@ -164,30 +168,53 @@ function heapify(arr, n, i) {
 
     render() {
         return (
-            <div className="navbar-algorithms" id="navbar">
-                <div className="navbarInfo">
-                    <button onClick={() => this.setState({ algoInfoModal: true })}>
-                        <BiInfoCircle/>
-                    </button>
-                </div>
-                <div className="navbarSelect">
-                    <Algorithms 
-                        onChange={this.props.onChange}
-                        algorithms={this.state.algorithms}
-                    />
-                </div>
-               {this.state.algoInfoModal && (
-                    <div className="modal">
-                        <div onClick={() => this.setState({ algoInfoModal: false })} className="overlay"></div>
-                        <div className="modal-content">
-                            {this.renderSortInfo()}
-                            <button className="close-modal" onClick={() => this.setState({ algoInfoModal: false })}>
-                                <BiX/>
-                            </button>
-                        </div>
+            <>
+                <div className="settingArea">
+                    <div className="settingLabel">
+                        <p>No. of Items</p>
                     </div>
-                )}
-            </div>
+                    <div className="settingSelect">
+                        <Size 
+                            onChange={this.props.onChange}
+                            lengths={this.state.lengths}
+                        />
+                    </div>
+                    <div className="settingLabel">
+                        <p>Sort Speed</p>
+                    </div>
+                    <div className="settingSelect">
+                        <Speed 
+                            onChange={this.props.onChange}
+                            speeds={this.state.speeds}
+                        />
+                    </div>
+                </div>
+                <div className="navbar-algorithms" id="navbar">
+                    <div className="navbarInfo">
+                        <button onClick={() => this.setState({ algoInfoModal: true })}>
+                            <BiInfoCircle/>
+                        </button>
+                    </div>
+                    <div className="navbarSelect">
+                        <BiLayer className="selectIcon"/>
+                        <Algorithms 
+                            onChange={this.props.onChange}
+                            algorithms={this.state.algorithms}
+                        />
+                    </div>
+                {this.state.algoInfoModal && (
+                        <div className="modal">
+                            <div onClick={() => this.setState({ algoInfoModal: false })} className="overlay"></div>
+                            <div className="modal-content">
+                                {this.renderSortInfo()}
+                                <button className="close-modal" onClick={() => this.setState({ algoInfoModal: false })}>
+                                    <BiX/>
+                                </button>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </>
         );
     }
 }

@@ -277,7 +277,7 @@ class Pop extends Component {
 
   render() {
     return (
-      <svg style={{width: "100%", hegith: "100%"}}>
+      <svg>
         {this.topSvg}
         {this.state.indexSvg}
         {this.state.nodeSvg}

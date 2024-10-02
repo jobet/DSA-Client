@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import '../stylesheet/InputData.css'
-
 // component for inputting values into the data structure visualizer
 class InputData extends Component {
   constructor() {

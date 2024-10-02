@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import '../stylesheet/SampleCode.css'
 
 // component that allows for sample code to be performed within the data structure visualizer
 class SampleCode extends Component {
@@ -76,8 +75,7 @@ data.Priority_Queue.map(d => pq.push(d));
   render() {
     const { history } = this.props;
     return (
-      <div className='samplecode'>
-        
+      <>
         <button className='samplecodebutton' onClick={this.closeButton}>Select Data Structure</button>
         {(this.state.open)?
           <div className='coverDom2'>
@@ -87,11 +85,11 @@ data.Priority_Queue.map(d => pq.push(d));
               <button className='gosample' onClick={() => this.clickButton(this.listcode, this.listdata)}>List</button>
               <button className='gosample' onClick={() => this.clickButton(this.queuecode, this.queuedata)}>Queue</button>
               <button className='gosample' onClick={() => this.clickButton(this.pqcode, this.pqdata)}>Priority Queue</button>
-              <button className='closeshowdata' onClick={this.closeButton}>CLOSE</button>
+              <button className='closeshowdata' onClick={this.closeButton}>Close</button>
             </div>
           </div>
         : null}
-      </div>
+      </>
     )
   }
 }

@@ -59,7 +59,7 @@
 
 .info-button {
   flex: 0 1 auto;
-  width: 50px;
+  min-width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;

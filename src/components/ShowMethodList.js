@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import '../stylesheet/ShowMethodList.css'
-
 // component for displaying the method list for the data structure visualizer
 class ShowMethodList extends React.Component {
   constructor(goMethod=f=>f, methodList=[], changeStop = f=>f, stopShow=false) {
@@ -34,7 +32,7 @@ class ShowMethodList extends React.Component {
 
   render() {
     return (
-      <div className='showmethod'>
+      <>
         <button className='showmethodbutton' onClick={() => this.changeShowMethod(false)}>Show Method</button>
         {(this.state.showmethod)?
         <div className='coverDom2'>
@@ -44,7 +42,7 @@ class ShowMethodList extends React.Component {
           </div>
         </div>
         :null}
-      </div>
+      </>
     )
   }
 }

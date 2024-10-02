@@ -4,6 +4,10 @@
   margin: 0;
 }
 
+body{
+  font-size: 62.5%;
+}
+
 .Sorting, .ShortestPath, .DataStructures, .QuizPage, .InformationBox1, .LoginForm{
   display: flex;
   align-items: center;
@@ -30,7 +34,6 @@
   background-color: white;
   padding: 20px;
   color: black;
-  font-weight:normal;
   font-size: large;
 }
 .reply_shown{
@@ -40,7 +43,6 @@
   font-size: large;
 }
 .replyuser {
-  font-weight: bolder;
   display: inline-block;
   padding-left: 7px;
 }
@@ -63,7 +65,6 @@
   background-color: unset;
 }
 .buttonRegLog{
-  font-weight:normal;
   background: none;
   border: hidden;
   color: #B8336A;
@@ -72,20 +73,19 @@ button {
   display: flex;
   min-width: fit-content;
   flex: 1 1 auto;
-  font-size: 1rem;
   text-align: justify;
   align-items: center;
   justify-content: center;
-  min-height: 50px;
+  min-height: 40px;
   color: #fff;
   background:#B8336A;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
   border: 1px solid #B8336A;
   border-radius: 6px;
 }
 button svg{
-  font-size: 1.6rem;
+  font-size: 1.4rem;
 }
 button:hover {
   color:#B8336A;
@@ -108,7 +108,6 @@ button:hover {
   border-radius: 6px;
   padding: 0 20px;
   font-size: large;
-  font-weight: 400;
 }
 .loginBox a{
   display: flex;
@@ -144,11 +143,11 @@ button:hover {
   display: table;
   background-attachment: fixed;
   align-items: center;
-  font-weight: semibold;
+  
   color:#B8336A;
 }
 .InformationBox1 h1{
-  font-weight: semibold;
+  
   
   color:black;
 }
@@ -189,28 +188,36 @@ button:hover {
 .left-panel .collapsible{
   text-align: left;
 }
-
-h1 {
-  color:#1b1464;
+h1, h2, a {
   font-weight: 800;
 }
 
-h2, h3, p, a{
+h1 {
+  color:#1b1464;
+  font-size: 3.2em;
+}
+
+h2 {
+  color:  #B8336A;
+  font-size: 2.6em;
+}
+
+h3 {
   font-weight: 600;
+  font-size: 2.4em;
+}
+
+p, li{
+  font-weight: 400;
 }
 
 p{
-  font-weight: 400;
-  text-align: justify;
+  font-size: 1.2rem;
 }
 
-
-h2 {
-  color:  #B8336A; 
-  font-weight: bold;
+li, a{
+  font-size: 1rem;
 }
-
-
 
 .Sorting {
   width: 100%;
@@ -220,7 +227,6 @@ h2 {
 .DataStructures {
   width: 100%;
   overflow: hidden;
-  
   background-position: center;
   background-size: cover;
   height: 100vh;
@@ -268,9 +274,6 @@ h2 {
   font-size: 1.15rem;
   /* background-image: url("../src/components/images/bluebox.png"); */
   text-align: justify;
-
-  font-weight: semibold;
-  
   line-height: 30px;
 }
 .rounded-container{
@@ -306,7 +309,6 @@ h2 {
   width: 50%;
 }
 .htext {
-  font-weight: bold;
   font-size: x-large;
   color: rgb(38, 11, 87);
   font-size: x-large;
@@ -351,13 +353,12 @@ h2 {
 #typer1 {
   text-align: center;
   margin-bottom: 12px;
-  font-size: 3rem;
+  font-size: 4.8em;
   text-shadow: 0px 2px 6px #ffffff;
 }
 
 .message2{
   color:black;
-  font-size: 2rem;
   margin-bottom: 12px;
   text-align: center;
   text-shadow: 0px 2px 6px #ffffff;
@@ -381,30 +382,15 @@ h2 {
   padding: 0px 0px 24px 0px;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
-
-.box2 img{
-  padding-right: 20px;
-}
-
-.descSection{
-  padding-right: 20%;
-}
-
-.oneSection{
-  padding: 0 20%;
-}
-
-.oneSection p, .oneSection li{
-  font-size: 1.4rem;
-  padding-bottom: 1rem;
-}
-
-.oneSection h1, .oneSection h2{
-  font-size: 2.4rem;
+.oneSection li{
+  margin-bottom: 4px;
 }
 
 .typeSection{
@@ -425,26 +411,22 @@ h2 {
 
 .oneSection ul {
 	position: relative;
-	list-style: none;
 	margin-left: 0;
 	padding-left: 1.2em;
 }
-.oneSection ul li:before {
-	content: "✔";
-	position: absolute;
-	left: 0;
-}
 
 .aboutImg{
-  width: 36rem;
+  width: 100%;
 }
 
 .imgSection{
-  padding-left: 20%;
-}
+  flex: 1 1 45%;
+  min-width: 300px;
+} 
 
-.box2 .descSection{
-  font-size: 1.6rem;
+.descSection{
+  font-size: 1.2em;
+  flex: 1 1 55%;
 }
 
 .Home {
@@ -462,17 +444,6 @@ h2 {
   background-position: center;
   display:table;
   background-attachment: fixed;
-}
-
-
-#typer2 {
-  
-  font-size: 8vh;
-  text-align: center;
-  margin-top: 5%;
-  padding-right: 5%;
-  float:right; 
-
 }
 
 .newlogin:hover {
@@ -493,7 +464,6 @@ h2 {
   text-align: center;
   color:white;
   font-size: large;
-  font-weight: normal;
   line-height: 35px;
   
   cursor: pointer;
@@ -516,7 +486,6 @@ h2 {
   text-align: center;
   color:white;
   font-size: large;
-  font-weight: normal;
   line-height: 35px;
   
   cursor: pointer;
@@ -575,7 +544,7 @@ h2 {
   background-color: white;
   padding: 15px;
   color: black;
-  font-weight:normal;
+  
   
   font-size: large;
 }
@@ -618,8 +587,6 @@ h2 {
   width: 97%;
   height: auto;
   padding: 20px;
-  font-weight: semibold;
-  
   border-color: none;
   margin: 10px;
   color: black;
@@ -637,8 +604,6 @@ h2 {
   
 }
 .score-card{
-  font-weight: semibold;
-  
   padding:1%;
   margin:10%;
   margin-top:2%;
@@ -705,7 +670,6 @@ h2 {
   float:right;
   text-align: center;
   width:40%;
-  font-weight:lighter;
   color:darkblue;
 }
 .scoreTable{
@@ -723,7 +687,6 @@ h2 {
 .scoreRow{
   padding-top:2%;
   padding-right: 5%;
-  font-weight: semibold;
   
   font-size: 1.1rem;
   background: rgb(209,239,253);
@@ -749,7 +712,6 @@ h2 {
   position: absolute;
   left:8%;
   text-align: left;
-  font-weight:400;
 }
 .crown{
   margin-bottom: -1%;
@@ -759,7 +721,7 @@ h2 {
   height:10vh;
 }
 .scoreRight h1{
-  font-weight: bolder;
+  
 }
 .commentmsg{
   padding-left: 50px;
@@ -794,8 +756,6 @@ h2 {
   background:white;
   border-style: hidden;
   color:black;
-  font-weight:lighter;
-  
   width: 100%;
   height:30px;
   margin-top: 10px;
@@ -806,7 +766,6 @@ h2 {
 
 .ideatext{
    color:violet;
-   font-weight: bold;
 }
 /* Backend */
 .BackendPage {
@@ -818,7 +777,6 @@ h2 {
   color: black;
   font-size: 48px;
   text-align: center;
-  font-weight: bold;
 }
 .userinfo{
   color: black;
@@ -1000,18 +958,15 @@ h2 {
 }
 .dashboardtitle{
   font-size: 32px;
-  font-weight: bolder;
   color: rgb(0, 0, 0);
 }
 .dashboardicon {
   font-size: 64px;
-  font-weight: bolder;
   color: rgb(0, 0, 0);
   text-align: right;
 }
 .dashboardstats {
   font-size: 24px;
-  font-weight: bolder;
   color: #208ceb;
   text-align: left;
 }
@@ -1057,13 +1012,11 @@ h2 {
 }
 .backenduser {
   font-size: 24px;
-  font-weight: bolder;
   color: rgb(0, 0, 0);
   display: inline-block;
   padding-left: 7px;
 }
 .backendreplyuser {
-  font-weight: bolder;
   color: rgb(0, 0, 0);
   display: inline-block;
   padding-left: 7px;
@@ -1149,12 +1102,9 @@ h2 {
 #fillDiv{
   margin-top:20px;
   margin-bottom: 20px;
-  font-weight: semibold;
   font-size: 1.2rem;
 }
 .quizInnerDiv{
-  font-weight: semibold;
-  
   padding:1%;
   margin:10%;
   margin-top:2%;
@@ -1164,13 +1114,11 @@ h2 {
 }
 
 #quizSign{
-  font-weight:bold;
+  
   color:#2b388a;
 }
 
 .quiz_demo{
-  font-weight: semibold;
-  
   padding:1%;
   margin:auto;
   margin-top:1%;
@@ -1199,16 +1147,13 @@ h2 {
 }
 
 .quiz_instruction{
-  font-weight: semibold;
   text-align: center;
-  
   padding:1%;
   margin-top:10%;
   margin-left:10%;
   margin-right:10%;
   margin-bottom:3%;
   font-size: 16px;
-  font-weight: bold;
   margin-top:2%;
   background-color: rgb(255, 255, 255);
     box-shadow: -6px -6px 10px rgba(255, 255, 255, 0),
@@ -1216,18 +1161,14 @@ h2 {
 }
 
 #quiz_instruction_note{
-  font-weight: semibold;
-  
   padding:1%;
   margin:10% 10% 5% 10%;
   font-size: 16px;
-  font-weight: bold;
   margin-top:2%;
 }
 
 .choices_admin_quiz>label{
   margin: 2%;
-  font-weight: bolder;
 }
 .choices_admin_quiz{
   padding-top: 20px;
@@ -1244,16 +1185,12 @@ h2 {
   margin:0%;
   padding:0%;
   margin-left: 87%;
-  
-
 }
 #buttonQuizz{
   margin:0%;
   border-color: teal;
   border-style: solid;
   border-width: medium;
-  font-weight:bolder;
-  
   color:#2b388a;
   font-size: 1.05rem;
   background-color: white;
@@ -1261,7 +1198,6 @@ h2 {
 #buttonQuizz:hover{
   background-color:teal;
   color:white;
-
 }
 
 .quiz-maker-add_button{
@@ -1271,7 +1207,6 @@ h2 {
   border-radius: 8px;
   border:rgb(0, 0, 0) solid 3px;
   color: black;
-  
   width: 25%;
 }
 
@@ -1283,7 +1218,6 @@ h2 {
   border-radius: 8px;
   border:rgb(0, 0, 0);
   color: black;
-  
   width: 33%;
   border:rgb(0, 0, 0) solid 3px;
 }
@@ -1380,7 +1314,7 @@ h2 {
 
 .question-admin-choices-container>label{
   padding-top: 15px;
-  font-weight: bolder;
+  
 }
 
 
@@ -1388,33 +1322,28 @@ h2 {
   padding:10px;
   border-radius:10px;
   box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
-  font-weight: bolder;
+  
   font-size: 14px;
   margin: 10px 0px;
 }
 
 .quiz-maker-label{
-  font-weight: bolder;
+  
   font-size: 32px;
 }
 
 .quiz_admin_container .questions{
   background-color: rgb(255, 255, 255);
-  /* background-color: rgb(216, 243, 255); */
   min-height: 50vh;
   max-height: 77vh;
   padding-bottom: 30px;
   border-radius: 5px;
   box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
-  /* border-radius: 6px;
-  border: black solid 2px; */
   overflow-y: auto;
 }
 
 #admin-quiz-content>h1{
   background-color: none;
-  font-weight:bold;
-  
   font-size: 2rem;
   text-align: left;
   font-size: 52px;
@@ -1429,7 +1358,6 @@ h2 {
 }
 
 .grid-questions{
-  
   text-align: left;
 }
 
@@ -1440,8 +1368,6 @@ h2 {
   border-color: rgba(117, 126, 126, 0.418);
   border-style: solid;
   border-width: medium;
-  font-weight:bold;
-  
   font-size: 1.7rem;
   text-align: left;
   border-radius: unset;
@@ -1449,8 +1375,6 @@ h2 {
 
 #selected_button_tf{
   opacity: 0.7;
-  font-weight:semibold;
-  
   color:white;
   background-color:#2b388a;
   width: 90%;
@@ -1460,8 +1384,6 @@ h2 {
   color:  #787878;; 
   background-color: white;
   width: 90%;
-  font-weight:semibold;
-  
   border-width:thin;
 }
 
@@ -1469,8 +1391,6 @@ h2 {
   color: #787878;; 
   background-color:white;
   width: 90%;
-  font-weight:semibold;
-  
   border-width:thin;
 }
 
@@ -1490,13 +1410,12 @@ h2 {
 
 #quiz-content0{
   background-color: none;
-  font-weight:bold;
+  
   
   font-size: 2rem;
 }
 
 #quiz-content4{
-  font-weight:bolder;
   
   font-size: 1rem;
   color:tomato;
@@ -1509,8 +1428,6 @@ h2 {
   border-color: rgba(117, 126, 126, 0.418);;
   border-style: solid;
   border-width: thin;
-  font-weight:lighter;
-  
   font-size: 1.7rem;
   text-align: left;
   border-radius: unset;
@@ -1522,8 +1439,6 @@ h2 {
   width:90%;
   height:auto;
   font-size: 1.1rem;
-  font-weight:lighter;
-  
   padding:10px;
 }
 #quiz-contentx:hover{
@@ -1542,7 +1457,7 @@ h2 {
 }
 
 #quiz-content2{
-  font-weight: semibold;
+  
   
   font-size: x-large;
   margin-bottom: 10px;
@@ -1579,24 +1494,470 @@ h2 {
   height:200%;
 }
 
-.AVl-redirect-button{
-  position: absolute;
-  margin-top: -64.2%;
-  left: 55%;
-  width: auto;
-  height: auto;
-  text-align: left;
-  border: none;
-  color: steelblue;
-  background-color: transparent;
-  font-size: 1.1rem;
-  cursor: pointer;
-  padding: 13px;
-}
-
 .left-avl-panel{
   width: 20%;
   position:absolute;
+}
+/* DSA PAGE */
+
+.dsaContainer{
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+textarea.input-data {
+  min-height: 80px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  resize: vertical;
+  background-color: white;
+  border: 1px solid #888;
+  border-radius: 6px;
+}
+
+div.fixedCode {
+  width: 98.5%;
+  height: 3%;
+  margin: 5px;
+  font-size: 13px;
+  
+}
+
+textarea.code-write {
+  display: none;
+}
+div.text-input1 {
+  padding: 5px;
+  width: 23%;
+  height: 4.2%;
+  margin:0;
+  float: left;
+  margin-top: 1.5%;
+  position: relative;
+  text-align: middle;
+  color:aliceblue;
+  
+}
+.precaution {
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  float: left;
+  margin: 0;
+  margin-top: 1.5%;
+  position: relative;
+  border: none;
+  cursor: pointer;
+  background-size: cover;
+  outline:0px !important;
+  color: aliceblue;
+}
+
+.cautionImg {
+  width: 22px;
+  height: 22px;
+  display: block;
+  float: left;
+}
+
+
+.coverDom {
+  width: 1000%;
+  height: 1000%;
+  top:0;
+  left:0;
+  right:0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1002;
+  color: aliceblue;
+}
+
+.cautionContent {
+  width: 400px;
+  height: 300px;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%;
+  position: fixed;
+  background-color: rgb(0, 0, 0);
+  z-index: 1003;
+  border-color: black;
+  border-width: 2px;
+  border-style: double;
+  
+  color:white;
+}
+
+.input-button-close {
+  width: auto;
+  height: auto;
+  text-align: middle;
+  border: none;
+  background-color: Black;
+  color: white;
+  font-size: 17px;
+  cursor: pointer;
+  padding: 7px;
+  
+}
+
+p.linestyle {
+  margin:5px;
+}
+
+div.operation-state {
+  width: 40%;
+  height: 100%;
+  float: right;
+  color: aliceblue;
+}
+
+.op-section {
+  vertical-align: middle;
+  color: white;
+  border-color: red;
+}
+.samplecode {
+  height: 4.2%;
+  float: left;
+}
+.changecodecontent {
+  width: 190px;
+  height: 200px;
+  top: 29%;
+  left: 63%;
+  right: 25%;
+  bottom: 25%;
+  overflow:auto;
+  align-content: center;
+  text-align: center;
+  position: fixed;
+  border-color:teal;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.815);
+  z-index: 1001;
+  color: aliceblue;
+  
+}
+
+
+.gosample {
+  width: 100%;
+  height: auto;
+  margin:0px;
+  position: relative;
+  border-style: solid;
+  border-color:teal;
+  border-left:hidden;
+  border-right:hidden;
+  border-top:hidden;
+  text-align: center;
+  align-content: center;
+  background-color:white;
+  border-radius: 0px;
+  cursor: pointer;
+  color: teal;
+
+}
+
+div.show-container {
+  background-color: transparent;
+}
+
+div.drawing {
+  display: flex;
+  min-height: 60svh;
+  width: 100%;
+  border-width: 1px;
+  border-color: none;
+  border-style: hidden;
+  border-radius: 20px;
+  background-color: rgb(222, 235, 248);
+  color: aliceblue;
+  flex-wrap: wrap;
+}
+
+div.drawing svg{
+  min-height: 60svh;
+  display: flex;
+  flex: 1 1 auto;
+  width: fit-content;
+}
+
+div.text-show2 {
+}
+
+div.text-show3 {
+}
+
+.slidercontainer {
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* The slider itself */
+.slider {
+  display: flex;
+  -webkit-appearance: none; /* Override default CSS styles */
+  width: 100%; /* Full-width */
+  height: 5px; /* Specified height */
+  background-color: #B8336A; /* Grey background */
+  outline: none; /* Remove outline */
+  border-radius: 6px;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 13px; /* Set a specific slider handle width */
+  height: 13px; /* Slider handle height */
+  background: rgba(55, 222, 224, 0.952); /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 1.5em; /* Set a specific slider handle width */
+  height: 1.5em; /* Slider handle height */
+  background: #B8336A; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+  border: none;
+  border-radius: 100%;
+}
+
+@keyframes CodeText {
+  from {
+    transform: scale(1.2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.codeText {
+  transform: scale(1);
+  animation: CodeText;
+  animation-duration: 1s;
+  margin: 0;
+  text-align: center;
+  color: black;
+
+}
+.showdata {
+  width: 15%;
+  height: 4.2%;
+  float: left;
+  position: relative;
+  margin:0;
+  margin-top: 0.8%;
+}
+
+.showdatabutton {
+  width: auto;
+  height: auto;
+  border: none;
+  background-color: Black;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px;
+  margin-right:7px;
+  margin-left: 5px;
+
+}
+
+.coverDom2 {
+  width: 1000%;
+  height: 1000%;
+  top:0;
+  left:0;
+  right:0;
+  bottom: 0;
+  position: fixed;
+  background-color: rgba(0,0,0,0);
+  z-index: 1000;
+}
+
+.dataContent {
+  width: 400px;
+  height: 300px;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%;
+  overflow: scroll;
+  position: fixed;
+  border-color: black;
+  border-width: 2px;
+  border-style: double;
+  background-color: rgba(14, 13, 13, 0.808);
+  z-index: 1001;
+}
+
+.datascript {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  border-color: red;
+  border-width: 1px;
+  overflow: hidden;
+  border-style: solid;
+}
+
+.datastring {
+  width: 100%;
+  position: relative;
+  border-color: rgb(253, 253, 253);
+  border-width: 1px;
+  overflow: hidden;
+  border-style: solid;
+  color: aliceblue;
+}
+
+.dataname {
+  height: 150%;
+  position:relative;
+  float: left;
+  color: aliceblue;
+}
+
+.consolelog {
+  width: 50%;
+  height: 120%;
+  text-align: middle;
+  border: none;
+  margin:2px;
+  margin-top:1px;
+  float: right;
+  position: relative;
+  background-color: rgb(245, 245, 245);
+  color: white;
+  cursor: pointer;
+}
+
+
+.toString {
+  width: 50%;
+  height: 120%;
+  text-align: middle;
+  border: none;
+  margin:2px;
+  margin-top:-5px;
+  float: right;
+  position: relative;
+  background-color: rgb(250, 250, 250);
+  color: white;
+  cursor: pointer;
+}
+
+.viewobject {
+  width: 10%;
+  height: 90%;
+  text-align: middle;
+  border: none;
+  margin:2px;
+  margin-top:1px;
+  float: right;
+  position: relative;
+  background-color: Black;
+  color: white;
+  cursor: pointer;
+}
+
+.closeshowdata {
+  width: auto;
+  height:auto;
+  text-align: middle;
+  border: none;
+  background-color: Black;
+  color: white;
+  margin-top:2px;
+  float: left;
+  position: relative;
+  padding:4px;
+  margin-left: 35%;
+}
+
+div.show-datas {
+  width: 100%;
+  height: 10%;
+  float: left;
+  color: aliceblue;
+  background-color: rgba(14, 116, 109, 0.849);
+}
+
+svg.data-svg {
+  width: 99.5%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.384);
+  color: aliceblue;
+}
+
+.methodContent {
+  width: 250px;
+  height: 300px;
+  top: 25%;
+  left: 25%;
+  right: 25%;
+  bottom: 25%;
+  overflow: scroll;
+  position: fixed;
+  border-color: black;
+  border-width: 2px;
+  border-style: double;
+  background-color: rgba(87, 2, 2, 0.747);
+  color: aliceblue;
+  z-index: 1001;
+  font-size: 2 rem;
+}
+
+
+.methodscript {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  border-color: black;
+  border-width: 1px;
+  overflow: hidden;
+  border-style: solid;
+}
+
+.methodCommand {
+  height: 100%;
+  position:relative;
+  float: left;
+  margin: 3px;
+}
+
+.goMethod {
+  width: auto;
+  height: auto;
+  text-align: middle;
+  border: none;
+  margin:2px;
+  margin-right: 3px;
+  margin-top:1px;
+  float: right;
+  position: relative;
+  background-color: Black;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 2px;
 }
 
 @media screen and (max-width: 960px) {
@@ -1604,11 +1965,16 @@ h2 {
     max-width: 100%;
     overflow-x: hidden;
   }
-  #typer1 {
-    font-size: 2.6rem;
+  button svg{
+    font-size: 1rem;
   }
-  .message2{
-    font-size: 1.2rem;
+  .selectIcon{
+    font-size: 1rem;
+  }
+  .box2, .descSection, .imgSection{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 12px;
   }
   .box2 {
     padding: 0px 0px 8px 0px;
@@ -1622,35 +1988,15 @@ h2 {
   }
   .type img{
     width: 60%;
-    align-items: center;
-    justify-self: center;
   }
   .oneSection{
-    text-align: center;
     padding: 0 12px;
-  }
-  .oneSection ul{
-    text-align: justify;
   }
   .descSection{
-    text-align: center;
     justify-content: center;
-    padding: 0 12px;
   }  
-  .box2 .descSection{
-    font-size: 1.2rem;
-  }
-  .oneSection h1{
-    font-size: 2rem;
-  }
-  .oneSection h2{
-    font-size: 1.6rem;
-  }
-  .oneSection p, .oneSection li{
-    font-size: 1.2rem;
-  }
   .type{
-    padding: 0 4px;
+    padding: 0;
     grid-template-columns: auto;
   }
   .type div{
@@ -1664,5 +2010,9 @@ h2 {
   .loginBox{
     width: 100%;
     padding: 4px;
+  }
+  .dsaContainer{
+    width: 100%;
+    padding: 0;
   }
 }

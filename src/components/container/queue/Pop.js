@@ -181,7 +181,7 @@ const Pop = ({initiate=f=>f, object, params=[], duration = 1, stop = false}) => 
   }
 
   return (
-    <svg style={{width:"100%", height: "100%"}}>
+    <svg>
       {textSvg}
       {frontSvg}
       {nodeSvg}

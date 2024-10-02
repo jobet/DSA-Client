@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import '../stylesheet/ShowSpecificData.css'
 import StaticList from './staticContainer/StaticList'
 
 const ShowSpecificData = ({specificData={}}) => {

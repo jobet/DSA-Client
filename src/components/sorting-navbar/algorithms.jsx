@@ -3,7 +3,6 @@ import React from 'react';
 // the algorithm option component for the sorting navbar
 const Algorithms = (props) => {
     return (
-        <span className="options">
             <select 
                 name="Algorithm" id="menu" className="algo-menu"
                 onChange = {(e) => props.onChange(e.target.value, "algo")}>
@@ -15,7 +14,6 @@ const Algorithms = (props) => {
                     </option>
                 ))}
             </select>
-        </span>
     );
 }
  

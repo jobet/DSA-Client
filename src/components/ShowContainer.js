@@ -1,11 +1,10 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import '../stylesheet/ShowContainer.css'
 import std from './container'
 
 const NextComp = () => {
   return (
-    <svg style={{width:"100%", height: "100%"}}>
+    <svg>
       <text x={20} y={50} width={200} height={40}>End this Method</text>
     </svg>
   )
@@ -13,13 +12,13 @@ const NextComp = () => {
 
 const CodeComp = ({executing, step}) => {
   return (
-    <div className='codeText'>{(step >= 0) ? step.toString()+'. ': null} {executing}</div>
+    <p className='codeText'>{(step >= 0) ? step.toString()+'. ': null} {executing}</p>
   )
 }
 
 const EmptyComp = () => {
   return (
-    <div />
+    <></>
   )
 }
 
@@ -222,16 +221,14 @@ class ShowContainer extends Component{
   render() {
     return (
       <div className='show-container'>
-        <div className='text-show2'>Data Structure</div>
-        <div className='slidercontainer'> 
-          <div className='slidername'>Fast----SPEED BAR----Slow</div>
-          <input type='range' min={20} max={250} value={this.props.duration} onChange={e => this.props.changeDuration(e.target.value)} className='slider' />
-        </div>
-        <div className='text-show3'>Executing: </div>
         <this.state.Executing executing = {this.props.executingCode} step={this.props.step}/>
         <div className='drawing'>
         {console.log('out: ', this.state.Visualize, this.props.containerState.object, this.props.stopShow)}
         <this.state.Visualize duration={Number(this.props.duration)/100} stop={this.state.Stop} initiate={this.initiate} object={this.props.containerState.object} params = {this.params}/>
+        </div>
+        <div className='slidercontainer'> 
+          <p>Speed</p>
+          <input type='range' min={20} max={250} value={this.props.duration} onChange={e => this.props.changeDuration(e.target.value)} className='slider' />
         </div>
       </div>
     )

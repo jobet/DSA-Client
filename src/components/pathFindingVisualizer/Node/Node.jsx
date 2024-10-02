@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 
 import './Node.css';
 
-// component for the nodes within the path finding visualizer
 export default class Node extends Component {
   render() {
     const {
@@ -32,7 +31,10 @@ export default class Node extends Component {
         onMouseDown={() => onMouseDown(row, col)}
         onMouseEnter={() => onMouseEnter(row, col)}
         onMouseUp={() => onMouseUp()}
-        onTouchStart={() => onTouchStart(row, col)}></td>
+        onTouchStart={(e) => {
+          e.preventDefault();
+          onTouchStart(row, col);
+        }}></td>
     );
   }
 }

@@ -47,11 +47,13 @@
     transform: scale(0.33);
     background-color: #ffffff;
     border-radius: 100%;
+    box-shadow: none;
   }
 
   50% {
     transform: scale(1.2);
     background-color:#B8336A;
+    box-shadow: none;
   }
 
   100% {
@@ -77,13 +79,13 @@
 
 @keyframes shortestPath {
   0% {
-    transform: scale(0.6);
-    background-color: #5fcae633;
+    background-color: #1b1464;
+    box-shadow: none;
   }
 
   50% {
     transform: scale(1.2);
-    background-color: #5fcae667;
+    box-shadow: none;
   }
 
   100% {

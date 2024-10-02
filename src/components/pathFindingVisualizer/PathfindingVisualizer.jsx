@@ -16,60 +16,6 @@ let visiNode='Cells Visited: 0 cells';
 
 // main component for the path finding visualizer
 export default class PathfindingVisualizer extends Component {
-  handleClick = (e) => {
-    e.preventDefault();
-    this.props.response();
-  }
-  handleTouchStart(row, col) {
-    if (!this.state.isRunning) {
-      const node = this.state.grid[row][col];
-      if (node.isStart) {
-        this.setState({
-          isStartNode: true,
-          mouseIsPressed: true,
-          currRow: row,
-          currCol: col,
-        });
-      } else if (node.isFinish) {
-        this.setState({
-          isFinishNode: true,
-          mouseIsPressed: true,
-          currRow: row,
-          currCol: col,
-        });
-      } else {
-        const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
-        this.setState({
-          grid: newGrid,
-          isWallNode: true,
-          mouseIsPressed: true,
-          currRow: row,
-          currCol: col,
-        });
-      }
-    }
-  }
-
-  handleTouchMove(e) {
-    if (this.state.mouseIsPressed) {
-      e.preventDefault();
-      const touch = e.touches[0];
-      const element = document.elementFromPoint(touch.clientX, touch.clientY);
-      if (element && element.className.includes('node')) {
-        const [, row, col] = element.id.split('-');
-        const nodeKey = `${row}-${col}`;
-        if (nodeKey !== this.state.lastTouchedNode) {
-          this.handleMouseEnter(parseInt(row), parseInt(col));
-          this.setState({
-            lastTouchedNode: nodeKey,
-          });
-        }
-      }
-    }
-  }
-  handleTouchEnd() {
-    this.setState({mouseIsPressed: false, isStartNode: false, isFinishNode: false, isWallNode: false, lastTouchedNode: null});
-  }
   renderSortInfo() {
     const selectedAlgorithm = this.state.selectedAlgorithm;
     const sortInfo = {
@@ -245,6 +191,8 @@ DFS(node) {
       selectedAlgorithm: 1,
       isDrawing: false,
       lastTouchedNode: null,
+      isDragging: false,
+      touchStartTime: 0,
     };
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
@@ -334,6 +282,82 @@ DFS(node) {
       isNode: true,
     };
   };
+  handleClick = (e) => {
+    e.preventDefault();
+    this.props.response();
+  }
+  handleTouchStart(row, col) {
+    if (!this.state.isRunning) {
+      const node = this.state.grid[row][col];
+      if (node.isStart) {
+        this.setState({
+          isStartNode: true,
+          mouseIsPressed: true,
+          currRow: row,
+          currCol: col,
+          touchStartTime: Date.now(),
+        });
+      } else if (node.isFinish) {
+        this.setState({
+          isFinishNode: true,
+          mouseIsPressed: true,
+          currRow: row,
+          currCol: col,
+          touchStartTime: Date.now(),
+        });
+      } else {
+        const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
+        this.setState({
+          grid: newGrid,
+          isWallNode: true,
+          mouseIsPressed: true,
+          isDrawing: true,
+          currRow: row,
+          currCol: col,
+          touchStartTime: Date.now(),
+        });
+      }
+    }
+  }
+
+  handleTouchMove(e) {
+    if (this.state.mouseIsPressed && this.state.isDrawing) {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const element = document.elementFromPoint(touch.clientX, touch.clientY);
+      if (element && element.className.includes('node')) {
+        const [, row, col] = element.id.split('-');
+        const nodeKey = `${row}-${col}`;
+        if (nodeKey !== this.state.lastTouchedNode) {
+          this.handleMouseEnter(parseInt(row), parseInt(col));
+          this.setState({
+            lastTouchedNode: nodeKey,
+            isDragging: true,
+          });
+        }
+      }
+    }
+  }
+  handleTouchEnd() {
+    const touchDuration = Date.now() - this.state.touchStartTime;
+    if (!this.state.isDragging && touchDuration < 200) {
+      // This was a tap, toggle the wall
+      const newGrid = getNewGridWithWallToggled(this.state.grid, this.state.currRow, this.state.currCol);
+      this.setState({
+        grid: newGrid,
+      });
+    }
+    this.setState({
+      mouseIsPressed: false,
+      isStartNode: false,
+      isFinishNode: false,
+      isWallNode: false,
+      isDrawing: false,
+      lastTouchedNode: null,
+      isDragging: false,
+      touchStartTime: 0,
+    });
+  }
 
   //handles the different controls for the mouse (editing walls, changing start and end positions)
   handleMouseDown(row, col) {

@@ -82,7 +82,7 @@ class StaticList extends React.Component {
 
   render() {
     return (
-      <svg style={{width:"100%", height: "100%", cursor:'pointer'}} onMouseUp={this.mouseUpEvent} onMouseDown={this.mouseDownEvent} onMouseMove={this.mouseMoveEvent} onMouseOut={this.mouseOutEvent}>
+      <svg style={{cursor:'pointer'}} onMouseUp={this.mouseUpEvent} onMouseDown={this.mouseDownEvent} onMouseMove={this.mouseMoveEvent} onMouseOut={this.mouseOutEvent}>
         {this.sizeSvg}
         {this.state.objectSvg}
       </svg>

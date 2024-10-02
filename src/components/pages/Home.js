@@ -18,9 +18,7 @@ export default function Home(){
                     }}
                 />
                 </h1>
-                <div className='message2' >
-                    <h3 className='message2'>Learn how most data structures and algorithms work through animated visualizers!</h3>
-                </div>
+                <h3 className='message2'>Learn how most data structures and algorithms work through animated visualizers!</h3>
             </div>
             <div className='box2'>
                 <div className="imgSection">
@@ -82,10 +80,10 @@ export default function Home(){
                 </p>
                 <h1>Qualities of Good Algorithms</h1>
                 <ul>
-                    <li>Input and output should be defined precisely.</li>
-                    <li>Each step in the algorithm should be clear and unambiguous.</li>
-                    <li>Algorithms should be most effective among many different ways to solve a problem.</li>
-                    <li>An algorithm shouldn't include computer code. Instead, the algorithm should be written in such a way that it can be used in different programming languages.</li>
+                    <li><p>Input and output should be defined precisely.</p></li>
+                    <li><p>Each step in the algorithm should be clear and unambiguous.</p></li>
+                    <li><p>Algorithms should be most effective among many different ways to solve a problem.</p></li>
+                    <li><p>An algorithm shouldn't include computer code. Instead, the algorithm should be written in such a way that it can be used in different programming languages.</p></li>
                 </ul>
                 </div>
             </div>

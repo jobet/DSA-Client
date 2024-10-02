@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ShowSection from '../ShowSection'
 import InputSection from '../InputSection'
-import '../../stylesheet/Dsa.css'
 import sampleDatas from '../../data/testDatas'
 import parsing from '../../data/parsing'
 
@@ -127,10 +126,10 @@ class Dsa extends Component {
 
   render() {
     return (
-      <div className="App">
+      <>
         <ShowSection specificData={this.state.specificData} showSpecificData={this.showSpecificData} methodAnimation={this.state.methodAnimation} goMethod={this.goMethod} methodList={this.sampleDatas.filter(n=>n.executingCode)} duration={this.state.duration} changeDuration={this.changeDuration} changeStop={this.changeStop} stopShow = {this.state.stopShow} step={this.state.step} submitStack={this.state.submitStack} nextStep={this.nextStep} dataStates={this.state.dataStates} executingCode = {this.state.executingCode} containerState={this.state.containerState}/>
         <InputSection getCode={this.getCode} getData={this.getData}/>
-      </div>
+      </>
     );
   }
 }

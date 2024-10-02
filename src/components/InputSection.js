@@ -3,8 +3,6 @@ import PropTypes from 'prop-types'
 import InputCode from './InputCode'
 import InputData from './InputData'
 import SampleCode from './SampleCode'
-import '../stylesheet/InputSection.css'
-
 // component for holding the different components contained within the input section of the data structure visualizer
 class InputSection extends Component {
   constructor() {
@@ -46,19 +44,16 @@ class InputSection extends Component {
 
   render() {
     return (
-      <section className='input-section'>
-        
-        {/* <button className='precaution' onClick={this.changeShow}><img className='cautionImg' src={require('../public/caution.png')} alt='caution'/></button> */}
-        <button className='input-button' onClick={input => this.setState({submit: true})}>START</button>
+      <>
+        <button className='input-button' onClick={input => this.setState({submit: true})}>Start</button>
         <SampleCode changeSample = {(code, data) => this.setState({sampleCode: code, sampleData: data})}/>
         <InputCode submit={this.state.submit} getCode={this.props.getCode} sampleCode = {this.state.sampleCode}/>
-        <div className='text-input2'>INPUT DATA</div>
         <InputData submit={this.state.submit} getData={this.props.getData} sampleData = {this.state.sampleData}/>
         {(this.state.showCaution)?
         <div className='coverDom'>
         </div>
         :null}
-      </section>
+      </>
     )
   }
 }

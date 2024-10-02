@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import '../stylesheet/InputCode.css'
 
 const dump =`
 a.push();

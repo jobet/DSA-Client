@@ -48,26 +48,12 @@
   }
 }
 /* NAVBAR STARTS */
-.navbar-algorithms {
-  min-width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
-}
-.navbarInfo button{
-  min-width: 50px;
-}
 .navbar-sorting {
   margin-left: auto;
   margin-right: auto;
   display: flex;
   flex-wrap: wrap;
-  width:50%;
-  font-size: 0.8rem;
-  min-height: 60px;
+  width: 50%;
   align-items: center;
   justify-content: center;
   padding: 0;
@@ -77,8 +63,10 @@
   text-align: center;
 }
 .settingArea{
+  margin-left: auto;
+  margin-right: auto;
   padding: 0 12px;
-  width: 100%;
+  width: 50%;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -99,7 +87,7 @@
   width: 100%;
 }
 .buttonArea button{
-  margin: 0 1px 1px 0;
+  margin: 0 0.5px 1px 0.5px;
 }
 .navbar-table {
   width: 40vh;
@@ -135,9 +123,93 @@
 .navbar-sorting > .icon {
   display: none;
 }
+/* NAVBAR ENDS */
+/* ALGO MENU STYLE */
+.navbar-algorithms {
+  width: 50%;
+  margin-bottom: 1px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.navbarSelect{
+  min-height: 40px;
+  box-sizing: border-box;
+  --main-color: white;
+  color: var(--main-color);
+  flex: 1 1 auto;
+  display: flex;
+  min-width: fit-content;
+  background-color: #B8336A;
+  border-radius: 6px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 0 0.5px 0 1px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #B8336A;
+  transition: all 0.1s ease-out;
+}
+.navbarSelect:hover{
+  --main-color:#B8336A;
+  border: 1px solid #B8336A;
+  background-color:#ffffff;
+  transition: all 0.1s ease-in;
+}
+.selectIcon{
+  font-size: 1.4rem;
+  display: flex;
+  margin: 0px 2px 0 8px;
+}
+.navbarInfo button{
+  min-width: 40px;
+  margin-left: 0.5px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.algo-menu {
+  flex: 1 1 auto;
+  display: flex;
+  min-width: fit-content;
+  background-color: transparent;
+  box-sizing: border-box;
+  color: var(--main-color);
+  min-height: 38px;
+  padding: 0 8px 0 0;
+  border: 0px;
+  outline: 0px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+}
+.algo-option {
+  color: black;
+}
+.config-menu {
+  background-color: transparent;
+  text-align: center;
+  min-width: 60px;
+  min-height: 40px;
+  text-overflow: ellipsis;
+  border:#1b1464 solid 1px;
+  border-radius:4px;
+}
+.config-option {
+  width: 30px;
+  height: 60px;
+  text-overflow: ellipsis;
+}
+
 @media screen and (max-width: 960px) {
   .cell{
     font-size: 0;
+  }
+  .settingArea{
+    width: 100%;
+    box-sizing: border-box;
   }
   .navbar-sorting{
     font-size: 0.6rem;
@@ -146,50 +218,10 @@
   .navbar-algorithms{
     width: 100%;
   }
-  button {
-    font-size: 0.7rem;
-  }
-  button svg{
-    font-size: 1rem;
-  }
   .ExecutionTime {
     font-size: 0.8rem;
   }
-}
-
-/* NAVBAR ENDS */
-
-/* ALGO MENU STYLE */
-.algo-menu {
-  background-color: transparent;
-  color: #1b1464;
-  font-size: 2.2rem;
-  border: 0px;
-  outline: 0px;
-  font-weight: 800;
-}
-.algo-option {
-  background-color: transparent;
-  color: #1b1464;
-  font-size: 2.4rem;
-  border: 0px;
-  outline: 0px;
-}
-.config-menu {
-  background-color: transparent;
-  color: #1b1464;
-  font-size: 1rem;
-  text-align: center;
-  width: 70px;
-  height: 40px;
-  text-overflow: ellipsis;
-  border:#1b1464 solid 1px;
-  border-radius:4px;
-}
-.config-option {
-  color: #1b1464;
-  font-size: 1rem;
-  width: 30px;
-  height: 60px;
-  text-overflow: ellipsis;
+  .selectIcon{
+    font-size: 1rem;
+  }
 }
