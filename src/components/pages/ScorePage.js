@@ -77,7 +77,7 @@ export default function ScorePage(){
     }
     
     return(
-        <div className="InformationBox1">
+        <div className="ScorePage">
              
              <div className="outerleft">
             <img className="checklist" src={checklist}></img>

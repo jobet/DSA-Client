@@ -1,41 +1,55 @@
-import React, { Component } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
-// component for inputting values into the data structure visualizer
-class InputData extends Component {
-  constructor() {
-    super()
-    var arr = [];
-    while(arr.length < 5){
-        var r = Math.floor(Math.random() * 100) + 1;
-        if(arr.indexOf(r) === -1) arr.push(r);
+
+const InputData = ({ submit, getData, sampleData }) => {
+  const textareaRef = useRef(null)
+
+  useEffect(() => {
+    if (submit) {
+      getData(textareaRef.current.value)
     }
-    this.inputData = `{
-  Set_Tree_Keys:[`+arr+`]
-}`
+  }, [submit, getData])
+
+  useEffect(() => {
+    if (sampleData !== '') {
+      textareaRef.current.value = sampleData
+    }
+  }, [sampleData])
+
+  const generateRandomArray = () => {
+    const arr = []
+    while (arr.length < 5) {
+      const r = Math.floor(Math.random() * 100) + 1
+      if (arr.indexOf(r) === -1) arr.push(r)
+    }
+    return arr
   }
 
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.submit) {
-      this.props.getData(this.txtarea.value)
-    }
-    if (nextProps.sampleData !== ``) {
-      this.txtarea.value = nextProps.sampleData;
-    }
-  }
-  render() {
-    return (
-      <textarea ref={input=>this.txtarea=input} className='input-data' wrap='off' spellCheck='false' defaultValue={this.inputData}>
-      </textarea>
-    )
-  }
+  const defaultInputData = `{
+  Set_Tree_Keys:[${generateRandomArray()}]
+}`
+
+  return (
+    <textarea 
+      ref={textareaRef}
+      className='input-data'
+      wrap='off'
+      spellCheck='false'
+      defaultValue={defaultInputData}
+    />
+  )
 }
 
 InputData.propTypes = {
-  getData: PropTypes.func
+  submit: PropTypes.bool,
+  getData: PropTypes.func,
+  sampleData: PropTypes.string
 }
 
-InputData.defaultProps ={
-  getData: f=>f
+InputData.defaultProps = {
+  submit: false,
+  getData: f => f,
+  sampleData: ''
 }
 
 export default InputData

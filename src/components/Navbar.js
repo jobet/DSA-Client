@@ -84,15 +84,15 @@ function Navbar({ avatar, username }) {
         </li>
         <li className='nav-item' ref={container}>
           {avatar ? (
-            <Link className="nav-links-button" onClick={handleButtonClick}>
+            <button className="nav-links-button" onClick={handleButtonClick}>
               <img src={avatar} className="navavatar" alt="User Avatar" />
               <span>{username}</span>
-            </Link>
+            </button>
           ) : (
-            <Link className="nav-links-button" onClick={handleButtonClick}>
+            <button className="nav-links-button" onClick={handleButtonClick}>
               <span className="navbicon"><BiUser /></span>
               <span>Login</span>
-            </Link>
+            </button>
           )}
           {state && (
             <div className="dropdown">
@@ -111,9 +111,9 @@ function Navbar({ avatar, username }) {
                   </>
                 ) : (
                   <>
-                    <h3>Log in or Register to comment and to take the daily quiz!</h3>
-                    <Link to='/login-form' onClick={closeMobileMenu} className="dropdownlinks"><li>Login</li></Link>
-                    <Link to='/register-form' onClick={closeMobileMenu} className="dropdownlinks"><li>Register</li></Link>
+                    <p>Log in or Register to comment and to take the daily quiz!</p>
+                    <Link to='/login-form' onClick={closeMobileMenu} className="dropdownlinks"><li><strong>Login</strong></li></Link>
+                    <Link to='/register-form' onClick={closeMobileMenu} className="dropdownlinks"><li><strong>Register</strong></li></Link>
                   </>
                 )}
               </ul>

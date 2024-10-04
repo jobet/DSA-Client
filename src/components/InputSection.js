@@ -45,7 +45,9 @@ class InputSection extends Component {
   render() {
     return (
       <>
-        <button className='input-button' onClick={input => this.setState({submit: true})}>Start</button>
+        <button className='input-button' onClick={input => this.setState({submit: true})}>
+          Start
+        </button>
         <SampleCode changeSample = {(code, data) => this.setState({sampleCode: code, sampleData: data})}/>
         <InputCode submit={this.state.submit} getCode={this.props.getCode} sampleCode = {this.state.sampleCode}/>
         <InputData submit={this.state.submit} getData={this.props.getData} sampleData = {this.state.sampleData}/>

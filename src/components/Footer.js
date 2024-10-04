@@ -7,8 +7,9 @@ function Footer() {
   return (
     <>
       <div className='footer'>
-      <img src={logoImage} alt='' className="footerlogo"/>
-      <p>&nbsp;&nbsp;Copyright © 2024 DSA. Some Rights Reserved.</p>
+        <img src={logoImage} alt='' className="footerlogo"/>
+        <p>Copyright © 2024 DSA.</p>
+        <p>&nbsp;Some Rights Reserved.</p>
       </div>
     </>
   );

@@ -1,6 +1,3 @@
-import std from '../data/visualizeContainer'
-
-
 const sampleDatas = [
   {}
 ]

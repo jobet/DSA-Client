@@ -8,12 +8,12 @@ const ShowSpecificData = ({specificData={}}) => {
     Visualize = StaticList;
   }
   return (
-    <div className='show-container'>
+    <>
       <div className='text-show2'>DataStructure</div>
       <div className='drawing'>
         <Visualize data = {specificData} />
       </div>
-    </div>
+    </>
   )
 }
 

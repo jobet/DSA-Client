@@ -8,22 +8,29 @@
   z-index: 2;
   top: 0;
   background-color: rgb(255, 255, 255);
-  outline: solid 1px #B8336A60;
+  outline: solid 1px #1b146480;
 }
 .footer {
   bottom: 0;
   background: #1b1464;
-  word-break: break-all;
-  min-height: 60px;
+  height: 60px;
+  box-sizing: border-box;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  color: rgb(255,255,255);
+  color: #fff;
+  padding: 4px 4px;
+}
+
+.footer p{
+  font-size: 1rem;
+  display: flex;
 }
 
 .footerlogo{
-  width: 30px;
+  width: 20px;
+  margin-right: 4px;
 }
 
 .footerb {
@@ -53,11 +60,10 @@
   position: absolute;
   top: 62px;
   z-index: 2;
-  border: 1px solid #B8336A;
+  border: 1px solid #1b146480;
   border-radius: 6px;
   box-sizing: border-box;
   padding: 30px 24px;
-  min-height: 20rem;
 }
 .dropdown ul {
   list-style: none;
@@ -279,9 +285,6 @@
   .fab-times {
     color: black;
     font-size: 2rem;
-  }
-  .footerlogo{
-    width: 20px;
   }
   .footer, .footerb {
     font-size: 0.8rem;

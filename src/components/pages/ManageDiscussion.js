@@ -137,7 +137,7 @@ export default function ManageDiscussion(){
         })()}
 
 {/* Replies */}
-<div className="replyholder">
+<>
         {replies.map((item) => (
           <>
             {item.comment_id == val.comment_id ? <div>{convertDate(new Date(item.reply_written)) == "Invalid Date" ? "" :    
@@ -157,7 +157,7 @@ export default function ManageDiscussion(){
             </div>}        
           </div>:"" }
           </>
-        ))}</div>
+        ))}</>
               </div>
                ) 
             })}

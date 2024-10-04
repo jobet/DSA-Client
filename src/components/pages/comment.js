@@ -151,8 +151,11 @@ const Toast = Swal.mixin({
     }
 
     function Login(){
-        history.push("/login-form");
-        
+      history.push("/login-form");
+    }
+
+    function Register(){
+      history.push("/register-form");
     }
 
 
@@ -323,10 +326,9 @@ const Toast = Swal.mixin({
 
 
      return(
-        
-        <div className="InformationBox1">
+        <div className="DiscussionBoard">
+          <div className="DiscussionBox">
             <h1 style={{textAlign:"center"}}>Discussion Board</h1>
-            <br></br>
             <div className="commentform">
 
       {(() => {
@@ -351,9 +353,12 @@ const Toast = Swal.mixin({
         } else {
           return (
             <div className="commentform">
-              <label style={{color:'black'}}>Login to join the discussion!</label>
-              <button className="disc-button"onClick={Login} >Login</button>
+              <h3>Login to join the discussion!</h3>
+              <div className="buttonArea">
+                <button onClick={Register}>Register</button>
+                <button onClick={Login}>Login</button>
               </div>
+            </div>
           )
         }
       })()}
@@ -400,16 +405,16 @@ const Toast = Swal.mixin({
             {(() => {
         if (val.user_infos.useremail_reg == localStorage.getItem("email") && deleteCount==2 && editCount==2){
           return (
-            <div>
-            <button id='editBtn' className='commentbtn' onClick={()=>{editing(val)}}>Edit</button>
-            <button id='deleteBtn' className='commentbtn' onClick={()=>{deleteComment(val.comment_id)}}>Delete</button>
+            <div className="actionArea">
+              <button id='editBtn' className='commentbtn' onClick={()=>{editing(val)}}>Edit</button>
+              <button id='deleteBtn' className='commentbtn' onClick={()=>{deleteComment(val.comment_id)}}>Delete</button>
             </div>
           )
         }
         
         else if (val.user_infos.useremail_reg == localStorage.getItem("email")) {
           return (
-            <div>    
+            <div className="actionArea">    
             <button id='editBtn' className='commentbtn' onClick={()=>{editing(val)}}>Edit</button>
             <button id='deleteBtn' className='commentbtn' onClick={()=>{deleteComment(val.comment_id)}}>Delete</button>
             <button className='replybtn' onClick={() => handleCardIndex(val.comment_id)}>Reply</button>
@@ -447,7 +452,7 @@ const Toast = Swal.mixin({
 
 {/* Replies */}
 
-<div className="replyholder">
+<>
         {replies.map((item) => (
           <>
 
@@ -463,21 +468,19 @@ const Toast = Swal.mixin({
             </>}
 
             {item.useremail_reg == localStorage.getItem("email") ?
-             <div>
-            <button className='replybtn' onClick={() => handleReplyCardIndex(item.reply_id)}>Edit</button>
-             <button className='replybtn' onClick={()=>{deleteReply(item.reply_id)}}>Delete</button>
-
-             <div className={item.reply_id == replyCardIndex && editReplyShow ? 'reply_shown' : 'reply_hidden'}>
-            <input value={editReplyValue} placeholder="Edit Reply" onChange={(e) => {setEditReplyValue(e.target.value)}} type="text"></input> <button onClick={() => editReply(item.reply_id)} className='replybtn'>Confirm</button>
-            </div>
-             
-             </div> : ""}
+            <div className="actionArea">
+              <button className='replybtn' onClick={() => handleReplyCardIndex(item.reply_id)}>Edit</button>
+              <button className='replybtn' onClick={()=>{deleteReply(item.reply_id)}}>Delete</button>
+              <div className={item.reply_id == replyCardIndex && editReplyShow ? 'reply_shown' : 'reply_hidden'}>
+                <input value={editReplyValue} placeholder="Edit Reply" onChange={(e) => {setEditReplyValue(e.target.value)}} type="text"></input> <button onClick={() => editReply(item.reply_id)} className='replybtn'>Confirm</button>
+              </div>
+            </div> : ""}
 
             
           </div>:"" }
           
           </>
-        ))}</div>
+        ))}</>
               </div>
 
                
@@ -487,8 +490,8 @@ const Toast = Swal.mixin({
             })}
             
             </div>
+            </div>
         </div>
-          
      )
      
   

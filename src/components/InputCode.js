@@ -1,44 +1,37 @@
-import React, {Component} from 'react'
+import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
-const dump =`
-a.push();
-a.push().push();
-a.dfs()().bc().pushBack();
-abc.def.cd()
-abc.def().cde.pushBack();
-abc[].push()
-abc.push(dec.push())
-if(ab.pop())
-`
-// component for the input code section of the data structure visualizer
-class InputCode extends Component {
-  constructor() {
-    super()
-    this.code = `
+const InputCode = ({ submit, getCode, sampleCode }) => {
+  const textareaRef = useRef(null)
+
+  useEffect(() => {
+    if (submit) {
+      getCode(textareaRef.current.value)
+    }
+  }, [submit, getCode])
+
+  useEffect(() => {
+    if (sampleCode !== '') {
+      textareaRef.current.value = sampleCode
+    }
+  }, [sampleCode])
+
+  const defaultCode = `
     let tree = new std.SetTree();
-data.Set_Tree_Keys.map(n => tree.insert(n));    
-`
-  }
-  
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.submit) {
-      this.props.getCode(this.txtarea.value)
-    }
+    data.Set_Tree_Keys.map(n => tree.insert(n));    
+  `
 
-    if(nextProps.sampleCode !== ``) {
-      this.txtarea.value = nextProps.sampleCode;
-    }
-  }
-
-  render() {
-    return (
-      <div className = 'code-write'>
-        <textarea ref={input=>this.txtarea=input} className='code-write' spellCheck='false' wrap='off' defaultValue={this.code}>
-        </textarea>
-      </div>
-    )
-  }
+  return (
+    <div className='code-write'>
+      <textarea 
+        ref={textareaRef}
+        className='code-write'
+        spellCheck='false'
+        wrap='off'
+        defaultValue={defaultCode}
+      />
+    </div>
+  )
 }
 
 InputCode.propTypes = {
@@ -47,10 +40,10 @@ InputCode.propTypes = {
   sampleCode: PropTypes.string
 }
 
-InputCode.defaultProps ={
+InputCode.defaultProps = {
   submit: false,
-  getCode: f=>f,
-  sampleCode: ``,
+  getCode: f => f,
+  sampleCode: '',
 }
 
 export default InputCode

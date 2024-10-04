@@ -199,27 +199,31 @@ function Profile() {
   }
 
   return (
-<div className='Home'>
+  <div className='Profile'>
          {(() => {
         if (localStorage.getItem('username')){
           return (
-            <div className='box1-login'>
-              <div className='login_form'>
-                <center>
+            <div className='profileBox'>
+              <div className="userDetails">
                 <img className='usericon' width={'120px'} height={'120px'} src={localStorage.getItem('avatar_display')}></img>
-                  <h1>Username: {localStorage.getItem('username')}</h1>
-                     <h1>Email: {localStorage.getItem('email')}</h1>
-                     <button onClick={changeName}>Change Username</button>
-                     <button onClick={changePassword}>Change Password</button>
-                     <button onClick={changeAvatar}>Change Avatar</button>
-                     <button onClick={enterScoreList}>Score List</button>
-                     <br></br>
-                     <button onClick={logOut}>Logout</button>
-                     <br></br>
-                     <br></br>
-                     <br></br>
-                     <button onClick={deleteAccount}>Delete Account</button>
-                </center>
+                <div className="userTextDetails">
+                  <h1>{localStorage.getItem('username')}</h1>
+                  <h3>{localStorage.getItem('email')}</h3>
+                </div>
+              </div>
+              <div className="buttonArea">
+                <button onClick={enterScoreList}>Quiz Scores</button>
+              </div>
+              <div className="buttonArea">
+                <button onClick={changeName}>Change Username</button>
+                <button onClick={changePassword}>Change Password</button>
+                <button onClick={changeAvatar}>Change Avatar</button>
+              </div>
+              <div className="buttonArea">
+                <button onClick={logOut}>Logout</button>
+              </div>
+              <div className="buttonArea">
+                <button className="redbtn" onClick={deleteAccount}>Delete Account</button>
               </div>
             </div>
           )
@@ -229,7 +233,7 @@ function Profile() {
         }
         
       })()}   
-        </div>
+   </div>
   )
 }
 

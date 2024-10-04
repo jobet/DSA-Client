@@ -1,5 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { BiX, BiShow } from 'react-icons/bi'
+
 // component for displaying the method list for the data structure visualizer
 class ShowMethodList extends React.Component {
   constructor(goMethod=f=>f, methodList=[], changeStop = f=>f, stopShow=false) {
@@ -33,16 +35,20 @@ class ShowMethodList extends React.Component {
   render() {
     return (
       <>
-        <button className='showmethodbutton' onClick={() => this.changeShowMethod(false)}>Show Method</button>
-        {(this.state.showmethod)?
+      <button className='showmethodbutton' onClick={() => this.changeShowMethod(false)}>
+        <BiShow /> Show Method
+      </button>
+      {(this.state.showmethod)?
         <div className='coverDom2'>
           <div className='methodContent'>
             {this.props.methodList.map((n, i) => this.methodScript(n, i))}
-            <button className='closeshowdata' onClick={this.changeShowMethod}>close</button>
+            <button onClick={this.changeShowMethod}>
+              <BiX/>
+            </button>
           </div>
         </div>
-        :null}
-      </>
+       :null}
+    </>
     )
   }
 }

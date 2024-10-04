@@ -129,8 +129,6 @@ class ShowContainer extends Component{
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps, this.props)
-    
     // duration change, clear initiate call
     if (this.props.duration !== nextProps && complexCollections.indexOf(nextProps.containerState.object.classname) === -1) {
       console.log('call duration change')
@@ -143,23 +141,21 @@ class ShowContainer extends Component{
     if (this.state !== nextState) {
       return true;
     }
-
+    
     // stopShow: true->false, do rendering
-    if (this.props.stopShow && !nextProps.stopShow) {
-      console.log('true -> false')
+    /*if (this.props.stopShow && nextProps.stopShow) {
       clearTimeout(this.sto1);
       clearTimeout(this.sto2);
       this.setVisualize(nextProps)
-      return false;
-    }
+      return true;
+    }*/
 
     // if next stopShow is true, clear timeout and change Visualize to NextComp
-    if (!this.props.stopShow && nextProps.stopShow) {
+    if (!this.props.stopShow && !nextProps.stopShow) {
       clearTimeout(this.sto1);
       clearTimeout(this.sto2);
       console.log('clear timeout, stopShow true');
       this.setState({Stop: true})
-      // this.sto1 = setTimeout(() => this.setState({Visualize: NextComp, Stop: false}), 50);
       return false;
     }
 
@@ -194,8 +190,7 @@ class ShowContainer extends Component{
     }
 
     // show animation sequentially
-    if (this.props.step + 1 === nextProps.step) {
-      console.log('step serial')      
+    if (this.props.step + 1 === nextProps.step) {   
       this.setVisualize(nextProps)
       return false;
     }
@@ -210,8 +205,6 @@ class ShowContainer extends Component{
   
   initiate = (time) => {
     const submitStack = this.props.submitStack;
-    console.log('call initiate')
-    console.log(this.props.containerState.object)
     this.sto1 = setTimeout(() => {
       this.setState({Visualize: EmptyComp, Executing: EmptyComp, Stop: false})
       this.sto2 = setTimeout(() => this.props.nextStep(submitStack), 10)
@@ -220,17 +213,32 @@ class ShowContainer extends Component{
 
   render() {
     return (
-      <div className='show-container'>
-        <this.state.Executing executing = {this.props.executingCode} step={this.props.step}/>
-        <div className='drawing'>
-        {console.log('out: ', this.state.Visualize, this.props.containerState.object, this.props.stopShow)}
-        <this.state.Visualize duration={Number(this.props.duration)/100} stop={this.state.Stop} initiate={this.initiate} object={this.props.containerState.object} params = {this.params}/>
-        </div>
-        <div className='slidercontainer'> 
-          <p>Speed</p>
-          <input type='range' min={20} max={250} value={this.props.duration} onChange={e => this.props.changeDuration(e.target.value)} className='slider' />
-        </div>
+      <>
+      <div className='drawing'>
+        <this.state.Visualize 
+        duration={Number(this.props.duration)/100} 
+        stop={this.state.Stop} 
+        initiate={this.initiate} 
+        object={this.props.containerState.object} 
+        params = {this.params}
+        />
       </div>
+      <p className="codeText">
+        <this.state.Executing executing = {this.props.executingCode} step={this.props.step}/>
+      </p>
+      <div className='slidercontainer'> 
+        <p>Speed</p>
+        <input 
+          type='range' 
+          min={120} 
+          max={240} 
+          value={260 - Number(this.props.duration)} 
+          onChange={e => this.props.changeDuration((260 - e.target.value))} 
+          className='slider' 
+        />
+        <p>{((Math.round(((260-Number(this.props.duration))/40)*100)/100)-2).toFixed(2)}x</p>
+      </div>
+    </>
     )
   }
 }
@@ -242,18 +250,16 @@ ShowContainer.propTypes = {
   nextStep: PropTypes.func,
   containerState: PropTypes.object,
   executingCode: PropTypes.string,
-  duration: PropTypes.string,
+  duration: PropTypes.number,
   changeDuration: PropTypes.func,
 }
 
 ShowContainer.defaultProps = {
-  stopShow: false,
   step: 0,
   submitStack: 0,
   nextStep: f=>f,
   containerState: {},
   executingCode: '',
-  duration: 1,
   changeDuration: f=>f,
 }
 

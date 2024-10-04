@@ -54,13 +54,9 @@ const parsing = ({inputCode='', inputData=''}) => {
   
   // data
   eval('data = ' + inputData);
-  console.log(data);
-  
 
   // find variables
   const variables = findVariables(inputCode);
-  console.log(variables)
-
   
   // code
   inputCode = codeTransition(inputCode)
@@ -68,7 +64,6 @@ const parsing = ({inputCode='', inputData=''}) => {
   
   // new 변환
   inputCode = constructorTransition(inputCode, constructors)
-  console.log(inputCode)
 
 
   eval(inputCode)

@@ -8,7 +8,11 @@ body{
   font-size: 62.5%;
 }
 
-.Sorting, .ShortestPath, .DataStructures, .QuizPage, .InformationBox1, .LoginForm{
+.Sorting, .ShortestPath,
+.DataStructures, .QuizPage,
+.InformationBox1, .LoginForm,
+.DiscussionBoard, .Profile,
+.ScorePage {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -188,7 +192,7 @@ button:hover {
 .left-panel .collapsible{
   text-align: left;
 }
-h1, h2, a {
+h1, h2, a, th {
   font-weight: 800;
 }
 
@@ -207,11 +211,16 @@ h3 {
   font-size: 2.4em;
 }
 
+text {
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
 p, li{
   font-weight: 400;
 }
 
-p{
+p, th, td{
   font-size: 1.2rem;
 }
 
@@ -224,16 +233,6 @@ li, a{
   overflow: hidden;
 }
 
-.DataStructures {
-  width: 100%;
-  overflow: hidden;
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
-  display: table;
-  background-attachment: fixed;
-  
-}
 .DSleft {
   width: 65%;
   float: left;
@@ -535,18 +534,15 @@ li, a{
   text-align: center;
 }
 .commentform input {
-  width: 60%;
-  height: 50px;
-  margin-left: 20%;
-  margin-right: 20%;
-  border-radius: 5px;
-  border: 2px solid turquoise;
+  box-sizing: border-box;
+  width: 100%;
+  height: 80px;
+  margin: 8px auto;
+  border-radius: 6px;
+  border: 1px solid #1b1464;
   background-color: white;
   padding: 15px;
   color: black;
-  
-  
-  font-size: large;
 }
 .commentform label {
   color: aliceblue;
@@ -560,10 +556,9 @@ li, a{
   margin-right:45%;
 }
 .cardholder {
-  margin-left: 5%;
-  margin-right: 5%;
   display: flex;
   flex-direction: column-reverse;
+  width: 100%;
 }
 
 .replyholder{
@@ -571,30 +566,39 @@ li, a{
   padding: 10px;
   padding-bottom: 0px;
   padding-left: 30px;
-  border-radius: 19px ;
+  border-radius: 12px;
 }
 .replyholder2{
   margin-top: 15px;
-  padding: 10px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  border-radius: 19px ;
+  padding: 4px 8px 12px 8px;
+  border-radius: 12px;
   background-color: white;
 }
 
+.actionArea{
+  width: 30%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
 
 .card {
-  width: 97%;
+  width: 100%;
+  box-sizing: border-box;
   height: auto;
-  padding: 20px;
+  padding: 8px 12px 16px 12px;
   border-color: none;
-  margin: 10px;
+  margin: 4px 2px;
   color: black;
   text-align: justify;
-  font-size: large;
-  border-radius: 19px;
+  border-radius: 12px;
   background: #cfedfd;
   margin-bottom: 10px;
+}
+
+.card h2{
+  font-size: 1.8rem;
 }
 
 .cardholderScore {
@@ -728,28 +732,25 @@ li, a{
 }
 .replymsg{
   padding-left: 28px;
+  font-size: 1rem;
 }
 .datemsg{
   padding-left: 88%;
 }
 .user {
   display: inline-block;
-  padding-left: 7px;
 }
 
 .commentbtn {
-  border: none;
+  border: 1px solid transparent;
+  box-sizing: border-box;
   background: none;
-  font-size: large;
-  color:#2659a6;
-
+  color:#1b1464;
 }
 .replybtn {
-  border: none;
+  border: 1px solid transparent;
   background: none;
-  font-size: large;
-  color:#2659a6;
-
+  color:#1b1464;
 }
 
 .updateinput {
@@ -1105,17 +1106,16 @@ li, a{
   font-size: 1.2rem;
 }
 .quizInnerDiv{
-  padding:1%;
-  margin:10%;
-  margin-top:2%;
-  background-color: white;
-    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0),
-      6px 6px 10px rgba(0, 0, 0, 0.2);
-}
-
-#quizSign{
-  
-  color:#2b388a;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  width: 100%;
+  min-height: calc(100svh - 400px);
+  border: 1px solid #1b146480;
+  border-radius: 6px;
 }
 
 .quiz_demo{
@@ -1142,29 +1142,11 @@ li, a{
   font-size: 32px;
 }
 
-.quiz_user_page_front{
-  height: auto;
-}
-
 .quiz_instruction{
-  text-align: center;
-  padding:1%;
-  margin-top:10%;
-  margin-left:10%;
-  margin-right:10%;
-  margin-bottom:3%;
-  font-size: 16px;
-  margin-top:2%;
-  background-color: rgb(255, 255, 255);
-    box-shadow: -6px -6px 10px rgba(255, 255, 255, 0),
-      6px 6px 10px rgba(0, 0, 0, 0.2);
-}
-
-#quiz_instruction_note{
-  padding:1%;
-  margin:10% 10% 5% 10%;
-  font-size: 16px;
-  margin-top:2%;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
+  padding: 18px;
+  margin: 8px 0;
 }
 
 .choices_admin_quiz>label{
@@ -1182,10 +1164,11 @@ li, a{
 }
 
 .button-next{
-  margin:0%;
-  padding:0%;
-  margin-left: 87%;
+  width: 50%;
+  display: flex;
+  margin-right: 0;
 }
+
 #buttonQuizz{
   margin:0%;
   border-color: teal;
@@ -1359,24 +1342,21 @@ li, a{
 
 .grid-questions{
   text-align: left;
+  width: 100%;
 }
 
 #selected_button{
-  width:95%;
-  background-color:#6b74ad;
+  width: 95%;
+  background-color:#B8336A;
   color:white;
-  border-color: rgba(117, 126, 126, 0.418);
-  border-style: solid;
-  border-width: medium;
   font-size: 1.7rem;
   text-align: left;
-  border-radius: unset;
 }
 
 #selected_button_tf{
   opacity: 0.7;
   color:white;
-  background-color:#2b388a;
+  background-color:#B8336A;
   width: 90%;
 }
 
@@ -1424,13 +1404,10 @@ li, a{
 #quiz-contentx{
   width:95%;
   background-color: white;
-  color:#787878;
-  border-color: rgba(117, 126, 126, 0.418);;
-  border-style: solid;
-  border-width: thin;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
   font-size: 1.7rem;
-  text-align: left;
-  border-radius: unset;
+  color: black;
 }
 #fillInput{
   border-color: rgba(117, 126, 126, 0.418);;
@@ -1506,6 +1483,17 @@ li, a{
   margin-right: auto;
 }
 
+.dsaContainer .buttonArea, .dsaContainer .slidercontainer, .dsaContainer .inputContainer {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inputContainer{
+  margin: 1px;
+  box-sizing: border-box;
+}
+
 textarea.input-data {
   min-height: 80px;
   width: 100%;
@@ -1513,7 +1501,7 @@ textarea.input-data {
   padding: 8px;
   resize: vertical;
   background-color: white;
-  border: 1px solid #888;
+  border: 1px solid #1b146480;
   border-radius: 6px;
 }
 
@@ -1673,32 +1661,24 @@ div.show-container {
 
 div.drawing {
   display: flex;
-  min-height: 60svh;
+  min-height: calc((100svh - 120px) - 320px);
   width: 100%;
-  border-width: 1px;
-  border-color: none;
-  border-style: hidden;
-  border-radius: 20px;
-  background-color: rgb(222, 235, 248);
-  color: aliceblue;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
   flex-wrap: wrap;
 }
 
 div.drawing svg{
-  min-height: 60svh;
+  min-height: calc((100svh - 120px) - 320px);
   display: flex;
   flex: 1 1 auto;
   width: fit-content;
-}
-
-div.text-show2 {
-}
-
-div.text-show3 {
+  align-items: center;
+  justify-content: center;
 }
 
 .slidercontainer {
-  min-height: 50px;
+  min-height: 42px;
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -1706,11 +1686,12 @@ div.text-show3 {
 
 /* The slider itself */
 .slider {
+  margin: 8px 0;
   display: flex;
   -webkit-appearance: none; /* Override default CSS styles */
   width: 100%; /* Full-width */
   height: 5px; /* Specified height */
-  background-color: #B8336A; /* Grey background */
+  background-color: #1b1464; /* Grey background */
   outline: none; /* Remove outline */
   border-radius: 6px;
 }
@@ -1723,11 +1704,12 @@ div.text-show3 {
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 13px; /* Set a specific slider handle width */
-  height: 13px; /* Slider handle height */
-  background: rgba(55, 222, 224, 0.952); /* Green background */
+  width: 1.5em; /* Set a specific slider handle width */
+  height: 1.5em; /* Slider handle height */
+  background: #B8336A; /* Green background */
   cursor: pointer; /* Cursor on hover */
+  border: none;
+  border-radius: 100%;
 }
 
 .slider::-moz-range-thumb {
@@ -1741,7 +1723,7 @@ div.text-show3 {
 
 @keyframes CodeText {
   from {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
   to {
     transform: scale(1);
@@ -1753,9 +1735,9 @@ div.text-show3 {
   animation: CodeText;
   animation-duration: 1s;
   margin: 0;
+  min-height: 1.2em;
   text-align: center;
   color: black;
-
 }
 .showdata {
   width: 15%;
@@ -1960,6 +1942,51 @@ svg.data-svg {
   padding: 2px;
 }
 
+.quizBox{
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.DiscussionBox, .DiscussionBox .buttonArea,
+.quizBox .buttonArea,
+.profileBox .buttonArea {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.profileBox{
+  min-width: 25%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
+  box-sizing: border-box;
+  padding: 32px 24px;
+}
+
+.userDetails{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+
+.redbtn{
+  background-color: rgb(180, 0, 0);
+  border: 1px solid transparent;
+}
+
 @media screen and (max-width: 960px) {
   html, body {
     max-width: 100%;
@@ -2014,5 +2041,14 @@ svg.data-svg {
   .dsaContainer{
     width: 100%;
     padding: 0;
+  }
+  .dsaContainer 
+  .buttonArea, 
+  .dsaContainer .slidercontainer, 
+  .dsaContainer .inputContainer,
+  .quizBox, .DiscussionBox,
+  .DiscussionBox .buttonArea,
+  .quizBox .buttonArea {
+    width: 100%;
   }
 }
