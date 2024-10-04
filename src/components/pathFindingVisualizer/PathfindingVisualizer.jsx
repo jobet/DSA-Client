@@ -3,7 +3,7 @@ import Node from './Node/Node';
 import {dijkstra} from '../pathFindingAlgorithms/dijkstra';
 import {dfs} from '../pathFindingAlgorithms/dfs';
 import {bfs} from '../pathFindingAlgorithms/bfs';
-import { BiInfoCircle, BiHelpCircle, BiX, BiTrash, BiPlayCircle } from "react-icons/bi";
+import { BiInfoCircle, BiHelpCircle, BiX, BiTrash, BiPlayCircle, BiChevronDown, BiExpand, BiSubdirectoryLeft } from "react-icons/bi";
 import './PathfindingVisualizer.css';
 import shortPath from '../images/shortPath.PNG';
 import clearWall from '../images/clearWall.PNG';
@@ -193,6 +193,10 @@ DFS(node) {
       lastTouchedNode: null,
       isDragging: false,
       touchStartTime: 0,
+      algoName: "Dijkstra",
+      selected: "Dijkstra",
+      algoDropdown: false,
+      algoIcon: <BiExpand className="itemIcon"/>,
     };
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
@@ -668,6 +672,24 @@ DFS(node) {
           <h3>{distancestr}</h3>
           <h3>{visiNode}</h3>
           <div className="buttonArea">
+            <button className="info-button" onClick={() => this.setState({ algoInfoModal: true })}>
+              <BiInfoCircle/>
+            </button>
+            <div className="dropdown-container">
+              <button className='algorithm-button' onClick={() => this.setState({ algoDropdown: true })}>{this.state.algoIcon} {this.state.algoName} <BiChevronDown className="dropDownIcon"/></button>
+              {this.state.algoDropdown && (
+              <>
+                <div onClick={() => this.setState({ algoDropdown: false })} className="overlay2"></div>
+                <div className='appDropdown'>
+                  <button onClick={() => this.setState({ algoDropdown: false, selected: "Dijkstra", algoName: "Dijkstra", selectedAlgorithm: 1, algoIcon: <BiExpand className="itemIcon"/> })}>Dijkstra</button>
+                  <button onClick={() => this.setState({ algoDropdown: false, selected: "BFS", algoName: "Breadth First Search",selectedAlgorithm: 2, algoIcon: <BiExpand className="itemIcon"/>})}>Breadth First Search</button>
+                  <button onClick={() => this.setState({ algoDropdown: false, selected: "DFS", algoName: "Depth First Search", selectedAlgorithm: 3, algoIcon: <BiSubdirectoryLeft className="itemIcon"/>,})}>Depth First Search</button>
+                </div>
+              </>
+              )}
+            </div>
+          </div>
+          <div className="buttonArea">
             <button id="help" onClick={() => this.setState({ modal: true })}>
               <BiHelpCircle/> Help
             </button>
@@ -681,53 +703,13 @@ DFS(node) {
               onClick={() => this.clearWalls()}>
               <BiTrash /> Clear Walls
             </button>
-          </div>
-          <div className="buttonArea">
-            <div className="algorithm-button-group">
-              <button
-                type="button"
-                className="info-button"
-                onClick={() => this.setState({ algoInfoModal: true, selectedAlgorithm: 1 })}>
-                <BiInfoCircle />
-              </button>
-              <button
-                type="button"
-                className="algorithm-button"
-                onClick={() => this.visualize('Dijkstra')}>
-                <BiPlayCircle/> Dijkstra's
-              </button>
-            </div>
-            <div className="algorithm-button-group">
-              <button
-                type="button"
-                className="info-button"
-                onClick={() => this.setState({ algoInfoModal: true, selectedAlgorithm: 2 })}>
-                <BiInfoCircle />
-              </button>
-              <button
-                type="button"
-                className="algorithm-button"
-                onClick={() => this.visualize('BFS')}>
-                <BiPlayCircle/> Breadth First Search
-              </button>
-            </div>
-            <div className="algorithm-button-group">
-              <button
-                type="button"
-                className="info-button"
-                onClick={() => this.setState({ algoInfoModal: true, selectedAlgorithm: 3 })}>
-                <BiInfoCircle />
-              </button>
-              <button
-                type="button"
-                className="algorithm-button"
-                onClick={() => this.visualize('DFS')}>
-                <BiPlayCircle/> Depth First Search
-              </button>
-            </div>
+            <button
+            type="button"
+            onClick={() => this.visualize(this.state.selected)}>
+              <BiPlayCircle/> Start
+            </button>
           </div>
         </div>
-
         {this.state.algoInfoModal && (
                     <div className="modal">
                         <div onClick={() => this.setState({ algoInfoModal: false })} className="overlay"></div>

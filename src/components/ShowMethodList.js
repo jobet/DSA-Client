@@ -13,42 +13,40 @@ class ShowMethodList extends React.Component {
   }
 
   changeShowMethod = (did = true) => {
-    if (did || !this.props.stopShow)
-    this.props.changeStop()
-    this.setState({showmethod: !this.state.showmethod})
+    if (this.props.methodList.length){
+      this.setState({showmethod: !this.state.showmethod})
+    }
   }
 
   gotoMethod = (idx) => {
     this.setState({showmethod: !this.state.showmethod})
-    this.props.goMethod(idx)
+    this.props.changeStopShowToTrue();
+    this.props.goMethod(idx);
   }
 
   methodScript = (method, idx) => {
     return (
-      <div className='methodscript'>
-        <div className='methodCommand'>{idx}: {method.executingCode.substring(0, 40)}</div>
-        <button className='goMethod' onClick={()=>this.gotoMethod(idx)}>Go</button>
-      </div>
+      <>
+        <button onClick={()=>this.gotoMethod(idx)}>{idx+1}. {method.executingCode.substring(0, 40)}</button>
+      </>
     )
   }
 
   render() {
     return (
-      <>
+      <div className="dropdown-container">
       <button className='showmethodbutton' onClick={() => this.changeShowMethod(false)}>
         <BiShow /> Show Method
       </button>
-      {(this.state.showmethod)?
-        <div className='coverDom2'>
-          <div className='methodContent'>
+      {this.state.showmethod && (
+      <>
+      <div onClick={this.changeShowMethod} className="overlay2"></div>
+        <div className='appDropdown'>
             {this.props.methodList.map((n, i) => this.methodScript(n, i))}
-            <button onClick={this.changeShowMethod}>
-              <BiX/>
-            </button>
-          </div>
         </div>
-       :null}
-    </>
+      </>
+       )}
+    </div>
     )
   }
 }
@@ -56,7 +54,8 @@ class ShowMethodList extends React.Component {
 ShowMethodList.propTypes = {
   goMethod: PropTypes.func,
   methodList: PropTypes.array,
-  changeStop: PropTypes.func
+  changeStop: PropTypes.func,
+  changeStopShowToTrue: PropTypes.func,
 }
 
 export default ShowMethodList;

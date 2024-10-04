@@ -1,20 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { BiChevronDown, BiLayer } from 'react-icons/bi';
 
-// the algorithm option component for the sorting navbar
 const Algorithms = (props) => {
+    const [algoDropdown, setAlgoDropdown] = useState(false);
+    const [selectedAlgorithm, setSelectedAlgorithm] = useState(null);
+    const [algoName, setAlgoName] = useState("Bubble Sort");
+
+    const handleSelect = (algorithm, name, id) => {
+        setAlgoDropdown(false);
+        setSelectedAlgorithm(id);
+        setAlgoName(name);
+        props.onChange(algorithm, "algo");
+    };
+
     return (
-            <select 
-                name="Algorithm" id="menu" className="algo-menu"
-                onChange = {(e) => props.onChange(e.target.value, "algo")}>
-                {props.algorithms.map(element => (
-                    <option className="algo-option"
-                        key = {element.value}
-                        value = {element.value}>
-                        {element.type}
-                    </option>
-                ))}
-            </select>
+        <div className="dropdown-container">
+            <button 
+                className="algorithm-button"
+                onClick={() => setAlgoDropdown(!algoDropdown)}
+            >
+                <BiLayer className="itemIcon"/> {algoName} <BiChevronDown className="dropDownIcon"/>
+            </button>
+            {algoDropdown && (
+                <>
+                    <div 
+                        onClick={() => setAlgoDropdown(false)} 
+                        className="overlay2"
+                    ></div>
+
+                    <div className='appDropdown'>
+                        {props.algorithms.map((element, index) => (
+                            <button
+                                key={index}
+                                onClick={() => handleSelect(element.value, element.type, index + 1)}
+                            >
+                                {element.type}
+                            </button>
+                        ))}
+                    </div>
+                </>
+            )}
+        </div>
     );
-}
- 
+};
+
 export default Algorithms;

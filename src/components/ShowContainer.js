@@ -2,17 +2,11 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import std from './container'
 
-const NextComp = () => {
-  return (
-    <svg>
-      <text x={20} y={50} width={200} height={40}>End this Method</text>
-    </svg>
-  )
-}
-
 const CodeComp = ({executing, step}) => {
   return (
-    <p className='codeText'>{(step >= 0) ? step.toString()+'. ': null} {executing}</p>
+    <>
+    {(step >= 0) ? (step+1).toString()+'. ': null} {executing}
+    </>
   )
 }
 
@@ -31,6 +25,8 @@ class ShowContainer extends Component{
       Visualize: EmptyComp,
       Executing: CodeComp,
       Stop: false,
+      isLastStep: false,
+      totalSteps: 0,
     }
     this.showstep = 0;
   }
@@ -40,7 +36,13 @@ class ShowContainer extends Component{
     const method = props.containerState.method
     this.params = props.containerState.params
   
-    this.setState({Visualize: EmptyComp, Executing: EmptyComp, Stop: false})    
+    this.setState({
+      Visualize: EmptyComp, 
+      Executing: EmptyComp, 
+      Stop: false, 
+      isLastStep: false,
+      totalSteps: props.methodList.length
+    })    
     setTimeout(()=>{
     if (objectName === 'List') {
       switch(method){
@@ -129,6 +131,23 @@ class ShowContainer extends Component{
   }
 
   shouldComponentUpdate(nextProps, nextState) {
+    console.log(this.props.methodList)
+    // Check if we're on the last step
+    const isLastStep = nextProps.step === this.state.totalSteps - 1;
+    console.log(this.state.totalSteps)
+    console.log('isLastStep', isLastStep)
+    // Update isLastStep state
+    if (isLastStep !== this.state.isLastStep) {
+      this.setState({ isLastStep });
+    }
+    // Don't clear visualization if it's the last step
+    if (!isLastStep) {
+      if (this.props.duration !== nextProps.duration && complexCollections.indexOf(nextProps.containerState.object.classname) === -1) {
+        console.log('call duration change')
+        clearTimeout(this.sto1)
+        clearTimeout(this.sto2)
+      }
+    }
     // duration change, clear initiate call
     if (this.props.duration !== nextProps && complexCollections.indexOf(nextProps.containerState.object.classname) === -1) {
       console.log('call duration change')
@@ -139,6 +158,7 @@ class ShowContainer extends Component{
 
     // if state change, return true;
     if (this.state !== nextState) {
+      console.log('state change')
       return true;
     }
     
@@ -151,17 +171,18 @@ class ShowContainer extends Component{
     }*/
 
     // if next stopShow is true, clear timeout and change Visualize to NextComp
-    if (!this.props.stopShow && !nextProps.stopShow) {
+    /*if (this.props.stopShow && nextProps.stopShow) {
       clearTimeout(this.sto1);
       clearTimeout(this.sto2);
       console.log('clear timeout, stopShow true');
       this.setState({Stop: true})
       return false;
-    }
+    }*/
 
     // if submitTimeout is different and not first method, clear timeout 
     if (this.props.submitStack !== nextProps.submitStack) {
       if (!this.props.submitStack) {
+        console.log(this.props.submitStack, "what is this?")
         clearTimeout(this.sto1);
         clearTimeout(this.sto2);
         this.setVisualize(nextProps)
@@ -190,11 +211,11 @@ class ShowContainer extends Component{
     }
 
     // show animation sequentially
-    if (this.props.step + 1 === nextProps.step) {   
+    if (this.props.step + 1 === nextProps.step) { 
+      console.log("visualizing next props:", nextProps.step)
       this.setVisualize(nextProps)
       return false;
     }
-
     return true;
   }
 
@@ -206,7 +227,9 @@ class ShowContainer extends Component{
   initiate = (time) => {
     const submitStack = this.props.submitStack;
     this.sto1 = setTimeout(() => {
-      this.setState({Visualize: EmptyComp, Executing: EmptyComp, Stop: false})
+      if (!this.state.isLastStep) {
+        this.setState({Visualize: EmptyComp, Executing: EmptyComp, Stop: false})
+      }
       this.sto2 = setTimeout(() => this.props.nextStep(submitStack), 10)
     }, time)
   }
@@ -252,6 +275,7 @@ ShowContainer.propTypes = {
   executingCode: PropTypes.string,
   duration: PropTypes.number,
   changeDuration: PropTypes.func,
+  methodList: PropTypes.array,
 }
 
 ShowContainer.defaultProps = {

@@ -74,7 +74,7 @@ const PopBack = ({initiate=f=>f,object, params=[], duration = 1, stop = false}) 
   }
 
   return (
-    <svg>
+    <svg viewBox="100 -50 300 300">
       {express}
     </svg>
   )

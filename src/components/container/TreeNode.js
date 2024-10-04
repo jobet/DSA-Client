@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const TreeNode = ({data='', cx=10, cy=20, r= 30, textcolor='white', color='lightcyan', key = 1, className="DataNode", border="black", ani_dur="1.5s", ani_delay='1s', strokewidth= '2px'}) => {
+const TreeNode = ({data='', cx=10, cy=20, r= 30, textcolor='white', color='lightcyan', key = 1, className="DataNode", border="transparent", ani_dur="1.5s", ani_delay='1s', strokewidth= '2px'}) => {
   return (
     [<circle className={className} key={key} cx={cx} cy={cy} r={r} style={{ animationDuration: ani_dur, animationDelay: ani_delay, "fill": color, "stroke":border, "strokeWidth": strokewidth}}>
       <title>{data}</title>

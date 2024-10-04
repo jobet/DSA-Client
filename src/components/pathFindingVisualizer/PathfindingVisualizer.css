@@ -52,7 +52,7 @@
 }
 
 .algorithm-button {
-  margin-left: 0;
+  padding-left: 12px;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }

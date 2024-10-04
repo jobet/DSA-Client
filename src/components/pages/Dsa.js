@@ -95,9 +95,8 @@ class Dsa extends Component {
   }
 
   goMethod = (idx) => {
-    console.log("goMethod reached")
+    console.log(idx)
     this.setState({
-      stopShow: false,
       dataStates: this.sampleDatas[idx].dataStates,
       executingCode: this.sampleDatas[idx].executingCode,
       containerState: this.sampleDatas[idx].containerState,

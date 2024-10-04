@@ -62,6 +62,7 @@ class ShowSection extends Component {
       dataStates,
       executingCode,
       containerState,
+      changeStopShowToTrue,
     } = this.props;
 
     const { modal, submit, sampleCode, sampleData } = this.state;
@@ -78,6 +79,7 @@ class ShowSection extends Component {
             nextStep={nextStep}
             containerState={containerState}
             executingCode={executingCode}
+            methodList={methodList}
           />
         ) : (
           <ShowSpecificData specificData={specificData} />
@@ -96,6 +98,7 @@ class ShowSection extends Component {
             goMethod={goMethod}
             methodList={methodList}
             changeStop={this.handleActionButton}
+            changeStopShowToTrue={changeStopShowToTrue}
           />
           <button className='action-button' onClick={this.handleActionButton}>
             {stopShow ? (

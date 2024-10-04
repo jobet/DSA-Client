@@ -101,7 +101,7 @@ class Push extends Component {
 
     
     // appear one node.
-    DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString() + 's', key: this.id, border: 'yellow', className:"appear", data: params[0].toString(), x: this.interval + this.width*(lastpoint + 1), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+    DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString() + 's', key: this.id, border: '#B8336A', className:"appear", data: params[0].toString(), x: this.interval + this.width*(lastpoint + 1), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
     this.id += 1;
     if (this.size === this.maxSize) {
       // add gray node
@@ -144,14 +144,14 @@ class Push extends Component {
     this.id += 1;
 
     const nodeSvg = this.addNodes(nextindex)
-    DataNode({key: this.id, border: 'yellow', data: this.origin._elements[nextindex].toString(), x: this.interval + this.width*(lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+    DataNode({key: this.id, border: '#B8336A', data: this.origin._elements[nextindex].toString(), x: this.interval + this.width*(lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
     this.id += 1;
 
     // 원래 index가 svg에 표현되어 있으면 걔도 색칠함 totalShow가 14임
     if (index <= nextindex + 14 - ((nextindex > 5) ? 7 : nextindex + 1)) {
       indexSvg.push(<text key={this.id}x={this.interval + this.width*(index - nextindex + lastpoint)} y={40} width={30} height={15}>index: {index}</text>)
       this.id += 1;
-      DataNode({key: this.id, border: 'yellow', data: this.origin._elements[index].toString(), x: this.interval + this.width*(index - nextindex + lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+      DataNode({key: this.id, border: '#B8336A', data: this.origin._elements[index].toString(), x: this.interval + this.width*(index - nextindex + lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
       this.id += 1;
     }
 
@@ -162,14 +162,14 @@ class Push extends Component {
       this.origin._elements[nextindex] = this.origin._elements[index]
       this.origin._elements[index] = temp
 
-      DataNode({ani_delay:(this.duration*9/20).toString()+'s', ani_dur: (this.duration/20).toString()+'s', key: this.id, className: "pqPushErase", border: 'yellow', x: this.interval + this.width*(lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))  
+      DataNode({ani_delay:(this.duration*9/20).toString()+'s', ani_dur: (this.duration/20).toString()+'s', key: this.id, className: "pqPushErase", border: '#B8336A', x: this.interval + this.width*(lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))  
       this.id += 1;
-      DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString()+'s', key: this.id, className: "appear" ,border: 'yellow', data: this.origin._elements[nextindex].toString(), x: this.interval + this.width*(lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))  
+      DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString()+'s', key: this.id, className: "appear" ,border: '#B8336A', data: this.origin._elements[nextindex].toString(), x: this.interval + this.width*(lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))  
       this.id += 1;
       if (index <= nextindex + 14 - ((nextindex > 5) ? 7 : nextindex + 1)) {
-        DataNode({ani_delay:(this.duration*9/20).toString()+'s', ani_dur: (this.duration/20).toString()+'s',key: this.id, className: "pqPushErase", border: 'yellow', x: this.interval + this.width*(index - nextindex + lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+        DataNode({ani_delay:(this.duration*9/20).toString()+'s', ani_dur: (this.duration/20).toString()+'s',key: this.id, className: "pqPushErase", border: '#B8336A', x: this.interval + this.width*(index - nextindex + lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
         this.id += 1;
-        DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString()+'s', key: this.id, className: "appear",border: 'yellow', data: this.origin._elements[index].toString(), x: this.interval + this.width*(index - nextindex + lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+        DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString()+'s', key: this.id, className: "appear",border: '#B8336A', data: this.origin._elements[index].toString(), x: this.interval + this.width*(index - nextindex + lastpoint), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
         this.id += 1;
       }
     }
@@ -222,7 +222,7 @@ class Push extends Component {
 
   render() {
     return (
-      <svg>
+      <svg viewBox="100 -50 300 300">
         {this.topSvg}
         {this.state.indexSvg}
         {this.state.nodeSvg}

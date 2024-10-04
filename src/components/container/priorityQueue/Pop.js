@@ -213,12 +213,12 @@ class Pop extends Component {
     // compare animation
     const nodeSvg = []
 
-    DataNode({key: this.id, border: 'yellow', data: this.origin._elements[idx1].toString(), x: this.interval + this.width*(idx1pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+    DataNode({key: this.id, border: '#B8336A', data: this.origin._elements[idx1].toString(), x: this.interval + this.width*(idx1pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
     this.id += 1;
 
     // 원래 index가 svg에 표현되어 있으면 걔도 색칠함 totalShow가 14임
     if (isSecondExpress) {
-      DataNode({key: this.id, border: 'yellow', data: this.origin._elements[idx2].toString(), x: this.interval + this.width*(idx2pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+      DataNode({key: this.id, border: '#B8336A', data: this.origin._elements[idx2].toString(), x: this.interval + this.width*(idx2pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
       this.id += 1;
     }
 
@@ -228,14 +228,14 @@ class Pop extends Component {
       this.origin._elements[idx1] = this.origin._elements[idx2]
       this.origin._elements[idx2] = temp
 
-      DataNode({ani_delay:(this.duration*9/20).toString()+'s', ani_dur: (this.duration/20).toString()+'s', key: this.id, className: "pqPushErase", border: 'yellow', x: this.interval + this.width*(idx1pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))  
+      DataNode({ani_delay:(this.duration*9/20).toString()+'s', ani_dur: (this.duration/20).toString()+'s', key: this.id, className: "pqPushErase", border: '#B8336A', x: this.interval + this.width*(idx1pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))  
       this.id += 1;
-      DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString() + 's', key: this.id, className: "appear" ,border: 'yellow', data: this.origin._elements[idx1].toString(), x: this.interval + this.width*(idx1pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))  
+      DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString() + 's', key: this.id, className: "appear" ,border: '#B8336A', data: this.origin._elements[idx1].toString(), x: this.interval + this.width*(idx1pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))  
       this.id += 1;
       if (isSecondExpress) {
-        DataNode({ani_delay:(this.duration*9/20).toString()+'s', ani_dur: (this.duration/20).toString()+'s', key: this.id, className: "pqPushErase", border: 'yellow', x: this.interval + this.width*(idx2pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+        DataNode({ani_delay:(this.duration*9/20).toString()+'s', ani_dur: (this.duration/20).toString()+'s', key: this.id, className: "pqPushErase", border: '#B8336A', x: this.interval + this.width*(idx2pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
         this.id += 1;
-        DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString() + 's', key: this.id, className: "appear",border: 'yellow', data: this.origin._elements[idx2].toString(), x: this.interval + this.width*(idx2pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
+        DataNode({ani_delay:(this.duration/2).toString()+'s', ani_dur: this.duration.toString() + 's', key: this.id, className: "appear",border: '#B8336A', data: this.origin._elements[idx2].toString(), x: this.interval + this.width*(idx2pos), y: 50, "width": this.width}).map(n => nodeSvg.push(n))
         this.id += 1;
       }
     }
@@ -277,7 +277,7 @@ class Pop extends Component {
 
   render() {
     return (
-      <svg>
+      <svg viewBox="100 -50 300 300">
         {this.topSvg}
         {this.state.indexSvg}
         {this.state.nodeSvg}

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // import '../../stylesheet/DataNode.css'
 
 //css for nodes in dsa like queues
-const DataNode = ({data='', x=10, y=20, width=60, height=50, color='turquoise', key = 1, className="DataNode", border="teal", ani_dur="2s", ani_delay='1s'}) => {
+const DataNode = ({data='', x=10, y=20, width=60, height=60, color='#5fcae6', key = 1, className="DataNode", border="#1b1464", ani_dur="2s", ani_delay='1s'}) => {
   return (
     [<rect className={className} key={key} x={x} y={y} width={width} height={height} style={{animationDuration: ani_dur, animationDelay: ani_delay, "fill": color, "stroke":border, "strokeWidth":'1.2px'}}>
       <title>{data}</title>

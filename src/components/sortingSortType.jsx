@@ -1,6 +1,6 @@
 import React from 'react';
 import Algorithms from './sorting-navbar/algorithms';
-import { BiInfoCircle, BiX, BiLayer } from "react-icons/bi";
+import { BiInfoCircle, BiX } from "react-icons/bi";
 import Size from './sorting-navbar/size';
 import Speed from './sorting-navbar/speed';
 
@@ -189,19 +189,14 @@ function heapify(arr, n, i) {
                         />
                     </div>
                 </div>
-                <div className="navbar-algorithms" id="navbar">
-                    <div className="navbarInfo">
-                        <button onClick={() => this.setState({ algoInfoModal: true })}>
-                            <BiInfoCircle/>
-                        </button>
-                    </div>
-                    <div className="navbarSelect">
-                        <BiLayer className="selectIcon"/>
-                        <Algorithms 
-                            onChange={this.props.onChange}
-                            algorithms={this.state.algorithms}
-                        />
-                    </div>
+                <div className="buttonArea" id="navbar">
+                    <button className="info-button" onClick={() => this.setState({ algoInfoModal: true })}>
+                        <BiInfoCircle/>
+                    </button>
+                    <Algorithms 
+                        onChange={this.props.onChange}
+                        algorithms={this.state.algorithms}
+                    />
                 {this.state.algoInfoModal && (
                         <div className="modal">
                             <div onClick={() => this.setState({ algoInfoModal: false })} className="overlay"></div>
