@@ -222,7 +222,7 @@ class Push extends Component {
 
   render() {
     return (
-      <svg viewBox="100 -50 300 300">
+      <svg viewBox="100 0 300 300">
         {this.topSvg}
         {this.state.indexSvg}
         {this.state.nodeSvg}

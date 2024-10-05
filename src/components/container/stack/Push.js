@@ -46,7 +46,7 @@ const Push = ({initiate=f=>f, object, params=[], duration = 1, stop = false}) =>
   keyid += 1;
   
   return (
-    <svg viewBox="100 -50 300 300">
+    <svg viewBox="100 0 300 300">
       {express}
     </svg>
   )

@@ -669,8 +669,8 @@ DFS(node) {
           </table>
         </div>
         <div className="dashboardArea">
-          <h3>{distancestr}</h3>
-          <h3>{visiNode}</h3>
+          <p><strong>{distancestr}</strong></p>
+          <p><strong>{visiNode}</strong></p>
           <div className="buttonArea">
             <button className="info-button" onClick={() => this.setState({ algoInfoModal: true })}>
               <BiInfoCircle/>

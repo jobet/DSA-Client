@@ -2,20 +2,29 @@ import React from 'react';
 
 // the size or number of items option component for the sorting navbar
 const Size = (props) => {
+    const [size, setSize] = React.useState(10);
+
+    const handleSizeChange = (e) => {
+        setSize(e.target.value);
+        props.onChange(e.target.value, "size");
+    };
     return (
-        <span className="options">
-            <select 
-                name="size" id="menu" className="config-menu"
-                onChange = {(e) => props.onChange(e.target.value, "size")}>
-                {props.lengths.map(element => (
-                    <option className="config-option" 
-                        key = {10*element}
-                        value = {element}>
-                        {element}
-                    </option>
-                ))}
-            </select>
-        </span>
+        <>
+            <div className='slidercontainer'> 
+                <div className="sliderlabel">
+                    <p>Amount of Items</p>
+                    <p>{size}</p>
+                </div>
+                <input 
+                    type='range' 
+                    min={10} 
+                    max={30} 
+                    value={size} 
+                    onChange={handleSizeChange} 
+                    className='slider' 
+                />
+            </div>
+        </>
     );
 }
  

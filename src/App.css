@@ -46,9 +46,14 @@ body{
   background-color:unset;
   font-size: large;
 }
-.replyuser {
-  display: inline-block;
-  padding-left: 7px;
+label.replyuser {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #B8336A;
+}
+
+table.comment td{
+  vertical-align: bottom;
 }
 .reply_shown input{
   width: 100%;
@@ -523,10 +528,9 @@ li, a{
 }
 
 .ExecutionTime {
-  color:black;
-
   text-align: center;
 }
+
 .commentform {
   align-content: center;
   display: flex;
@@ -569,8 +573,8 @@ li, a{
   border-radius: 12px;
 }
 .replyholder2{
-  margin-top: 15px;
-  padding: 4px 8px 12px 8px;
+  margin-top: 4px;
+  padding: 4px 8px 4px 8px;
   border-radius: 12px;
   background-color: white;
 }
@@ -583,18 +587,27 @@ li, a{
   justify-content: flex-start;
 }
 
+.actionArea button{
+  min-height: 30px;
+  border: none;
+}
+
+.actionArea button:hover{
+  border: none;
+  background-color: transparent;
+}
+
 .card {
   width: 100%;
   box-sizing: border-box;
   height: auto;
-  padding: 8px 12px 16px 12px;
+  padding: 8px 12px;
   border-color: none;
-  margin: 4px 2px;
+  margin: 4px 0;
   color: black;
   text-align: justify;
   border-radius: 12px;
   background: #cfedfd;
-  margin-bottom: 10px;
 }
 
 .card h2{
@@ -727,11 +740,13 @@ li, a{
 .scoreRight h1{
   
 }
-.commentmsg{
-  padding-left: 50px;
+.commentBody{
+  padding: 0 18px 8px 48px;
+}
+.replyBody{
+  padding: 0 18px 8px 28px;
 }
 .replymsg{
-  padding-left: 28px;
   font-size: 1rem;
 }
 .datemsg{
@@ -957,6 +972,17 @@ li, a{
   width: 1%;
   white-space: nowrap;
 }
+.commentHeader{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.commentHeader span{
+  font-size: 1rem;
+}
+.userDateSeparator{
+  padding: 0 4px;
+}
 .dashboardtitle{
   font-size: 32px;
   color: rgb(0, 0, 0);
@@ -1100,22 +1126,67 @@ li, a{
     line-height: 25px;
 }
 
-#fillDiv{
-  margin-top:20px;
-  margin-bottom: 20px;
+.fillDiv{
+  width: 100%;
+  box-sizing: border-box;
   font-size: 1.2rem;
 }
-.quizInnerDiv{
+
+.fillDiv input{
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  border: 1px solid #1b146480;
+  padding: 20px;
+  border-radius: 6px;
+}
+.quizInnerDiv {
+  box-sizing: border-box;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 12px;
   width: 100%;
   min-height: calc(100svh - 400px);
+  height: 1px;
   border: 1px solid #1b146480;
   border-radius: 6px;
+  padding: 18px;
+  margin: 8px 0;
+  overflow-y: auto;
+}
+
+div.quizInnerDiv > p{
+  margin: 0 auto;
+}
+
+.quizHeader {
+  box-sizing: border-box;
+  width: 100%;
+  flex: 0 1 auto;
+}
+
+.quizBody {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.quizBody button {
+  display: flex;
+  box-sizing: border-box;
+  height: 80px;
+  flex: 1 1 calc(50% - 20px);
+  margin: 5px 10px;
+  padding: 0;
+  font-size: 1.2rem;
+  background-color: white;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
+  color: black;
 }
 
 .quiz_demo{
@@ -1142,11 +1213,36 @@ li, a{
   font-size: 32px;
 }
 
-.quiz_instruction{
+.quiz_instruction {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   border: 1px solid #1b146480;
+  min-height: calc(100dvh - 400px);
+  max-height: calc(100dvh - 240px);
   border-radius: 6px;
   padding: 18px;
   margin: 8px 0;
+  overflow-y: auto;
+  justify-content: space-between;
+}
+
+.quiz_instruction_header,
+.quiz_instruction_function {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.quiz_instruction_header {
+  flex: 1;
+}
+
+.quiz_instruction_function {
+  text-align: center;
+  align-items: center;
+  margin-top: auto;
 }
 
 .choices_admin_quiz>label{
@@ -1158,15 +1254,23 @@ li, a{
 
 .buttons-positioned{
   display: flex;
-  justify-content: space-between;
-  margin-top:20px;
-  margin-bottom:10px;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .button-next{
-  width: 50%;
+  box-sizing: border-box;
   display: flex;
-  margin-right: 0;
+  align-self: end;
+  width: 50%;
+}
+
+.button-next button,
+.buttons-positioned button{
+  display: flex;
+  flex: 1 1 50%;
+  margin: 4px 2px;
+  box-sizing: border-box;
 }
 
 #buttonQuizz{
@@ -1341,6 +1445,8 @@ li, a{
 }
 
 .grid-questions{
+  display: flex;
+  flex-direction: column;
   text-align: left;
   width: 100%;
 }
@@ -1358,20 +1464,6 @@ li, a{
   color:white;
   background-color:#B8336A;
   width: 90%;
-}
-
-#true_button{
-  color:  #787878;; 
-  background-color: white;
-  width: 90%;
-  border-width:thin;
-}
-
-#false_button{
-  color: #787878;; 
-  background-color:white;
-  width: 90%;
-  border-width:thin;
 }
 
 #true_button:hover{
@@ -1400,24 +1492,6 @@ li, a{
   font-size: 1rem;
   color:tomato;
 }
-
-#quiz-contentx{
-  width:95%;
-  background-color: white;
-  border: 1px solid #1b146480;
-  border-radius: 6px;
-  font-size: 1.7rem;
-  color: black;
-}
-#fillInput{
-  border-color: rgba(117, 126, 126, 0.418);;
-  border-style: solid;
-  border-width: thin;
-  width:90%;
-  height:auto;
-  font-size: 1.1rem;
-  padding:10px;
-}
 #quiz-contentx:hover{
   background-color: #c9e8f8;
 }
@@ -1441,13 +1515,12 @@ li, a{
   margin-top:10px;
 }
 
-#quiz-content3{
-  display: inline-block;
-  width: 50%;
-  text-align: center;
-  align-content: center;
-  margin-top:10px;
-  margin-bottom: 10px;
+.quizType2{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 1 1 auto;
+  min-height: fit-content;
 }
 
 .progress-circle-container{
@@ -1485,11 +1558,15 @@ li, a{
 
 .visualizerArea .buttonArea,
 .dsaContainer .buttonArea, 
-.dsaContainer .slidercontainer, 
 .dsaContainer .inputContainer {
   width: 50%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.dsaContainer .slidercontainer {
+  width: 40%;
+  margin: 0 auto;
 }
 
 .inputContainer{
@@ -1617,7 +1694,7 @@ div.operation-state {
   height: 4.2%;
   float: left;
 }
-/* Parent container for the button and dropdown */
+
 .dropdown-container {
   position: relative;
   display: flex;
@@ -1625,7 +1702,7 @@ div.operation-state {
 }
 
 .samplecodebutton {
-  width: 100%; /* Make the button take full width of its container */
+  width: 100%;
 }
 
 .appDropdown {
@@ -1636,12 +1713,12 @@ div.operation-state {
   left: 0;
   top: 0;
   transform: translate(0, -100%);
-  width: 100%; /* Make the dropdown width 100% of its container */
+  width: 100%;
   overflow: none;
   border: 1px solid #1b146480;
-  border-radius: 6px;
+  border-radius: 6px 6px 6px 0;
   z-index: 3;
-  background-color: white; /* Add background color */
+  background-color: white;
 }
 
 .itemIcon{
@@ -1680,7 +1757,7 @@ div.operation-state {
 }
 
 .appDropdown button:last-child:hover {
-  border-bottom: none; /* Remove border from last item */
+  border-bottom: none;
 }
 
 div.show-container {
@@ -1706,10 +1783,32 @@ div.drawing svg{
 }
 
 .slidercontainer {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   min-height: 42px;
   display: flex;
   flex-direction: column;
   text-align: center;
+  width: 80%;
+  margin-bottom: 4px;
+}
+
+.sliderlabel {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+  align-items: center;
+}
+
+.slidercontainer p{
+  font-weight: 600;
+  margin: -2px 0;
+  font-size: 1rem;
 }
 
 /* The slider itself */
@@ -1954,6 +2053,7 @@ div.show-datas {
 
 .quizBox{
   width: 50%;
+  box-sizing: border-box;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -1996,17 +2096,130 @@ div.show-datas {
   background-color: rgb(180, 0, 0);
   border: 1px solid transparent;
 }
+
+.ScoreContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.ScoreBox{
+  margin-top: 2px;
+  box-sizing: border-box;
+  height: calc(100dvh - 200px);
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scoretablist {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+.scoretabs {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+.scoretab1, .scoretab2{
+  background: #B8336A;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  border: 1px solid #B8336A;
+  border-radius: 6px;
+  min-height: 40px;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  min-width: fit-content;
+  flex: 1 1 auto;
+}
+
+.scoretab1{
+  margin-right: 1px;
+}
+
+.scoretab2{
+  margin-left: 1px;
+}
+
+.scoretab1:hover, .scoretab2:hover, .scoretab--selected {
+  background: white;
+  color: #B8336A;
+  transition: all 0.1s ease-in;
+}
+
+.yourScoreTab, .topScoreTab{
+  display: flex;
+  width: 100%;
+  text-align: center;
+  overflow-y: auto;
+  border-radius: 6px;
+}
+
+.yourScoreTab{
+  margin-top: 2px;
+}
+
+.scoreCard{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 48px;
+  border: 1px solid #1b146480;
+  margin: 0 0 2px 0;
+  text-align: justify;
+  border-radius: 6px;
+}
+
+.scorePercent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px;
+}
+
+.topScoreInfo{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.userAvatarInfo img{
+  width: 100px;
+  height: 100px;
+}
+
 @media screen and (max-width: 1366px) {
+  .visualizerArea .buttonArea,
   .box2, .descSection, .imgSection,
   .visualizerArea, .loginBox,
-  .dsaContainer, .dsaContainer .buttonArea, 
-  .dsaContainer .slidercontainer, 
+  .dsaContainer, .dsaContainer .buttonArea,
   .dsaContainer .inputContainer,
   .quizBox, .DiscussionBox,
   .DiscussionBox .buttonArea,
   .quizBox .buttonArea {
     width: 75%;
     margin: 0 auto;
+  }
+  .dsaContainer .slidercontainer {
+    width: calc(75% * 0.8);
   }
 }
 
@@ -2066,12 +2279,31 @@ div.show-datas {
     padding: 0;
   }
   .dsaContainer 
-  .buttonArea, 
-  .dsaContainer .slidercontainer, 
+  .buttonArea, .visualizerArea .buttonArea,
   .dsaContainer .inputContainer,
   .quizBox, .DiscussionBox,
   .DiscussionBox .buttonArea,
-  .quizBox .buttonArea {
+  .quizBox .buttonArea,
+  .ScoreContainer {
     width: 100%;
+  }
+  .dsaContainer .slidercontainer {
+    width: 80%;
+  }
+  .appDropdown {
+    max-height: 80dvh;
+    width: 80svw;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    position: fixed;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-radius: 6px;
+    z-index: 3;
+  }
+  .overlay2{
+    background: rgba(0, 0, 0, 0.6);
   }
 }

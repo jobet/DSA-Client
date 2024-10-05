@@ -19,14 +19,14 @@ const EmptyComp = () => {
 let complexCollections = ['PriorityQueue', 'SetTree', 'MapTree', 'MultiSetTree', 'MultiMapTree'];
 
 class ShowContainer extends Component{
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       Visualize: EmptyComp,
       Executing: CodeComp,
       Stop: false,
       isLastStep: false,
-      totalSteps: 0,
+      totalSteps: props.methodList.length,
     }
     this.showstep = 0;
   }
@@ -40,8 +40,7 @@ class ShowContainer extends Component{
       Visualize: EmptyComp, 
       Executing: EmptyComp, 
       Stop: false, 
-      isLastStep: false,
-      totalSteps: props.methodList.length
+      isLastStep: false
     })    
     setTimeout(()=>{
     if (objectName === 'List') {
@@ -131,11 +130,8 @@ class ShowContainer extends Component{
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(this.props.methodList)
     // Check if we're on the last step
     const isLastStep = nextProps.step === this.state.totalSteps - 1;
-    console.log(this.state.totalSteps)
-    console.log('isLastStep', isLastStep)
     // Update isLastStep state
     if (isLastStep !== this.state.isLastStep) {
       this.setState({ isLastStep });
@@ -250,7 +246,10 @@ class ShowContainer extends Component{
         <this.state.Executing executing = {this.props.executingCode} step={this.props.step}/>
       </p>
       <div className='slidercontainer'> 
-        <p>Speed</p>
+        <div className="sliderlabel">
+          <p>Speed</p>
+          <p>{((Math.round(((260-Number(this.props.duration))/40)*100)/100)-2).toFixed(2)}x</p>
+        </div>
         <input 
           type='range' 
           min={120} 
@@ -259,7 +258,7 @@ class ShowContainer extends Component{
           onChange={e => this.props.changeDuration((260 - e.target.value))} 
           className='slider' 
         />
-        <p>{((Math.round(((260-Number(this.props.duration))/40)*100)/100)-2).toFixed(2)}x</p>
+       
       </div>
     </>
     )

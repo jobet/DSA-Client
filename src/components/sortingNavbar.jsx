@@ -10,7 +10,7 @@ class Navbar extends React.Component {
     };
     render() {
         return (
-            <div className="navbar-sorting">
+            <>
                 <div className="buttonArea">
                     <button id="help" onClick={() => this.setState({ modal: true })}>
                         <BiHelpCircle/> Help
@@ -41,7 +41,7 @@ class Navbar extends React.Component {
                         </div>
                     </div>
                 )}
-            </div>
+            </>
         );
     }
 }

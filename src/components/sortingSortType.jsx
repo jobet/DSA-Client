@@ -170,24 +170,14 @@ function heapify(arr, n, i) {
         return (
             <>
                 <div className="settingArea">
-                    <div className="settingLabel">
-                        <p>No. of Items</p>
-                    </div>
-                    <div className="settingSelect">
-                        <Size 
-                            onChange={this.props.onChange}
-                            lengths={this.state.lengths}
-                        />
-                    </div>
-                    <div className="settingLabel">
-                        <p>Sort Speed</p>
-                    </div>
-                    <div className="settingSelect">
-                        <Speed 
-                            onChange={this.props.onChange}
-                            speeds={this.state.speeds}
-                        />
-                    </div>
+                    <Size 
+                        onChange={this.props.onChange}
+                        lengths={this.state.lengths}
+                    />
+                    <Speed 
+                        onChange={this.props.onChange}
+                        speeds={this.state.speeds}
+                    />
                 </div>
                 <div className="buttonArea" id="navbar">
                     <button className="info-button" onClick={() => this.setState({ algoInfoModal: true })}>

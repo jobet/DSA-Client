@@ -2,20 +2,30 @@ import React from 'react';
 
 // the speed option component for the sorting navbar
 const Speed = (props) => {
+    const [speed, setSpeed] = React.useState(1);
+
+    const handleSpeedChange = (e) => {
+        console.log(e.target.value);
+        setSpeed(e.target.value);
+        props.onChange(e.target.value, "speed");
+    };
     return (
-        <span className="options">
-            <select 
-                name="Algorithm" id="menu" className="config-menu"
-                onChange = {(e) => props.onChange(e.target.value, "speed")}>
-                {props.speeds.map(element => (
-                    <option className="config-option"
-                        key = {element}
-                        value = {element}>
-                        {element}
-                    </option>
-                ))}
-            </select>
-        </span>
+        <>
+            <div className='slidercontainer'> 
+                <div className="sliderlabel">
+                    <p>Speed</p>
+                    <p>{speed}x</p>
+                </div>
+                <input 
+                    type='range' 
+                    min={1} 
+                    max={16} 
+                    value={speed} 
+                    onChange={handleSpeedChange} 
+                    className='slider' 
+                />
+            </div>
+        </>
     );
 }
  

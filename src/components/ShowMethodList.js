@@ -6,7 +6,6 @@ import { BiX, BiShow } from 'react-icons/bi'
 class ShowMethodList extends React.Component {
   constructor(goMethod=f=>f, methodList=[], changeStop = f=>f, stopShow=false) {
     super()
-
     this.state = {
       showmethod: false,
     }

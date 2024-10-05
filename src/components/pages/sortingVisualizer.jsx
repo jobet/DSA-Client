@@ -50,7 +50,7 @@ class Visualizer extends React.Component {
                     list={this.state.list}
                 />
                 <div className='ExecutionTime'>
-                    <h3>{this.state.executionTime}</h3>
+                    <p><strong>{this.state.executionTime}</strong></p>
                 </div>
                 <SortType
                     start={this.start}

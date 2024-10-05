@@ -61,14 +61,12 @@
   text-align: center;
 }
 .settingArea{
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 12px;
+  margin: 0 auto;
   width: 50%;
   justify-content: center;
   align-items: center;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 .settingSelect{
@@ -209,15 +207,8 @@
     width: 100%;
     box-sizing: border-box;
   }
-  .navbar-sorting{
-    font-size: 0.6rem;
-    width: 100%;
-  }
   .navbar-algorithms{
     width: 100%;
-  }
-  .ExecutionTime {
-    font-size: 0.8rem;
   }
   .selectIcon{
     font-size: 1rem;

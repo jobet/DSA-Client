@@ -121,38 +121,53 @@ export default function Quiz(){
 
     function QuizQuestion(props){
         return(
-        <div class="grid-questions">
-            <h1>Question {questionNo+1}</h1>
-            {questionSets[questionNo]?.question_type == "Multiple Choice" ?
-            <>
+        <>
+            <div className="quizHeader">
+                <h1>Question {questionNo+1}</h1>
                 <h3>{questionSets[questionNo]?.question_type}</h3>
-                <h1>{questionSets[questionNo]?.question_content}</h1>
-                <div id="quiz-content3"><button id={answers.current[questionNo] == "A" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("A")}}>{SplitChoices(questionSets[questionNo]?.question_choices, 1)}</button></div>
-                <div id="quiz-content3"><button id={answers.current[questionNo] == "B" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("B")}}>{SplitChoices(questionSets[questionNo]?.question_choices, 2)}</button></div>
-                <div id="quiz-content3"><button id={answers.current[questionNo] == "C" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("C")}}>{SplitChoices(questionSets[questionNo]?.question_choices, 3)}</button></div>
-                <div id="quiz-content3"><button id={answers.current[questionNo] == "D" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("D")}}>{SplitChoices(questionSets[questionNo]?.question_choices, 4)}</button></div>
-                {/* <div id="quiz-content4">Correct Answer:{questionSets[questionNo]?.correct_answer}</div> */}
-                <br></br>
-            </> : questionSets[questionNo]?.question_type == "True or False" ? 
-            <>
-                <h2>{questionSets[questionNo]?.question_type}</h2>
-                <h1>{questionSets[questionNo]?.question_content}</h1>
-                <div id="quiz-content3"><button onClick={()=>{SelectAnswer("True")}} id={answers.current[questionNo] == "True" ? "selected_button_tf" : "true_button"}>True</button></div>
-                <div id="quiz-content3"><button onClick={()=>{SelectAnswer("False")}} id={answers.current[questionNo] == "False" ? "selected_button_tf" : "false_button"}>False</button></div>
-                {/* <div id="quiz-content4">Correct Answer:{questionSets[questionNo]?.correct_answer}</div> */}
-            </> 
-
-            : questionSets[questionNo]?.question_type == "Fill in the Blank" ? 
-            <> 
-                <h2>{questionSets[questionNo]?.question_type}</h2>
-                <h1>{questionSets[questionNo]?.question_content}</h1>
-                <br></br>
-                <div id="fillDiv">Answer:  <input id="fillInput" autocomplete="off" type="text" placeholder={currentBlankAnswer} onChange={(e) => {FillAnswer(e.target.value)}}></input></div>
-                <br></br>
-                {/* <div id="quiz-content4">Correct Answer:{questionSets[questionNo]?.correct_answer}</div> */}
-            </>
-           : ""}
-        </div>
+                <p>{questionSets[questionNo]?.question_content}</p>
+            </div>
+            <div className="quizBody">
+                {questionSets[questionNo]?.question_type == "Multiple Choice" ?
+                <>
+                    <button id={answers.current[questionNo] == "A" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("A")}}>
+                        {SplitChoices(questionSets[questionNo]?.question_choices, 1)}
+                    </button>
+                    <button id={answers.current[questionNo] == "B" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("B")}}>
+                        {SplitChoices(questionSets[questionNo]?.question_choices, 2)}
+                    </button>
+                    <button id={answers.current[questionNo] == "C" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("C")}}>
+                        {SplitChoices(questionSets[questionNo]?.question_choices, 3)}
+                    </button>
+                    <button id={answers.current[questionNo] == "D" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("D")}}>
+                        {SplitChoices(questionSets[questionNo]?.question_choices, 4)}
+                    </button>
+                </> 
+                : questionSets[questionNo]?.question_type == "True or False" ? 
+                <>
+                    <button onClick={()=>{SelectAnswer("True")}} id={answers.current[questionNo] == "True" ? "selected_button_tf" : "true_button"}>
+                        True
+                    </button>
+                    <button onClick={()=>{SelectAnswer("False")}} id={answers.current[questionNo] == "False" ? "selected_button_tf" : "false_button"}>
+                        False
+                    </button>
+                </> 
+                : questionSets[questionNo]?.question_type == "Fill in the Blank" ? 
+                <div className="fillDiv">
+                    <p>
+                        <strong>Your Answer</strong>
+                    </p>
+                    <input id="fillInput" 
+                    autocomplete="off" 
+                    type="text" 
+                    placeholder={"Type the answer here.."}
+                    value={currentBlankAnswer}
+                    onChange={(e) => {FillAnswer(e.target.value)}}
+                    />
+                </div>
+                : ""}
+            </div>
+        </>
         )
     }
 
@@ -247,7 +262,7 @@ export default function Quiz(){
                 questionSets.length === 1 ? (
                     // Case when there's only one question
                     <div class="button-next">
-                    <button onClick={FinishQuiz}>Finish</button>
+                        <button onClick={FinishQuiz}>Finish</button>
                     </div>
                 ) : (
                     // Other cases
@@ -275,40 +290,46 @@ export default function Quiz(){
                     )
                 )
                 }
-                {questionNo+1 + " of " + questionSets.length}
+                <p>{questionNo+1 + " of " + questionSets.length}</p>
                 </div>
                 
                 : //Not started 
 
                 <>
                     <div className="quiz_instruction">
-                       <p>Instructions: Today's quiz has <span style={{color:"blue"}}>{questionSets?.length}</span> item questions of different types
-                         such as multiple choice, fill in the blank, and true or false. The questions contained
-                       within changes everyday. <br/><br/><strong>NOTE:</strong> Only the first attempt of the quiz is recorded. 
+                        <div className="quiz_instruction_header">
+                            <h1>
+                            Instructions
+                            </h1>
+                            <p>
+                            Today's quiz has <span style={{color:"blue"}}>{questionSets?.length}</span> item questions of different types
+                            such as multiple choice, fill in the blank, and true or false. The questions contained
+                            within changes everyday. <br/><br/><strong>NOTE:</strong> Only the first attempt of the quiz is recorded. 
                             Another attempt does not update the first recorded score until the following day.
-                       </p>
-                    </div>
-                    
-
-                    {localStorage.getItem("email") != undefined ?
-                    <div className="buttonArea">
-                        <button onClick={() => setModal(true)}>
-                            <BiHelpCircle /> Help
-                        </button>
-                        <button onClick={()=>{BeginQuiz()}}>
-                            Start Quiz
-                        </button>
-                    </div>
-                    :
-                        <>
-                            <h3>Please login to take the quiz.</h3>
+                            </p>
+                        </div>
+                        <div className="quiz_instruction_function">
+                            {localStorage.getItem("email") != undefined ?
                             <div className="buttonArea">
-                                <button onClick={() => setModal(true)}><BiHelpCircle /> Help</button>
-                                <button onClick={enterRegister}>Register</button>
-                                <button onClick={enterLogin}>Login</button>
+                                <button onClick={() => setModal(true)}>
+                                    <BiHelpCircle /> Help
+                                </button>
+                                <button onClick={()=>{BeginQuiz()}}>
+                                    Start Quiz
+                                </button>
                             </div>
-                        </>
-                    }
+                            :
+                                <>
+                                    <h3>Please login to take the quiz.</h3>
+                                    <div className="buttonArea">
+                                        <button onClick={() => setModal(true)}><BiHelpCircle /> Help</button>
+                                        <button onClick={enterRegister}>Register</button>
+                                        <button onClick={enterLogin}>Login</button>
+                                    </div>
+                                </>
+                            }
+                        </div>
+                    </div>
                     {modal && (
         <div className="modal">
           <div onClick={() => setModal(false)} className="overlay"></div>

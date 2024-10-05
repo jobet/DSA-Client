@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import ShowSection from '../ShowSection';
-import sampleDatas from '../../data/testDatas';
 import parsing from '../../data/parsing';
 
 class Dsa extends Component {
   constructor() {
+    const generateRandomArray = () => {
+      const arr = []
+      while (arr.length < 5) {
+        const r = Math.floor(Math.random() * 100) + 1
+        if (arr.indexOf(r) === -1) arr.push(r)
+      }
+      return arr
+    }
     super();
-    this.sampleDatas = sampleDatas;
+    this.sampleDatas = parsing({ 
+      inputCode: 
+`
+    let tree = new std.SetTree();
+    data.Set_Tree_Keys.map(n => tree.insert(n));    
+  `, 
+      inputData: 
+`{
+  Set_Tree_Keys:[${generateRandomArray()}]
+}` });
     this.state = {
       dataStates: [],
       executingCode: '',

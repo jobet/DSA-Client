@@ -53,7 +53,7 @@ const Pop = ({initiate=f=>f, object, params=[], duration = 1, stop = false}) => 
   }
 
   return (
-    <svg viewBox="100 -50 300 300">
+    <svg viewBox="100 0 300 300">
       {express}
     </svg>
   )

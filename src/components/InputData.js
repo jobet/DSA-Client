@@ -14,7 +14,7 @@ const InputData = ({ submit, getData, sampleData }) => {
     if (sampleData !== '') {
       textareaRef.current.value = sampleData
     }
-  }, [sampleData])
+  }, [sampleData, getData])
 
   const generateRandomArray = () => {
     const arr = []

@@ -2,19 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import FormatMonth from '../functions/formatMonth';
-import FormatTime from '../functions/formatTime';
-import {AvatarGenerator} from './generator_avatar.ts';
-import crown from '../images/crown.png';
-import man from '../images/sit.png';
-import checklist from '../images/pencil.png';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+
 
 export default function ScorePage(){
 
     const [scoreList, setScoreList] = useState([]);
     const [topScore,setTopScore] = useState([]);
-    const generator = new AvatarGenerator();
-
+    const [selectedTab, setSelectedTab] = useState(0);
      //get scorelist
      useEffect(() => {
         Axios.post(`${process.env.REACT_APP_API_URL}/api/scoreList/post`,{useremail_reg:localStorage.getItem('email')}).then((response)=>{
@@ -78,84 +73,106 @@ export default function ScorePage(){
     
     return(
         <div className="ScorePage">
-             
-             <div className="outerleft">
-            <img className="checklist" src={checklist}></img>
-             <h1 className="labelScore">Your Scores: </h1>
-                <img className="man" src={man}></img>
-            <div className="scoreLeft">
-               
-            <div className="cardholderScore">
-            {
-                scoreList.map((item)=>{
-                    return (
-                     <div className="score-card">
-                        <div className = "score-information-holder">
-                            <h1 >{item.user_infos.username_reg}</h1>
-                            Score for daily quiz:
-                            <br/>
-                            {item.user_score} / {item.questions_total}
-                            <br/>
-                            <br/>
-                            Taken on:
-                            <br/>
-                            {formatDateTime(new Date(item.quiz_taken))}
-                        </div>
-                        <div className="progress-circle-container">
-                            <CircularProgressbar
-                                value={parseInt(item.user_score)}
-                                maxValue={parseInt(item.questions_total)}
-                                text={`${calculatePercent(item.user_score,item.questions_total)} %`}
-                                circleRatio={0.7} //Makes a semi-circle that is 70% of a full circle.
-                                styles={{
-                                    trail:{
-                                        strokeLinecap: "butt",
-                                        transform: "rotate(-126deg)",
-                                        transformOrigin: "center center",
-                                    },
-                                    path:{
-                                        strokeLinecap: "butt",
-                                        transform: "rotate(-126deg)",
-                                        transformOrigin: "center center",
-                                        stroke: calculateColor(calculatePercent(item.user_score,item.questions_total)), 
-                                    },
-                                    text:{
-                                        fill: calculateColor(calculatePercent(item.user_score,item.questions_total)),
-                                        fontSize:"1rem",
-                                        
-                                    },
-                                    
-                                }}
-                                strokeWidth = {10}
-                            >
-                            </CircularProgressbar>
-                        </div>
-                     </div>
-                )})
-            }
+            <div className="ScoreContainer">
+            <h1 style={{textAlign: 'center'}}>
+                    {selectedTab === 0 ? 'Your Quiz Scores' : 'Top Quiz Scores'}
+            </h1>
+            <div className="ScoreBox">
+                <Tabs 
+                    className="scoretabs" 
+                    selectedTabClassName="scoretab--selected"
+                    onSelect={index => setSelectedTab(index)}
+                >
+                    <TabList className="scoretablist">
+                        <Tab className="scoretab1"><strong>Your Scores</strong></Tab>
+                        <Tab className="scoretab2"><strong>Top Scores</strong></Tab>
+                    </TabList>
+                    <TabPanel className="yourScoreTab">
+                        {
+                            scoreList.map((item)=>{
+                                return (
+                                <div className="scoreCard">
+                                    <div className="scoreInfo">
+                                        <h2>{item.user_score}/{item.questions_total}</h2>
+                                        <p>Taken {formatDateTime(new Date(item.quiz_taken))}</p>
+                                    </div>
+                                    <div className="scorePercent">
+                                        <CircularProgressbar
+                                            value={parseInt(item.user_score)}
+                                            maxValue={parseInt(item.questions_total)}
+                                            text={`${Math.trunc(calculatePercent(item.user_score,item.questions_total)).toFixed()}%`}
+                                            circleRatio={1}
+                                            styles={{
+                                                trail:{
+                                                    strokeLinecap: "round",
+                                                },
+                                                path:{
+                                                    strokeLinecap: "round",
+                                                    stroke: calculateColor(calculatePercent(item.user_score,item.questions_total)), 
+                                                },
+                                                text:{
+                                                    fill: calculateColor(calculatePercent(item.user_score,item.questions_total)),
+                                                    fontSize:"1rem",
+                                                    
+                                                },
+                                            }}
+                                            strokeWidth = {10}
+                                        >
+                                        </CircularProgressbar>
+                                    </div>
+                                </div>
+                            )})
+                        }
+                    </TabPanel>     
+                    <TabPanel className="topScoreTab">
+                            {topScore.map((item)=>{
+                                return(
+                                    <div className="scoreCard">
+                                        <div className="topScoreInfo">
+                                            <div className="userAvatarInfo">
+                                                <img
+                                                src={item.user_infos.useravatar_url}
+                                                />
+                                            </div>
+                                            <div className="userScoreInfo">
+                                                <h2>
+                                                    {item.user_infos.username_reg}
+                                                </h2>
+                                                <h2>{item.user_score}/{item.questions_total}</h2>
+                                                <p>{formatDateTime(new Date(item.quiz_taken))}</p>
+                                            </div>
+                                        </div>
+                                    <div className="scorePercent">
+                                        <CircularProgressbar
+                                            value={parseInt(item.user_score)}
+                                            maxValue={parseInt(item.questions_total)}
+                                            text={`${Math.trunc(calculatePercent(item.user_score,item.questions_total)).toFixed()}%`}
+                                            circleRatio={1}
+                                            styles={{
+                                                trail:{
+                                                    strokeLinecap: "round",
+                                                },
+                                                path:{
+                                                    strokeLinecap: "round",
+                                                    stroke: calculateColor(calculatePercent(item.user_score,item.questions_total)), 
+                                                },
+                                                text:{
+                                                    fill: calculateColor(calculatePercent(item.user_score,item.questions_total)),
+                                                    fontSize:"1rem",
+                                                    
+                                                },
+                                            }}
+                                            strokeWidth = {10}
+                                        >
+                                        </CircularProgressbar>
+                                    </div>
+                                    </div>
+                                )
+                            })
+                            }
+                    </TabPanel>
+                </Tabs>
             </div>
-            </div>
-            </div>
-            <div className="scoreRight">
-                <img className = "crown" src={crown}></img>
-                <h1>Top 7 Recent Quiz Scorers </h1>
-                <div className="scoreTable">
-                {topScore.map((item)=>{
-                    return(
-                        <div>
-                            <div className="scorePic">
-                            <img width={'90px'} height={'90px'} src={item.user_infos.useravatar_url}></img>
-                            </div>
-                            <div className="scoreRow">
-
-                                <h3>{item.user_infos.username_reg}</h3>{formatDateTime(new Date(item.quiz_taken))} <h1>{item.user_score} / {item.questions_total}</h1>
-                            </div>
-                        </div>
-                    )
-                })
-                }
-            </div>
-
             </div>
         </div>
     )
