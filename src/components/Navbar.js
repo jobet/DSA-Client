@@ -105,8 +105,8 @@ function Navbar({ avatar, username }) {
                         <h2>{username}</h2>
                       </li>
                     </Link>
-                    <Link to='/profile' className="dropdownlinks" onClick={handleButtonClick}><li>Profile</li></Link>
-                    <Link to='/score-page' className="dropdownlinks" onClick={handleButtonClick}><li>Scores</li></Link>
+                    <Link to='/profile' className="dropdownlinks" onClick={closeMobileMenu}><li>Profile</li></Link>
+                    <Link to='/score-page' className="dropdownlinks" onClick={closeMobileMenu}><li>Scores</li></Link>
                     <Link onClick={logOut} className="dropdownlogout"><li>Logout</li></Link>
                   </>
                 ) : (

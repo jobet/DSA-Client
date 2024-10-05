@@ -3,6 +3,7 @@ import Axios from 'axios';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { BiUserCircle, BiCrown } from "react-icons/bi";
 
 
 export default function ScorePage(){
@@ -84,10 +85,11 @@ export default function ScorePage(){
                     onSelect={index => setSelectedTab(index)}
                 >
                     <TabList className="scoretablist">
-                        <Tab className="scoretab1"><strong>Your Scores</strong></Tab>
-                        <Tab className="scoretab2"><strong>Top Scores</strong></Tab>
+                        <Tab className="scoretab1"><BiUserCircle/> <strong>Your Scores</strong></Tab>
+                        <Tab className="scoretab2"><BiCrown/> <strong>Top Scores</strong></Tab>
                     </TabList>
-                    <TabPanel className="yourScoreTab">
+                    <TabPanel className="scoreTab">
+                        <div className="yourScoreTab">
                         {
                             scoreList.map((item)=>{
                                 return (
@@ -123,8 +125,10 @@ export default function ScorePage(){
                                 </div>
                             )})
                         }
+                        </div>
                     </TabPanel>     
-                    <TabPanel className="topScoreTab">
+                    <TabPanel className="scoreTab">
+                        <div className="topScoreTab">
                             {topScore.map((item)=>{
                                 return(
                                     <div className="scoreCard">
@@ -170,6 +174,7 @@ export default function ScorePage(){
                                 )
                             })
                             }
+                        </div>
                     </TabPanel>
                 </Tabs>
             </div>

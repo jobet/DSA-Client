@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import fill_blank from '../images/fill_in_the_blank.jpg'
 import fil_blank2 from '../images/fill_blank.jpg'
 import t_or_f from '../images/t_or_f.jpg'
-import { BiHelpCircle, BiX  } from "react-icons/bi";
+import { BiHelpCircle, BiX, BiRightArrowAlt, BiLeftArrowAlt, BiCheck, BiPlayCircle  } from "react-icons/bi";
 
 export default function Quiz(){
     let history = useHistory();
@@ -262,30 +262,30 @@ export default function Quiz(){
                 questionSets.length === 1 ? (
                     // Case when there's only one question
                     <div class="button-next">
-                        <button onClick={FinishQuiz}>Finish</button>
+                        <button onClick={FinishQuiz}>Submit Quiz <BiCheck/></button>
                     </div>
                 ) : (
                     // Other cases
                     questionNo+1 === 1 && questionNo+1 !== questionSets.length ? (
                     // First question but not the only one
                     <div class="button-next">
-                        <button onClick={NextQuestion}>Next Question</button>
+                        <button onClick={NextQuestion}>Next Question <BiRightArrowAlt/></button>
                     </div>
                     ) : questionNo > 0 && questionNo+1 !== questionSets.length ? (
                     // Any middle question
                     <div class="buttons-positioned">
-                        <button onClick={PrevQuestion}>Previous Question</button>
-                        <button onClick={NextQuestion}>Next Question</button>
+                        <button onClick={PrevQuestion}><BiLeftArrowAlt/> Previous Question</button>
+                        <button onClick={NextQuestion}>Next Question <BiRightArrowAlt/></button>
                     </div>
                     ) : questionNo+1 === questionSets.length ? (
                     // Last question
                     <div class="buttons-positioned">
-                        <button onClick={PrevQuestion}>Previous Question</button>
-                        <button onClick={FinishQuiz}>Finish</button>
+                        <button onClick={PrevQuestion}><BiLeftArrowAlt/> Previous Question</button>
+                        <button onClick={FinishQuiz}>Submit Quiz <BiCheck/></button>
                     </div>
                     ) : (
                     <div class="button-next">
-                        <button onClick={NextQuestion}>Next Question</button>
+                        <button onClick={NextQuestion}>Next Question <BiRightArrowAlt/></button>
                     </div>
                     )
                 )
@@ -315,7 +315,7 @@ export default function Quiz(){
                                     <BiHelpCircle /> Help
                                 </button>
                                 <button onClick={()=>{BeginQuiz()}}>
-                                    Start Quiz
+                                    <BiPlayCircle/> Start Quiz
                                 </button>
                             </div>
                             :
