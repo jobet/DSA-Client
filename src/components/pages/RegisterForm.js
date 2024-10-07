@@ -219,7 +219,7 @@ function RegisterForm() {
         else{
           return (
             <div className='loginBox'>
-            <h1 className='log_h1'>Create an Account</h1>
+            <h1 className='siteTitle'>Create an Account</h1>
                 <h3>Username</h3>
                   <input type="text" name="Reg_username" placeholder="Enter Username" id="reg_user_input" onChange={(e) => {
                      setReg_username(e.target.value)

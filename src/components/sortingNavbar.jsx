@@ -2,6 +2,7 @@ import React from 'react';
 import noSort from './images/noSort.PNG';
 import sortSpeed from './images/sortSpeed.PNG';
 import sortBtn from './images/sortBtn.PNG';
+import sortType from './images/sortType.png';
 import { BiHelpCircle, BiPlayCircle, BiX, BiDice5  } from "react-icons/bi";
 class Navbar extends React.Component {  
     state = {
@@ -25,16 +26,25 @@ class Navbar extends React.Component {
                 {this.state.modal && (
                     <div className="modal">
                         <div onClick={() => this.setState({ modal: false })} className="overlay"></div>
-                        <div className="modal-content">
+                        <div id="modal-instruction" className="modal-content">
                             <h1>Sorting Instructions</h1>
-                            <img src={noSort} alt="No sort" />
-                            <p>To select the number of items to sort click on the dropdown menu as shown in the image.</p>
-                            <img src={sortSpeed} alt="Sort speed" />
-                            <p>Select the sorting speed by clicking the dropdown menu.</p>
-                            <img src={sortBtn} alt="Sort button" />
-                            <p>The Generate items button allows you to generate set of item bars.<br/>
-                                The Start button will begin the sorting process.
-                            </p>
+                            <div className="modalSeparator">
+                                <p>Select the sorting algorithm you want to visualize.</p>
+                                <img src={sortType} alt="Select Sorting Algorithm"/>
+                            </div>
+                            <div className="modalSeparator">
+                                <p>You can change the amount of items to sort by dragging the slider.</p>
+                                <img src={noSort} alt="No sort" />
+                            </div>
+                            <div className="modalSeparator">
+                                <p>You can change the speed by dragging the slider.</p>
+                                <img src={sortSpeed} alt="Sort speed" />
+                            </div>
+                            <div className="modalSeparator">
+                                <p>Randomize allows you to generate new set of items.</p>
+                                <p>The Start button will begin the sorting process.</p>
+                                <img src={sortBtn} alt="Sort button" />   
+                            </div>
                             <button className="close-modal" onClick={() => this.setState({ modal: false })}>
                                 <BiX/>
                             </button>

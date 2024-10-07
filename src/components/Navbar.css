@@ -1,10 +1,12 @@
 .navbar {
+  box-sizing: border-box;
   height: 60px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   width: 100vw;
+  padding: 0 8rem;
   z-index: 2;
   top: 0;
   background-color: rgb(255, 255, 255);
@@ -21,6 +23,11 @@
   align-items: center;
   color: #fff;
   padding: 4px 4px;
+}
+
+.footer svg{
+  margin: 0 2px;
+  font-size: 1rem;
 }
 
 .footer p{
@@ -56,9 +63,9 @@
   text-align: center;
   background: #fff;
   width: 16rem;
-  right: 0;
+  right: calc(8rem - ((16rem - 90px)/2));
   position: absolute;
-  top: 62px;
+  top: 60px;
   z-index: 2;
   border: 1px solid #1b146480;
   border-radius: 6px;
@@ -94,14 +101,13 @@
   justify-content: center;
   cursor: pointer;
   text-decoration: none;
-  margin-left: 5%;
   color: #1b1464;
   transition: all 0.1s ease-in-out;
-  margin-right: 30px;
 }
 
 .navbar-logo img{
-  padding: 5px;
+  margin-right: 4px;
+  width: 30px;
 }
 
 .navbar-logo:hover {
@@ -114,14 +120,11 @@
 }
 
 .nav-menu {
-  margin-right: 5%;
   display: grid;
   grid-template-columns: repeat(6, max-content);
   grid-gap: 30px;
   list-style: none;
   text-align: center;
-  justify-content: end;
-  width: 100%;
 }
 .nav-menu-user {
   margin-right: 5%;
@@ -130,7 +133,6 @@
   grid-gap: 10px;
   list-style: none;
   text-align: center;
-  justify-content: end;
 }
 
 .nav-item {
@@ -159,8 +161,11 @@
   justify-content: center;
   color:#1b1464;
   text-decoration: none;
-  
   transition: all 0.1s ease-in-out;
+}
+.nav-links svg{
+  margin: 2px 2px 0 2px;
+  font-size: 1.2rem;
 }
 .nav-links-button {
   position: relative;
@@ -191,9 +196,10 @@
   transition: all 0.1s ease-in;
 }
 
-
-.fa-bars {
+.fa-times, .fa-bars {
+  display: flex;
   color: #1b1464;
+  font-size: 2rem;
 }
 
 .nav-links-mobile {
@@ -203,10 +209,20 @@
 .menu-icon {
   display: none;
 }
-
+@media screen and (max-width: 1366px) {
+  .navbar{
+    padding: 0 4rem;
+  }
+  .dropdown{
+    right: 0;
+  }
+}
 @media screen and (max-width: 960px) {
   .NavbarItems {
     position: relative;
+  }
+  .navbar{
+    padding: 0 24px;
   }
   .dropdown{
     height: calc((100dvh - 60px) - ((100dvh - 60px)/6));
@@ -268,18 +284,8 @@
   }
 
   .menu-icon {
-    display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 50%);
-    font-size: 1.8rem;
+    display: flex;
     cursor: pointer;
-  }
-
-  .fa-times {
-    color: #1b1464;
-    font-size: 2rem;
   }
   
   .fab-times {

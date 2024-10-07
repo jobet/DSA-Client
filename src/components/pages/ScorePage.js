@@ -75,7 +75,7 @@ export default function ScorePage(){
     return(
         <div className="ScorePage">
             <div className="ScoreContainer">
-            <h1 style={{textAlign: 'center'}}>
+            <h1 className="siteTitle">
                     {selectedTab === 0 ? 'Your Quiz Scores' : 'Top Quiz Scores'}
             </h1>
             <div className="ScoreBox">

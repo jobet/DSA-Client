@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { BiX, BiShow } from 'react-icons/bi'
+import { BiShow } from 'react-icons/bi'
 
 // component for displaying the method list for the data structure visualizer
 class ShowMethodList extends React.Component {

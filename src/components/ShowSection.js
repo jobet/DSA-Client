@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 import ShowMethodList from './ShowMethodList';
 import ShowContainer from './ShowContainer';
 import ShowSpecificData from './ShowSpecificData';
-import { BiHelpCircle, BiX, BiStop, BiPlay } from 'react-icons/bi';
+import { BiHelpCircle, BiX, BiStop, BiPlayCircle } from 'react-icons/bi';
 import InputCode from './InputCode';
 import InputData from './InputData';
 import SampleCode from './SampleCode';
+import dsaType from './images/dsaType.png';
+import sortSpeed from './images/sortSpeed.PNG';
+import dsaInput from './images/dsaInput.png';
+import dsaFunction from './images/dsaFunction.png';
 
 class ShowSection extends Component {
   constructor(props) {
@@ -107,7 +111,7 @@ class ShowSection extends Component {
               </>
             ) : (
               <>
-                <BiPlay /> Start
+                <BiPlayCircle /> Start
               </>
             )}
           </button>
@@ -115,14 +119,27 @@ class ShowSection extends Component {
         {modal && (
           <div className="modal">
             <div onClick={this.toggleModal} className="overlay"></div>
-            <div className="modal-content">
+            <div id="modal-instruction" className="modal-content">
               <h1>Data Structures Instructions</h1>
-              <p>To select a data structure, press the select data structure button.</p>
-              <p>The AVL button redirects you to the AVL visualizer page.</p>
-              <p>In the input data field, you can input your own data array. Sample data values are provided.</p>
-              <p>To start the visualization process, press the Start button.</p>
-              <p>Once the visualization has started, you can stop it by pressing the Stop button.</p>
-              <p>To restart the visualization from the current step, press the Start button again.</p>
+              <div className="modalSeparator">
+                <p>Select the data structure algorithm you want to visualize.</p>
+                <img src={dsaType} alt="Select Sorting Algorithm"/>
+              </div>
+              <div className="modalSeparator">
+                <p>You can change the duration of the animation by dragging the slider.</p>
+                <img src={sortSpeed} alt="Change Speed"/>
+              </div>
+              <div className="modalSeparator">
+                <p>In the input data field, you can input your own data array.</p>
+                <p>Sample data values are provided.</p>
+                <img src={dsaInput} alt="Input Data"/>
+              </div>
+              <div className="modalSeparator">
+                <p>To start the visualization process, press the Start button.</p>
+                <p>Once the visualization has started, you can stop it by pressing the Stop button.</p>
+                <p>To visualize a step from the overall process, press the Show Method button.</p>
+                <img src={dsaFunction} alt="Show Method and Start Button"/>
+              </div>
               <button className="close-modal" onClick={this.toggleModal}>
                 <BiX />
               </button>

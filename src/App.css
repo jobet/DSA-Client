@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
 * {
-  font-family: "Archivo", sans-serif;
+  font-family: "Gabarito", sans-serif;
+  font-optical-sizing: auto;
   margin: 0;
 }
 
@@ -19,32 +20,54 @@ body{
   min-height: calc(100dvh - 145px);
   margin: 65px 0 20px;
 }
-.log_h1 {
-  padding-top: 10px;
+.siteTitle {
   text-align: center;
-  font-size:2rem;
 }
 
-.hidden_email{
+.video-container {
+  margin: -8rem auto 0 auto;
+  width: 50%;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.background-video {
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 35dvh;
+  left: 0;
+  width: 100%;
+  height: 75dvh;
+  z-index: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,1) 10%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 90%);
+}
+.reply_hidden{
   display: none;
 }
-.box1 input{
-  width: 60%;
-  height: 30px;
-  margin-left: 0%;
-  border-radius: 5px;
-  margin-top: 20px;
-  border: 2px solid turquoise;
-  background-color: white;
-  padding: 20px;
-  color: black;
-  font-size: large;
-}
 .reply_shown{
-  display: block;
-  margin-top: -20px;
+  display: flex;
+  flex-direction: column;
   background-color:unset;
   font-size: large;
+  align-items: start;
+}
+.reply_shown textarea{
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 40px;
+  margin-left: 0%;
+  border-radius: 6px;
+  border: 1px solid #1b146480;
+  color: black;
+  background-color: white;
+  padding: 12px;
+  resize: vertical;
 }
 label.replyuser {
   font-size: 1.2rem;
@@ -52,27 +75,6 @@ label.replyuser {
   color: #B8336A;
 }
 
-table.comment td{
-  vertical-align: bottom;
-}
-.reply_shown input{
-  width: 100%;
-  height: 30px;
-  margin-left: 0%;
-  border-radius: 5px;
-  margin-top: 20px;
-  padding: 20px;
-  border-color: unset;
-  color: black;
-  background-color: white;
-  font-size: large;
-}
-.reply_hidden{
-  visibility: hidden;
-  margin-top: -80px;
-  margin-bottom: 0px;
-  background-color: unset;
-}
 .buttonRegLog{
   background: none;
   border: hidden;
@@ -110,12 +112,13 @@ button:hover {
   justify-content: center;
 }
 .loginBox input, .loginBox select{
+  background-color: white;
   border: #B8336A solid 1px;
   box-sizing: border-box;
-  height: 50px;
+  height: 40px;
   margin-bottom: 5px;
   border-radius: 6px;
-  padding: 0 20px;
+  padding: 0 12px;
   font-size: large;
 }
 .loginBox a{
@@ -152,12 +155,9 @@ button:hover {
   display: table;
   background-attachment: fixed;
   align-items: center;
-  
   color:#B8336A;
 }
 .InformationBox1 h1{
-  
-  
   color:black;
 }
 
@@ -249,7 +249,7 @@ li, a{
   color: white;
   width: 20%;
   float: right;
-  border-color:#8bcff9;
+  border-color:#5fcae6;
   border-width: thin;
   border-style: solid;
   margin-right:30px;
@@ -260,12 +260,81 @@ li, a{
   margin-left: auto;
   margin-right: auto;
 }
+
+.grid-container {
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: 4px;
+}
+.dashboardArea{
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 25%;
+}
+.grid {
+  outline: 1px solid #1b1464;
+  display: inline-block;
+  white-space: nowrap;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.pathfindcontent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.textDistance{
+  color:black;
+  font-weight:800;
+  font-size: larger;
+}
+
+.textDistance1{
+  color:black;
+  font-weight:800;
+  font-size: larger;
+}
+
+.algorithm-button-group {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.algorithm-button {
+  padding-left: 12px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.info-button {
+  flex: 0 1 auto;
+  min-width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
 .right-side {
   color: white;
   width: 23%;
   float: right;
   padding:unset;
-  border-color:  #8bcff9;
+  border-color:  #5fcae6;
   border-style: solid;
   border-width: thin;
   margin-right:10px;
@@ -276,7 +345,6 @@ li, a{
   color:#B8336A;
   padding: 2rem;
   font-size: 1.15rem;
-  /* background-image: url("../src/components/images/bluebox.png"); */
   text-align: justify;
   line-height: 30px;
 }
@@ -344,7 +412,10 @@ li, a{
 }
 
 .box1 {
-  height: 100svh;
+  box-sizing: border-box;
+  padding: 60px 0 0;
+  position: relative;
+  height: 60svh;
   width:100%;
   margin-left: auto;
   margin-right: auto;
@@ -352,20 +423,19 @@ li, a{
   justify-content: center;
   display: flex;
   flex-direction: column;
+  z-index: 1;
 }
 
 #typer1 {
   text-align: center;
   margin-bottom: 12px;
   font-size: 4.8em;
-  text-shadow: 0px 2px 6px #ffffff;
 }
 
 .message2{
   color:black;
   margin-bottom: 12px;
   text-align: center;
-  text-shadow: 0px 2px 6px #ffffff;
 }
 
 .newlogin{
@@ -383,6 +453,8 @@ li, a{
 }  
 
 .box2 {
+  position: relative;
+  z-index: 1;
   padding: 0px 0px 24px 0px;
   align-items: center;
   justify-content: center;
@@ -435,9 +507,6 @@ li, a{
 
 .Home {
   scroll-behavior: smooth;
-  background-image: url(../src/components/images/wallpaper.png);
-  background-repeat: no-repeat;
-  background-position: 0px -200px;
 }
 
 
@@ -512,15 +581,43 @@ li, a{
 
 .commentform {
   align-content: center;
+  justify-content: start;
   display: flex;
   flex-direction: column;
-  text-align: center;
+  padding: 2px 12px;
 }
-.commentform input {
+
+.userform{
+  display: flex;
+  flex-direction: row;
+}
+
+.userform img{
+  flex: 0 0 auto;
+  display: flex;
+  width: 50px;
+  height: 50px;
+}
+
+.userinput{
+  margin-top: 4px;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.userinput button{
+  flex: 0 1 auto;
+  width: 100px;
+}
+
+.commentform textarea {
   box-sizing: border-box;
   width: 100%;
   height: 80px;
-  margin: 8px auto;
+  margin: 2px 0;
   border-radius: 6px;
   border: 1px solid #1b1464;
   background-color: white;
@@ -531,12 +628,6 @@ li, a{
   color: aliceblue;
   text-align: center;
   font-size: large;
-}
-.commentform button {
-  width: 10%;
-  text-align: center;
-  margin-left:45%;
-  margin-right:45%;
 }
 .cardholder {
   display: flex;
@@ -554,43 +645,43 @@ li, a{
 .replyholder2{
   margin-top: 4px;
   padding: 4px 8px 4px 8px;
-  border-radius: 12px;
+  border: 1px solid  #B8336A80;
+  border-radius: 6px;
   background-color: white;
 }
 
 .actionArea{
-  width: 30%;
+  width: 100%;
   display: flex;
-  flex-wrap: wrap;
   align-items: flex-start;
-  justify-content: flex-start;
 }
 
-.actionArea button{
+.actionArea button, .reply_shown button{
+  display: flex;
+  flex: 0 1 auto;
+  margin: 0 4px;
   min-height: 30px;
   border: none;
 }
 
-.actionArea button:hover{
+.actionArea button:hover, .reply_shown button:hover {
   border: none;
   background-color: transparent;
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   box-sizing: border-box;
   height: auto;
   padding: 8px 12px;
-  border-color: none;
-  margin: 4px 0;
+  margin: 2px 0;
   color: black;
   text-align: justify;
-  border-radius: 12px;
-  background: #cfedfd;
-}
-
-.card h2{
-  font-size: 1.8rem;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
+  background: white;
 }
 
 .cardholderScore {
@@ -704,9 +795,6 @@ li, a{
 }
 .scoreRight h1{
   
-}
-.commentBody{
-  padding: 0 18px 8px 48px;
 }
 .replyBody{
   padding: 0 18px 8px 28px;
@@ -929,24 +1017,34 @@ li, a{
   border-radius: 19px;
   background: rgba(255, 255, 255);
 }
-.comment{
-  text-align: justify;
-  padding-bottom: 0px;
-}
-.comment td:first-child {
-  width: 1%;
-  white-space: nowrap;
-}
 .commentHeader{
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: start;
+  align-items: start;
+}
+.commentHeader img{
+  flex: 0 0 auto;
 }
 .commentHeader span{
   font-size: 1rem;
 }
+.userCommentDetails{
+  margin-top: 8px;
+  height: 20px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.userReplyDetails{
+  margin-top: 4px;
+  height: 18px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
 .userDateSeparator{
-  padding: 0 4px;
+  padding: 0 8px;
+  font-size: 0.5rem;
 }
 .dashboardtitle{
   font-size: 32px;
@@ -1108,11 +1206,12 @@ li, a{
 .quizInnerDiv {
   box-sizing: border-box;
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   width: 100%;
   min-height: calc(100svh - 400px);
   max-height: calc(100dvh - 240px);
-  height: 1px;
+  height: auto;
   border: 1px solid #1b146480;
   border-radius: 6px;
   padding: 18px;
@@ -1124,35 +1223,43 @@ div.quizInnerDiv > p{
   margin: 0 auto;
 }
 
-.quizHeader {
-  box-sizing: border-box;
-  width: 100%;
-  flex: 0 1 auto;
-}
-
 .quizBody {
   box-sizing: border-box;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
   height: 100%;
   width: 100%;
   flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
 }
 
-.quizBody button {
-  display: flex;
+.quizAnswers {
   box-sizing: border-box;
-  height: 80px;
-  flex: 1 1 calc(50% - 20px);
-  margin: 5px 10px;
-  padding: 0;
+  display: flex;
+  flex: 1 1 auto;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.quizAnswers button {
+  width: 100%;
+  flex: 1 1 calc(50% - 4px);
+  margin: 2px;
+  box-sizing: border-box;
+  padding: 10px;
   font-size: 1.2rem;
   background-color: white;
   border: 1px solid #1b146480;
   border-radius: 6px;
   color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
 }
 
 .quiz_demo{
@@ -1417,27 +1524,14 @@ div.quizInnerDiv > p{
   width: 100%;
 }
 
-#selected_button{
-  width: 95%;
-  background-color:#B8336A;
-  color:white;
-  font-size: 1.7rem;
-  text-align: left;
-}
-
-#selected_button_tf{
-  opacity: 0.7;
+#selected_button_tf, #selected_button{
   color:white;
   background-color:#B8336A;
-  width: 90%;
 }
 
-#true_button:hover{
-  background-color: #cfedfd;
-}
-
-#false_button:hover{
-  background-color: #cfedfd;
+#true_button:hover, #false_button:hover,
+#quiz-contentx:hover{
+  background-color: #5fcae6;
 }
 
 #quiz-content1{
@@ -1457,9 +1551,6 @@ div.quizInnerDiv > p{
   
   font-size: 1rem;
   color:tomato;
-}
-#quiz-contentx:hover{
-  background-color: #c9e8f8;
 }
 
 .AVLdiv{
@@ -2198,6 +2289,9 @@ div.show-datas {
     width: 75%;
     margin: 0 auto;
   }
+  .dashboardArea {
+    width: calc(75% * 0.75);
+  }
   .dsaContainer .slidercontainer {
     width: calc(75% * 0.8);
   }
@@ -2213,6 +2307,9 @@ div.show-datas {
   }
   .selectIcon{
     font-size: 1rem;
+  }
+  .box1{
+    height: 100dvh;
   }
   .box2, .descSection, .imgSection{
     width: 100%;
@@ -2286,7 +2383,7 @@ div.show-datas {
   .overlay2{
     background: rgba(0, 0, 0, 0.6);
   }
-  .scoretablist{
+  .scoretablist, .dashboardArea{
     width: 100%;
   }
   .scoreCard{
@@ -2294,5 +2391,16 @@ div.show-datas {
   }
   .quizInnerDiv{
     height: calc(100dvh - 240px);
+  }
+  .video-container {
+    margin: -12rem 0 0 -50%;
+    width: 200%;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .video-overlay {
+    top: 0dvh;
+    height: 200dvh;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 25%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 75%);
   }
 }

@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Typewriter from 'typewriter-effect';
-import members from '../images/members.png';
+import members from '../images/members.svg';
 import linear from '../images/linear.svg';
 import nonlinear from '../images/nonlinear.svg';
+import HomeVideo from '../images/HomeVideo.webm';
 
 export default function Home(){
+    useEffect(() => {
+        const videoElement = document.getElementById("homeVideo");
+        if (videoElement) {
+            videoElement.playbackRate = 2;
+        }
+    }, []);
     return(
         <>
         <div className='Home'>
@@ -20,12 +27,19 @@ export default function Home(){
                 </h1>
                 <h3 className='message2'>Learn how most data structures and algorithms work through animated visualizers!</h3>
             </div>
+            <div className='video-container'>
+                <video id="homeVideo" autoPlay loop muted playsInline className='background-video'>
+                    <source src={HomeVideo} type="video/webm" />
+                    Your browser does not support the video tag.
+                </video>
+                <div className='video-overlay'></div>
+            </div>
             <div className='box2'>
                 <div className="imgSection">
                     <img src={members} className="aboutImg"/>
                 </div>
                 <div className="descSection">
-                    <h1 id="typer0" >About DSA Visualizer</h1>
+                    <h1 id="typer0" >About DSA Visual</h1>
                     <p>
                         DSA Visualizer or Data Structures and Algorithms Visualizer is a website created for the purposes of 
                         hosting animated visualizers fo data structures like queue, linked list, and trees as well as algorithms 

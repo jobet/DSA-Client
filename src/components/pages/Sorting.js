@@ -7,7 +7,7 @@ export default function Sorting(){
     return (
         <div className='Sorting'>
                 <div className='visualizerArea'>
-                    <h1 style={{textAlign:"center"}}>Sorting Algorithms</h1>
+                    <h1 className="siteTitle">Sorting Algorithms</h1>
                     <Visualizer />
                 </div>  
         </div>

@@ -216,7 +216,7 @@ return (
             <div className='box1-login'>
               
               <div className='login_form'>
-                <h1 className='log_h1' style={{color:'teal'}}>Confirm Code</h1>
+                <h1 className='siteTitle' style={{color:'teal'}}>Confirm Code</h1>
                 <br></br>
                 <div className='logbox'>
                     <center>
@@ -243,7 +243,7 @@ return (
         else{
           return (
           <div className='loginBox'>
-            <h1 className='log_h1'>Login to DSA</h1>
+            <h1 className='siteTitle'>Login to DSA</h1>
               <h3>E-Mail</h3>
               <input placeholder="Enter Email" type="email" name="email" id="log_email" onChange={(e) => {
                 setLog_Email(e.target.value)

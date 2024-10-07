@@ -1,6 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 import logoImage from './images/logow.svg';
+import { BiCopyright } from "react-icons/bi";
 
 
 function Footer() {
@@ -8,7 +9,7 @@ function Footer() {
     <>
       <div className='footer'>
         <img src={logoImage} alt='' className="footerlogo"/>
-        <p>Copyright © 2024 DSA.</p>
+        <p>Copyright</p> <BiCopyright/> <p>2024 DSA.</p>
         <p>&nbsp;Some Rights Reserved.</p>
       </div>
     </>

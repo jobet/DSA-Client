@@ -30,8 +30,8 @@ body.active-modal {
     justify-content: flex-start;
     align-items: flex-start;
     position: absolute;
-    width: 90%;
-    max-width: 35svw;
+    box-sizing: border-box;
+    width: 40svw;
     max-height: 90vh;
     overflow-y: auto;
     top: 50%;
@@ -39,9 +39,13 @@ body.active-modal {
     transform: translate(-50%, -50%);
     line-height: 1.2;
     background: #f1f1f1;
-    padding: 24px 16px;
+    padding: 24px;
     border-radius: 3px;
     z-index: 4;
+}
+
+#modal-instruction {
+    width: 30svw;
 }
 
 .modal-content > * {
@@ -70,9 +74,15 @@ body.active-modal {
     font-weight: bold;
 }
 
-.modal-content img {
-    max-width: 100%;
-    height: auto;
+.modalSeparator{
+    display: flex;
+    flex-direction: column;
+    margin: 12px auto;
+}
+
+.modalSeparator img {
+    width: 80%;
+    margin: 0 auto;
 }
 
 .modal-content p {
@@ -95,12 +105,18 @@ body.active-modal {
 @media screen and (max-width: 960px) {
     .modal-content {
         box-sizing: border-box;
-        min-width: 100dvw;
-        min-height: 100dvh;
+        width: 100dvw;
+        height: 100dvh;
+        max-height: 100dvh;
         top: 0;
         left: 0;
         transform: none;
         border-radius: 0;
+    }
+    #modal-instruction{
+        width: 100dvw;
+        height: 100dvh;
+        max-height: 100dvh;
     }
     .close-modal {
         font-size: 1.5rem;

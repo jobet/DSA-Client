@@ -128,6 +128,7 @@ export default function Quiz(){
                 <p>{questionSets[questionNo]?.question_content}</p>
             </div>
             <div className="quizBody">
+                <div className="quizAnswers">
                 {questionSets[questionNo]?.question_type == "Multiple Choice" ?
                 <>
                     <button id={answers.current[questionNo] == "A" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("A")}}>
@@ -166,6 +167,7 @@ export default function Quiz(){
                     />
                 </div>
                 : ""}
+                </div>
             </div>
         </>
         )
@@ -254,7 +256,7 @@ export default function Quiz(){
     return(
         <div className="QuizPage">
             <div className="quizBox">
-            <h1 id="quizSign" style={{textAlign: 'center'}}>{prnDt}</h1>
+            <h1 id="quizSign" className="siteTitle">{prnDt}</h1>
                 {started ? <div className="quizInnerDiv">            
                 <QuizQuestion/>
                 

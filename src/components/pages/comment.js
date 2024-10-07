@@ -55,7 +55,7 @@ export default function Comment(){
   } , [commentList])
 
 
-  function submitReply(replyMessage, comm_ID){
+  async function submitReply(replyMessage, comm_ID){
     {
       var today = new Date();
       var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
@@ -63,33 +63,29 @@ export default function Comment(){
       var timeSQL = (today.getHours()-8) + ":" + today.getMinutes() + ":" + today.getSeconds();
       var dateTime = date+' '+time;
       var dateTimeSQL = date+' '+timeSQL;
-        Axios.post(`${process.env.REACT_APP_API_URL}/api/reply_insert`, {
+      await Axios.post(`${process.env.REACT_APP_API_URL}/api/reply_insert`, {
             Reg_email:localStorage.getItem("email"),
             Reply_content:replyMessage,
             Reply_written: dateTimeSQL,
             Comment_ID:comm_ID
         })
-      setReplyList([...replies,{"reply_id":highestReplyID,"reply_written":dateTime,"comment_id":comm_ID,
-      "useravatar_url":localStorage.getItem("avatar_display"),"useremail_reg":localStorage.getItem("email"),
-    "reply_content":replyMessage,"username_reg":localStorage.getItem("username")}])
+      
+      setReplyList([...replies,
+      {"reply_id":highestReplyID,
+      "reply_written":dateTime,
+      "reply_content":replyMessage,
+      "comment_id":comm_ID,
+      "user_infos": {
+        "useravatar_url": localStorage.getItem('avatar_display'),
+        "username_reg": localStorage.getItem("username"),
+        "useremail_reg":localStorage.getItem("email")
+      }
+      }])
       setHighestReplyID(highestReplyID+1)
       };
       setShow(false)
       setReplyValue("")
-
   }
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 1000,
-  timerProgressBar: true,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer)
-    toast.addEventListener('mouseleave', Swal.resumeTimer)
-  }
-})
 
 //submit comment
     async function submitComment () {
@@ -308,15 +304,7 @@ const Toast = Swal.mixin({
               Reply_value: editReplyValue,
               Reply_id: replyID,
   
-            } )
-            //setEditCount(editCount + 1);
-            const updateReply = setReplyList(replies.map((val) => {   //maps replies for updating
-              return val.reply_id == replyID?{reply_id:val.reply_id,reply_written:val.reply_written,comment_id:val.comment_id
-                ,useravatar_url:val.useravatar_url,useremail_reg:val.useremail_reg,reply_content:editReplyValue,username_reg:val.username_reg}:val
-            }))
-
-
-         
+            } )      
             setEditReplyShow(false)
 
           }
@@ -329,42 +317,61 @@ const Toast = Swal.mixin({
      return(
         <div className="DiscussionBoard">
           <div className="DiscussionBox">
-            <h1 style={{textAlign:"center"}}>Discussion Board</h1>
+            <h1 className="siteTitle">Discussion Board</h1>
             <div className="commentform">
 
       {(() => {
         if (localStorage.getItem("username") && commentCount == 2){
           return (
-            <div className="commentform">
+            <>
+            <div className="userform">
+              <img 
+              className='usericon' 
+              width={'50px'} 
+              height={'50px'}
+              src={localStorage.getItem("avatar_display")}
+              />
+              <div className="userinput">
                 <h2>{localStorage.getItem("username")}</h2>
-                <h2>Adding comments is restricted to 2 at a time</h2>
+                <h3>Adding comments is restricted to 2 at a time</h3>
+              </div>
             </div>
+          </>
           )
         }
         else if (localStorage.getItem("username")) {
           return (
-            <div className="commentform">
-              <center><h2>{localStorage.getItem("username")}</h2>
-              <img className='usericon' width={'80px'} height={'80px'}src={localStorage.getItem("avatar_display")}></img>
-              </center>
-            <input type="text" name="comment" value={comment} placeholder="Type a response" onChange={(e)=>{setcomment(e.target.value)}}/>
-           <button onClick={submit}  >Submit</button>
-            </div>
+            <>
+              <div className="userform">
+                <img 
+                className='usericon' 
+                width={'50px'} 
+                height={'50px'}
+                src={localStorage.getItem("avatar_display")}
+                />
+                <div className="userinput">
+                  <h2>{localStorage.getItem("username")}</h2>
+                  <textarea type="text" name="comment" value={comment} placeholder="Type a comment" onChange={(e)=>{setcomment(e.target.value)}}/>
+                  <button onClick={submit}>Submit</button>
+                </div>
+              </div>
+            </>
           )
         } else {
           return (
-            <div className="commentform">
-              <h3>Login to join the discussion!</h3>
+            <>
+              <p className="siteTitle"><strong>Login to join the discussion!</strong></p>
               <div className="buttonArea">
                 <button onClick={Register}>Register</button>
                 <button onClick={Login}>Login</button>
               </div>
-            </div>
+            </>
           )
         }
       })()}
                 
             </div>
+            <p><strong>Comments ({commentList.length})</strong></p>
             <div className="cardholder">
         {(() => { 
           if (!commentList.length){
@@ -382,27 +389,28 @@ const Toast = Swal.mixin({
           console.log(val);
           return (
             <>
-            <div className="comment">
               <div className="commentHeader">
                 <img className='usericon' 
                 width={'50px'} 
                 height={'50px'}
                 src={val.user_infos.useravatar_url}
                 />
-                <h2 className='user' value={userid}>
-                  {val.user_infos.username_reg}
-                </h2>
-                <BiSolidCircle className="userDateSeparator"/> 
-                <span>
-                  {convertDate(new Date(val.date_written))}
-                </span>
+                <div>
+                  <div className="userCommentDetails">
+                    <h2 className='user' value={userid}>
+                      {val.user_infos.username_reg}
+                    </h2>
+                    <BiSolidCircle className="userDateSeparator"/> 
+                    <span>
+                      {convertDate(new Date(val.date_written))}
+                    </span>
+                  </div>
+                  <p className="commentmsg">
+                    {val.comment_text}
+                  </p>
+                </div>
               </div>
-              <div className="commentBody">
-                <p className="commentmsg">
-                  {val.comment_text}
-                </p>
-              </div>
-            </div>  
+
             </>
           )
       })()}
@@ -427,20 +435,37 @@ const Toast = Swal.mixin({
         
         else if (val.user_infos.useremail_reg == localStorage.getItem("email")) {
           return (
-            <div className="actionArea">    
-            <button id='editBtn' className='commentbtn' onClick={()=>{editing(val)}}>Edit</button>
-            <button id='deleteBtn' className='commentbtn' onClick={()=>{deleteComment(val.comment_id)}}>Delete</button>
-            <button className='commentbtn' onClick={() => handleCardIndex(val.comment_id)}>Reply</button>
-            <div className={val.comment_id == cardIndex && show ? 'reply_shown' : 'reply_hidden'}>
-            <input value={replyValue} placeholder="Input Reply" onChange={(e) => {setReplyValue(e.target.value)}} type="text"></input> <button onClick={() => submitReply(replyValue, val.comment_id)} className='replybtn'>Confirm</button>
-            </div>
-            </div>
+            <>
+              <div className="actionArea">    
+                <button id='editBtn' className='commentbtn' onClick={()=>{editing(val)}}>Edit</button>
+                <button id='deleteBtn' className='commentbtn' onClick={()=>{deleteComment(val.comment_id)}}>Delete</button>
+                <button className='commentbtn' onClick={() => handleCardIndex(val.comment_id)}>Reply</button>
+              </div>
+              <div 
+              className={val.comment_id == cardIndex && show ? 
+              'reply_shown' : 
+              'reply_hidden'}
+              >
+                <textarea 
+                  value={replyValue} 
+                  placeholder="Input Reply" 
+                  onChange={(e) => {setReplyValue(e.target.value)}} 
+                  type="text"
+                />
+                <button 
+                onClick={() => submitReply(replyValue, val.comment_id)} 
+                className='commentbtn'
+                >
+                  Submit Reply
+                </button>
+              </div>
+            </>
           )
         } 
         else if (localStorage.getItem("username")){
           return(
-            <div>
-               <button className='replybtn' onClick={() => handleCardIndex(val.comment_id)}>Reply</button>
+            <div className="actionArea">
+               <button className='commentbtn' onClick={() => handleCardIndex(val.comment_id)}>Reply</button>
             <div className={val.comment_id == cardIndex && show ? 'reply_shown' : 'reply_hidden'}>
             <input value={replyValue} placeholder="Input Reply" onChange={(e) => {setReplyValue(e.target.value)}} type="text"></input> <button onClick={() => submitReply(replyValue, val.comment_id)} className='replybtn'>Confirm</button>
             </div>
@@ -478,18 +503,20 @@ const Toast = Swal.mixin({
                 width="30px" 
                 height="30px"
                 />
-                <label className="replyuser">
-                  {item.user_infos.username_reg}
-                </label>
-                <BiSolidCircle className="userDateSeparator"/> 
-                <span>
-                  {convertDate(new Date(item.reply_written))}
-                </span>
-              </div>
-              <div className="replyBody">
-                <span className="replymsg">
-                  {item.reply_content}
-                </span>
+                <div>
+                  <div className="userReplyDetails">
+                    <label className="replyuser">
+                      {item.user_infos.username_reg}
+                    </label>
+                    <BiSolidCircle className="userDateSeparator"/> 
+                    <span>
+                      {convertDate(new Date(item.reply_written))}
+                    </span>
+                  </div>
+                  <span className="replymsg">
+                    {item.reply_content}
+                  </span>
+                </div>
               </div>
             </div>
             

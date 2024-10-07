@@ -4,7 +4,10 @@ import './Navbar.css';
 import logoImage from './images/logo.svg';
 import { UserContext } from './UserContext';
 import Swal from 'sweetalert2';
-import { BiUser, BiCommentDetail, BiEdit, BiLogOut, BiLineChart } from "react-icons/bi";
+import { BiUser, BiCommentDetail, 
+  BiEdit, BiLogOut, BiLineChart, 
+  BiBookContent, BiBarChart, BiGrid } from "react-icons/bi";
+import { TbBinaryTree } from "react-icons/tb";
 
 function Navbar({ avatar, username }) {
   const [click, setClick] = useState(false);
@@ -61,26 +64,37 @@ function Navbar({ avatar, username }) {
   return (
     <nav className='navbar'>
       <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
-        <img draggable="false" src={logoImage} alt='DSA' width={40} height={40} />DSA
+        <img draggable="false" src={logoImage} alt='DSA' width={40} height={40} />
+        DSA Visual
       </Link>
       <div className='menu-icon' onClick={handleClick}>
         <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
       </div>
       <ul className={click ? 'nav-menu active' : 'nav-menu'}>
         <li className='nav-item'>
-          <Link to='/sorting-algorithms' className='nav-links' onClick={closeMobileMenu}>Sorting</Link>
+          <Link to='/sorting-algorithms' className='nav-links' onClick={closeMobileMenu}>
+          <BiBarChart/> Sorting
+          </Link>
         </li>
         <li className='nav-item'>
-          <Link to='/shortest-path-algorithms' className='nav-links' onClick={closeMobileMenu}>Path Finding</Link>
+          <Link to='/shortest-path-algorithms' className='nav-links' onClick={closeMobileMenu}>
+          <BiGrid/> Path Finding
+          </Link>
         </li>
         <li className='nav-item'>
-          <Link to='/data-structures' className='nav-links' onClick={closeMobileMenu}>Data Structures</Link>
+          <Link to='/data-structures' className='nav-links' onClick={closeMobileMenu}>
+          <TbBinaryTree/>Data Structures
+          </Link>
         </li>
         <li className='nav-item'>
-          <Link to='/quiz' className='nav-links' onClick={closeMobileMenu}>Quiz</Link>
+          <Link to='/quiz' className='nav-links' onClick={closeMobileMenu}>
+          <BiBookContent />Quiz
+          </Link>
         </li>
         <li className='nav-item'>
-          <Link to='/comments' className='nav-links' onClick={closeMobileMenu}>Discussion</Link>
+          <Link to='/comments' className='nav-links' onClick={closeMobileMenu}>
+          <BiCommentDetail/>Discussion
+          </Link>
         </li>
         <li className='nav-item' ref={container}>
           {avatar ? (

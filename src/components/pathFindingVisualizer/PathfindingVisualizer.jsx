@@ -4,7 +4,6 @@ import {dijkstra} from '../pathFindingAlgorithms/dijkstra';
 import {dfs} from '../pathFindingAlgorithms/dfs';
 import {bfs} from '../pathFindingAlgorithms/bfs';
 import { BiInfoCircle, BiHelpCircle, BiX, BiTrash, BiPlayCircle, BiChevronDown, BiExpand, BiSubdirectoryLeft } from "react-icons/bi";
-import './PathfindingVisualizer.css';
 import shortPath from '../images/shortPath.PNG';
 import clearWall from '../images/clearWall.PNG';
 import start from '../images/start.PNG';
@@ -630,7 +629,7 @@ DFS(node) {
     const {grid, mouseIsPressed} = this.state;
     return (
       <div className="pathfindcontent">
-        <h1 style={{textAlign:"center"}}>Shortest Path Algorithms</h1>
+        <h1 className="siteTitle">Shortest Path Algorithms</h1>
         <div 
           className="grid-container"
           onTouchMove={this.handleTouchMove}
@@ -724,22 +723,36 @@ DFS(node) {
         {this.state.modal && (
         <div className="modal">
           <div onClick={() => this.setState({ modal: false })} className="overlay"></div>
-          <div className="modal-content">
+          <div id="modal-instruction" className="modal-content">
               <h1>Path Finding Instructions</h1>
-              <img src={start} style={{width:150}}></img>
-              <p>Drag the starting point (blue) and the ending point (red) to change their positions.</p>
-              <img src={wall} style={{width:150}}></img>
-              <p>
-                Click an empty cell to create a wall.
-              </p>
-              <img src={clearWall} style={{width:300}}></img>
-              <p>The clear grid button will remove the previous path
-                  Clear wall button will remove walls.
-              </p>
-              <img src={shortPath} style={{width:500}}></img>
-              <p>
-                Choose from the available algorithm to start the path finding process.
-              </p>
+              <div className="modalSeparator">
+                <p>
+                  Select the path finding algorithm you want to visualize.
+                </p>
+                <img src={shortPath}></img>
+              </div>
+              <div className="modalSeparator">
+                <p>Drag the starting point (blue) and the ending point (red) to change their positions.</p>
+                <img src={start}></img>
+              </div>
+              <div className="modalSeparator">
+                <p>
+                  Click an empty cell to create a wall.
+                </p>
+                <img src={wall}></img>
+              </div>
+              <div className="modalSeparator">
+                <p>
+                  The Clear grid button will remove the previous path.
+                </p>
+                <p>
+                  The Clear wall button will remove all walls.
+                </p>
+                <p>
+                  The Start button will begin the path finding process.
+                </p>
+                <img src={clearWall}></img>
+              </div>
               <button className="close-modal" onClick={() => this.setState({ modal: false })}>
                 <BiX/>
               </button>
