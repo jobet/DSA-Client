@@ -59,12 +59,12 @@ export default function ManageDiscussion(){
         text: "",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'No',
-        cancelButtonText:'Yes'
+        confirmButtonColor: '#B8336A',
+        cancelButtonColor: '#333',
+        confirmButtonText: 'Yes',
+        cancelButtonText:'YNo'
       }).then((result) => {
-        if (!result.isConfirmed) {
+        if (result.isConfirmed) {
           Axios.delete(`${process.env.REACT_APP_API_URL}/api/comment/delete/${id}`)
             const updatedBackendComments = commentList.filter(val => val.comment_id != id);
             //setDeleteCount(deleteCount + 1);
@@ -82,12 +82,12 @@ export default function ManageDiscussion(){
         text: "",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
-        confirmButtonText: 'No',
-        cancelButtonText:'Yes'
+        confirmButtonColor: '#B8336A',
+        cancelButtonColor: '#333',
+        confirmButtonText: 'Yes',
+        cancelButtonText:'No'
       }).then((result) => {
-        if (!result.isConfirmed) {
+        if (result.isConfirmed) {
 
             const updatedReplies = replies.filter(val => val.reply_id != id);
             //setDeleteCount(deleteCount + 1);

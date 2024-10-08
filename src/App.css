@@ -50,14 +50,14 @@ body{
 .reply_hidden{
   display: none;
 }
-.reply_shown{
+.reply_shown, .comment_shown{
+  width: 100%;
+  box-sizing: border;
   display: flex;
   flex-direction: column;
-  background-color:unset;
-  font-size: large;
   align-items: start;
 }
-.reply_shown textarea{
+.reply_shown textarea, .updateinput{
   width: 100%;
   box-sizing: border-box;
   min-height: 40px;
@@ -68,6 +68,9 @@ body{
   background-color: white;
   padding: 12px;
   resize: vertical;
+}
+.updateinput{
+  margin-top: 4px;
 }
 label.replyuser {
   font-size: 1.2rem;
@@ -103,6 +106,12 @@ button:hover {
   border: 1px solid #B8336A;
   background-color:#ffffff;
   transition: all 0.1s ease-in;
+}
+button:disabled {
+  color: black;
+  background-color: #1b146480;
+  border: 1px solid #1b146480;
+  cursor: not-allowed;
 }
 .loginBox {
   width: 25rem;
@@ -821,18 +830,6 @@ li, a{
   color:#1b1464;
 }
 
-.updateinput {
-  background:white;
-  border-style: hidden;
-  color:black;
-  width: 100%;
-  height:30px;
-  margin-top: 10px;
-  border-radius: 10px;
-  padding:10px;
-  font-size: larger;
-}
-
 .ideatext{
    color:violet;
 }
@@ -1021,6 +1018,10 @@ li, a{
   display: flex;
   justify-content: start;
   align-items: start;
+}
+.commentBody{
+  width: 100%;
+  box-sizing: border-box;
 }
 .commentHeader img{
   flex: 0 0 auto;
@@ -1869,7 +1870,7 @@ div.drawing svg{
 }
 
 /* The slider itself */
-.slider {
+.slider, .slider-disabled {
   margin: 8px 0;
   display: flex;
   -webkit-appearance: none; /* Override default CSS styles */
@@ -1880,29 +1881,30 @@ div.drawing svg{
   border-radius: 6px;
 }
 
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
+.slider-disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-moz-range-thumb, 
+.slider::-webkit-slider-thumb,
+.slider-disabled::-moz-range-thumb,
+.slider-disabled::-webkit-slider-thumb {
+  width: 1.5em;
+  height: 1.5em;
+  background: #B8336A;
+  cursor: pointer;
+  border: none;
+  border-radius: 100%;
+}
+
+.slider-disabled::-moz-range-thumb,
+.slider-disabled::-webkit-slider-thumb {
+  background: #333;
+}
+
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none; /* Override default look */
-  width: 1.5em; /* Set a specific slider handle width */
-  height: 1.5em; /* Slider handle height */
-  background: #B8336A; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-  border: none;
-  border-radius: 100%;
-}
-
-.slider::-moz-range-thumb {
-  width: 1.5em; /* Set a specific slider handle width */
-  height: 1.5em; /* Slider handle height */
-  background: #B8336A; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-  border: none;
-  border-radius: 100%;
 }
 
 @keyframes CodeText {
@@ -2381,7 +2383,7 @@ div.show-datas {
     z-index: 3;
   }
   .overlay2{
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
   }
   .scoretablist, .dashboardArea{
     width: 100%;

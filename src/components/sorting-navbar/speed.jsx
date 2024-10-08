@@ -5,7 +5,6 @@ const Speed = (props) => {
     const [speed, setSpeed] = React.useState(1);
 
     const handleSpeedChange = (e) => {
-        console.log(e.target.value);
         setSpeed(e.target.value);
         props.onChange(e.target.value, "speed");
     };

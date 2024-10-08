@@ -77,12 +77,12 @@ export default function Quiz(){
             text: msg,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'No',
-            cancelButtonText:'Yes'
+            confirmButtonColor: '#B8336A',
+            cancelButtonColor: '#333',
+            confirmButtonText: 'Yes',
+            cancelButtonText:'No'
         }).then((result) => {
-            if (!result.isConfirmed) {
+            if (result.isConfirmed) {
                 let score = 0;
 
                 for(let i=0;i<questionSets.length;i++){
@@ -214,12 +214,12 @@ export default function Quiz(){
             text: msg,
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#3085d6',
-            confirmButtonText: 'No',
-            cancelButtonText:'Yes'
+            confirmButtonColor: '#B8336A',
+            cancelButtonColor: '#333',
+            confirmButtonText: 'Yes',
+            cancelButtonText:'No'
         }).then((result) => {
-            if(!result.isConfirmed)
+            if(result.isConfirmed)
                 setStarted(true)
         })
         

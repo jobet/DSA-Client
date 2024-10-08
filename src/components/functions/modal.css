@@ -21,7 +21,7 @@ body.active-modal {
 }
 
 .overlay {
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -40,8 +40,37 @@ body.active-modal {
     line-height: 1.2;
     background: #f1f1f1;
     padding: 24px;
-    border-radius: 3px;
+    border-radius: 6px;
     z-index: 4;
+}
+
+.swal2-popup{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background: #f1f1f1;
+    width: 30svw;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 6px;
+    line-height: 1.2;
+    background: #f1f1f1;
+    padding: 24px;
+    border-radius: 6px;
+    z-index: 4;
+    color: black;
+}
+.swal2-popup button {
+    height: 40px;
+}
+.swal2-input{
+    background-color: white;
+    border: #B8336A solid 1px;
+    box-sizing: border-box;
+}
+.swal2-title {
+    color:#1b1464;
 }
 
 #modal-instruction {

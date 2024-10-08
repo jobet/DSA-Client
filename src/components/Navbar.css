@@ -9,19 +9,19 @@
   padding: 0 8rem;
   z-index: 2;
   top: 0;
-  background-color: rgb(255, 255, 255);
-  outline: solid 1px #1b146480;
+  background: #fff;
+  box-shadow: 0 0 10px 10px #fff;
 }
 .footer {
   bottom: 0;
-  background: #1b1464;
+  color: #1b1464;
   height: 60px;
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  color: #fff;
+  background: transparent;
   padding: 4px 4px;
 }
 

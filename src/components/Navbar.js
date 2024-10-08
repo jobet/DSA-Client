@@ -39,14 +39,14 @@ function Navbar({ avatar, username }) {
 
   const logOut = () => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "Logout?",
+      title: 'You are about to Log-Out',
+      text: "Are you sure you want to log-out?",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#B8336A',
+      cancelButtonColor: '#333',
+      cancelButtonText: 'No',
       confirmButtonText: 'Yes',
-      cancelButtonText: 'No'
     }).then((result) => {
       if (result.isConfirmed) {
         setState(false);

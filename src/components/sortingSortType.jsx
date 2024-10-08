@@ -173,6 +173,7 @@ function heapify(arr, n, i) {
                     <Size 
                         onChange={this.props.onChange}
                         lengths={this.state.lengths}
+                        running={this.props.running}
                     />
                     <Speed 
                         onChange={this.props.onChange}
@@ -186,6 +187,7 @@ function heapify(arr, n, i) {
                     <Algorithms 
                         onChange={this.props.onChange}
                         algorithms={this.state.algorithms}
+                        running={this.props.running}
                     />
                 {this.state.algoInfoModal && (
                         <div className="modal">

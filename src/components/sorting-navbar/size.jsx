@@ -21,7 +21,7 @@ const Size = (props) => {
                     max={30} 
                     value={size} 
                     onChange={handleSizeChange} 
-                    className='slider' 
+                    className={props.running ? "slider-disabled" : "slider"}
                 />
             </div>
         </>

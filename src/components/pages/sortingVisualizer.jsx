@@ -30,6 +30,7 @@ class Visualizer extends React.Component {
         algorithm: 1,
         running: false,
         executionTime: "0.00s",
+        stopRequested: false,
     };
 
     // creating the list
@@ -40,7 +41,6 @@ class Visualizer extends React.Component {
     //When there is a change or event
     componentDidUpdate() {
         this.onChange();
-        this.generateList();
     }
     //Rendering the Sorting Visualizer
     render() { 
@@ -58,9 +58,12 @@ class Visualizer extends React.Component {
                     newList={this.generateList}
                     onChange={this.onChange}
                     algorithm={this.state.algorithm}
+                    running={this.state.running}
                 />
                 <Navbar
                     start={this.start}
+                    stop={this.stop}
+                    running={this.state.running}
                     response={this.response}
                     newList={this.generateList}
                     onChange={this.onChange}
@@ -71,22 +74,22 @@ class Visualizer extends React.Component {
 
     // updates the state when you choose a navbar options
     // when the algorithm is running avoid changing navbar options
-    onChange = (value, option) => {
+    onChange = async(value, option) => {
         if(option === ALGORITHM && !this.state.running) {
-            this.setState({ algorithm: Number(value) });
+            await this.setState({ algorithm: Number(value) });
         }
         else if(option === SPEED) {
-            this.setState({ speed: Number(value) });
+            await this.setState({ speed: Number(value) });
         }
         else if(option === SIZE && !this.state.running) {
-            this.setState({ size: Number(value) });
+            await this.setState({ size: Number(value) });
             this.generateList();
         }
     };
 
     // creates a random list of values
-    generateList = (value = 0) => {
-        if((this.state.list.length !== this.state.size && !this.state.running) || Number(value) === 1) {
+    generateList = () => {
+        if(!this.state.running) {
             let list = generator(this.state.size);
             this.setState({ list: list });
         }
@@ -94,59 +97,53 @@ class Visualizer extends React.Component {
 
     // chooses and runs the chosen sorting algorithms
     start = async() => {
-        let startTime = performance.now();
+        let moves = await this.getMoves(this.state.algorithm);
+        this.setState({ running: true });
 
-        this.lock(true);
-        
-        // Set up a timer to periodically update the execution time
+        let startTime = performance.now();
         const intervalId = setInterval(() => {
             const currentTime = performance.now();
             const elapsedTime = currentTime - startTime;
             this.setState({
                 executionTime: `${(elapsedTime / 1000).toFixed(2)}s`
             });
-        }, 1); // Update every 1 ms (you can adjust this)
+        }, 10);
 
-        let moves = await this.getMoves(this.state.algorithm);
+        
         await this.visualizeMoves(moves);
+        if(!this.state.stopRequested) {
+            let endTime = performance.now();
+            clearInterval(intervalId);
+            this.setState({
+                executionTime: `${((endTime - startTime) / 1000).toFixed(2)}s`
+            });
+        }
+        else{
+            clearInterval(intervalId);
+            this.setState({
+                executionTime: `Visualizer Stopped`
+            });
+        }
+
         await this.done();
 
-        let endTime = performance.now();
-        clearInterval(intervalId); // Clear the interval when done
-
-        // Final update of the execution time
-        this.setState({
-            executionTime: `${((endTime - startTime) / 1000).toFixed(2)}s`
-        });
-
-        this.lock(false);
+        await this.setState({ running: false, stopRequested: false });
     };
 
+    stop = () => {
+        this.setState({ stopRequested: true });
+    }
+
     // tracks the moves for the sorting algorithms
-    getMoves = async(Name) => {
-        let moves = [];
-        let array = await getKeysCopy(this.state.list, this.state.size);
-        if(Name === 1) {
-            moves = await bubbleSort(array, array.length);
-        }
-        if(Name === 2) {
-            moves = await insertionSort(array, array.length);
-        }
-        if(Name === 3) {
-            moves = await mergeSort(array, array.length);
-        }
-        if(Name === 4) {
-            moves = await quickSort(array, array.length);
-        }
-        if(Name === 5) {
-            moves = await heapSort(array, array.length);
-        }
-        return moves;
+    getMoves = async (algorithmIndex) => {
+        const array = await getKeysCopy(this.state.list, this.state.size);
+        const algorithms = [bubbleSort, insertionSort, mergeSort, quickSort, heapSort];
+        return algorithms[algorithmIndex - 1](array, array.length);
     };
 
     // displaying acquired moves
     visualizeMoves = async(moves) => {
-        if(moves.length === 0) {
+        if(moves.length === 0 ||  this.state.stopRequested) {
             return;
         }
         // handles range when the move length is 4
@@ -161,6 +158,9 @@ class Visualizer extends React.Component {
        // displaying of swapping based sorting algorithms
        visualizeMovesBySwapping = async(Moves) => {
         while(Moves.length > 0) {
+            if(this.state.stopRequested) {
+                return;
+            }
             let currMove = Moves[0];
             // when the container does not have 3 elements, then return
             if(currMove.length !== 3) {
@@ -183,6 +183,9 @@ class Visualizer extends React.Component {
     visualizeMovesInRange = async(Moves) => {
         let prevRange = [];
         while (Moves.length > 0 && Moves[0].length === 4) {
+            if(this.state.stopRequested) {
+                return;
+            }
             // adjuest range when necessary to avoid blinking
             if(prevRange !== Moves[0][3]) {
                 await this.updateElementClass(prevRange, NORMAL);
@@ -199,6 +202,9 @@ class Visualizer extends React.Component {
 
     // swapping the values of moves
     updateList = async(indexes) => {
+        if(this.stopRequested){
+            return;
+        }
         let array = [...this.state.list];
         let stored = array[indexes[0]].key;
         array[indexes[0]].key = array[indexes[1]].key;
@@ -208,12 +214,18 @@ class Visualizer extends React.Component {
 
     // Updates the state attribute list when there is a change
     updateStateChanges = async(newList) => {
+        if(this.state.stopRequested) {
+            return;
+        }
         this.setState({list: newList});
         await pause(this.state.speed);
     };
 
     // changes the value of the element in the list
     updateElementValue = async(indexes) => {
+        if(this.stopRequested){
+            return;
+        }
         let array = [...this.state.list];
         array[indexes[0]].key = indexes[1];
         await this.updateStateChanges(array);
@@ -221,15 +233,15 @@ class Visualizer extends React.Component {
 
     // changes the class type of the element in the list
     updateElementClass = async(indexes, classType) => {
+        if(this.stopRequested){
+            return;
+        }
         let array = [...this.state.list];
         for(let i = 0 ; i < indexes.length ; ++i) {
             array[indexes[i]].classType = classType;
         }
         await this.updateStateChanges(array);
     };
-
-    
-
     // allows for the navbar to be responsive
     response = () => {
         let Navbar = document.querySelector(".navbar");
@@ -237,18 +249,18 @@ class Visualizer extends React.Component {
         else Navbar.className = "navbar";
     };
 
-    // to prevent navbar options changes once the sorting algorithm has ran
-    lock = (status) => {
-        this.setState({ running: Boolean(status) });
-    };
-
     // List is done
     done = async() => {
         let indexes = [];
         for(let i = 0 ; i < this.state.size ; ++i) {
-            indexes.push(i);
+            await indexes.push(i);
         }
-        await this.updateElementClass(indexes, DONE);
+        if (this.state.stopRequested) {
+            await this.updateElementClass(indexes, NORMAL);
+        }
+        else{
+            await this.updateElementClass(indexes, DONE);
+        }
     };
     
     

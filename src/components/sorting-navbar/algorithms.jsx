@@ -16,6 +16,7 @@ const Algorithms = (props) => {
     return (
         <div className="dropdown-container">
             <button 
+                disabled={props.running}
                 className="algorithm-button"
                 onClick={() => setAlgoDropdown(!algoDropdown)}
             >

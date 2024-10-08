@@ -3,12 +3,20 @@ import noSort from './images/noSort.PNG';
 import sortSpeed from './images/sortSpeed.PNG';
 import sortBtn from './images/sortBtn.PNG';
 import sortType from './images/sortType.png';
-import { BiHelpCircle, BiPlayCircle, BiX, BiDice5  } from "react-icons/bi";
+import { BiHelpCircle, BiPlayCircle, BiX, BiDice5, BiStop  } from "react-icons/bi";
 class Navbar extends React.Component {  
     state = {
         modal: false,
         algoInfoModal: false
     };
+    handleClick = () => {
+        if(this.props.running) {
+            this.props.stop();
+        }
+        else if(!this.props.runnning){
+            this.props.start();
+        }
+    }
     render() {
         return (
             <>
@@ -16,11 +24,22 @@ class Navbar extends React.Component {
                     <button id="help" onClick={() => this.setState({ modal: true })}>
                         <BiHelpCircle/> Help
                     </button>
-                    <button id="random" onClick={() => this.props.newList(1)}>
+                    <button id="random" onClick={() => this.props.newList(1)}
+                    disabled={this.props.running}>
                         <BiDice5 /> Randomize
                     </button>
-                    <button id="start" onClick={() => this.props.start()}>
-                        <BiPlayCircle/> Start
+                    <button id="start" onClick={() => this.handleClick()}>
+                        {
+                            this.props.running ? (
+                                <>
+                                    <BiStop/> Stop
+                                </>
+                            ) : (
+                                <>
+                                    <BiPlayCircle/> Start
+                                </>
+                            )
+                        }
                     </button>
                 </div>
                 {this.state.modal && (

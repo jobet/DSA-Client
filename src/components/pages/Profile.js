@@ -44,8 +44,8 @@ function Profile() {
       text: "Logout?",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      confirmButtonColor: '#333',
+      cancelButtonColor: '#B8336A',
       confirmButtonText: 'Yes',
       cancelButtonText:'No'
     }).then((result) => {
@@ -83,6 +83,10 @@ function Profile() {
           '<input type="password" id="swal-input2" class="swal2-input">',
         focusConfirm: false,
         showCancelButton: true,
+        confirmButtonColor: '#B8336A',
+        confirmButtonText: 'Change Password',
+        cancelButtonColor: '#333',
+        cancelButtonText: 'Cancel',
         preConfirm: () => {
           return [
             document.getElementById('swal-input1').value,
@@ -123,6 +127,8 @@ function Profile() {
         input: 'text',
         inputLabel: 'Username',
         inputPlaceholder: 'Enter new username',
+        confirmButtonColor: '#B8336A',
+        confirmButtonText: 'Change Username',
         inputAttributes: {
           maxlength: 20,
           autocapitalize: 'off',
@@ -155,8 +161,8 @@ function Profile() {
       text: "This will delete every info including comments and replies from the account",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#B8336A',
+      cancelButtonColor: '#333',
       cancelButtonText: 'No',
       confirmButtonText: 'Yes'
     }).then((result) => {
@@ -166,8 +172,8 @@ function Profile() {
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
+      confirmButtonColor: '#B8336A',
+      cancelButtonColor: '#333',
       cancelButtonText: 'Cancel',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {

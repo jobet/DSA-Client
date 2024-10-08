@@ -34,12 +34,12 @@ export default function UserTable({ columns, data }) {
       text: "",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'No',
-      cancelButtonText:'Yes'
+      confirmButtonColor: '#B8336A',
+      cancelButtonColor: '#333',
+      confirmButtonText: 'Yes',
+      cancelButtonText:'No'
     }).then((result) => {
-      if (!result.isConfirmed) {
+      if (result.isConfirmed) {
         Axios.delete(`${process.env.REACT_APP_API_URL}/api/username/delete/${selecteduser}`);
       }
     }
@@ -55,12 +55,12 @@ export default function UserTable({ columns, data }) {
       text: "",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'No',
-      cancelButtonText:'Yes'
+      confirmButtonColor: '#B8336A',
+      cancelButtonColor: '#333',
+      confirmButtonText: 'Yes',
+      cancelButtonText:'No'
     }).then((result) => {
-      if (!result.isConfirmed) {
+      if (result.isConfirmed) {
         for (var key in arr) {
         const userinfo = arr[key];
         console.log(userinfo.useremail_reg);
