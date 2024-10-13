@@ -7,6 +7,7 @@
 
 body{
   font-size: 62.5%;
+  background-color: #F7F1FF;
 }
 
 .Sorting, .ShortestPath,
@@ -24,28 +25,18 @@ body{
   text-align: center;
 }
 
-.video-container {
-  margin: -8rem auto 0 auto;
+.video-container img {
+  -webkit-filter: blur(15px);
+  -o-filter: blur(5px);
+  filter: blur(5px);
+  pointer-events: none;
+  position: absolute;
+  top: 25%;
+  left: 25%;
   width: 50%;
   z-index: -1;
   overflow: hidden;
-}
-
-.background-video {
-  pointer-events: none;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.video-overlay {
-  position: absolute;
-  top: 35dvh;
-  left: 0;
-  width: 100%;
-  height: 75dvh;
-  z-index: 0;
-  background: linear-gradient(to bottom, rgba(255,255,255,1) 10%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 90%);
+  opacity: 0.5;
 }
 .reply_hidden{
   display: none;
@@ -424,7 +415,7 @@ li, a{
   box-sizing: border-box;
   padding: 60px 0 0;
   position: relative;
-  height: 60svh;
+  height: 100dvh;
   width:100%;
   margin-left: auto;
   margin-right: auto;
@@ -1214,6 +1205,7 @@ li, a{
   max-height: calc(100dvh - 240px);
   height: auto;
   border: 1px solid #1b146480;
+  background-color: #fff;
   border-radius: 6px;
   padding: 18px;
   margin: 8px 0;
@@ -1292,6 +1284,7 @@ div.quizInnerDiv > p{
   flex-direction: column;
   box-sizing: border-box;
   border: 1px solid #1b146480;
+  background-color: #fff;
   min-height: calc(100dvh - 400px);
   max-height: calc(100dvh - 240px);
   border-radius: 6px;
@@ -1827,8 +1820,8 @@ div.drawing {
   height: calc((100svh - 120px) - 320px);
   width: 100%;
   border: 1px solid #1b146480;
+  background-color: #fff;
   border-radius: 6px;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }
@@ -1853,6 +1846,7 @@ div.drawing svg{
   flex-direction: column;
   text-align: center;
   width: 80%;
+  margin: 0 auto;
   margin-bottom: 4px;
 }
 
@@ -2135,6 +2129,7 @@ div.show-datas {
   justify-content: center;
   align-items: center;
   border: 1px solid #1b146480;
+  background-color: #fff;
   border-radius: 6px;
   box-sizing: border-box;
   padding: 32px 24px;
@@ -2169,11 +2164,16 @@ div.show-datas {
   margin-top: 2px;
   box-sizing: border-box;
   height: calc(100dvh - 200px);
+  max-height: calc(100dvh - 200px);
   width: 100%;
   overflow-y: auto;
+  border: 1px solid #1b146480;
+  border-top: none;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #fff;
 }
 
 .scoretablist {
@@ -2197,8 +2197,9 @@ div.show-datas {
   display: flex;
   flex-direction: row;
   position: relative;
-  border: 1px solid #B8336A;
-  border-radius: 6px;
+  border: 1px solid #1b146480;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
   min-height: 40px;
   list-style: none;
   align-items: center;
@@ -2215,14 +2216,6 @@ div.show-datas {
   font-size: 1.2rem;
 }
 
-.scoretab1{
-  margin-right: 1px;
-}
-
-.scoretab2{
-  margin-left: 1px;
-}
-
 .scoretab1:hover, .scoretab2:hover, .scoretab--selected {
   background: white;
   color: #B8336A;
@@ -2234,14 +2227,12 @@ div.show-datas {
 }
 
 .yourScoreTab, .topScoreTab{
-  margin: 44px 0 0 0;
+  margin: 39px 0 0 0;
   box-sizing: border-box;
-  border: 1px solid #1b146480;
   display: flex;
   flex-direction: column;
   width: 100%;
   text-align: center;
-  overflow-y: auto;
   border-radius: 6px;
 }
 
@@ -2254,6 +2245,7 @@ div.show-datas {
   padding: 24px 48px;
   border: none;
   border-bottom: 1px solid #1b146480;
+  background: #fff;
   text-align: justify;
 }
 
@@ -2394,15 +2386,24 @@ div.show-datas {
   .quizInnerDiv{
     height: calc(100dvh - 240px);
   }
-  .video-container {
-    margin: -12rem 0 0 -50%;
+  .video-container img {
+    top: 25%;
+    right: 0;
+    left: -50%;
     width: 200%;
     z-index: 0;
     overflow: hidden;
   }
   .video-overlay {
-    top: 0dvh;
-    height: 200dvh;
-    background: linear-gradient(to bottom, rgba(255,255,255,1) 25%, rgba(255,255,255,0) 50%, rgba(255,255,255,1) 75%);
+    top: 0;
+    height: 100dvh;
+    background: #F7F1FF85;
+  }
+  .userAvatarInfo img{
+    width: 100px;
+    height: 100px;
+  }
+  .scorePercent{
+    width: 100px;
   }
 }

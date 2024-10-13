@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 
-const InputData = ({ submit, getData, sampleData }) => {
+const InputData = ({ submit, getData, sampleData, stopShow }) => {
   const textareaRef = useRef(null)
 
   useEffect(() => {
@@ -32,7 +32,8 @@ const InputData = ({ submit, getData, sampleData }) => {
   return (
     <textarea 
       ref={textareaRef}
-      className='input-data'
+      className={'input-data'}
+      disabled={stopShow}
       wrap='off'
       spellCheck='false'
       defaultValue={defaultInputData}

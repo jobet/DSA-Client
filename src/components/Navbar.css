@@ -9,8 +9,6 @@
   padding: 0 8rem;
   z-index: 2;
   top: 0;
-  background: #fff;
-  box-shadow: 0 0 10px 10px #fff;
 }
 .footer {
   bottom: 0;
@@ -233,7 +231,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    border-radius: 0;
+    border: none;
   }
 
   .dropdown li{
@@ -262,7 +261,7 @@
   }
 
   .nav-menu.active {
-    background: #ffffff;
+    background: #F7F1FF;
     left: 0;
     opacity: 1;
     transition: all 0.2s ease;
@@ -271,7 +270,7 @@
 
   .nav-links, .nav-links-button {
     text-align: center;
-    height: calc((100dvh - 61px)/6);
+    height: calc((100dvh - 60px)/6);
     width: 100%;
     display: flex;
     border-radius: 0px;

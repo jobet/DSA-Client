@@ -34,7 +34,7 @@ class ShowMethodList extends React.Component {
   render() {
     return (
       <div className="dropdown-container">
-      <button className='showmethodbutton' onClick={() => this.changeShowMethod(false)}>
+      <button disabled={this.props.stopShow} className='showmethodbutton' onClick={() => this.changeShowMethod(false)}>
         <BiShow /> Show Method
       </button>
       {this.state.showmethod && (
@@ -55,6 +55,7 @@ ShowMethodList.propTypes = {
   methodList: PropTypes.array,
   changeStop: PropTypes.func,
   changeStopShowToTrue: PropTypes.func,
+  stopShow: PropTypes.bool,
 }
 
 export default ShowMethodList;

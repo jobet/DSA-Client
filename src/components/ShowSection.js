@@ -90,10 +90,10 @@ class ShowSection extends Component {
         )}
         <div className="inputContainer">
           <InputCode submit={submit} getCode={getCode} sampleCode={sampleCode} />
-          <InputData submit={submit} getData={getData} sampleData={sampleData} />
+          <InputData submit={submit} getData={getData} sampleData={sampleData} stopShow={stopShow} /> 
         </div>
         <div className="buttonArea">
-          <SampleCode changeSample={this.handleSampleChange} />
+          <SampleCode changeSample={this.handleSampleChange} stopShow={stopShow} />
         </div>
         <div className="buttonArea">
           <button onClick={this.toggleModal}><BiHelpCircle /> Help</button>

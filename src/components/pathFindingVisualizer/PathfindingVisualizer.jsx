@@ -3,11 +3,12 @@ import Node from './Node/Node';
 import {dijkstra} from '../pathFindingAlgorithms/dijkstra';
 import {dfs} from '../pathFindingAlgorithms/dfs';
 import {bfs} from '../pathFindingAlgorithms/bfs';
-import { BiInfoCircle, BiHelpCircle, BiX, BiTrash, BiPlayCircle, BiChevronDown, BiExpand, BiSubdirectoryLeft } from "react-icons/bi";
+import { BiInfoCircle, BiStop, BiHelpCircle, BiX, BiTrash, BiPlayCircle, BiChevronDown, BiExpand, BiSubdirectoryLeft } from "react-icons/bi";
 import shortPath from '../images/shortPath.PNG';
 import clearWall from '../images/clearWall.PNG';
 import start from '../images/start.PNG';
 import wall from '../images/wall.PNG';
+import { PiLinkBreakLight } from 'react-icons/pi';
 
 let distancestr='Shortest Distance: 0 cells';
 let visited_nodes =-2;
@@ -196,6 +197,8 @@ DFS(node) {
       selected: "Dijkstra",
       algoDropdown: false,
       algoIcon: <BiExpand className="itemIcon"/>,
+      animationFrameId: null,
+      speed: 1,
     };
     this.handleMouseDown = this.handleMouseDown.bind(this);
     this.handleMouseEnter = this.handleMouseEnter.bind(this);
@@ -324,7 +327,7 @@ DFS(node) {
   }
 
   handleTouchMove(e) {
-    if (this.state.mouseIsPressed && this.state.isDrawing) {
+    if (this.state.mouseIsPressed) {
       e.preventDefault();
       const touch = e.touches[0];
       const element = document.elementFromPoint(touch.clientX, touch.clientY);
@@ -332,7 +335,30 @@ DFS(node) {
         const [, row, col] = element.id.split('-');
         const nodeKey = `${row}-${col}`;
         if (nodeKey !== this.state.lastTouchedNode) {
-          this.handleMouseEnter(parseInt(row), parseInt(col));
+          const newRow = parseInt(row);
+          const newCol = parseInt(col);
+          if (this.state.isStartNode) {
+            const newGrid = getNewGridWithMovedStart(this.state.grid, newRow, newCol, this.state.currRow, this.state.currCol);
+            this.setState({
+              grid: newGrid,
+              currRow: newRow,
+              currCol: newCol,
+              START_NODE_ROW: newRow,
+              START_NODE_COL: newCol,
+            });
+          } else if (this.state.isFinishNode) {
+            const newGrid = getNewGridWithMovedFinish(this.state.grid, newRow, newCol, this.state.currRow, this.state.currCol);
+            this.setState({
+              grid: newGrid,
+              currRow: newRow,
+              currCol: newCol,
+              FINISH_NODE_ROW: newRow,
+              FINISH_NODE_COL: newCol,
+            });
+          } else if (this.state.isWallNode) {
+            const newGrid = getNewGridWithWallToggled(this.state.grid, newRow, newCol);
+            this.setState({grid: newGrid});
+          }
           this.setState({
             lastTouchedNode: nodeKey,
             isDragging: true,
@@ -537,10 +563,10 @@ DFS(node) {
 
 
   // main animation for the pathfinding
-  visualize(algo) {
+  async visualize(algo) {
     if (!this.state.isRunning) {
       this.clearGrid();
-      this.toggleIsRunning();
+      await this.toggleIsRunning();
       const {grid} = this.state;
       const startNode =
         grid[this.state.START_NODE_ROW][this.state.START_NODE_COL];
@@ -564,52 +590,52 @@ DFS(node) {
       const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
       nodesInShortestPathOrder.push('end');
       this.animate(visitedNodesInOrder, nodesInShortestPathOrder);
+    } else {
+      this.stopVisualization();
     }
+  }
+
+  stopVisualization() {
+    this.toggleIsRunning();
   }
 
   // draws a path from the start to the end node
-  animateShortestPath(nodesInShortestPathOrder) {
+  async animateShortestPath(nodesInShortestPathOrder) {
     distancestr="Shortest Distance: "+(nodesInShortestPathOrder.length-3).toString()+" cells"
-   
-    // visited_nodes="No. of Visited Nodes: "+ visited_nodes.toString() +" Cells";
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      if (nodesInShortestPathOrder[i] === 'end') {
-        setTimeout(() => {
-          this.toggleIsRunning();
-        }, i * 50);
-      } else {
-        setTimeout(() => {
-          const node = nodesInShortestPathOrder[i];
-          const nodeClassName = document.getElementById(
-            `node-${node.row}-${node.col}`,
-          ).className;
-          if (
-            nodeClassName !== 'node node-start' &&
-            nodeClassName !== 'node node-finish'
-          ) {
-            document.getElementById(`node-${node.row}-${node.col}`).className =
-              'node node-shortest-path';
-          }
-        }, i * 40);
+      if(this.state.isRunning){
+        if(i === nodesInShortestPathOrder.length - 1) {
+          visiNode="Cells Visited: "+(visited_nodes-1).toString()+" cells";
+          await this.stopVisualization();
+          break;
+        }
+        const node = nodesInShortestPathOrder[i];
+        const nodeClassName = document.getElementById(
+          `node-${node.row}-${node.col}`,
+        ).className;
+        if (
+          nodeClassName !== 'node node-start' &&
+          nodeClassName !== 'node node-finish'
+        ) {
+          document.getElementById(`node-${node.row}-${node.col}`).className =
+            'node node-shortest-path';
+        }
+        if (i % 10 === 0) {
+          await this.updateSpeed(this.state.speed);
+        }
       }
     }
-    visiNode="Cells Visited: "+(visited_nodes-1).toString()+" cells";
-    document.getElementById('textDistance').style.cssText = "color: white;font-weight:800;font-size: larger;";
-    document.getElementById('textDistance1').style.cssText = "color: white;font-weight:800;font-size: larger;";
   }
 
-  animate(visitedNodesInOrder, nodesInShortestPathOrder) {
+  async animate(visitedNodesInOrder, nodesInShortestPathOrder) {
     if(visited_nodes>0)
       visited_nodes=-2;
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-      visited_nodes+=1;
-      if (i === visitedNodesInOrder.length) {
-        setTimeout(() => {
-          this.animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
-        return;
-      }
-      setTimeout(() => {
+      if(this.state.isRunning){
+        visited_nodes+=1;
+        if (i === visitedNodesInOrder.length){
+          await this.animateShortestPath(nodesInShortestPathOrder);
+        }
         const node = visitedNodesInOrder[i];
         const nodeClassName = document.getElementById(
           `node-${node.row}-${node.col}`,
@@ -621,10 +647,24 @@ DFS(node) {
           document.getElementById(`node-${node.row}-${node.col}`).className =
             'node node-visited';
         }
-      }, 10 * i);
+        if (i % 10 === 0) {
+          await this.updateSpeed(this.state.speed);
+        }
+      }
+      else{
+        break;
+      }
     }
-    
   }
+
+  updateSpeed(speed) {
+    return new Promise(resolve => {
+      setTimeout(() => {
+          resolve();
+      }, Math.round(300 * Math.pow(0.778, speed - 1)));
+    });
+  }
+  
   render() {
     const {grid, mouseIsPressed} = this.state;
     return (
@@ -670,12 +710,31 @@ DFS(node) {
         <div className="dashboardArea">
           <p><strong>{distancestr}</strong></p>
           <p><strong>{visiNode}</strong></p>
+          <div className='slidercontainer'> 
+                <div className="sliderlabel">
+                    <p>Speed</p>
+                    <p>{this.state.speed}x</p>
+                </div>
+                <input 
+                    type='range' 
+                    min={1} 
+                    max={16} 
+                    value={this.state.speed} 
+                    onChange={async e => await this.setState({ speed: e.target.value })}
+                    className='slider' 
+                />
+          </div>
           <div className="buttonArea">
             <button className="info-button" onClick={() => this.setState({ algoInfoModal: true })}>
               <BiInfoCircle/>
             </button>
             <div className="dropdown-container">
-              <button className='algorithm-button' onClick={() => this.setState({ algoDropdown: true })}>{this.state.algoIcon} {this.state.algoName} <BiChevronDown className="dropDownIcon"/></button>
+              <button 
+              className='algorithm-button'
+              onClick={() => this.setState({ algoDropdown: true })}
+              disabled={this.state.isRunning}>
+                {this.state.algoIcon} {this.state.algoName} <BiChevronDown className="dropDownIcon"/>
+              </button>
               {this.state.algoDropdown && (
               <>
                 <div onClick={() => this.setState({ algoDropdown: false })} className="overlay2"></div>
@@ -693,11 +752,13 @@ DFS(node) {
               <BiHelpCircle/> Help
             </button>
             <button
+              disabled={this.state.isRunning}
               type="button"
               onClick={() => this.clearGrid()}>
               <BiTrash /> Clear Grid
             </button>
             <button
+              disabled={this.state.isRunning}
               type="button"
               onClick={() => this.clearWalls()}>
               <BiTrash /> Clear Walls
@@ -705,7 +766,15 @@ DFS(node) {
             <button
             type="button"
             onClick={() => this.visualize(this.state.selected)}>
-              <BiPlayCircle/> Start
+              {this.state.isRunning ? (
+                <>
+                <BiStop/> Stop
+                </>
+              ) : (
+                <>
+                <BiPlayCircle/> Start
+                </>
+              )}
             </button>
           </div>
         </div>

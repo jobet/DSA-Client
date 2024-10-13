@@ -667,7 +667,9 @@ class PriorityQueue {
           <BiInfoCircle/>
         </button>
         <div className="dropdown-container">
-        <button className='algorithm-button' onClick={this.closeButton}>{this.state.algoIcon}{this.state.selected} <BiChevronDown className="dropDownIcon"/></button>
+        <button disabled={this.props.stopShow} className='algorithm-button' onClick={this.closeButton}>
+          {this.state.algoIcon}{this.state.selected} <BiChevronDown className="dropDownIcon"/>
+        </button>
         {this.state.open && (
           <>
             <div onClick={this.closeButton} className="overlay2"></div>
@@ -698,7 +700,8 @@ class PriorityQueue {
 }
 
 SampleCode.propTypes = {
-  changeSample : PropTypes.func
+  changeSample : PropTypes.func,
+  stopShow : PropTypes.bool,
 }
 
 SampleCode.defaultProps = {

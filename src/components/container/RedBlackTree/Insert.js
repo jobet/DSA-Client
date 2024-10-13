@@ -199,14 +199,23 @@ class Insert extends Component {
       textSvg: [],
       ElementSvg: [],  
       ArrowSvg: [],
+      svgViewBox: '0 0 580 460',
     }
 
-    this.drawPos = [[290,80],[170,180],[410,180],[110,280],[230,280],[350,280],[470,280],
-  [80,380],[140,380],[200,380],[260,380],[320,380],[380,380],[440,380],[500,380]]
+    this.drawPos = [
+      ['50%', '17.39%'], ['29.31%', '39.13%'], ['70.69%', '39.13%'],
+      ['18.97%', '60.87%'], ['39.66%', '60.87%'], ['60.34%', '60.87%'], ['81.03%', '60.87%'],
+      ['13.79%', '82.61%'], ['24.14%', '82.61%'], ['34.48%', '82.61%'], ['44.83%', '82.61%'],
+      ['55.17%', '82.61%'], ['65.52%', '82.61%'], ['75.86%', '82.61%'], ['86.21%', '82.61%']
+    ];
+    this.drawPos2 = [['50%',80],[170,180],[410,180],[110,280],[230,280],[350,280],[470,280],
+    [80,380],['24.14%',380],['34.48%',380],[260,380],[320,380],[380,380],[440,380],[500,380]];
   }
 
   // lifecycle 
   componentDidMount() {
+    this.updateSvgViewBox();
+    window.addEventListener('resize', this.updateSvgViewBox);
     if (this.props.object.classname === 'SetTree' || this.props.object.classname === 'MultiSetTree') {
       if (this.props.object.classname === 'SetTree') {
         this.tree = this.props.object.copy()._settree._tree;
@@ -214,36 +223,36 @@ class Insert extends Component {
         this.tree = this.props.object.copy()._multisettree._tree;
       }
       this.treekind = 'set';
-      this.newNodeExample = [<TreeNode key={this.keyid} data={this.props.params[0].toString() + ((this.treekind === 'map')?'    \n: ' + this.props.params[1].toString(): '')} cx = {this.interval+20} cy={75} r={18} color={'red'} strokewidth='0px'/>]
+      this.newNodeExample = [<TreeNode key={this.keyid} data={this.props.params[0].toString() + ((this.treekind === 'map')?'    \n: ' + this.props.params[1].toString(): '')} cx={'6%'} cy={'15%'} r={18} color={'red'} strokewidth='0px'/>]
       this.keyid += 1;
 
       if (this.tree.contains(this.props.params[0]) && this.props.object.classname === 'SetTree') {
         // duplicated key
         this.props.initiate(this.props.duration*2*1000);
-        this.setState({textSvg: [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Error: SetTree contains key already</text>]});
+        this.setState({textSvg: [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Error: SetTree contains key already</text>]});
         this.keyid +=1;
       } else if (this.tree.size() === 0) {
         // empty tree
         this.props.initiate(this.props.duration*2*1000);
         
         let ElementSvg = [];
-        ElementSvg.push(<TreeNode border='deepskyblue' key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={this.props.params[0].toString() + ((this.treekind === 'map')?'    \n: ' + this.props.params[1].toString(): '')} cx={290} cy={120} r={20} color={'black'}/>)
+        ElementSvg.push(<TreeNode border='deepskyblue' key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={this.props.params[0].toString() + ((this.treekind === 'map')?'    \n: ' + this.props.params[1].toString(): '')} cx={'50%'} cy={'17.35%'} r={20} color={'black'}/>)
         this.keyid += 1;
-        ElementSvg.push(<TreeNode key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={'LEAF'} cx={140} cy={200} r={20} color={'black'}/>)
+        ElementSvg.push(<TreeNode key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={'LEAF'} cx={'29.31%'} cy={'39.13%'} r={20} color={'black'}/>)
         this.keyid +=1;
-        ElementSvg.push(<TreeNode key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={'LEAF'} cx={430} cy={200} r={20} color={'black'}/>)
+        ElementSvg.push(<TreeNode key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={'LEAF'} cx={'70.69%'} cy={'39.13%'} r={20} color={'black'}/>)
         this.keyid +=1;
         // new Arrow
-        ElementSvg = (Arrow(290, 120, 140, 200, 'appear80', this.keyid, this.props.duration.toString() + 's', this.props.duration.toString() + 's')).concat(ElementSvg)
+        ElementSvg = (Arrow('50%', '17.35%', '29.31%', '39.13%', 'appear80', this.keyid, this.props.duration.toString() + 's', this.props.duration.toString() + 's')).concat(ElementSvg)
         this.keyid += 1;  
-        ElementSvg = (Arrow(290, 120, 430, 200, 'appear80', this.keyid, this.props.duration.toString() + 's', this.props.duration.toString() + 's')).concat(ElementSvg)
+        ElementSvg = (Arrow('50%', '17.35%', '70.69%', '39.13%', 'appear80', this.keyid, this.props.duration.toString() + 's', this.props.duration.toString() + 's')).concat(ElementSvg)
         this.keyid += 1;  
 
-        this.setState({ElementSvg, textSvg: [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Insert To Empty Tree</text>]});
+        this.setState({ElementSvg, textSvg: [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Insert To Empty Tree</text>]});
         this.keyid +=1;
       } else {
         const ElementSvg = this.drawNodeArrow(this.tree._root);
-        this.setState({ElementSvg, textSvg: [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Original {(this.props.object.classname === 'SetTree') ? 'SetTree' : 'MultiSetTree'}</text>]});
+        this.setState({ElementSvg, textSvg: [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Original {(this.props.object.classname === 'SetTree') ? 'SetTree' : 'MultiSetTree'}</text>]});
         this.keyid +=1;
         this.sto = setTimeout(() => this.findInsertPose(this.tree._root), this.props.duration*1*1000);
       }
@@ -254,43 +263,62 @@ class Insert extends Component {
         this.tree = this.props.object.copy()._multimaptree._tree;
       }
       this.treekind = 'map';
-      this.newNodeExample = [<TreeNode key={this.keyid} data={this.props.params[0].toString() + ((this.treekind === 'map')?'    \n: ' + this.props.params[1].toString(): '')} cx = {this.interval+20} cy={75} r={18} color={'red'} strokewidth='0px'/>]
+      this.newNodeExample = [<TreeNode key={this.keyid} data={this.props.params[0].toString() + ((this.treekind === 'map')?'    \n: ' + this.props.params[1].toString(): '')} cx={'6%'} cy={'15%'} r={18} color={'red'} strokewidth='0px'/>]
       this.keyid += 1;
 
       if (this.tree.contains(this.props.params[0]) && this.props.object.classname === 'MapTree') {
         // duplicated key
         this.props.initiate(this.props.duration*2*1000);
-        this.setState({textSvg: [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Error: MapTree contains key already</text>]});
+        this.setState({textSvg: [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Error: MapTree contains key already</text>]});
         this.keyid +=1;
       } else if (this.tree.size() === 0) {
         // empty tree
         this.props.initiate(this.props.duration*2*1000);
         
         let ElementSvg = [];
-        ElementSvg.push(<TreeNode border='deepskyblue' key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={this.props.params[0].toString() + ((this.treekind === 'map')?'    \n: ' + this.props.params[1].toString(): '')} cx={290} cy={120} r={20} color={'black'}/>)
+        ElementSvg.push(<TreeNode border='deepskyblue' key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={this.props.params[0].toString() + ((this.treekind === 'map')?'    \n: ' + this.props.params[1].toString(): '')} cx={'50%'} cy={'33.20%'} r={20} color={'black'}/>)
         this.keyid += 1;
-        ElementSvg.push(<TreeNode key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={'LEAF'} cx={140} cy={200} r={20} color={'black'}/>)
+        ElementSvg.push(<TreeNode key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={'LEAF'} cx={'24.14%'} cy={'34.48%'} r={20} color={'black'}/>)
         this.keyid +=1;
-        ElementSvg.push(<TreeNode key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={'LEAF'} cx={430} cy={200} r={20} color={'black'}/>)
+        ElementSvg.push(<TreeNode key={this.keyid} className='appear80' ani_dur={this.props.duration.toString() + 's'} ani_delay={this.props.duration.toString() + 's'} data={'LEAF'} cx={'68.86%'} cy={'34.48%'} r={20} color={'black'}/>)
         this.keyid +=1;
         // new Arrow
-        ElementSvg = (Arrow(290, 120, 140, 200, 'appear80', this.keyid, this.props.duration.toString() + 's', this.props.duration.toString() + 's')).concat(ElementSvg)
+        ElementSvg = (Arrow('50%', '33.20%', '24.14%', '34.48%', 'appear80', this.keyid, this.props.duration.toString() + 's', this.props.duration.toString() + 's')).concat(ElementSvg)
         this.keyid += 1;  
-        ElementSvg = (Arrow(290, 120, 430, 200, 'appear80', this.keyid, this.props.duration.toString() + 's', this.props.duration.toString() + 's')).concat(ElementSvg)
+        ElementSvg = (Arrow('50%', '33.20%', '68.86%', '34.48%', 'appear80', this.keyid, this.props.duration.toString() + 's', this.props.duration.toString() + 's')).concat(ElementSvg)
         this.keyid += 1;  
 
-        this.setState({ElementSvg, textSvg: [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Insert To Empty Tree</text>]});
+        this.setState({ElementSvg, textSvg: [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Insert To Empty Tree</text>]});
         this.keyid +=1;
       } else {
         const ElementSvg = this.drawNodeArrow(this.tree._root);
-        this.setState({ElementSvg, textSvg: [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Original MapTree</text>]});
+        this.setState({ElementSvg, textSvg: [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Original MapTree</text>]});
         this.keyid +=1;
         this.sto = setTimeout(() => this.findInsertPose(this.tree._root), this.props.duration*1*1000);
       }
     } else {
-      this.setState({textSvg: [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Error: wrong classname {console.log(this.props.object)}</text>]});
+      this.setState({textSvg: [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Error: wrong classname {console.log(this.props.object)}</text>]});
       this.keyid +=1;
     }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateSvgViewBox);
+  }
+
+  updateSvgViewBox = () => {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const aspectRatio = width / height;
+    let viewBox;
+
+    if (aspectRatio > 580/460) {
+      viewBox = `0 0 ${(580 * aspectRatio).toFixed(0)} 460`;
+    } else {
+      viewBox = `0 0 580 ${(460 / aspectRatio).toFixed(0)}`;
+    }
+
+    this.setState({ svgViewBox: viewBox });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -307,7 +335,7 @@ class Insert extends Component {
     const key = this.props.params[0];
 
     if (node.getLeftChild() === null) {
-      const textSvg = [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Insert Node</text>];
+      const textSvg = [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Insert Node</text>];
       let ElementSvg;
 
       const nnum = getnnum(node), pnum = getpnum(node), gnum = getgnum(node);
@@ -353,7 +381,7 @@ class Insert extends Component {
       return;
     }
 
-    const textSvg = [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>Find Insert Position</text>];
+    const textSvg = [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>Find Insert Position</text>];
     let ElementSvg;
 
     const nnum = getnnum(node), pnum = getpnum(node), gnum = getgnum(node);
@@ -403,7 +431,7 @@ class Insert extends Component {
   }
 
   insertCase1(node = null) {
-    const textSvg = [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>InsertCase1: N is root node - change color</text>];
+    const textSvg = [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>InsertCase1: N is root node - change color</text>];
     this.keyid += 1;
     
     let ElementSvg;
@@ -432,7 +460,7 @@ class Insert extends Component {
   }
 
   insertCase2(node = null) {
-    const textSvg = [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>InsertCase2: P is black - do nothing</text>];
+    const textSvg = [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>InsertCase2: P is black - do nothing</text>];
     this.keyid += 1;
     
     let ElementSvg;
@@ -454,7 +482,7 @@ class Insert extends Component {
   }
 
   insertCase3 = (node) => {
-    const textSvg = [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>InsertCase3: P is red and U is red - recursive</text>];
+    const textSvg = [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>InsertCase3: P is red and U is red - recursive</text>];
     this.keyid += 1;
     
     let ElementSvg;
@@ -499,7 +527,7 @@ class Insert extends Component {
   };
   
   insertCase4 = (node) => {
-    const textSvg = [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>InsertCase4 - 1: P is red and U is red - rotate</text>];
+    const textSvg = [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>InsertCase4 - 1: P is red and U is red - rotate</text>];
     this.keyid += 1;
     
     // let ElementSvg = this.showAndAnimation(node, 'disappear', (this.props.duration).toString() + 's', (this.props.duration).toString() + 's');
@@ -569,7 +597,7 @@ class Insert extends Component {
   }
   
   insertCase4Step2 = (node) => {
-    const textSvg = [<text key={this.keyid} x={this.interval} y={50} width={30} height={15}>InsertCase4 - 2: P is red and U is red - rotate</text>];
+    const textSvg = [<text key={this.keyid} x={'2%'} y={'5%'} width={30} height={15}>InsertCase4 - 2: P is red and U is red - rotate</text>];
     this.keyid += 1;
     
     // let ElementSvg = this.showAndAnimation(node, 'disappear', (this.props.duration).toString() + 's', (this.props.duration).toString() + 's');

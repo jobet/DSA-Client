@@ -4,6 +4,7 @@ import members from '../images/members.svg';
 import linear from '../images/linear.svg';
 import nonlinear from '../images/nonlinear.svg';
 import HomeVideo from '../images/HomeVideo.webm';
+import HomeVideoImg from '../images/HomeVideo.webp';
 
 export default function Home(){
     useEffect(() => {
@@ -28,11 +29,7 @@ export default function Home(){
                 <h3 className='message2'>Learn how most data structures and algorithms work through animated visualizers!</h3>
             </div>
             <div className='video-container'>
-                <video id="homeVideo" autoPlay loop muted playsInline className='background-video'>
-                    <source src={HomeVideo} type="video/webm" />
-                    Your browser does not support the video tag.
-                </video>
-                <div className='video-overlay'></div>
+                <img src={HomeVideoImg} className="homeVideo" id="homeVideo" />
             </div>
             <div className='box2'>
                 <div className="imgSection">
