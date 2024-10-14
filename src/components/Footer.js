@@ -19,7 +19,7 @@ function Footer() {
 function FooterBackend() {
   return (
     <>
-      <div className='footer'>
+      <div className='footer footerb'>
       <img src={logoImage} alt='' className="footerlogo"/>
         <p>DSA Visual</p>
        <BiCopyright/>

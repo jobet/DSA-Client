@@ -435,7 +435,7 @@ export default function Comment(){
               {replies.map((item) => {
                 if(item.comment_id == val.comment_id){
                   return (
-                    <div className="replyholder2">
+                    <div className="replyholder">
                     {convertDate(item.reply_written) == "Invalid Date" ? 
                     ""
                     :  

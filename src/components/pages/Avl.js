@@ -1,11 +1,6 @@
 import React,{useState} from 'react';
-import Collapsible from '../functions/Collapsible.js';
 import AVL from '../AVL_Tree/AVL.js';
-import SideCollapsible from '../functions/SideCollapsible.js';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import "../functions/modal.css";
-
 export default function Avl(){
     const [modal, setModal] = useState(false);
 

@@ -29,7 +29,11 @@ export default function Home(){
                 <h3 className='message2'>Learn how most data structures and algorithms work through animated visualizers!</h3>
             </div>
             <div className='video-container'>
-                <img src={HomeVideoImg} className="homeVideo" id="homeVideo" />
+                <video id="homeVideo" autoPlay loop muted playsInline className='background-video'>
+                    <source src={HomeVideo} type="video/webm" />
+                    Your browser does not support the video tag.
+                </video>
+                <div className='video-overlay'></div>
             </div>
             <div className='box2'>
                 <div className="imgSection">

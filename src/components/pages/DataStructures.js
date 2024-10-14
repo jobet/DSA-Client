@@ -1,8 +1,6 @@
 import React from 'react';
 import Dsa from './Dsa.js';
 import 'react-tabs/style/react-tabs.css';
-import "../functions/modal.css";
-
 export default function DataStructures(){
     return(
         <div className='DataStructures'>

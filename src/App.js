@@ -25,7 +25,6 @@ import RegisterForm from './components/pages/RegisterForm';
 function App() {
   //Login/Register with Dropdown
   const [value, setValue] = useState(<Navbar avatar={localStorage.getItem('avatar_display')} username={localStorage.getItem('username')}/>)
-  
   if(window.location.pathname=="/admin"){
     return (
       <Router>

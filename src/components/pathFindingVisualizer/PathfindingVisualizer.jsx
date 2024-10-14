@@ -620,9 +620,7 @@ DFS(node) {
           document.getElementById(`node-${node.row}-${node.col}`).className =
             'node node-shortest-path';
         }
-        if (i % 10 === 0) {
-          await this.updateSpeed(this.state.speed);
-        }
+        await this.updateSpeed(this.state.speed);
       }
     }
   }
@@ -648,7 +646,7 @@ DFS(node) {
             'node node-visited';
         }
         if (i % 10 === 0) {
-          await this.updateSpeed(this.state.speed);
+          await this.updateSpeed(this.state.speed, 0);
         }
       }
       else{
@@ -657,11 +655,18 @@ DFS(node) {
     }
   }
 
-  updateSpeed(speed) {
+  updateSpeed(speed, type) {
+    let delay = 0;
+    if(type===0){
+      delay = Math.round(300 * Math.pow(0.778, speed - 1))
+    }
+    else{
+      delay = Math.round(100 * Math.pow(0.852, speed - 1))
+    }
     return new Promise(resolve => {
       setTimeout(() => {
           resolve();
-      }, Math.round(300 * Math.pow(0.778, speed - 1)));
+      }, delay);
     });
   }
   

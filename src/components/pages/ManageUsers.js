@@ -57,9 +57,11 @@ export default function ManageUsers(){
   }, []);
   if(localStorage.getItem("adminusername")){
     return (
-      <div className="BackendPage">
-      <h2 className="backend_title">User Management</h2>
-      <UserTable columns={columns} data={data}/>
+      <div className="DashboardPage">
+        <div className="BackendPage">
+          <h1 className="siteTitle">User Management</h1>
+          <UserTable columns={columns} data={data}/>
+        </div>
       </div>)
   }
   else window.location.href = "/admin";

@@ -1,7 +1,5 @@
 import React from 'react';
-import "../functions/modal.css";
 import Visualizer from './sortingVisualizer.jsx';
-import './sorting.css';
 
 export default function Sorting(){
     return (

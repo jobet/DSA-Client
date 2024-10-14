@@ -1,5 +1,6 @@
 import React from "react";
 import { useTable, useRowSelect, usePagination } from "react-table"; 
+import { BiArrowToLeft, BiLeftArrowAlt, BiRightArrowAlt, BiArrowToRight, BiTrash} from "react-icons/bi";
 import Axios from 'axios'
 import Swal from 'sweetalert2';
 
@@ -121,7 +122,9 @@ export default function UserTable({ columns, data }) {
           id: 'deleteuserbtn',
           Header: '',
           Cell: ({ row }) => (
-              <button className="deletebtn" onClick={() => deleteUser(row)}>Delete</button>
+              <button className="deletebtn" onClick={() => deleteUser(row)}>
+                <BiTrash />
+              </button>
           ),
         }
       ])
@@ -134,16 +137,20 @@ export default function UserTable({ columns, data }) {
   */
   return (
     <>
-    <span className="indentButton"><button className='deletebtn' onClick={()=>{deleteUsers(selectedFlatRows.map(d => d.original))}}>Delete</button></span>
-    <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <span>
-          Go to page:{' '}
+      <div className="pagination">
+        <button className='deletebtn' onClick={()=>{deleteUsers(selectedFlatRows.map(d => d.original))}}>
+          <BiTrash />
+        </button>
+        <div className="pagination-controls">
+          <div className="left-controls">
+            <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+              <BiArrowToLeft />
+            </button>
+            <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+              <BiLeftArrowAlt />
+            </button>
+          </div>
+          <p>Page:</p>
           <input
             type="number"
             defaultValue={pageIndex + 1}
@@ -153,59 +160,63 @@ export default function UserTable({ columns, data }) {
             }}
             style={{ width: '100px' }}
           />
-        </span>{' '}
-        <select
-          value={pageSize}
-          onChange={e => {
-            setPageSize(Number(e.target.value))
-          }}
-        >
-          {[10, 20, 30, 40, 50].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
-      </div>
-    <table {...getTableProps()} id="listtable">
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+          <select
+            value={pageSize}
+            onChange={e => {
+              setPageSize(Number(e.target.value))
+            }}
+          >
+            {[10, 20, 30, 40, 50].map(pageSize => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
             ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {page.map((row, i) => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()}>
-              {row.cells.map(cell => {
-                return(
-                  <>
-                  <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
-                </>
-                )
-              })}
+          </select>
+          <div className="right-controls">
+            <button onClick={() => nextPage()} disabled={!canNextPage}>
+              <BiRightArrowAlt />
+            </button>
+            <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+              <BiArrowToRight />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="userManagementTable">
+      <table {...getTableProps()} id="listtable">
+        <thead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps()}>{column.render("Header")}</th>
+              ))}
             </tr>
-          );
-        })}
-      </tbody>
-    </table>
-    <p style={{textAlign:"center",fontSize:"15px"}}>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
-        </p>
+          ))}
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {page.map((row, i) => {
+            prepareRow(row);
+            return (
+              <tr {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return(
+                    <>
+                    <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
+                  </>
+                  )
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+      <p style={{textAlign:"center",fontSize:"15px"}}>
+            Page{' '}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>{' '}
+          </p>
+      </div>
     </>
   )
 }

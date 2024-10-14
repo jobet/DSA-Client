@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import { BiSolidCircle } from "react-icons/bi";
 
 export default function ManageDiscussion(){
     const [commentList,setcommentList]=useState([]);
@@ -26,31 +27,35 @@ export default function ManageDiscussion(){
         setBackupCommentList([...commentList])
      }
   } , [commentList])
+  
     function convertDate(date){
+      let finalDate = "";
       var seconds = Math.floor((new Date() - date) / 1000);
-
-      var interval = seconds / 31536000;
-    
-      if (interval > 1) {
-        return Math.floor(interval) + " years ago";
+      if ((seconds / 31536000) > 1) {
+          finalDate = Math.floor(seconds / 31536000) + " year";
+          if (Math.floor(seconds / 31536000) != 1) finalDate += "s";
       }
-      interval = seconds / 2592000;
-      if (interval > 1) {
-        return Math.floor(interval) + " months ago";
+      else if ((seconds / 2592000) > 1) {
+          finalDate = Math.floor(seconds / 2592000) + " month";
+          if (Math.floor(seconds / 2592000) != 1) finalDate += "s";
       }
-      interval = seconds / 86400;
-      if (interval > 1) {
-        return Math.floor(interval) + " days ago";
+      else if ((seconds / 86400) > 1) {
+          finalDate = Math.floor(seconds / 86400) + " day";
+          if (Math.floor(seconds / 86400) != 1) finalDate += "s";
       }
-      interval = seconds / 3600;
-      if (interval > 1) {
-        return Math.floor(interval) + " hours ago";
+      else if ((seconds / 3600) > 1) {
+          finalDate = Math.floor(seconds / 3600) + " hour";
+          if (Math.floor(seconds / 3600) != 1) finalDate += "s";
       }
-      interval = seconds / 60;
-      if (interval > 1) {
-        return Math.floor(interval) + " minutes ago";
+      else if ((seconds / 60) > 1) {
+          finalDate = Math.floor(seconds / 60) + " minute";
+          if (Math.floor(seconds / 60) != 1) finalDate += "s";
       }
-      return Math.floor(seconds) + " seconds ago";
+      else{
+          finalDate = Math.floor(seconds) + " second";
+          if (Math.floor(seconds) != 1) finalDate += "s";
+      }
+      return finalDate+" ago";
     }
 
     const deleteComment=(id)=>{
@@ -62,7 +67,7 @@ export default function ManageDiscussion(){
         confirmButtonColor: '#B8336A',
         cancelButtonColor: '#333',
         confirmButtonText: 'Yes',
-        cancelButtonText:'YNo'
+        cancelButtonText:'No'
       }).then((result) => {
         if (result.isConfirmed) {
           Axios.delete(`${process.env.REACT_APP_API_URL}/api/comment/delete/${id}`)
@@ -101,69 +106,81 @@ export default function ManageDiscussion(){
     const [show, setShow] = useState(false);
       if(localStorage.getItem("adminusername")){
      return(
-       <>
+       <div className="DashboardPage">
         <div className="BackendPage">
-            <h2 className="backend_title">Discussion Management</h2>
-            <br></br>
+          <div className="DiscussionBox">
+            <h1 className="siteTitle">Discussion Management</h1>
+            <p><strong>Comments ({commentList.length})</strong></p>
             <div className="cardholder">
-        {(() => { 
-          if (!commentList.length){
-            console.log('comment list was emptied')
-            // console.log(backupCommentList)
-            setcommentList([...backupCommentList])
-          }
-        })}
-            {
-            commentList.map((val)=>{
-               return (
-                <div className="backendcard">
-                  {(() => {
-          return (
-            <>
-            <table className="comment">
-              <tr>
-                <td>
-                <img className='usericon' width={'45px'} height={'50px'}src={val.user_infos.useravatar_url}></img>
-                </td>
-              <td>
-              <span className='backenduser'>  {val.user_infos.username_reg}</span> • {convertDate(new Date(val.date_written))}
-              </td>
-              </tr>
-            </table>
-            <p className="commentmsg">{val.comment_text} </p>
-            <button id='deleteBtn' className='deletebtn' onClick={()=>{deleteComment(val.comment_id)}}>Delete</button>
-            </>
-          )
-        })()}
+              {commentList.map((val) => (
+                <div className="card" key={val.comment_id}>
+                  <div className="commentHeader">
+                    <img
+                      className='usericon'
+                      width='50px'
+                      height='50px'
+                      src={val.user_infos.useravatar_url}
+                      alt="User Avatar"
+                    />
+                    <div className="commentBody">
+                      <div className="userCommentDetails">
+                        <h2 className='user'>{val.user_infos.username_reg}</h2>
+                        <BiSolidCircle className="userDateSeparator"/> 
+                        <span>{convertDate(new Date(val.date_written))}</span>
+                      </div>
+                      <p className="commentmsg">{val.comment_text}</p>
+                    </div>
+                  </div>
+                  
+                  {val.user_infos.useremail_reg === localStorage.getItem("email") && (
+                    <div className="actionArea">
+                      <button id='deleteBtn' className='commentbtn' onClick={() => deleteComment(val.comment_id)}>Delete</button>
+                    </div>
+                  )}
 
-{/* Replies */}
-<>
-        {replies.map((item) => (
-          <>
-            {item.comment_id == val.comment_id ? <div>{convertDate(new Date(item.reply_written)) == "Invalid Date" ? "" :    
-            <div>
-              <table className="comment">
-                <tr>
-                  <td>
-                  <img src={item.user_infos.useravatar_url} width="20px" height="20px"></img>
-                  </td>
-                  <td>
-                  <label className="backendreplyuser">{item.user_infos.username_reg}</label><span> • {convertDate(new Date(item.reply_written))}</span>
-                  </td>
-                </tr>
-              </table>
-            <p className="replymsg">{item.reply_content}</p>
-            <button className='deletebtn' onClick={()=>{deleteReply(item.reply_id)}}>Delete</button>
-            </div>}        
-          </div>:"" }
-          </>
-        ))}</>
-              </div>
-               ) 
-            })}
+                  {/* Replies */}
+                  {replies.map((item) => {
+                    if (item.comment_id === val.comment_id) {
+                      return (
+                        <div className="replyholder" key={item.reply_id}>
+                          {convertDate(new Date(item.reply_written)) !== "Invalid Date" && (
+                            <>
+                              <div className="comment">
+                                <div className="commentHeader">
+                                  <img 
+                                    src={item.user_infos.useravatar_url} 
+                                    width="30px" 
+                                    height="30px"
+                                    alt="User Avatar"
+                                  />
+                                  <div className="commentBody">
+                                    <div className="userReplyDetails">
+                                      <label className="replyuser">{item.user_infos.username_reg}</label>
+                                      <BiSolidCircle className="userDateSeparator"/> 
+                                      <span>{convertDate(new Date(item.reply_written))}</span>
+                                    </div>
+                                    <span className="replymsg">{item.reply_content}</span>
+                                  </div>
+                                </div>
+                              </div>
+                              {item.useremail_reg === localStorage.getItem("email") && (
+                                <div className="actionArea">
+                                  <button className='replybtn' onClick={() => deleteReply(item.reply_id)}>Delete</button>
+                                </div>
+                              )}
+                            </>
+                          )}
+                        </div>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              ))}
             </div>
+          </div>
         </div>
-        </>
+      </div>
      )
     }
     else window.location.href = "/admin"; 

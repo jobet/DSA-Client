@@ -6,12 +6,13 @@ import { UserContext } from './UserContext';
 import Swal from 'sweetalert2';
 import { BiUser, BiCommentDetail, 
   BiEdit, BiLogOut, BiLineChart, 
-  BiBookContent, BiBarChart, BiGrid } from "react-icons/bi";
+  BiBarChart, BiGrid } from "react-icons/bi";
 import { TbBinaryTree } from "react-icons/tb";
 
 function Navbar({ avatar, username }) {
   const [click, setClick] = useState(false);
   const [state, setState] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { setValue } = useContext(UserContext);
   const history = useHistory();
   const container = useRef(null);
@@ -23,11 +24,21 @@ function Navbar({ avatar, username }) {
       }
     }
 
+    function handleScroll() {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    }
+
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [scrolled]);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => {
@@ -62,7 +73,7 @@ function Navbar({ avatar, username }) {
   };
 
   return (
-    <nav className='navbar'>
+    <nav className={`navbar ${scrolled ? 'navbar-scrolled' : ''}`}>
       <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
         <img draggable="false" src={logoImage} alt='DSA' width={40} height={40} />
         DSA Visual
@@ -88,7 +99,7 @@ function Navbar({ avatar, username }) {
         </li>
         <li className='nav-item'>
           <Link to='/quiz' className='nav-links' onClick={closeMobileMenu}>
-          <BiBookContent />Quiz
+          <BiEdit />Quiz
           </Link>
         </li>
         <li className='nav-item'>
@@ -104,7 +115,7 @@ function Navbar({ avatar, username }) {
             </button>
           ) : (
             <button className="nav-links-button" onClick={handleButtonClick}>
-              <span className="navbicon"><BiUser /></span>
+              <BiUser />
               <span>Login</span>
             </button>
           )}
@@ -140,45 +151,73 @@ function Navbar({ avatar, username }) {
 }
 
 function NavbarBackend() {
+  const [state, setState] = useState(false);
   const [click, setClick] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const container = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (container.current && !container.current.contains(event.target)) {
+        setState(false);
+      }
+    }
+
+    function handleScroll() {
+      const isScrolled = window.scrollY > 10;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [scrolled]);
+
   const adminLogout = () => {
     localStorage.removeItem("adminusername");
   };
 
   return (
-    <nav className='navbarb'>
+    <nav className={`navbar navbarb ${scrolled ? 'navbar-scrolled' : ''}`}>
       <Link to='/dashboard' className='navbar-logo' onClick={closeMobileMenu}>
-        <img draggable="false" src={logoImage} alt='DSA' width={168} height={45} />
+        <img draggable="false" src={logoImage} alt='DSA' width={40} height={40} />
+        DSA Admin
       </Link>
       <div className='menu-icon' onClick={handleClick}>
-        <i className={click ? 'fas fab-times' : 'fas fab-bars'} />
+        <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
       </div>
-      <ul className={click ? 'navb-menu active' : 'navb-menu'}>
-        <li className='navb-item'>
-          <Link to='/dashboard' className='navb-links' onClick={closeMobileMenu}>
-            <span className="navbicon"><BiLineChart /></span> Dashboard
+      <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+        <li className='nav-item'>
+          <Link to='/dashboard' className='nav-links backend-links' onClick={closeMobileMenu}>
+            <BiLineChart />Dashboard
           </Link>
         </li>
-        <li className='navb-item'>
-          <Link to='/manage-users' className='navb-links' onClick={closeMobileMenu}>
-            <span className="navbicon"><BiUser /></span> Users
+        <li className='nav-item'>
+          <Link to='/manage-users' className='nav-links backend-links' onClick={closeMobileMenu}>
+            <BiUser />Manage Users
           </Link>
         </li>
-        <li className='navb-item'>
-          <Link to='/manage-discussion' className='navb-links' onClick={closeMobileMenu}>
-            <span className="navbicon"><BiCommentDetail /></span> Discussion
+        <li className='nav-item'>
+          <Link to='/manage-quiz' className='nav-links backend-links' onClick={closeMobileMenu}>
+            <BiEdit />Manage Quiz
           </Link>
         </li>
-        <li className='navb-item'>
-          <Link to='/manage-quiz' className='navb-links' onClick={closeMobileMenu}>
-            <span className="navbicon"><BiEdit /></span> Quiz
+        <li className='nav-item'>
+          <Link to='/manage-discussion' className='nav-links backend-links' onClick={closeMobileMenu}>
+            <BiCommentDetail />Manage Discussion
           </Link>
         </li>
-        <li className='navb-item'>
-          <a href="/admin" className="navb-links" onClick={adminLogout}>
-            <span className="navbicon"><BiLogOut /></span> Log-out
+        <li className='nav-item'>
+          <a href="/admin" className="nav-links backend-links" onClick={adminLogout}>
+            <BiLogOut />Logout
           </a>
         </li>
       </ul>
