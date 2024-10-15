@@ -83,6 +83,12 @@ button:hover {
   background-color:#ffffff;
   transition: all 0.1s ease-in;
 }
+button:active {
+  color:#B8336A;
+  border: 1px solid #B8336A;
+  background-color:#ffffff;
+  transition: all 0.1s ease-in;
+}
 button:disabled {
   color: black;
   background-color: #1b146480;
