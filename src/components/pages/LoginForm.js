@@ -213,31 +213,33 @@ return (
         }
         else if (enableSubmitCode == true) {
           return (
-            <div className='box1-login'>
-              
-              <div className='login_form'>
-                <h1 className='siteTitle' style={{color:'teal'}}>Confirm Code</h1>
-                <br></br>
-                <div className='logbox'>
-                    <center>
-                      {/* {document.getElementById("log_email").value = log_Email} */}
-                     <input type="email" placeholder="Enter Email" value={log_Email} name="email" id="log_email" onChange={(e) => {
-                        setLog_Email(e.target.value)
-                      }} ></input>
-                      </center>
-                      <center>
-         
-                      <input type="text" placeholder="Enter Confirmation Code" name="confirm" id="log_confirm_code" onChange={(e) => {
-                         setCode(e.target.value)
-                      }} ></input>
-                    </center>
-                
-                </div>
-                    <center><button style={{width:'auto'}} onClick={confirm_User}>Submit Code</button></center>
-              
-             <br></br>
-             </div>
-             </div>
+            <div className='loginBox'>
+              <h1 className='siteTitle'>Confirm Code</h1>
+              <h3>E-Mail</h3>
+              <input 
+                type="email" 
+                placeholder="Enter Email" 
+                value={log_Email} 
+                name="email" 
+                id="log_email" 
+                onChange={(e) => {
+                  setLog_Email(e.target.value)
+                }}
+              />
+              <h3>Confirmation Code</h3>
+              <input 
+                type="text" 
+                placeholder="Enter Confirmation Code" 
+                name="confirm" 
+                id="log_confirm_code" 
+                onChange={(e) => {
+                    setCode(e.target.value)
+                }}
+              />
+              <button style={{width:'auto'}} onClick={confirm_User}>
+                Submit Code
+              </button>
+            </div>
         )
       }
         else{

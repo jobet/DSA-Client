@@ -131,13 +131,9 @@ export default function ManageDiscussion(){
                       <p className="commentmsg">{val.comment_text}</p>
                     </div>
                   </div>
-                  
-                  {val.user_infos.useremail_reg === localStorage.getItem("email") && (
-                    <div className="actionArea">
-                      <button id='deleteBtn' className='commentbtn' onClick={() => deleteComment(val.comment_id)}>Delete</button>
-                    </div>
-                  )}
-
+                  <div className="actionArea">
+                    <button id='deleteBtn' className='commentbtn' onClick={() => deleteComment(val.comment_id)}>Delete</button>
+                  </div>
                   {/* Replies */}
                   {replies.map((item) => {
                     if (item.comment_id === val.comment_id) {
@@ -163,11 +159,9 @@ export default function ManageDiscussion(){
                                   </div>
                                 </div>
                               </div>
-                              {item.useremail_reg === localStorage.getItem("email") && (
-                                <div className="actionArea">
-                                  <button className='replybtn' onClick={() => deleteReply(item.reply_id)}>Delete</button>
-                                </div>
-                              )}
+                              <div className="actionArea">
+                                <button className='replybtn' onClick={() => deleteReply(item.reply_id)}>Delete</button>
+                              </div>
                             </>
                           )}
                         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Axios from 'axios';
 import Swal from 'sweetalert2';
 import {UserContext} from '../UserContext';
-import logoImage from './panellogo.png';
+import logoImage from '../images/logo.svg';
 
 function Admin() {
   const {value,setValue} = useContext(UserContext);
@@ -75,20 +75,21 @@ function Admin() {
     return (
       <div className="AdminPage">
               <div className='backendform'>
-              <img src={logoImage} draggable={false}/>
-              <h2 className='backend_title'>Admin Panel</h2>
-              <br></br>
-  
-                    <input className="backendinput" placeholder="Username" type="email" name="email" id="log_AdminUsername" onChange={(e) => {
-                       setlog_AdminUsername(e.target.value)
-                    }} ></input>
-                    <br></br>
-                    <input className="backendinput" type="password" placeholder="Password" name="password" id="log_AdminPassword" onChange={(e) => {
-                       setlog_AdminPassword(e.target.value)
-                    }} ></input>
-                    <br></br>
-  
-                    <button className="backendbtn" onClick={login_User}>Login</button>
+                <div className="backendFormLogo">
+                  <img src={logoImage} draggable={false} className="adminPanelLogo"/>
+                  <h1 className="siteTitle">DSA Admin</h1>
+                </div>
+                <div className="backendFormInput">
+                  <input className="backendinput" placeholder="Username" type="email" name="email" id="log_AdminUsername" onChange={(e) => {
+                      setlog_AdminUsername(e.target.value)
+                  }}/>
+                  <input className="backendinput" type="password" placeholder="Password" name="password" id="log_AdminPassword" onChange={(e) => {
+                      setlog_AdminPassword(e.target.value)
+                  }}/>
+                  <button onClick={login_User}>
+                    Login
+                  </button>
+                </div>
               </div>
         </div>
     )

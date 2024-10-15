@@ -429,11 +429,6 @@ body.active-modal {
   flex: 1 1 55%;
 }
 /*Login Page*/
-.buttonRegLog{
-  background: none;
-  border: hidden;
-  color: #B8336A;
-}
 .loginBox {
   width: 25rem;
   display: flex;
@@ -461,6 +456,10 @@ body.active-modal {
 }
 .loginBox a button:hover{
   color: #B8336A;
+}
+.buttonRegLog,
+.buttonRegLog:hover{
+  background: none;
   border: none;
 }
 /* Sorting */
@@ -889,6 +888,7 @@ label.replyuser {
   background-color: white;
   padding: 15px;
   color: black;
+  resize: vertical;
 }
 .commentform label {
   color: aliceblue;
@@ -986,12 +986,11 @@ label.replyuser {
 .quizInnerDiv {
   box-sizing: border-box;
   display: flex;
-  flex: 1 1 auto;
+  flex-grow: 1;
   flex-direction: column;
   width: 100%;
   min-height: calc(100svh - 400px);
   max-height: calc(100dvh - 240px);
-  height: auto;
   border: 1px solid #1b146480;
   background-color: #fff;
   border-radius: 6px;
@@ -1008,7 +1007,6 @@ div.quizInnerDiv > p{
   justify-content: center;
   align-items: center;
   flex: 1 1 auto;
-  height: 100%;
   width: 100%;
   flex-wrap: wrap;
 }
@@ -1465,12 +1463,27 @@ div.drawing svg{
   border-color: rgba(177, 36, 36);
 }
 .pagination{
-  width: 100%;
   display: flex;
   text-align: center;
   align-items: center;
+  padding: 2px 10px;
+  box-sizing: border-box;
+}
+.paginationSelection{
+  padding-bottom: 2px;
+  box-sizing: border-box;
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.paginationSelection div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .pagination-controls{
+  flex: 1 1 auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1481,9 +1494,12 @@ div.drawing svg{
 .left-controls, .right-controls{
   display: flex;
 }
-.pagination input, .pagination select{
+.paginationSelect,
+.paginationInput {
+  margin: 0 0 0 4px;
   display: flex;
   flex: 0 1 auto;
+  width: 80px;
   background-color: white;
   border: #B8336A solid 1px;
   box-sizing: border-box;
@@ -1492,9 +1508,16 @@ div.drawing svg{
   padding: 0 12px;
   font-size: large;
 }
+.paginationInput{
+  margin: 0 4px;
+}
 .pagination button{
   flex: 0 1 auto;
   width: 40px;
+}
+.pagination-controls button{
+  width: 80px;
+  margin: 0 2px;
 }
 .backendchkbox{
   width: 20px;
@@ -1594,6 +1617,69 @@ div.drawing svg{
 .userManagementTable{
   flex-direction: column;
 }
+.userManagementCard{
+  width: 75%;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.userManagementDivider {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  border-bottom: #1b146480 solid 1px;
+  padding: 10px;
+}
+.userManagementFunction{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  box-sizing: border-box;
+}
+.userManagementFunction input{
+  width: 35px;
+  height: 35px;
+  margin-bottom: 4px;
+}
+.userManagementDetails{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.userManagementDetails h3{
+  width: 100%;
+}
+.userManagementDetails p:nth-child(2){
+  word-break: break-all;
+  width: 100%;
+}
+.userManagementDetails p{
+  padding: 0 4px;
+  display: flex;
+  flex: 0 1 auto;
+}
+.userManagementDetails strong{
+  padding-right: 4px;
+}
+.userManagementDivider img {
+  margin: 0 4px;
+  width: 80px;
+}
+.userManagementDivider:last-child {
+  border-bottom: none;
+}
+.userManagementButtons{
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+}
 .dashboardcard {
   height: auto;
   flex-direction: column;
@@ -1607,6 +1693,13 @@ div.drawing svg{
   border-radius: 6px;
   background: rgba(255, 255, 255);
   border: 1px solid #1b146480;
+}
+.dashboardMain .dashboardcard {
+  flex: 1 1 25%;
+  min-width: 250px;
+}
+.leftPanel .dashboardcard{
+  flex: 0 1 auto;
 }
 .dashboardcard button{
   padding: 0 16px;
@@ -1650,52 +1743,52 @@ div.drawing svg{
   padding-left: 7px;
 }
 .backendinput {
-  background:rgba(233, 233, 233);
-  height: 30px;
-  border-style: hidden;
-  color:black;
-  width: 100%;
-  border-color: rgba(233, 233, 233);
-  border-style: solid;
-  border-radius: 5px;
+  background-color: white;
+  border: #B8336A solid 1px;
+  box-sizing: border-box;
+  height: 40px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  padding: 0 12px;
 }
 .AdminPage {
+  height: 100dvh;
   background-color: rgb(216,243,255);
-  position: absolute;
-  top:0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  
-  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.adminPanelLogo{
+  width: 150px;
 }
 .backendform {
-  position: absolute;
-  top: 25%;
-  left: 37.5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: auto;
   text-align: center;
-  background-color: rgba(255, 255, 255);
-  width: 25%;
+  width: 20%;
   padding: 20px;
-  border-color: solid, 5px;
-  border-radius: 6px;
+}
+.backendFormLogo{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin-bottom: 24px;
+}
+.backendFormInput{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
 }
 .passwordfield{
   font-size: 15px;
   color: black;
   background-color: #00000000;
   border:none;
-}
-.backendinput{
-  width: 160px;
-  height: 40px;
-  padding: 12px 20px;
-  margin: 2px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
 }
 .popup{
     background-color: #c7f1ea;
@@ -1733,6 +1826,35 @@ div.drawing svg{
   border:rgb(0, 0, 0) solid 3px;
   color: black;
   width: 25%;
+}
+.quizInnerDivManagement {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  width: 100%;
+  min-height: calc(100svh - 400px);
+  max-height: calc(100dvh - 240px);
+  height: auto;
+  border: 1px solid #1b146480;
+  background-color: #fff;
+  border-radius: 6px;
+  margin: 8px 0;
+  overflow-y: auto;
+}
+.questions:first-child button{
+  width: 100%;
+}
+.quizButtonArea {
+  display: flex;
+}
+.quizButtonArea button:nth-child(1){
+  margin: 2px;
+  flex: 1 1 65%;
+}
+.quizButtonArea button:nth-child(2){
+  margin: 2px;
+  flex: 1 1 35%;
 }
 .quiz_deleteButton{
   /* background-color: rgba(255, 93, 93, 0.777); */
@@ -1785,12 +1907,26 @@ div.drawing svg{
   box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
 }
 .quiz-maker-choices-input{
-  font-size: 16px;
+  font-size: 1.2rem;
   padding: 10px;
-  margin: 10px 30px;
   border:2px;
-  box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-  border-radius:10px;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
+  resize: vertical;
+}
+.fillAnswer{
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  border: 1px solid #1b146480;
+  padding: 20px;
+  border-radius: 6px;
+}
+.addQuestionButton{
+  flex: 0 1 auto;
+  height: 40px;
+  width: 50%;
+  align-self: center;
 }
 .quiz-maker-choices-edit-input{
   font-size: 16px;
@@ -1824,23 +1960,26 @@ div.drawing svg{
   padding-top: 15px;
 }
 .quiz-maker-select{
-  padding:10px;
-  border-radius:10px;
-  box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
-  font-size: 14px;
-  margin: 10px 0px;
+  background-color: white;
+  border: #1b146480 solid 1px;
+  box-sizing: border-box;
+  height: 40px;
+  flex: 0 0 auto;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  padding: 0 12px;
+  font-weight: 600;
+  font-size: 2.4em;
 }
 .quiz-maker-label{
   font-size: 32px;
 }
-.quiz_admin_container .questions{
-  background-color: rgb(255, 255, 255);
-  min-height: 50vh;
-  max-height: 77vh;
-  padding-bottom: 30px;
-  border-radius: 5px;
-  box-shadow: 0 0 15px 4px rgba(0,0,0,0.06);
-  overflow-y: auto;
+.questions{
+  border-bottom: #1b146480 solid 1px;
+  padding: 18px;
+}
+.questions:last-child{
+  border-bottom: none;
 }
 #admin-quiz-content>h1{
   background-color: none;
@@ -1927,6 +2066,46 @@ div.drawing svg{
   width: 20%;
   position:absolute;
 }
+.quizBodyLabel{
+  width: 100%;
+}
+.multipleChoicesAnswer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1 1 calc(50% - 4px);
+  width: 100%;
+  margin: 2px;
+  box-sizing: border-box;
+  padding: 0;
+  font-size: 1.2rem;
+  background-color: white;
+  border: 1px solid #1b146480;
+  border-radius: 6px;
+  color: black;
+  height: 80px;
+}
+.multipleChoicesRadio {
+  flex: 0 1 auto;
+  height: 40px;
+  width: 40px;
+  margin: 12px;
+}
+.multipleChoicesText {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 1.2rem;
+  background-color: white;
+  border-radius: 0 6px 6px 0;
+  border: none;
+  border-left: 1px solid #1b146480;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 78px;
+}
 /* Responsive CSS */
 @media screen and (max-width: 1366px) {
   .visualizerArea .buttonArea,
@@ -1950,14 +2129,42 @@ div.drawing svg{
     left: 20dvw;
     width: 60dvw;
   }
-  .dashboardMain, .backendtabs,
-  .userManagementTable,
   .pagination {
     overflow-x: auto;
     width: 100%;
+    padding: 2px 5px;
+  }
+
+  .userManagementCard, .paginationSelection,
+  .backendtabs, .dashboardMain{
+    width: 100%;
+  }
+  .paginationSelection{
+    padding: 0 5px 2px 5px;
   }
   .pagination-controls{
+    margin: 0 0 0 5px;
     padding: 0;
+  }
+
+  .pagination-controls button{
+    width: auto;
+    min-width: 40px;
+    margin: 0 5px 0 0;
+    display: flex;
+    flex: 1 1 auto;
+  }
+
+  .pagination-controls button:last-child{
+    margin: 0;
+  }
+
+  .backendform{
+    height: 60dvh;
+    width: 25%;
+  }
+  .userManagementDivider{
+    padding: 5px;
   }
 }
 @media screen and (max-width: 960px) {
@@ -2119,5 +2326,19 @@ div.drawing svg{
   #listtable tr > *:nth-child(9),
   #listtable tr > *:nth-child(10) {
     display: none;
+  }
+  .backendform{
+    width: 100%;
+    box-sizing: border-box;
+    height: 80dvh;
+    padding: 0;
+  }
+  .backendFormInput{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 4px;
+  }
+  .questions {
+    padding: 5px;
   }
 }

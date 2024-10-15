@@ -171,6 +171,7 @@ export default function Comment(){
     setEditReplyShow(false);
     setEditCommentShow(true);
     setTempCommentID(val.comment_id)
+    setnewComment(val.comment_text);
     setDis(!dis);
   } 
   async function submitReply(replyMessage, comm_ID){
@@ -269,10 +270,10 @@ export default function Comment(){
     else
         setShow(true)
   }
-  function handleReplyCardIndex(index, commID){
+  function handleReplyCardIndex(index, reply){
     setEditCommentShow(false);
     setShow(false);
-    setCommentReplyIndex(commID)
+    setEditReplyValue(reply);
     setReplyCardIndex(index)
       if(editReplyShow)
       setEditReplyShow(false)
@@ -366,6 +367,7 @@ export default function Comment(){
                     type='text' 
                     id='editText'
                     className='updateinput'
+                    value={newComment}
                     onChange={(e)=>{setnewComment(e.target.value)}}
                     placeholder={val.comment_text}
                     />
@@ -483,7 +485,7 @@ export default function Comment(){
                       </>
                       :
                       <>
-                      <button className='replybtn' onClick={() => handleReplyCardIndex(item.reply_id)}>Edit</button>
+                      <button className='replybtn' onClick={() => handleReplyCardIndex(item.reply_id, item.reply_content)}>Edit</button>
                       <button className='replybtn' onClick={()=>{deleteReply(item.reply_id)}}>Delete</button>
                       </>
                       }
