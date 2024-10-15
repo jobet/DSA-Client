@@ -2129,7 +2129,8 @@ div.drawing svg{
   .dsaContainer .inputContainer,
   .quizBox, .DiscussionBox,
   .DiscussionBox .buttonArea,
-  .quizBox .buttonArea {
+  .quizBox .buttonArea,
+  .settingArea {
     width: 75%;
     margin: 0 auto;
   }
