@@ -305,7 +305,17 @@ export default function ManageQuiz(){
                                         <input 
                                         type="text" 
                                         className="fillAnswer"
-                                        value={correctAnswer}
+                                        value={
+                                            correctAnswer != "A" &&
+                                            correctAnswer != "B" &&
+                                            correctAnswer != "C" &&
+                                            correctAnswer != "D" &&
+                                            correctAnswer != "True" &&
+                                            correctAnswer != "False" ?
+                                            correctAnswer
+                                            :
+                                            ""
+                                        }
                                         placeholder="Correct Answer..." 
                                         onChange={(e) => {setCorrectAnswer(e.target.value)}}
                                         />

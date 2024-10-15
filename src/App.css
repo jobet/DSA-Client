@@ -336,18 +336,18 @@ body.active-modal {
   box-sizing: border-box;
   padding: 60px 0 0;
   position: relative;
-  height: 100dvh;
-  width:100%;
+  min-height: 100dvh;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   display: flex;
   flex-direction: column;
   z-index: 1;
 }
 #typer1 {
-  padding-top: 20dvh;
+  margin-top: 15dvh;
   text-align: center;
   margin-bottom: 12px;
   font-size: 4.8em;
@@ -358,19 +358,16 @@ body.active-modal {
   text-align: center;
 }
 .video-container {
-  position: absolute;
+  position: relative;
   display: flex;
-  top: 0;
-  left: 25dvw;
-  height: 100dvh;
   width: 50dvw;
   z-index: -1;
-  overflow: hidden;
 }
 .video-container video {
   pointer-events: none;
+  flex: 1 1 auto;
   display: flex;
-  max-width: 100%;
+  width: 100%;
   align-self: flex-end;
 }
 .video-overlay{
@@ -379,7 +376,7 @@ body.active-modal {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, #f7f1ff7c 75%, #F7F1FF 95%);
+  background: linear-gradient(to bottom, #f7f1ff4f 25%, #F7F1FF 100%);
   z-index: 1;
 }
 .box2 {
@@ -1470,7 +1467,7 @@ div.drawing svg{
   box-sizing: border-box;
 }
 .paginationSelection{
-  padding-bottom: 2px;
+  padding-top: 2px;
   box-sizing: border-box;
   width: 25%;
   display: flex;
@@ -1618,11 +1615,13 @@ div.drawing svg{
   flex-direction: column;
 }
 .userManagementCard{
+  max-height: calc(100dvh - 270px);
   width: 75%;
   border: 1px solid #1b146480;
   border-radius: 6px;
   background-color: #fff;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 .userManagementDivider {
   display: flex;
@@ -1644,8 +1643,21 @@ div.drawing svg{
   height: 35px;
   margin-bottom: 4px;
 }
-.userManagementDetails{
+.userManagementInfo{
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+.userManagementInfo img {
+  display: flex;
+  flex: 1 1 10%;
+  margin: 0 4px;
+  max-width: 80px;
+}
+.userManagementDetails{
+  flex: 1 1 90%;
+  min-width: 200px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1664,10 +1676,6 @@ div.drawing svg{
 }
 .userManagementDetails strong{
   padding-right: 4px;
-}
-.userManagementDivider img {
-  margin: 0 4px;
-  width: 80px;
 }
 .userManagementDivider:last-child {
   border-bottom: none;
@@ -2126,7 +2134,6 @@ div.drawing svg{
     width: calc(75% * 0.8);
   }
   .video-container {
-    left: 20dvw;
     width: 60dvw;
   }
   .pagination {
@@ -2140,7 +2147,7 @@ div.drawing svg{
     width: 100%;
   }
   .paginationSelection{
-    padding: 0 5px 2px 5px;
+    padding: 2px 5px 0 5px;
   }
   .pagination-controls{
     margin: 0 0 0 5px;
@@ -2195,9 +2202,6 @@ div.drawing svg{
   }
   .close-modal {
       font-size: 1.5rem;
-  }
-  .box1{
-    height: 100dvh;
   }
   .box2, .descSection, .imgSection{
     width: 100%;
@@ -2294,7 +2298,6 @@ div.drawing svg{
     height: calc(100dvh - 240px);
   }
   .video-container {
-    left: 0;
     width: 100dvw;
   }
   .userAvatarInfo img{

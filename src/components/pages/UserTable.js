@@ -17,6 +17,14 @@ const IndeterminateCheckbox = React.forwardRef(
   }
 );
 
+const formatDate = (date) => {
+  const formattedDate = new Date(date);
+  const day = formattedDate.getDate();
+  const month = formattedDate.getMonth() + 1;
+  const year = formattedDate.getFullYear();
+  return `${month}-${day}-${year}`;
+};
+
 const deleteUser = (user) => {
   Swal.fire({
     title: `Are you sure you want to delete ${user.useremail_reg}?`,
@@ -60,16 +68,18 @@ const UserCard = ({ user, getToggleRowSelectedProps }) => (
               <BiTrash />
         </button>
       </div>
-      <img src={user.useravatar_url} alt={`${user.name}'s avatar`} className="user-avatar" />
-      <div className="userManagementDetails">
-        <h3>{user.username_reg}</h3>
-        <p>{user.useremail_reg}</p>
-        <p><strong>Confirmed</strong> {user.confirmed}</p>
-        <p><strong>Code</strong> {user.code}</p>
-        <p><strong>Created At</strong> {user.user_created}</p>
-        <p><strong>Gender</strong> {user.usergender_reg}</p>
-        <p><strong>Year Level</strong> {user.useryear_reg}</p>
-        <p><strong>CCIS Program</strong> {user.userprogram_reg}</p>
+      <div className="userManagementInfo">
+        <img src={user.useravatar_url} alt={`${user.name}'s avatar`} className="user-avatar" />
+        <div className="userManagementDetails">
+          <h3>{user.username_reg}</h3>
+          <p>{user.useremail_reg}</p>
+          <p><strong>Confirmed</strong> {user.confirmed}</p>
+          <p><strong>Code</strong> {user.code}</p>
+          <p><strong>Created At</strong> {formatDate(user.user_created)}</p>
+          <p><strong>Gender</strong> {user.usergender_reg}</p>
+          <p><strong>Year Level</strong> {user.useryear_reg}</p>
+          <p><strong>CCIS Program</strong> {user.userprogram_reg}</p>
+        </div>
       </div>
     </div>
   </div>
@@ -140,6 +150,18 @@ export default function UserList({ columns, data }) {
           </button>
         </div>
       </div>
+      <div className="userManagementCard" {...getTableBodyProps()}>
+        {page.map(row => {
+          prepareRow(row);
+          return (
+            <UserCard
+              key={row.id}
+              user={row.original}
+              getToggleRowSelectedProps={row.getToggleRowSelectedProps}
+            />
+          );
+        })}
+      </div>
       <div className="paginationSelection">
         <div>
           <p><strong>Page</strong></p>
@@ -170,18 +192,6 @@ export default function UserList({ columns, data }) {
               ))}
           </select>
         </div>
-      </div>
-      <div className="userManagementCard" {...getTableBodyProps()}>
-        {page.map(row => {
-          prepareRow(row);
-          return (
-            <UserCard
-              key={row.id}
-              user={row.original}
-              getToggleRowSelectedProps={row.getToggleRowSelectedProps}
-            />
-          );
-        })}
       </div>
     </>
   );

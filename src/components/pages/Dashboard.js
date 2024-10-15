@@ -178,21 +178,21 @@ export default function Dashboard(){
                     labels={genderPieStats.map(val => val.gender)} 
                     datas={genderPieStats.map(val => val.amount)} 
                     label={'Gender'} 
-                    color={['#ff4573','#457dff','#aeff45']} />
+                    color={['#B8336A','#5fcae6','#ef7b45']} />
                   </TabPanel>     
                   <TabPanel>
                     <PieGraph 
                     labels={yearlevelPieStats.map(val => val.yearlevel)} 
                     datas={yearlevelPieStats.map(val => val.amount)} 
                     label={'Year Level'} 
-                    color={['#ff9645','#fff645','#96ff45','#45ffa5','#45b8ff']} />
+                    color={['#B8336A','#5fcae6','#ef7b45','#006989','#157f1f']} />
                   </TabPanel>
                   <TabPanel>
                     <PieGraph 
                     labels={programPieStats.map(val => val.program)} 
                     datas={programPieStats.map(val => val.amount)} 
                     label={'Program'} 
-                    color={['#5845ff','#ca45ff','#ff45ae','#ff4545']} />
+                    color={['#B8336A','#5fcae6','#ef7b45','#006989']} />
                   </TabPanel>
                   </Tabs>      
                 </div>
@@ -257,7 +257,7 @@ export default function Dashboard(){
                                   label1={'New Users'} 
                                   data2={[]} 
                                   label2={''} 
-                                  color1={'rgb(209, 23, 230, 0.60)'} 
+                                  color1={'#B8336A'} 
                                   color2={'rgb(0,0,0,0)'}
                                 />
                               </TabPanel>     
@@ -268,8 +268,8 @@ export default function Dashboard(){
                                   label1={'Comments'} 
                                   data2={commentLineStats.map(val => val.replies)} 
                                   label2={'Replies'} 
-                                  color1={'rgb(3, 94, 252, 0.60)'} 
-                                  color2={'rgb(252, 3, 94, 0.60)'}
+                                  color1={'#B8336A'} 
+                                  color2={'#5fcae6'}
                                 />
                               </TabPanel>
                           </Tabs>      
@@ -309,7 +309,7 @@ export default function Dashboard(){
                   </div>
                   <div className="rightPanel">
                       <div className="dashboardcard">
-                          <h1 className="dashboardtitle">User Activity</h1>
+                          <h1 className="dashboardtitle">User Quiz Activity</h1>
                           <Tabs className="graphtabs" selectedTabClassName="graphtab--selected">
                               <TabList className="graphtablist">
                                   <Tab className="graphtab"><strong>Quizzes Taken</strong></Tab>
@@ -322,7 +322,7 @@ export default function Dashboard(){
                                   label1={'Quizzes Taken'}
                                   data2={[]}
                                   label2={''}
-                                  color1={'rgb(38, 230, 0, 0.6)'} 
+                                  color1={'#B8336A'} 
                                   color2={'rgb(0,0,0,0)'}
                                 />
                               </TabPanel>
@@ -335,9 +335,9 @@ export default function Dashboard(){
                                   label2={'Average Percentage Score'} 
                                   data3={quizBarStats.map(val => val.highpercentage)} 
                                   label3={'Highest Percentage Score'} 
-                                  color1={'rgb(235, 100, 52)'} 
-                                  color2={'rgb(235, 235, 52)'} 
-                                  color3={'rgb(113, 235, 52)'}
+                                  color1={'rgb(177, 36, 36)'} 
+                                  color2={'#ffd400'} 
+                                  color3={'#157f1f'}
                                 />
                               </TabPanel>
                           </Tabs>      

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts';
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar } from 'recharts';
 
 export function LineGraph({ labels, data1, data2, label1, label2, color1, color2 }) {
   const data = labels.map((label, index) => ({
@@ -10,15 +10,18 @@ export function LineGraph({ labels, data1, data2, label1, label2, color1, color2
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <LineChart data={data}>
+      <AreaChart 
+        data={data}
+        margin={{ top: 0, right: 0, left: -45, bottom: 0 }}
+      >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey={label1} stroke={color1} activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey={label2} stroke={color2} activeDot={{ r: 8 }} />
-      </LineChart>
+        <Area type="monotone" dataKey={label1} stroke={color1} fill={color1} fillOpacity={0.9} activeDot={{ r: 8 }} />
+        <Area type="monotone" dataKey={label2} stroke={color2} fill={color2} fillOpacity={0.9} activeDot={{ r: 8 }} />
+      </AreaChart>
     </ResponsiveContainer>
   );
 }
@@ -37,10 +40,10 @@ export function PieGraph({ labels, datas, label, color }) {
           cx="50%"
           cy="50%"
           labelLine={false}
-          outerRadius="80%"
+          outerRadius="100%"
           fill="#8884d8"
           dataKey="value"
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          label={({ name, percent }) => `${(percent * 100).toFixed(0)}%`}
         >
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={color[index % color.length]} />
@@ -63,7 +66,8 @@ export function BarGraph({ labels, data1, data2, data3, label1, label2, label3, 
 
   return (
     <ResponsiveContainer width="100%" height={400}>
-      <BarChart data={data}>
+      <BarChart data={data}
+      margin={{ top: 0, right: 0, left: -45, bottom: 0 }}>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
         <YAxis />
