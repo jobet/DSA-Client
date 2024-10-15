@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 436 436">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #5fcae6;
+      }
+
+      .cls-2 {
+        fill: #272361;
+      }
+
+      .cls-3 {
+        fill: #b8346a;
+      }
+    </style>
+  </defs>
+  <rect class="cls-2" x="135.05" y="135.05" width="165.9" height="165.9" transform="translate(-90.3 218) rotate(-45)"/>
+  <rect class="cls-1" x="12.97" y="12.97" width="152.48" height="152.48" rx="44.93" ry="44.93" transform="translate(-36.95 89.21) rotate(-45)"/>
+  <rect class="cls-1" x="270.55" y="270.55" width="152.48" height="152.48" rx="44.93" ry="44.93" transform="translate(-143.65 346.79) rotate(-45)"/>
+  <path class="cls-3" d="M144.48,291.52h0c33.05,33.05,33.05,86.64,0,119.69h0c-33.05,33.05-86.64,33.05-119.69,0h0c-33.05-33.05-33.05-86.64,0-119.69h0c33.05-33.05,86.64-33.05,119.69,0Z"/>
+  <path class="cls-3" d="M411.21,24.79h0c33.05,33.05,33.05,86.64,0,119.69h0c-33.05,33.05-86.64,33.05-119.69,0h0c-33.05-33.05-33.05-86.64,0-119.69h0c33.05-33.05,86.64-33.05,119.69,0Z"/>
+</svg>
