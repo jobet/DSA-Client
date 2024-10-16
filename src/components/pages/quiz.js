@@ -132,16 +132,16 @@ export default function Quiz(){
                 {questionSets[questionNo]?.question_type == "Multiple Choice" ?
                 <>
                     <button id={answers.current[questionNo] == "A" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("A")}}>
-                        {SplitChoices(questionSets[questionNo]?.question_choices, 1)}
+                        <strong>A.</strong>{SplitChoices(questionSets[questionNo]?.question_choices, 1)}
                     </button>
                     <button id={answers.current[questionNo] == "B" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("B")}}>
-                        {SplitChoices(questionSets[questionNo]?.question_choices, 2)}
+                        <strong>B.</strong>{SplitChoices(questionSets[questionNo]?.question_choices, 2)}
                     </button>
                     <button id={answers.current[questionNo] == "C" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("C")}}>
-                        {SplitChoices(questionSets[questionNo]?.question_choices, 3)}
+                        <strong>C.</strong>{SplitChoices(questionSets[questionNo]?.question_choices, 3)}
                     </button>
                     <button id={answers.current[questionNo] == "D" ? "selected_button" : "quiz-contentx"} onClick={()=>{SelectAnswer("D")}}>
-                        {SplitChoices(questionSets[questionNo]?.question_choices, 4)}
+                        <strong>D.</strong>{SplitChoices(questionSets[questionNo]?.question_choices, 4)}
                     </button>
                 </> 
                 : questionSets[questionNo]?.question_type == "True or False" ? 
@@ -246,10 +246,7 @@ export default function Quiz(){
                     break
 
             }
-    }
-        // console.log(choices.split(". "))
-        // console.log(choices.split(". ")[0].substring(0,choices.split(". ")[1].length-2));
-        
+    }  
         return result;
     }
 
@@ -263,30 +260,30 @@ export default function Quiz(){
                 {
                 questionSets.length === 1 ? (
                     // Case when there's only one question
-                    <div class="button-next">
+                    <div className="button-next">
                         <button onClick={FinishQuiz}>Submit Quiz <BiCheck/></button>
                     </div>
                 ) : (
                     // Other cases
                     questionNo+1 === 1 && questionNo+1 !== questionSets.length ? (
                     // First question but not the only one
-                    <div class="button-next">
+                    <div className="button-next">
                         <button onClick={NextQuestion}>Next Question <BiRightArrowAlt/></button>
                     </div>
                     ) : questionNo > 0 && questionNo+1 !== questionSets.length ? (
                     // Any middle question
-                    <div class="buttons-positioned">
+                    <div className="buttons-positioned">
                         <button onClick={PrevQuestion}><BiLeftArrowAlt/> Previous Question</button>
                         <button onClick={NextQuestion}>Next Question <BiRightArrowAlt/></button>
                     </div>
                     ) : questionNo+1 === questionSets.length ? (
                     // Last question
-                    <div class="buttons-positioned">
+                    <div className="buttons-positioned">
                         <button onClick={PrevQuestion}><BiLeftArrowAlt/> Previous Question</button>
                         <button onClick={FinishQuiz}>Submit Quiz <BiCheck/></button>
                     </div>
                     ) : (
-                    <div class="button-next">
+                    <div className="button-next">
                         <button onClick={NextQuestion}>Next Question <BiRightArrowAlt/></button>
                     </div>
                     )

@@ -229,7 +229,7 @@ function Profile() {
                 <button onClick={logOut}>Logout</button>
               </div>
               <div className="buttonArea">
-                <button className="redbtn" onClick={deleteAccount}>Delete Account</button>
+                <button className="deletebtn" onClick={deleteAccount}>Delete Account</button>
               </div>
             </div>
           )

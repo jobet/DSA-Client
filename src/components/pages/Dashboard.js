@@ -61,7 +61,7 @@ export default function Dashboard(){
                 {userStats.map((val)=>{return (
                 <div className="seperation">
                     <div>
-                      <h1 class="dashboardtitle">Users</h1>
+                      <h1 className="dashboardtitle">Users</h1>
                       <h3>{val.verified_users} Verified Users</h3>
                       <h3>{val.total_users} Total Users</h3>
                       <Link to='/manage-users' className="backendLinkBtn">
@@ -78,7 +78,7 @@ export default function Dashboard(){
                 {commentStats.map((val)=>{return (
                 <div className="seperation">
                   <div>
-                    <h1 class="dashboardtitle">Discussion</h1>
+                    <h1 className="dashboardtitle">Discussion</h1>
                     <h3>{val.comments} Comments</h3>
                     <h3>{val.replies} Replies</h3>
                     <Link to='/manage-discussion' className="backendLinkBtn">
@@ -95,7 +95,7 @@ export default function Dashboard(){
                 {questionStats.map((val)=>{return (
                 <div className="seperation">
                   <div>
-                    <h1 class="dashboardtitle">Quiz</h1>
+                    <h1 className="dashboardtitle">Quiz</h1>
                     <h3>{val.questions} Questions</h3>
                     <h3>{val.quiztakers} Quizzes Taken</h3>
                     <Link to='/manage-quiz' className="backendLinkBtn">
@@ -112,17 +112,17 @@ export default function Dashboard(){
             <Tabs className="backendtabs" selectedTabClassName="backendtab--selected">
               <TabList className="backendtablist">
                 <Tab className="backendtab">
-                  <span class="dashboardtitle">
+                  <span className="dashboardtitle">
                     <BiUser/>Demographic
                   </span>
                 </Tab>
                 <Tab className="backendtab">
-                  <span class="dashboardtitle">
+                  <span className="dashboardtitle">
                     <BiCommentDetail/> Activity
                   </span>
                 </Tab>
                 <Tab className="backendtab">
-                  <span class="dashboardtitle">
+                  <span className="dashboardtitle">
                     <BiEdit/> Quiz
                   </span>
                 </Tab>
@@ -134,8 +134,8 @@ export default function Dashboard(){
                   <div className="dashboardDetails">
                     <h1>Users by Gender</h1>
                     {genderPieStats.map((val)=>{return (
-                        <div class="seperation">
-                          <h2 class="dashboardstats">{val.gender}</h2>
+                        <div className="seperation">
+                          <h2 className="dashboardstats">{val.gender}</h2>
                           <p style={{textAlign: "right"}}><strong>{val.amount}</strong></p>
                         </div>
                     )})}
@@ -166,7 +166,7 @@ export default function Dashboard(){
               </div>
               <div className="rightPanel">
                 <div className="dashboardcard">
-                  <h1 class="dashboardtitle">User Demographic</h1>
+                  <h1 className="dashboardtitle">User Demographic</h1>
                   <Tabs className="graphtabs" selectedTabClassName="graphtab--selected">
                     <TabList className="graphtablist">
                       <Tab className="graphtab"><strong>Gender</strong></Tab>

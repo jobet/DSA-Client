@@ -70,10 +70,12 @@
 .dropdown li {
   padding: 18px 12px;
 }
-.dropdown li:hover {
-  transition: all 0.2s ease-in-out;
-  color: #B8336A;
-  cursor: pointer;
+@media (pointer: fine) {
+  .dropdown li:hover {
+    transition: all 0.2s ease-in-out;
+    color: #B8336A;
+    cursor: pointer;
+  }
 }
 .dropdownlinks{
   color:#1b1464;
@@ -174,31 +176,35 @@
   text-decoration: none;
   transition: all 0.1s ease-out;
 }
-
-.nav-links:hover {
-  color:#B8336A;
-  transition: all 0.1s ease-in-out;
+@media (pointer: fine) {
+  .nav-links:hover {
+    color:#B8336A;
+    transition: all 0.1s ease-in-out;
+  }
 }
-
-.nav-links-button:hover {
-  color:#B8336A;
-  border: 1px solid #B8336A;
-  background-color:#ffffff;
-  transition: all 0.1s ease-in;
+@media (pointer: fine) {
+  .nav-links-button:hover {
+    color:#B8336A;
+    border: 1px solid #B8336A;
+    background-color:#ffffff;
+    transition: all 0.1s ease-in;
+  }
 }
-
 .fa-times, .fa-bars {
   display: flex;
   color: #1b1464;
   font-size: 2rem;
 }
-
 .nav-links-mobile {
   display: none;
 }
-
 .menu-icon {
   display: none;
+}
+.navavatar{
+  display: flex;
+  width: 24px;
+  padding: 0px 4px 4px 0px;
 }
 @media screen and (max-width: 1366px) {
   .navbar{
@@ -216,6 +222,7 @@
     padding: 0 24px;
   }
   .dropdown{
+    background-color: #F7F1FF;
     height: calc((100dvh - 60px) - ((100dvh - 60px)/6));
     width: 100%;
     bottom: 60px;
@@ -278,7 +285,7 @@
     background-color: rgb(216,243,255);
   }
 
-  .nav-links:hover {
+  .nav-links:active {
     background-color: #fff;
     color: #B8336A;
     border-radius: 0;
@@ -289,62 +296,7 @@
     display: flex;
     cursor: pointer;
   }
-  
-  .fab-times {
-    color: black;
-    font-size: 2rem;
-  }
   .footer, .footerb {
     font-size: 0.8rem;
   }
-}
-.navbarb-logo {
-  color: #fff;
-  justify-self: start;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-.fab-firstdraft {
-  margin-left: 0.5rem;
-  font-size: 1.6rem;
-}
-.navbicon{
-  display: flex;
-}
-.navavatar{
-  display: flex;
-  width: 24px;
-  padding: 0px 4px 4px 0px;
-}
-.navb-menu {
-  display: grid;
-  grid-template-columns: repeat(5, auto);
-  grid-gap: 10px;
-  list-style: none;
-  text-align: center;
-  width: 75vw;
-  justify-content: end;
-  margin-right: 0rem;
-}
-
-.navb-item {
-  height: 100%;
-  border-radius: 19px;
-  display: flex;
-  align-items: center;
-}
-.navb-item:hover {
-  background-color: rgba(83, 201, 255, 0.808);
-  transition: all 0.2s ease-out;
-}
-.navb-links {
-  
-  color: black;
-  text-decoration: none;
-  padding: 2.5rem 1rem;
-}
-
-.fab-bars {
-  color: black;
 }

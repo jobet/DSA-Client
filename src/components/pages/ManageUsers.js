@@ -18,11 +18,6 @@ export default function ManageUsers(){
     Header: 'Username',  
     accessor: 'username_reg'
     } 
-   ,{  
-   Header: 'Password',  
-   accessor: 'userpassword_reg',
-   Cell: ({ cell: { value } }) => <><input id={value} type="password" value={value} disabled className="passwordfield"></input></>
-   }
    ,{
     Header: 'Gender',  
     accessor: 'usergender_reg'

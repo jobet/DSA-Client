@@ -61,6 +61,7 @@ function Navbar({ avatar, username }) {
     }).then((result) => {
       if (result.isConfirmed) {
         setState(false);
+        setClick(false);
         localStorage.removeItem("username");
         localStorage.removeItem("email");
         localStorage.removeItem("password");

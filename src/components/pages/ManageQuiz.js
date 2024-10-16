@@ -193,7 +193,7 @@ export default function ManageQuiz(){
     return(
     <div className="DashboardPage">
         <div className="BackendPage">
-            <div class="quizBox">
+            <div className="quizBox">
                 <h1 className="siteTitle">Quiz Management</h1>
                 {questionPanel ? 
                             <div className="quizInnerDiv">
